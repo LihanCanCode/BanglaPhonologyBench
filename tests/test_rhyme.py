@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
-"""Fixed-case tests for src/rhyme.py (Task 3, Spec A.4 3a)."""
-from src.rhyme import assonance_key, final_matra, is_trivial_pair, rime
+"""Fixed-case tests for src/rhyme.py (Task 3, Spec A.4 3a/3b)."""
+from src.rhyme import (assonance_key, final_matra, is_trivial_pair,
+                       is_trivial_pair_fast, mean_success_at_k, rime,
+                       success_at_k, trivial_pair_key)
 
 
 def test_closed_syllable_rhyme_matches():
@@ -66,3 +68,45 @@ def test_is_trivial_pair_false_for_genuine_rhyme():
 def test_is_trivial_pair_shared_final_two_clusters():
     """Direct final-2-akshara match (not via the suffix blocklist)."""
     assert is_trivial_pair("সাগর", "নাগর")   # both end গর (গ + র)
+
+
+def test_trivial_pair_fast_agrees_with_slow():
+    """The precomputed-key fast path (Task 3b's gold-set filtering at
+    scale) must agree with is_trivial_pair() exactly."""
+    pairs = [
+        ("ক্ষেত্রটি", "পর্বটি"), ("আব্রাহামের", "দৃশ্যের"),
+        ("অবতার", "কাকার"), ("সাগর", "নাগর"),
+        ("তামা", "নির্ভরতা"), ("নিষ্ঠুরতা", "ব্যাটা"),
+    ]
+    for a, b in pairs:
+        slow = is_trivial_pair(a, b)
+        fast = is_trivial_pair_fast(trivial_pair_key(a), trivial_pair_key(b))
+        assert slow == fast, (a, b, slow, fast)
+
+
+def test_success_at_k_hit_within_k():
+    assert success_at_k(["x", "y", "কাকার", "z"], {"কাকার", "অবতার"}, k=5) == 1
+
+
+def test_success_at_k_hit_beyond_k_does_not_count():
+    """A gold match past position k should NOT count -- @k means only the
+    first k candidates are considered."""
+    assert success_at_k(["x", "y", "z", "w", "v", "কাকার"], {"কাকার"}, k=5) == 0
+
+
+def test_success_at_k_miss():
+    assert success_at_k(["x", "y", "z"], {"কাকার", "অবতার"}, k=5) == 0
+
+
+def test_success_at_k_empty_candidates():
+    assert success_at_k([], {"কাকার"}, k=5) == 0
+
+
+def test_mean_success_at_k_averages_across_prompts():
+    candidates = [["কাকার"], ["nomatch"], ["অবতার", "other"]]
+    gold = [{"কাকার"}, {"somethingelse"}, {"অবতার"}]
+    assert mean_success_at_k(candidates, gold, k=5) == 2 / 3
+
+
+def test_mean_success_at_k_empty_batch():
+    assert mean_success_at_k([], []) == 0.0

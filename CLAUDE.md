@@ -86,18 +86,24 @@ Word categories for split analyses: **A** (aligned: GTAD=0 ∧ STAD=0), **CB**
 2. **M2 (wks 3–6):** ✅ Tasks 1–2 datasets frozen (`data/tasks/g2p.jsonl`,
    `syllable_count_word.jsonl`, 3,000 words each); GTAD/STAD/ρ computed for 5 real
    tokenizers (`results/metrics_top3000.csv`); descriptive stats (`figures/figure2.*`).
-3. **M3 (wks 5–8):** ✅ Tasks 3a/4 built. Task 3a rhyme pairs: `src/rhyme.py` (proper
-   open/closed-final-syllable rime rule, Spec A.4 3a) + `scripts/build_rhyme_dataset.py`
-   -> `data/task3a_rhyme_pairs.jsonl` (200 positive + 200 negative, negatives split
-   80 assonance_decoy / 40 ortho_decoy / 80 random; anti-leakage via `is_trivial_pair`
-   + phoneme-sequence stem check). Task 4 schwa: `schwa_deletion.jsonl` 1,000 words
-   from the aligner. ⏳ annotation pass:
-   tooling built (`scripts/tag_etymology_heuristic.py`, `scripts/build_annotation_sheet.py`,
-   `scripts/apply_annotations.py`), review sheets generated in `data/annotation/`
-   — see `docs/annotation_guide.md`. Actual human review is a solo-annotator pass,
-   not yet done; `annotation.verified=false` until you mark rows reviewed and run
-   `apply_annotations.py`. No inter-annotator κ (single annotator, documented
-   limitation vs Spec A.4's 2-annotator design).
+3. **M3 (wks 5–8):** ✅ DONE, including the human annotation pass. Task 3a rhyme pairs:
+   `src/rhyme.py` (proper open/closed-final-syllable rime rule, Spec A.4 3a) +
+   `scripts/build_rhyme_dataset.py` -> `data/task3a_rhyme_pairs.jsonl` (200 positive +
+   200 negative, negatives split 80 assonance_decoy / 40 ortho_decoy / 80 random;
+   anti-leakage via `is_trivial_pair` + phoneme-sequence stem check) — **human-verified
+   400/400, 100% agreement**. Task 3b rhyme generation: `scripts/build_rhyme_generation_
+   dataset.py` -> `data/task3b_rhyme_generation.jsonl` (300 prompts: 200 common/100 rare;
+   gold = lexicon words sharing the prompt's rime, ADDITIONALLY filtered through
+   `is_trivial_pair` — without it, short grammatical suffixes like -এর dominate gold sets
+   almost entirely, see the script's docstring and the Spec A.4 3b note; not yet
+   human-reviewed). Task 4 schwa: `schwa_deletion.jsonl` 1,000 words from the aligner
+   — **human-verified 160/160 (stratified sample), 100% agreement**. Task 1 etymology:
+   4-way tag (added `deshi`, see Spec A.3.5 note) — **human-verified 353/353; heuristic
+   tagger accuracy 38.2%**, a real and reportable weakness of orthography-only etymology
+   guessing. Annotation tooling: `scripts/tag_etymology_heuristic.py`,
+   `scripts/build_annotation_sheet.py`, `scripts/apply_annotations.py`, sheets in
+   `data/annotation/` — see `docs/annotation_guide.md`. No inter-annotator κ anywhere
+   (single annotator, documented limitation vs Spec A.4's 2-annotator design).
 4. **M4 (wks 7–10):** probing harness — fork `liaodisen/Tokenization-Phonology`,
    export our data via `scripts/export_for_probing.py` (already runs locally, see
    `docs/probing_integration.md` for the full mapping); hidden-state extraction on
@@ -136,13 +142,24 @@ Run Python scripts with `-X utf8` on Windows (Bangla output to console).
 - `data/tasks/*.jsonl` — frozen task datasets (Spec A.5 schema): `g2p.jsonl`,
   `syllable_count_word.jsonl` (3,000 words each, 1,500 HighFreq/1,500 LowFreq by
   wordfreq(bn) zipf quartile), `schwa_deletion.jsonl` (1,000 words, environment-
-  stratified). Built by `scripts/build_tasks.py`. **Not yet annotator-verified** —
-  treat as silver until M3's human pass.
+  stratified). Built by `scripts/build_tasks.py`. Human-verified subsets noted in
+  the M3 milestone entry above; unreviewed items still `annotation.verified=false`.
 - `data/task3a_rhyme_pairs.jsonl` — Task 3a rhyme pairs (200 pos + 200 neg), built
   separately by `scripts/build_rhyme_dataset.py` + `src/rhyme.py` (NOT
   `build_tasks.py` — that script's earlier ad hoc rhyme code was retired in favor
   of this properly open/closed-syllable-aware implementation). `--stats` mode first,
   dry-run by default, `--confirm` to write; see the script's docstring.
+  **Human-verified, 400/400, 100% agreement.**
+- `data/task3b_rhyme_generation.jsonl` — Task 3b rhyme-generation prompts (300: 200
+  common/100 rare) + gold rhyme sets, built by `scripts/build_rhyme_generation_dataset.py`
+  (reuses `build_rhyme_dataset.py`'s lexicon loading + `src/rhyme.py`'s `rime()`).
+  Gold sets are filtered through `is_trivial_pair` (deviation from the spec's literal
+  "all lexicon words with matching rime" — documented in the spec and script docstring;
+  without it, productive grammatical suffixes like -এর dominate gold sets almost
+  entirely). `src/rhyme.py`'s `success_at_k`/`mean_success_at_k` implement the
+  PhonologyBench-style Success Rate@k scoring for when M5 zero-shot evals run against
+  this. Poetry-corpus gold enrichment (spec's stretch goal) NOT implemented — no corpus
+  text in this repo, so Success Rate@k here is a lower bound. Not yet human-reviewed.
 - `data/probing_export/` — CSV views of the above for the M4 probing harness, split by
   A/M/CB category per tokenizer (`scripts/export_for_probing.py`); see
   `docs/probing_integration.md`.

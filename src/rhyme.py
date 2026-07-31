@@ -23,11 +23,12 @@ string equality already enforces this — no separate "strict mode" needed.
 """
 from __future__ import annotations
 
-from typing import List, Optional, Tuple
+from typing import Iterable, List, Optional, Sequence, Tuple
 
 from bangla_phonology import MATRAS, is_nucleus, normalize_bn, segment_aksharas, syllabify
 
-__all__ = ["rime", "assonance_key", "is_trivial_pair", "final_matra"]
+__all__ = ["rime", "assonance_key", "is_trivial_pair", "trivial_pair_key",
+          "is_trivial_pair_fast", "final_matra", "success_at_k", "mean_success_at_k"]
 
 
 def _final_syllable_nucleus_index(phonemes: List[str]) -> Optional[Tuple[List[str], int]]:
@@ -79,18 +80,34 @@ _TRIVIAL_SUFFIXES = ("টি", "টা", "খানা", "গুলো", "গু
                      "ের", "রা", "দের", "তে", "কে", "েরা", "ও")
 
 
+def trivial_pair_key(word: str) -> Tuple[Tuple[str, ...], frozenset]:
+    """Precomputable half of is_trivial_pair(): (final-2-akshara tuple,
+    set of blocklist suffixes this word ends with). Compute once per word
+    and reuse via is_trivial_pair_fast() — is_trivial_pair() itself
+    recomputes segment_aksharas() on every call, fine for one-off pair
+    checks but too slow when filtering one prompt against thousands of
+    candidates (Task 3b gold-set construction)."""
+    w = normalize_bn(word)
+    clusters = segment_aksharas(w)
+    tail = tuple(clusters[-2:]) if len(clusters) >= 2 else tuple(clusters)
+    suffixes = frozenset(suf for suf in _TRIVIAL_SUFFIXES if w.endswith(suf))
+    return tail, suffixes
+
+
+def is_trivial_pair_fast(key1: Tuple[Tuple[str, ...], frozenset],
+                         key2: Tuple[Tuple[str, ...], frozenset]) -> bool:
+    """Same test as is_trivial_pair(), given two trivial_pair_key() results."""
+    tail1, suf1 = key1
+    tail2, suf2 = key2
+    return tail1 == tail2 or bool(suf1 & suf2)
+
+
 def is_trivial_pair(w1: str, w2: str) -> bool:
     """Anti-leakage filter (Liao & Shi): True if w1/w2 share their final 2
     grapheme clusters orthographically, OR both end in the same common
     inflection/classifier suffix — either way the "rhyme" would be
     morphological, not phonological."""
-    a, b = normalize_bn(w1), normalize_bn(w2)
-    ca, cb = segment_aksharas(a), segment_aksharas(b)
-    tail_a = tuple(ca[-2:]) if len(ca) >= 2 else tuple(ca)
-    tail_b = tuple(cb[-2:]) if len(cb) >= 2 else tuple(cb)
-    if tail_a == tail_b:
-        return True
-    return any(a.endswith(suf) and b.endswith(suf) for suf in _TRIVIAL_SUFFIXES)
+    return is_trivial_pair_fast(trivial_pair_key(w1), trivial_pair_key(w2))
 
 
 def final_matra(word: str) -> Optional[str]:
@@ -105,3 +122,29 @@ def final_matra(word: str) -> Optional[str]:
     last = clusters[-1]
     matras_in_cluster = [ch for ch in last if ch in MATRAS]
     return matras_in_cluster[-1] if matras_in_cluster else None
+
+
+# ----------------------------------------------------------------------------
+# Task 3b: rhyme generation scoring (Spec A.4 3b)
+# ----------------------------------------------------------------------------
+
+def success_at_k(candidates: Sequence[str], gold: Iterable[str], k: int = 5) -> int:
+    """PhonologyBench-style Success Rate@k for one prompt: 1 if any of the
+    model's first k candidate words is in the gold rhyme set, else 0.
+    `candidates` is assumed already ranked (best guess first); only the
+    first k are considered, matching the "@k" contract regardless of how
+    many candidates were generated."""
+    gold_set = gold if isinstance(gold, set) else set(gold)
+    return int(any(c in gold_set for c in candidates[:k]))
+
+
+def mean_success_at_k(all_candidates: Sequence[Sequence[str]],
+                       all_gold: Sequence[Iterable[str]], k: int = 5) -> float:
+    """Success Rate@k averaged over a batch of prompts (one candidate list
+    and one gold set per prompt, same order, same length)."""
+    if len(all_candidates) != len(all_gold):
+        raise ValueError("all_candidates and all_gold must be the same length")
+    if not all_candidates:
+        return 0.0
+    scores = [success_at_k(c, g, k) for c, g in zip(all_candidates, all_gold)]
+    return sum(scores) / len(scores)

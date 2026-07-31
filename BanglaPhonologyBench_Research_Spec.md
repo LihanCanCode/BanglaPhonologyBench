@@ -88,6 +88,15 @@ long paper or KnowLLM/SIGMORPHON workshop.
 - **3b Rhyme generation:** 300 prompt words (200 common / 100 rare). Gold = all lexicon words
   with matching rime (expect large gold sets; report Success Rate @5 as in PhonologyBench).
   Mine additional attested rhymes from poetry corpora to enrich gold.
+  NOTE (added post-hoc, scripts/build_rhyme_generation_dataset.py): gold sets are additionally
+  filtered through the 3a anti-leakage check (is_trivial_pair). Without it, short grammatical
+  suffixes (-এর genitive, -রা plural) dominate gold sets almost entirely — একের's raw gold was
+  7,127 words (essentially "any noun + -এর"), 20 after filtering — which would make Success
+  Rate@5 measure suffix-completion rather than genuine phonological rhyme generation. A real
+  derivational-suffix rime (-তা, ভাতা) is barely affected (639 -> 637), confirming the filter
+  targets grammatical leakage specifically rather than shrinking gold sets indiscriminately.
+  Poetry-corpus enrichment was NOT implemented (no corpus text present in this repo) — gold
+  sets are lexicon-only, so Success Rate@k here is a lower bound.
 
 #### Task 4 — Schwa (inherent vowel) deletion prediction  *(Bangla-unique contribution)*
 - **Item:** word → binary vector over consonant graphemes marking whether the inherent vowel
