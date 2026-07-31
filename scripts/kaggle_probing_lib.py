@@ -77,7 +77,8 @@ def extraction_done(out_dir: str, n_layers: int) -> bool:
         return False           # corrupted/partial write from a killed session: redo it
 
 
-def extract_g2p(extract_fn, rows: Sequence[dict], out_dir: str, n_layers: int) -> str:
+def extract_g2p(extract_fn, rows: Sequence[dict], out_dir: str, n_layers: int,
+                storage_dtype: str = "float32") -> str:
     """Extract last-token hidden states for every layer, for every row's
     `word`. Skips entirely (returns immediately) if out_dir already looks
     complete per extraction_done() — that's the whole resumability story
@@ -90,6 +91,14 @@ def extract_g2p(extract_fn, rows: Sequence[dict], out_dir: str, n_layers: int) -
         combo's extraction loop.
     rows: dicts with 'word' (str), 'phon_vec' (list[int]), 'syllables'
         (list[list[str]], only its len() is used).
+    storage_dtype: defaults to float32, NOT float16 — an earlier version
+        defaulted to float16 to save disk space and it turned out unsafe:
+        even with correctly-finite fp32 model output (see extraction_done's
+        docstring re: T5's fp16-compute overflow, a separate issue), some
+        BanglaT5 hidden states exceed float16's ~65504 max on real data
+        (word বীর্য, layer 4, hit exactly this on the first real run).
+        float32 costs 2x the disk for a problem this dataset's scale
+        (<=3,000 words/combo) doesn't make worth optimizing around.
     Writes layer_{i}.pkl in upstream's own format (word/embeddings/
     phon_vecs/syllable_count keys) so downstream code doesn't care whether
     they came from this or the original script.
@@ -115,13 +124,15 @@ def extract_g2p(extract_fn, rows: Sequence[dict], out_dir: str, n_layers: int) -
                     f"almost certainly running in plain float16 (T5 was trained in "
                     f"bfloat16/fp32 and plain fp16 inference commonly overflows internal "
                     f"activations) — load it in float32 instead.")
-            emb16 = np.asarray(emb, dtype="float16")
-            if not np.isfinite(emb16).all():
+            cast = np.asarray(emb, dtype=storage_dtype)
+            if not np.isfinite(cast).all():
                 raise RuntimeError(
                     f"word={row['word']!r}, layer={li}: finite in the model's native dtype "
-                    f"but overflowed casting to float16 for storage (magnitude > ~65504). "
-                    f"Store this layer as float32 instead.")
-            embeddings_by_layer[li].append(emb16)
+                    f"but overflowed casting to {storage_dtype} for storage. Use a wider "
+                    f"storage_dtype (float32 is already the default; if you're already on "
+                    f"float32 and still hitting this, the model's native values are "
+                    f"exceeding ~3.4e38, which would be its own separate bug).")
+            embeddings_by_layer[li].append(cast)
         words.append(row["word"])
         phon_vecs.append(row["phon_vec"])
         syllable_counts.append(len(row["syllables"]))

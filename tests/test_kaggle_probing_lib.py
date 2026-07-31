@@ -107,15 +107,32 @@ def test_extract_raises_clear_error_on_nonfinite_model_output(tmp_path):
     assert not extraction_done(str(tmp_path), N_LAYERS)
 
 
+def test_extract_default_storage_dtype_is_float32(tmp_path):
+    """Regression test for the real bug this default was changed to avoid:
+    float16 defaulted here originally, and real BanglaT5 hidden states
+    (finite, correctly computed) exceeded its ~65504 max on real data
+    (word বীর্য, layer 4). float32 must be the default so this doesn't
+    silently recur."""
+    import inspect
+    assert inspect.signature(extract_g2p).parameters["storage_dtype"].default == "float32"
+
+    def extract_fn(word):
+        # finite, well within float32 range, but > float16's ~65504 max
+        return [np.array([1e6] * HIDDEN, dtype="float32") for _ in range(N_LAYERS)]
+    extract_g2p(extract_fn, mock_rows(2), str(tmp_path), N_LAYERS)   # must NOT raise
+    assert extraction_done(str(tmp_path), N_LAYERS)
+
+
 def test_extract_raises_on_float16_overflow_from_finite_input():
-    """Finite in the model's native dtype but too large to survive the
-    float16 storage cast (magnitude > ~65504) must also fail loudly."""
+    """Finite in the model's native dtype but too large to survive an
+    explicitly-requested narrower storage cast (magnitude > ~65504 for
+    float16) must fail loudly rather than silently corrupt the checkpoint."""
     def extract_fn(word):
         return [np.array([1e6] * HIDDEN, dtype="float32") for _ in range(N_LAYERS)]
     import tempfile
     with tempfile.TemporaryDirectory() as tmp:
         with pytest.raises(RuntimeError, match="overflowed casting to float16"):
-            extract_g2p(extract_fn, mock_rows(2), tmp, N_LAYERS)
+            extract_g2p(extract_fn, mock_rows(2), tmp, N_LAYERS, storage_dtype="float16")
 
 
 def test_extraction_done_false_for_nonfinite_stored_embeddings(tmp_path):
