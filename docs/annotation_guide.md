@@ -14,14 +14,23 @@ different question:
 | Sheet | Question you're answering | Rows |
 |---|---|---|
 | `etym_review.csv` | Is this word tatsama (Sanskrit-origin), tadbhava (native), or foreign (English/Perso-Arabic/Portuguese)? | 353 |
-| `rhyme_review.csv` | Do these two words actually rhyme in your pronunciation? | 400 |
+| `task3a_rhyme_review.csv` | Do these two words actually rhyme in your pronunciation? | 400 |
 | `schwa_review.csv` | Is the inherent-vowel (schwa) pronunciation vector correct for this word? | 160 |
 
 All three were pre-filled by code — a heuristic etymology tagger
-(`scripts/tag_etymology_heuristic.py`), the lexicon's rime for rhyme pairs,
-and the orthography→phoneme aligner for schwa vectors. **Your job is to
-correct, not create.** Where the prediction looks right, leave the
-`*_corrected` cell blank — you only type something when you disagree.
+(`scripts/tag_etymology_heuristic.py`), the phonemic rime rule in
+`src/rhyme.py` for rhyme pairs, and the orthography→phoneme aligner for
+schwa vectors. **Your job is to correct, not create.** Where the prediction
+looks right, leave the `*_corrected` cell blank — you only type something
+when you disagree.
+
+> **Note on the rhyme sheet:** an earlier, simpler rhyme dataset
+> (`data/tasks/rhyme_pairs.jsonl` + `rhyme_review.csv`) was built before
+> `src/rhyme.py` existed and has been retired — it used a cruder rime rule
+> that didn't distinguish open vs. closed final syllables. If you see
+> references to it anywhere older, ignore them; `task3a_rhyme_review.csv` /
+> `data/task3a_rhyme_pairs.jsonl` are the current, correct versions. Nothing
+> was lost — the old sheet had zero rows reviewed when it was replaced.
 
 ## Column convention (same in all three sheets)
 
@@ -64,20 +73,40 @@ skewed sample of A/M/CB happens to fall out of your corrections (useful for
 sanity-checking the cognate-conjecture hypothesis later, not something to
 act on now).
 
-### rhyme_review.csv
+### task3a_rhyme_review.csv
 
-Columns: `id, word1, word2, ipa1, ipa2, rime1, rime2, subset,
-predicted_label, label_corrected, reviewed, notes`.
+Columns: `id, orth1, orth2, ipa1, ipa2, rime1, rime2, assonance_key1,
+assonance_key2, neg_type, predicted_label, freq_bucket1, freq_bucket2,
+label_corrected, reviewed, notes`.
 
-`predicted_label` is 1 (predicted to rhyme) or 0 (predicted not to rhyme).
-`subset` tells you which pool it came from:
-- `pos`: mined from the lexicon by matching rime (final-syllable nucleus+coda).
-- `hard`: same final-akshara *spelling*, different actual rime — orthographic
-  decoys, meant to be hard negatives. Check these particularly carefully;
-  they're the ones most likely to trip up a rule-based rhyme detector, which
-  is exactly why they're valuable, but also where mining errors are most
-  likely.
-- `easy`: matched on syllable count, spelling doesn't coincide.
+`predicted_label` is 1 (predicted to rhyme, 200 rows) or 0 (predicted not
+to rhyme, 200 rows). The rhyme rule itself (`src/rhyme.py`) follows Bangla
+poetic convention: a CLOSED final syllable (ends in a consonant) only needs
+matching nucleus+coda — the onset is free to differ, same as English
+cat/hat/mat. An OPEN final syllable (ends in the vowel) additionally
+requires the onset to match, since matching just the vowel would be
+assonance, not rhyme. `rime1`/`rime2` show you exactly what had to match;
+blank means the word's final syllable is a bare vowel with no onset at all
+(unusable for rhyme by this rule).
+
+For label=0 rows, `neg_type` tells you which of three deliberately
+different negative strategies produced it — read them differently:
+- `assonance_decoy` (80 rows): shares the final vowel (`assonance_key1` ==
+  `assonance_key2`) but the rime genuinely differs — e.g. same "-u" ending,
+  different consonant before it. These are the hardest cases: read for
+  whether the words *actually* rhyme to your ear despite the algorithm
+  saying no, since assonance can feel close to rhyme.
+- `ortho_decoy` (40 rows): mined by shared final vowel-sign (matra) —
+  spellings that *look* alike (e.g. both end in the া sign, spelled -তা vs
+  -টা) but differ in a consonant the algorithm treats as phonologically
+  real (dental vs. retroflex, etc.). Check these particularly carefully —
+  they're exactly the pairs most likely to trip up a model that's
+  pattern-matching on spelling rather than sound, which is also where a
+  mining bug would most likely produce a false negative.
+- `random` (80 rows): unrelated vowel entirely, matched on syllable count
+  and frequency bucket. Should be obviously non-rhyming; flag anything that
+  doesn't look like a fair, well-matched pair (e.g. wildly different
+  register/length despite the matching criteria).
 
 Type `0` or `1` in `label_corrected` only if you disagree with
 `predicted_label`.

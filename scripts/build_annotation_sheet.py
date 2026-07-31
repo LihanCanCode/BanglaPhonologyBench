@@ -22,9 +22,12 @@ Writes (data/annotation/):
                      Spec C.4). Columns: id, orth, ipa, freq_bucket,
                      tigerllm_category, etym_heuristic, etym_corrected,
                      reviewed, notes.
-  rhyme_review.csv  all 400 pairs. Columns: id, word1, word2, ipa1, ipa2,
-                     rime1, rime2, subset, predicted_label, label_corrected,
-                     reviewed, notes.
+  task3a_rhyme_review.csv  all 400 pairs from data/task3a_rhyme_pairs.jsonl
+                     (src/rhyme.py — proper open/closed-syllable rime, NOT
+                     the retired data/tasks/rhyme_pairs.jsonl). Columns: id,
+                     orth1, orth2, ipa1, ipa2, rime1, rime2, assonance_key1,
+                     assonance_key2, neg_type, predicted_label, freq_bucket1,
+                     freq_bucket2, label_corrected, reviewed, notes.
   schwa_review.csv  ~160 words stratified across the four schwa
                      environments (final/post_conjunct/conjunct/medial).
                      Columns: id, orth, aksharas, schwa_vector,
@@ -93,25 +96,32 @@ def build_etym_sheet(rng, target_tatsama=150, target_tadbhava=150):
 
 
 def build_rhyme_sheet():
-    items = load("rhyme_pairs.jsonl")
+    """Task 3a rhyme pairs (src/rhyme.py + scripts/build_rhyme_dataset.py),
+    NOT the retired data/tasks/rhyme_pairs.jsonl / rhyme_review.csv pair —
+    those were superseded (see docs/annotation_guide.md)."""
+    items = [json.loads(l) for l in open("data/task3a_rhyme_pairs.jsonl", encoding="utf-8")]
     rows = []
     for it in items:
         rows.append({
-            "id": it["id"], "word1": it["word1"], "word2": it["word2"],
-            "ipa1": it["ipa1"], "ipa2": it["ipa2"],
-            "rime1": "".join(it["rime1"]), "rime2": "".join(it["rime2"]),
-            "subset": it["subset"],
+            "id": it["id"], "orth1": it["orth1"], "orth2": it["orth2"],
+            "ipa1": "".join(it["phonemes1"]), "ipa2": "".join(it["phonemes2"]),
+            "rime1": "".join(it["rime1"]) if it["rime1"] else "",
+            "rime2": "".join(it["rime2"]) if it["rime2"] else "",
+            "assonance_key1": it["assonance_key1"] or "",
+            "assonance_key2": it["assonance_key2"] or "",
+            "neg_type": it["neg_type"] or "",
             "predicted_label": it["label"],
+            "freq_bucket1": it["freq_bucket1"], "freq_bucket2": it["freq_bucket2"],
             "label_corrected": "",   # fill: 1 (rhymes) / 0 (doesn't) — ONLY if you disagree
             "reviewed": "",           # set TRUE once you've looked at this row
             "notes": "",
         })
-    path = OUT / "rhyme_review.csv"
+    path = OUT / "task3a_rhyme_review.csv"
     with open(path, "w", newline="", encoding="utf-8-sig") as f:
         w = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
         w.writeheader()
         w.writerows(rows)
-    print(f"[rhyme_review] {len(rows)} rows -> {path}")
+    print(f"[task3a_rhyme_review] {len(rows)} rows -> {path}")
 
 
 def build_schwa_sheet(rng, per_env=40):

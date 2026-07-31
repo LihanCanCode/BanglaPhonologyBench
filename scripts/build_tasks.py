@@ -5,10 +5,11 @@ Outputs (data/tasks/):
   g2p.jsonl                 Task 1 — 3,000 words (1,500 HighFreq / 1,500 LowFreq)
   syllable_count_word.jsonl Task 2a — same 3,000 words, gold = lexicon syllable count
   schwa_deletion.jsonl      Task 4 — 1,000 words, binary inherent-vowel vector
-  rhyme_pairs.jsonl         Task 3a — 200 positive + 200 negative pairs
-                                      (anti-leakage: no shared final-2-akshara
-                                      spelling in positives; orthographic decoys
-                                      tagged "hard" in negatives)
+
+Task 3a (rhyme pairs) is NOT built here — see scripts/build_rhyme_dataset.py
+and src/rhyme.py, which properly distinguish open/closed final syllables
+(Spec A.4 3a) instead of this file's earlier ad hoc rime_of() heuristic.
+The canonical Task 3a output is data/task3a_rhyme_pairs.jsonl.
 
 Frequency buckets (Spec A.3.4): zipf from wordfreq(bn) over the lexicon∩wordfreq
 pool; HighFreq = top quartile, LowFreq = bottom quartile. etym/pos are null
@@ -182,94 +183,6 @@ def build_schwa(lex, rng, n=1000):
     write_jsonl(OUT / "schwa_deletion.jsonl", items)
 
 
-# --- Task 3a: rhyme pairs -------------------------------------------------------
-
-def rime_of(syllables):
-    last = syllables[-1]
-    for i, p in enumerate(last):
-        if is_nucleus(p):
-            return tuple(last[i:])
-    return None
-
-
-def last2_spelling(orth):
-    cl = segment_aksharas(orth)
-    return "".join(cl[-2:])
-
-
-def build_rhyme(lex, rng, n_pos=200, n_neg=200):
-    import wordfreq
-    pool = [w for w in sorted(lex)
-            if wordfreq.zipf_frequency(w, "bn") >= 3.0 and len(lex[w]) >= 2]
-    by_rime = defaultdict(list)
-    for w in pool:
-        r = rime_of(lex[w])
-        if r:
-            by_rime[r].append(w)
-
-    positives, seen = [], set()
-    rimes = sorted((r for r, ws in by_rime.items() if len(ws) >= 2),
-                   key=lambda r: -len(by_rime[r]))
-    candidates = []
-    for r in rimes:
-        ws = by_rime[r]
-        for i in range(len(ws)):
-            for j in range(i + 1, len(ws)):
-                a, b = ws[i], ws[j]
-                if last2_spelling(a) == last2_spelling(b):
-                    continue          # anti-leakage (Liao & Shi): force phonology
-                candidates.append((a, b, r))
-    rng.shuffle(candidates)
-    for a, b, r in candidates:
-        if a in seen or b in seen:    # each word appears in at most one pair
-            continue
-        positives.append((a, b, r))
-        seen.update((a, b))
-        if len(positives) >= n_pos:
-            break
-
-    negatives = []
-    # hard subset: same final akshara spelling, different rime (orthographic decoys)
-    by_last = defaultdict(list)
-    for w in pool:
-        by_last[segment_aksharas(w)[-1]].append(w)
-    hard = []
-    for ws in by_last.values():
-        for i in range(len(ws)):
-            for j in range(i + 1, len(ws)):
-                if rime_of(lex[ws[i]]) != rime_of(lex[ws[j]]):
-                    hard.append((ws[i], ws[j]))
-    rng.shuffle(hard)
-    negatives += [(a, b, "hard") for a, b in hard[:n_neg // 4]]
-    # easy negatives: matched on syllable count, different rime
-    flat = pool[:]
-    rng.shuffle(flat)
-    i = 0
-    while len(negatives) < n_neg and i + 1 < len(flat):
-        a, b = flat[i], flat[i + 1]
-        i += 2
-        if (len(lex[a]) == len(lex[b]) and rime_of(lex[a]) != rime_of(lex[b])
-                and segment_aksharas(a)[-1] != segment_aksharas(b)[-1]):
-            negatives.append((a, b, "easy"))
-
-    items = []
-    for k, (a, b, tag) in enumerate([(x, y, "pos") for x, y, _ in positives]
-                                    + negatives):
-        items.append({
-            "id": f"rhyme_{k:05d}", "task": "rhyme_awareness",
-            "word1": a, "word2": b,
-            "ipa1": "".join(p for s in lex[a] for p in s),
-            "ipa2": "".join(p for s in lex[b] for p in s),
-            "rime1": list(rime_of(lex[a])), "rime2": list(rime_of(lex[b])),
-            "label": 1 if tag == "pos" else 0,
-            "subset": tag,
-            "annotation": {"source": "google_lexicon_bn_bd", "verified": False},
-        })
-    write_jsonl(OUT / "rhyme_pairs.jsonl", items)
-    print(f"[rhyme] positives={len(positives)} negatives={len(negatives)} "
-          f"(hard={sum(1 for *_, t in negatives if t == 'hard')})")
-
-
 def main():
     rng = random.Random(SEED)
     lex = load_clean_lexicon()
@@ -277,7 +190,6 @@ def main():
     tokenizers = load_tokenizers()
     build_g2p_and_syllables(lex, tokenizers, rng)
     build_schwa(lex, rng)
-    build_rhyme(lex, rng)
 
 
 if __name__ == "__main__":

@@ -109,9 +109,11 @@ def apply_etym():
 
 
 def apply_rhyme():
-    csv_path = ANN / "rhyme_review.csv"
+    """Task 3a rhyme pairs (data/task3a_rhyme_pairs.jsonl, src/rhyme.py) —
+    NOT the retired data/tasks/rhyme_pairs.jsonl."""
+    csv_path = ANN / "task3a_rhyme_review.csv"
     if not csv_path.exists():
-        print("[rhyme] no rhyme_review.csv, skipping")
+        print("[rhyme] no task3a_rhyme_review.csv, skipping")
         return
     rows = read_csv(csv_path)
     reviewed = {r["id"]: r for r in rows if is_true(r["reviewed"])}
@@ -119,7 +121,8 @@ def apply_rhyme():
         print(f"[rhyme] 0/{len(rows)} rows marked reviewed=TRUE, nothing to apply")
         return
 
-    items = load_jsonl(TASKS / "rhyme_pairs.jsonl")
+    rhyme_path = Path("data/task3a_rhyme_pairs.jsonl")
+    items = load_jsonl(rhyme_path)
     agree = correct = 0
     for it in items:
         r = reviewed.get(it["id"])
@@ -134,7 +137,7 @@ def apply_rhyme():
         it["label"] = final
         it["annotation"]["verified"] = True
         it["annotation"]["annotators"] = 1
-    write_jsonl(TASKS / "rhyme_pairs.jsonl", items)
+    write_jsonl(rhyme_path, items)
     print(f"[rhyme] applied {len(reviewed)}/{len(rows)} reviewed rows "
           f"(agreed: {agree}, corrected: {correct}, "
           f"predicted-label accuracy on reviewed sample: {agree/len(reviewed):.1%})")

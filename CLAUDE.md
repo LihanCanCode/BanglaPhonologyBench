@@ -86,8 +86,12 @@ Word categories for split analyses: **A** (aligned: GTAD=0 ∧ STAD=0), **CB**
 2. **M2 (wks 3–6):** ✅ Tasks 1–2 datasets frozen (`data/tasks/g2p.jsonl`,
    `syllable_count_word.jsonl`, 3,000 words each); GTAD/STAD/ρ computed for 5 real
    tokenizers (`results/metrics_top3000.csv`); descriptive stats (`figures/figure2.*`).
-3. **M3 (wks 5–8):** ✅ Tasks 3a/4 built (`rhyme_pairs.jsonl` 400 pairs w/ anti-leakage
-   filter, `schwa_deletion.jsonl` 1,000 words from the aligner). ⏳ annotation pass:
+3. **M3 (wks 5–8):** ✅ Tasks 3a/4 built. Task 3a rhyme pairs: `src/rhyme.py` (proper
+   open/closed-final-syllable rime rule, Spec A.4 3a) + `scripts/build_rhyme_dataset.py`
+   -> `data/task3a_rhyme_pairs.jsonl` (200 positive + 200 negative, negatives split
+   80 assonance_decoy / 40 ortho_decoy / 80 random; anti-leakage via `is_trivial_pair`
+   + phoneme-sequence stem check). Task 4 schwa: `schwa_deletion.jsonl` 1,000 words
+   from the aligner. ⏳ annotation pass:
    tooling built (`scripts/tag_etymology_heuristic.py`, `scripts/build_annotation_sheet.py`,
    `scripts/apply_annotations.py`), review sheets generated in `data/annotation/`
    — see `docs/annotation_guide.md`. Actual human review is a solo-annotator pass,
@@ -132,10 +136,13 @@ Run Python scripts with `-X utf8` on Windows (Bangla output to console).
 - `data/tasks/*.jsonl` — frozen task datasets (Spec A.5 schema): `g2p.jsonl`,
   `syllable_count_word.jsonl` (3,000 words each, 1,500 HighFreq/1,500 LowFreq by
   wordfreq(bn) zipf quartile), `schwa_deletion.jsonl` (1,000 words, environment-
-  stratified), `rhyme_pairs.jsonl` (200 pos + 200 neg, 50 "hard" orthographic-decoy
-  negatives, anti-leakage filter on final-2-akshara spelling). Built by
-  `scripts/build_tasks.py`. **Not yet annotator-verified** — treat as silver until M3's
-  human pass.
+  stratified). Built by `scripts/build_tasks.py`. **Not yet annotator-verified** —
+  treat as silver until M3's human pass.
+- `data/task3a_rhyme_pairs.jsonl` — Task 3a rhyme pairs (200 pos + 200 neg), built
+  separately by `scripts/build_rhyme_dataset.py` + `src/rhyme.py` (NOT
+  `build_tasks.py` — that script's earlier ad hoc rhyme code was retired in favor
+  of this properly open/closed-syllable-aware implementation). `--stats` mode first,
+  dry-run by default, `--confirm` to write; see the script's docstring.
 - `data/probing_export/` — CSV views of the above for the M4 probing harness, split by
   A/M/CB category per tokenizer (`scripts/export_for_probing.py`); see
   `docs/probing_integration.md`.

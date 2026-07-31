@@ -568,7 +568,10 @@ def main():
 
     records = []
     for k, r in enumerate(positives + negatives):
-        records.append({"id": f"rhyme3a_{k:05d}", "task": "rhyme_awareness", **r})
+        records.append({
+            "id": f"rhyme3a_{k:05d}", "task": "rhyme_awareness", **r,
+            "annotation": {"source": "google_lexicon_bn_bd", "verified": False, "annotators": 0},
+        })
     OUT.parent.mkdir(parents=True, exist_ok=True)
     with open(OUT, "w", encoding="utf-8", newline="\n") as f:
         for rec in records:

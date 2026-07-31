@@ -14,7 +14,7 @@ walkthrough — the fork itself is NOT committed here, it's a plain
                                     directly; our max is reported below vs.
                                     their English max of 8)
   data/tasks/syllable_count_word.jsonl -> reuses the same CSV (syllables col)
-  data/tasks/rhyme_pairs.jsonl  -> data/probing_export/rhyme_pairs.csv
+  data/task3a_rhyme_pairs.jsonl -> data/probing_export/rhyme_pairs.csv
                                     columns: word1, word2, label
 
 At M4 time, copy (or symlink) data/probing_export/*.csv into the forked
@@ -100,13 +100,13 @@ def main():
         json.dump({"vocab": vocab, "pad_len": pad_len}, f, ensure_ascii=False, indent=2)
     print(f"[export] wrote phoneme vocab -> data/tasks/phoneme_vocab.json")
 
-    rhyme = [json.loads(l) for l in open(TASKS / "rhyme_pairs.jsonl", encoding="utf-8")]
+    rhyme = [json.loads(l) for l in open("data/task3a_rhyme_pairs.jsonl", encoding="utf-8")]
     rp = OUT / "rhyme_pairs.csv"
     with open(rp, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=["word1", "word2", "label"])
         w.writeheader()
         for it in rhyme:
-            w.writerow({"word1": it["word1"], "word2": it["word2"], "label": it["label"]})
+            w.writerow({"word1": it["orth1"], "word2": it["orth2"], "label": it["label"]})
     print(f"[export] wrote {rp.name}: {len(rhyme)} pairs")
 
 
