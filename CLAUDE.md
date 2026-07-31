@@ -95,8 +95,8 @@ Word categories for split analyses: **A** (aligned: GTAD=0 ∧ STAD=0), **CB**
    dataset.py` -> `data/task3b_rhyme_generation.jsonl` (300 prompts: 200 common/100 rare;
    gold = lexicon words sharing the prompt's rime, ADDITIONALLY filtered through
    `is_trivial_pair` — without it, short grammatical suffixes like -এর dominate gold sets
-   almost entirely, see the script's docstring and the Spec A.4 3b note; not yet
-   human-reviewed). Task 4 schwa: `schwa_deletion.jsonl` 1,000 words from the aligner
+   almost entirely, see the script's docstring and the Spec A.4 3b note) — **human-verified
+   300/300, no corrections**. Task 4 schwa: `schwa_deletion.jsonl` 1,000 words from the aligner
    — **human-verified 160/160 (stratified sample), 100% agreement**. Task 1 etymology:
    4-way tag (added `deshi`, see Spec A.3.5 note) — **human-verified 353/353; heuristic
    tagger accuracy 38.2%**, a real and reportable weakness of orthography-only etymology
@@ -159,7 +159,8 @@ Run Python scripts with `-X utf8` on Windows (Bangla output to console).
   entirely). `src/rhyme.py`'s `success_at_k`/`mean_success_at_k` implement the
   PhonologyBench-style Success Rate@k scoring for when M5 zero-shot evals run against
   this. Poetry-corpus gold enrichment (spec's stretch goal) NOT implemented — no corpus
-  text in this repo, so Success Rate@k here is a lower bound. Not yet human-reviewed.
+  text in this repo, so Success Rate@k here is a lower bound. **Human-verified, 300/300,
+  no corrections.**
 - `data/probing_export/` — CSV views of the above for the M4 probing harness, split by
   A/M/CB category per tokenizer (`scripts/export_for_probing.py`); see
   `docs/probing_integration.md`.
