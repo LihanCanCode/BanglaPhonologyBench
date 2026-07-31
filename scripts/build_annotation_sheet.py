@@ -81,7 +81,11 @@ def build_etym_sheet(rng, target_tatsama=150, target_tadbhava=150):
             "freq_bucket": it["freq_bucket"],
             "tigerllm_category": tigerllm_category(it),
             "etym_heuristic": it["etym"],
-            "etym_corrected": "",     # fill: tatsama / tadbhava / foreign — ONLY if you disagree
+            # fill: tatsama / tadbhava / foreign / deshi — ONLY if you disagree.
+            # deshi = indigenous substrate vocabulary, NOT descended from
+            # Sanskrit at all (unlike tadbhava); the heuristic never guesses
+            # it since it has no orthographic signature — see Spec A.3.5.
+            "etym_corrected": "",
             "reviewed": "",           # set TRUE once you've looked at this row
             "notes": "",
         })

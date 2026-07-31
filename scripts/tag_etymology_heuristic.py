@@ -24,6 +24,14 @@ This will mis-tag plenty of words (e.g. Perso-Arabic loans look tadbhava-
 simple; some tatsama compounds have no conjunct). That's expected — it only
 needs to save you typing on the ~70% of cases the heuristic gets right, per
 Spec A.1's "candidate generation ONLY" contract.
+
+A FOURTH valid tag, `deshi` (indigenous substrate vocabulary — not descended
+from Sanskrit at all, e.g. বোরো "boro rice"; see Spec A.3.5's note), is
+deliberately NOT guessed here: unlike the three above, deshi has no reliable
+orthographic signature — it looks exactly like tadbhava (simple, non-conjunct
+CV(C)) and is only distinguishable by actually knowing the word's etymology.
+Annotators assign it by hand in etym_corrected during review; this script
+will never emit it.
 """
 from __future__ import annotations
 

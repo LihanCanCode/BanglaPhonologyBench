@@ -39,10 +39,20 @@ long paper or KnowLLM/SIGMORPHON workshop.
    (e.g., মত /mɔt/ 'opinion' vs. মতো /mɔto/ 'like') are kept as separate entries with POS tags.
 4. Frequency annotation: log-frequency from IndicCorp-bn; split at top-quartile = HighFreq,
    bottom-quartile = LowFreq (middle half held out of frequency analyses).
-5. Loanword annotation: 3-way tag {tatsama (Sanskrit-origin, conjunct-heavy), tadbhava/native,
-   foreign (English/Perso-Arabic/Portuguese borrowings)} — via etymological wordlists +
-   annotator adjudication. This replaces Liao & Shi's CogNet analysis with a linguistically
-   richer Bangla-specific version.
+5. Loanword annotation: 4-way tag {tatsama (Sanskrit-origin, conjunct-heavy), tadbhava
+   (native, evolved FROM Sanskrit via regular sound change), deshi (indigenous substrate
+   vocabulary — NOT Sanskrit-descended at all, typically Austroasiatic/Munda-layer local
+   words, e.g. বোরো "boro rice"), foreign (English/Perso-Arabic/Portuguese borrowings)} —
+   via etymological wordlists + annotator adjudication. This replaces Liao & Shi's CogNet
+   analysis with a linguistically richer Bangla-specific version.
+   NOTE (added post-hoc during annotation): the original spec draft used the traditional
+   3-way tatsama/tadbhava/foreign split, but tadbhava strictly means "evolved from Sanskrit"
+   — it does not cover indigenous non-Sanskritic native vocabulary (দেশি), a real fourth
+   category in Bengali lexicography. Extended to 4-way once this surfaced during the M3
+   human annotation pass. deshi has no reliable orthographic signature distinguishing it
+   from tadbhava (both are typically simple, non-conjunct CV(C) forms), so unlike the other
+   three tags it is NOT heuristically pre-tagged — it is assigned purely by annotator
+   judgment during review.
 
 ### A.4 Tasks
 

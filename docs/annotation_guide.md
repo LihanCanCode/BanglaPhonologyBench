@@ -13,7 +13,7 @@ different question:
 
 | Sheet | Question you're answering | Rows |
 |---|---|---|
-| `etym_review.csv` | Is this word tatsama (Sanskrit-origin), tadbhava (native), or foreign (English/Perso-Arabic/Portuguese)? | 353 |
+| `etym_review.csv` | Is this word tatsama (Sanskrit-origin), tadbhava (native, evolved from Sanskrit), deshi (indigenous, not from Sanskrit at all), or foreign (English/Perso-Arabic/Portuguese)? | 353 |
 | `task3a_rhyme_review.csv` | Do these two words actually rhyme in your pronunciation? | 400 |
 | `schwa_review.csv` | Is the inherent-vowel (schwa) pronunciation vector correct for this word? | 160 |
 
@@ -64,6 +64,16 @@ tadbhava). It will be wrong on:
   Persian roots.
 - Tatsama compounds that happen to have no conjunct.
 - Foreign words that happen to contain a conjunct-like cluster coincidentally.
+- **দেশি (deshi) words tagged tadbhava** — this is the heuristic's blind
+  spot, not a mistake it can fix: tadbhava strictly means "evolved *from*
+  Sanskrit," but দেশি words (e.g. বোরো "boro rice") are indigenous substrate
+  vocabulary that was never Sanskrit-descended at all — often Austroasiatic/
+  Munda-layer, and orthographically indistinguishable from tadbhava (same
+  simple CV(C) shape, no conjunct, no foreign markers). The heuristic will
+  ALWAYS tag these tadbhava by default; catching them is purely on you,
+  from actually knowing the word's origin. Watch for this especially in
+  agriculture, local flora/fauna, and regional/dialect vocabulary — that's
+  where দেশি words cluster. Type `deshi` in `etym_corrected` when you spot one.
 
 All 53 heuristic-`foreign` words are included (foreign is the rarest class
 and most likely to need correction), plus 150 random tatsama + 150 random
