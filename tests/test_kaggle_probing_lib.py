@@ -89,6 +89,69 @@ def test_extraction_done_false_for_corrupted_file(tmp_path):
     assert not extraction_done(str(tmp_path), N_LAYERS)
 
 
+def make_nonfinite_extract_fn():
+    """Simulates a T5-family model run in plain fp16: overflows to inf."""
+    def extract_fn(word):
+        return [np.array([np.inf] * HIDDEN, dtype="float32") for _ in range(N_LAYERS)]
+    return extract_fn
+
+
+def test_extract_raises_clear_error_on_nonfinite_model_output(tmp_path):
+    """A model producing inf/nan (T5-in-fp16 being the real-world case that
+    prompted this) must fail loudly and immediately, not silently write
+    bad data that only breaks sklearn three cells later with no context."""
+    rows = mock_rows(3)
+    with pytest.raises(RuntimeError, match="non-finite values in extract_fn output"):
+        extract_g2p(make_nonfinite_extract_fn(), rows, str(tmp_path), N_LAYERS)
+    # nothing partial left behind to confuse a later resumability check
+    assert not extraction_done(str(tmp_path), N_LAYERS)
+
+
+def test_extract_raises_on_float16_overflow_from_finite_input():
+    """Finite in the model's native dtype but too large to survive the
+    float16 storage cast (magnitude > ~65504) must also fail loudly."""
+    def extract_fn(word):
+        return [np.array([1e6] * HIDDEN, dtype="float32") for _ in range(N_LAYERS)]
+    import tempfile
+    with tempfile.TemporaryDirectory() as tmp:
+        with pytest.raises(RuntimeError, match="overflowed casting to float16"):
+            extract_g2p(extract_fn, mock_rows(2), tmp, N_LAYERS)
+
+
+def test_extraction_done_false_for_nonfinite_stored_embeddings(tmp_path):
+    """A checkpoint written by an OLDER version of this code (before the
+    finite check existed) that already contains inf must be detected and
+    treated as not-done -- auto-redone on the next run, no manual cleanup
+    required from the user."""
+    words = ["a", "b"]
+    for li in range(N_LAYERS):
+        with open(tmp_path / f"layer_{li}.pkl", "wb") as f:
+            pickle.dump({
+                "word": words,
+                "embeddings": [np.array([np.inf] * HIDDEN, dtype="float16") for _ in words],
+                "phon_vecs": [[0], [0]], "syllable_count": [1, 1],
+            }, f)
+    assert not extraction_done(str(tmp_path), N_LAYERS)
+
+
+def test_extract_redoes_after_nonfinite_checkpoint_and_fn_fixed(tmp_path):
+    """The realistic recovery path: a bad (inf-containing) checkpoint from
+    a buggy run, then re-running with a FIXED extract_fn should redo the
+    combo automatically rather than trusting the stale bad data."""
+    words = ["word0", "word1"]
+    for li in range(N_LAYERS):
+        with open(tmp_path / f"layer_{li}.pkl", "wb") as f:
+            pickle.dump({
+                "word": words,
+                "embeddings": [np.array([np.inf] * HIDDEN, dtype="float16") for _ in words],
+                "phon_vecs": [[0], [0]], "syllable_count": [1, 1],
+            }, f)
+    calls = []
+    extract_g2p(make_extract_fn(calls), mock_rows(2), str(tmp_path), N_LAYERS)
+    assert len(calls) == 2, "must have redone extraction, not trusted the bad checkpoint"
+    assert extraction_done(str(tmp_path), N_LAYERS)
+
+
 def test_extract_redoes_after_corruption(tmp_path):
     rows = mock_rows(5)
     extract_g2p(make_extract_fn([]), rows, str(tmp_path), N_LAYERS)

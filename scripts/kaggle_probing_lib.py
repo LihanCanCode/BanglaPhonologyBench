@@ -43,9 +43,21 @@ __all__ = ["extraction_done", "extract_g2p", "run_probe_battery"]
 # 1. Extraction, file-level resumable
 # ----------------------------------------------------------------------------
 
+def _embeddings_finite(embeddings) -> bool:
+    import numpy as np
+    arr = np.asarray(embeddings, dtype="float64")
+    return bool(np.isfinite(arr).all())
+
+
 def extraction_done(out_dir: str, n_layers: int) -> bool:
     """True if out_dir already has all n_layers layer_{i}.pkl files with a
-    nonzero word count — good enough to trust and skip re-extracting."""
+    nonzero word count AND finite embedding values — good enough to trust
+    and skip re-extracting. A checkpoint containing inf/nan (e.g. from a
+    T5-family model run in plain fp16, a known instability — T5 was
+    trained in bfloat16/fp32 and plain fp16 inference can overflow
+    internal activations) is treated as NOT done, same as a corrupted
+    pickle: the combo gets automatically redone rather than silently
+    trusted or requiring the user to manually delete the bad checkpoint."""
     if not os.path.isdir(out_dir):
         return False
     for li in range(n_layers):
@@ -53,8 +65,14 @@ def extraction_done(out_dir: str, n_layers: int) -> bool:
         if not os.path.exists(path):
             return False
     try:
-        with open(os.path.join(out_dir, "layer_0.pkl"), "rb") as f:
-            return len(pickle.load(f)["word"]) > 0
+        for li in range(n_layers):
+            with open(os.path.join(out_dir, f"layer_{li}.pkl"), "rb") as f:
+                data = pickle.load(f)
+            if len(data["word"]) == 0:
+                return False
+            if not _embeddings_finite(data["embeddings"]):
+                return False
+        return True
     except Exception:
         return False           # corrupted/partial write from a killed session: redo it
 
@@ -89,7 +107,21 @@ def extract_g2p(extract_fn, rows: Sequence[dict], out_dir: str, n_layers: int) -
         if not embeddings_by_layer:
             embeddings_by_layer = {li: [] for li in range(len(layer_embeds))}
         for li, emb in enumerate(layer_embeds):
-            embeddings_by_layer[li].append(np.asarray(emb, dtype="float16"))
+            if not np.isfinite(emb).all():
+                raise RuntimeError(
+                    f"non-finite values in extract_fn output for word={row['word']!r}, "
+                    f"layer={li} — before any storage casting, so this is the model's own "
+                    f"output, not a downcast artifact. If this is a T5-family model, it's "
+                    f"almost certainly running in plain float16 (T5 was trained in "
+                    f"bfloat16/fp32 and plain fp16 inference commonly overflows internal "
+                    f"activations) — load it in float32 instead.")
+            emb16 = np.asarray(emb, dtype="float16")
+            if not np.isfinite(emb16).all():
+                raise RuntimeError(
+                    f"word={row['word']!r}, layer={li}: finite in the model's native dtype "
+                    f"but overflowed casting to float16 for storage (magnitude > ~65504). "
+                    f"Store this layer as float32 instead.")
+            embeddings_by_layer[li].append(emb16)
         words.append(row["word"])
         phon_vecs.append(row["phon_vec"])
         syllable_counts.append(len(row["syllables"]))
