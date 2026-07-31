@@ -106,3 +106,45 @@ def test_align_flags_unconsumed_phonemes():
 def test_align_flags_vowel_where_consonant_expected():
     a = align("কাজ", ["a", "a", "dʒ"])
     assert not a.ok
+
+
+def test_normalize_bn_composes_nukta_letters():
+    """NFC leaves \u09dc/\u09dd/\u09df decomposed (composition exclusions); we fold them."""
+    from bangla_phonology import normalize_bn
+    decomposed = "\u0997\u09bf" + "\u09af\u09bc" + "\u09c7\u099b\u09c7"  # gi + ya+nukta + eche
+    w = normalize_bn(decomposed)
+    assert "\u09df" in w                     # precomposed yya
+    assert segment_aksharas(w) == ["\u0997\u09bf", "\u09df\u09c7", "\u099b\u09c7"]
+
+
+def test_silent_ya_phala_and_ba_phala():
+    """ক্যা -> /kæ/ (silent ya-phala); স্বা -> /ʃa/; gemination still allowed."""
+    assert align("ক্যানসার", ["k", "æ", "n", "s", "a", "r"]).ok
+    assert align("স্বাস্থ্য", ["ʃ", "a", "s", "t̪ʰ", "o"]).ok
+    assert align("বিশ্ব", ["b", "i", "ʃ", "ʃ", "o"]).ok    # ব-ফলা as gemination
+
+
+def test_khiyo_and_gyo_simplification():
+    """Word-initial ক্ষ -> /kʰ/, জ্ঞ -> /g/."""
+    assert align("ক্ষমতা", ["kʰ", "ɔ", "m", "o", "t̪", "a"]).ok
+    assert align("জ্ঞাপন", ["g", "æ", "p", "o", "n"]).ok
+
+
+def test_ri_vowel_emits_ri():
+    """Independent ঋ emits /r/ + /i/."""
+    a = align("ঋণ", ["r", "i", "n"])
+    assert a.ok
+    assert a.spans[0] == (0, 2)
+
+
+def test_vowel_hiatus_backtracking():
+    """চুক্তিই /tʃukt̪ii/: both nuclei land, none unconsumed."""
+    a = align("চুক্তিই", ["tʃ", "u", "k", "t̪", "i", "i"])
+    assert a.ok
+
+
+def test_anusvara_coda_order():
+    """সং is /ʃɔŋ/ — C V coda, not C C V."""
+    a = align("সংস্কার", ["ʃ", "ɔ", "ŋ", "s", "k", "a", "r"])
+    assert a.ok
+    assert a.spans[0] == (0, 3)                   # সং -> ʃ ɔ ŋ

@@ -29,6 +29,22 @@ VISARGA = "\u0983"            # ঃ
 CANDRABINDU = "\u0981"        # ঁ  -> vowel nasalization
 DIACRITICS = {ANUSVARA, VISARGA, CANDRABINDU}
 ZWJ, ZWNJ = "\u200d", "\u200c"
+NUKTA = "\u09bc"              # \u09bc
+
+
+def normalize_bn(word: str) -> str:
+    """NFC + explicit composition of the Bengali nukta letters.
+
+    U+09DC \u09a1\u09bc, U+09DD \u09a2\u09bc, U+09DF \u09af\u09bc are Unicode composition EXCLUSIONS, so NFC
+    leaves their decomposed forms (C + \u09bc) decomposed; fold them ourselves so
+    the segmenter sees one consonant."""
+    import unicodedata as _ud
+    w = _ud.normalize("NFC", word)
+    for dec, pre in (("\u09a1\u09bc", "\u09dc"),   # \u09a1+\u09bc -> \u09a1\u09bc
+                     ("\u09a2\u09bc", "\u09dd"),   # \u09a2+\u09bc -> \u09a2\u09bc
+                     ("\u09af\u09bc", "\u09df")):  # \u09af+\u09bc -> \u09af\u09bc
+        w = w.replace(dec, pre)
+    return w
 
 
 def segment_aksharas(word: str) -> List[str]:
@@ -69,7 +85,7 @@ def segment_aksharas(word: str) -> List[str]:
                 j += 1
             clusters.append(word[i:j])
             i = j
-        elif ch == KHANDA_TA or ch in DIACRITICS or ch in MATRAS or ch == HASANTA:
+        elif ch == KHANDA_TA or ch in DIACRITICS or ch in MATRAS or ch == HASANTA or ch == NUKTA:
             # stray combining mark / khanda-ta: attach to previous cluster
             if clusters:
                 clusters[-1] += ch
@@ -146,19 +162,48 @@ def syllabify(phonemes: List[str],
 
 RI_KAR = "\u09c3"   # ৃ  emits /ri/: one consonant + one vowel
 
-def _expected_consonants(akshara: str) -> Tuple[int, int]:
-    """(core, coda) consonant counts for one akshara.
+YA, BA, SSA, NYA, KA, JA, YYA = "য", "ব", "ষ", "ঞ", "ক", "জ", "য়"
 
-    core: consonants realized BEFORE the nucleus (base/conjunct consonants,
-          plus the /r/ of ri-kar ৃ).
+
+def _expected_consonants(akshara: str) -> Tuple[int, int, int]:
+    """(min_core, max_core, coda) consonant counts for one akshara.
+
+    max_core: consonants realized BEFORE the nucleus if every written consonant
+          is pronounced (base/conjunct consonants + the /r/ of ri-kar ৃ).
+    min_core: lower bound after optional deletions attested in bn-BD:
+          - non-initial conjunct য (ya-phala) / ব (ba-phala): silent or
+            geminated (ক্যা /kæ/, স্বা /ʃa/ vs. বিশ্ব /biʃʃo/ — both allowed)
+          - ক্ষ realized /kʰ/ word-initially (ষ deletable after ক্)
+          - জ্ঞ realized /g/ word-initially (ঞ deletable after জ্)
+          - য় is a glide: silent or merged into a diphthong nucleus anywhere
     coda: consonants realized AFTER the nucleus — anusvara ং (/ŋ/) and
           khanda-ta ৎ (/t̪/) are phonemically syllable codas (Spec C.4), so
           the phoneme order inside the akshara is C* V coda*.
     """
-    core = sum(1 for ch in akshara if ch in CONSONANTS)
-    core += sum(1 for ch in akshara if ch == RI_KAR)   # ৃ emits /r/ + vowel
+    core = deletable = 0
+    first_cons, prev_h = True, False
+    seen: List[str] = []
+    for ch in akshara:
+        if ch in CONSONANTS:
+            core += 1
+            if ch == YYA:
+                deletable += 1
+            elif not first_cons and prev_h and (
+                    ch in (YA, BA)
+                    or (ch == SSA and KA in seen)
+                    or (ch == NYA and JA in seen)
+                    or (ch == "ম" and seen[-1] in ("শ", "ষ", "স", "হ"))):
+                deletable += 1                     # শ্ম/স্ম/হ্ম: ম often silent
+            first_cons = False
+            prev_h = False
+            seen.append(ch)
+        elif ch == RI_KAR:
+            core += 1                              # ৃ emits /r/ + vowel
+            prev_h = False
+        else:
+            prev_h = (ch == HASANTA)
     coda = sum(1 for ch in akshara if ch in (ANUSVARA, KHANDA_TA))
-    return core, coda
+    return core - deletable, core, coda
 
 def _vowel_initial(akshara: str) -> bool:
     return len(akshara) > 0 and akshara[0] in INDEP_VOWELS
@@ -172,48 +217,121 @@ class Alignment:
 
 
 def align(word: str, phonemes: List[str]) -> Alignment:
-    """Greedy monotone alignment: each akshara consumes its expected consonant
-    count, then at most one following vowel (the akshara's matra/inherent vowel,
-    possibly deleted).  Ambiguities are resolved by lookahead on the next
-    akshara's type; failures are flagged, not silently accepted (Spec C.4:
-    aligner-uncertain items go to annotation)."""
+    """Monotone alignment with bounded backtracking.
+
+    Each akshara consumes: [min_core..max_core] onset consonants, at most one
+    nucleus, then up to `coda` consonants (ং /ŋ/, ৎ /t̪/ — Spec C.4). Preference
+    order keeps the greedy/canonical parse (max consonants first — so ব-ফলা
+    gemination beats deletion — and nucleus taken when available); backtracking
+    resolves vowel hiatus (চুক্তিই) and digraph vowels (আই, ইউ), where an
+    independent-vowel akshara may align to an empty span if its vowel was
+    merged into the preceding diphthong nucleus. Failures are flagged, not
+    silently accepted (Spec C.4: aligner-uncertain items go to annotation)."""
     clusters = segment_aksharas(word)
+    n = len(phonemes)
+    shapes = [_expected_consonants(cl) for cl in clusters]
+
+    from functools import lru_cache
+
+    @lru_cache(maxsize=None)
+    def solve(ci: int, i: int) -> Optional[Tuple[Tuple[int, int], ...]]:
+        if ci == len(clusters):
+            return () if i == n else None
+        cl = clusters[ci]
+        min_core, max_core, need_coda = shapes[ci]
+
+        def rest(j):
+            tail = solve(ci + 1, j)
+            return ((i, j),) + tail if tail is not None else None
+
+        if _vowel_initial(cl):
+            # ঋ/ৠ emit /r/ + vowel: allow one onset consonant before the nucleus
+            starts = [i]
+            if cl[0] in ("ঋ", "ৠ") and i < n and not is_nucleus(phonemes[i]):
+                starts = [i + 1, i]
+            for st in starts:
+                if st < n and is_nucleus(phonemes[st]):
+                    j = st + 1
+                    for coda in range(need_coda, -1, -1):     # prefer full coda
+                        k = j
+                        ok_c = True
+                        for _ in range(coda):
+                            if k < n and not is_nucleus(phonemes[k]):
+                                k += 1
+                            else:
+                                ok_c = False; break
+                        if ok_c:
+                            r = rest(k)
+                            if r is not None:
+                                return r
+            # last resort: vowel merged into preceding diphthong -> empty span
+            return rest(i)
+
+        for c in range(max_core, min_core - 1, -1):        # prefer all written C
+            j = i
+            ok_c = True
+            for _ in range(c):
+                if j < n and not is_nucleus(phonemes[j]):
+                    j += 1
+                else:
+                    ok_c = False; break
+            if not ok_c:
+                continue
+            vowel_opts = [j + 1, j] if (j < n and is_nucleus(phonemes[j])) else [j]
+            for k in vowel_opts:                           # prefer taking nucleus
+                for coda in range(need_coda, -1, -1):
+                    kk = k
+                    ok_d = True
+                    for _ in range(coda):
+                        if kk < n and not is_nucleus(phonemes[kk]):
+                            kk += 1
+                        else:
+                            ok_d = False; break
+                    if ok_d:
+                        r = rest(kk)
+                        if r is not None:
+                            return r
+        return None
+
+    sol = solve(0, 0)
+    if sol is not None:
+        return Alignment(list(sol), True, "")
+    return _align_diagnose(clusters, phonemes, shapes)
+
+
+def _align_diagnose(clusters, phonemes, shapes) -> Alignment:
+    """Greedy walk used only to produce a human-readable failure note."""
     spans: List[Tuple[int, int]] = []
-    i = 0
+    i, n = 0, len(phonemes)
     for ci, cl in enumerate(clusters):
         start = i
-        need_core, need_coda = _expected_consonants(cl)
-        got_c = 0
+        min_core, max_core, need_coda = shapes[ci]
         if _vowel_initial(cl):
-            # V (D)* akshara: vowel phoneme first, then coda consonants (ং, ৎ)
-            if i < len(phonemes) and is_nucleus(phonemes[i]):
+            if i < n and is_nucleus(phonemes[i]):
                 i += 1
             else:
                 return Alignment(spans, False,
                                  f"nucleus expected for independent vowel @akshara {ci} ({cl})")
-            while i < len(phonemes) and got_c < need_coda and not is_nucleus(phonemes[i]):
-                i += 1; got_c += 1
+            got = 0
+            while i < n and got < need_coda and not is_nucleus(phonemes[i]):
+                i += 1; got += 1
             spans.append((start, i))
             continue
-        while i < len(phonemes) and got_c < need_core:
+        got = 0
+        while i < n and got < min_core:
             if is_nucleus(phonemes[i]):
                 return Alignment(spans, False,
                                  f"vowel where consonant expected @akshara {ci} ({cl})")
-            i += 1; got_c += 1
-        takes_vowel = False
-        if i < len(phonemes) and is_nucleus(phonemes[i]):
-            nxt = clusters[ci + 1] if ci + 1 < len(clusters) else None
-            if nxt is None or not _vowel_initial(nxt):
-                takes_vowel = True                # vowel must belong to this akshara
-            # else: following independent vowel claims the nucleus
-        if takes_vowel:
+            i += 1; got += 1
+        while i < n and got < max_core and not is_nucleus(phonemes[i]):
+            i += 1; got += 1
+        if i < n and is_nucleus(phonemes[i]):
             i += 1
-        # coda consonants (ং /ŋ/, ৎ /t̪/) come AFTER the nucleus (Spec C.4)
-        got_c = 0
-        while i < len(phonemes) and got_c < need_coda and not is_nucleus(phonemes[i]):
-            i += 1; got_c += 1
+        got = 0
+        while i < n and got < need_coda and not is_nucleus(phonemes[i]):
+            i += 1; got += 1
         spans.append((start, i))
-    ok = (i == len(phonemes))
+    ok = (i == n)
     note = "" if ok else f"unconsumed phonemes: {phonemes[i:]}"
     return Alignment(spans, ok, note)
 

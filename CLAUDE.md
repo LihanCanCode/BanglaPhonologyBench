@@ -78,13 +78,21 @@ Word categories for split analyses: **A** (aligned: GTAD=0 ∧ STAD=0), **CB**
 
 ## Milestone plan (Spec Part D)
 
-1. **M1 (wks 1–3):** lexicon acquisition + licensing audit; akshara segmenter + phonemic
-   syllabifier validated (✅ implementation exists, 28 gold checks pass).
-2. **M2 (wks 3–6):** Tasks 1–2 datasets frozen; GTAD/STAD/ρ computed for all tokenizers;
-   descriptive stats.
-3. **M3 (wks 5–8):** Tasks 3–4 built (rhyme mining + schwa alignment); annotation pass.
-4. **M4 (wks 7–10):** probing harness (fork liaodisen/Tokenization-Phonology, swap data
-   loaders); hidden-state extraction on **Kaggle T4s** (fp16 batch; 4-bit if needed for 8B).
+1. **M1 (wks 1–3):** ✅ lexicon acquired (Google bn-BD, CC BY 4.0, 65,037 entries) +
+   licensing recorded; akshara segmenter + phonemic syllabifier validated (93 tests,
+   99.86% syllable-count agreement against the lexicon).
+2. **M2 (wks 3–6):** ✅ Tasks 1–2 datasets frozen (`data/tasks/g2p.jsonl`,
+   `syllable_count_word.jsonl`, 3,000 words each); GTAD/STAD/ρ computed for 5 real
+   tokenizers (`results/metrics_top3000.csv`); descriptive stats (`figures/figure2.*`).
+3. **M3 (wks 5–8):** ✅ Tasks 3a/4 built (`rhyme_pairs.jsonl` 400 pairs w/ anti-leakage
+   filter, `schwa_deletion.jsonl` 1,000 words from the aligner). ⏳ annotation pass
+   (etym/pos tags, human verification) not yet done — `annotation.verified=false`
+   throughout; native-speaker review still needed before these count as gold.
+4. **M4 (wks 7–10):** probing harness — fork `liaodisen/Tokenization-Phonology`,
+   export our data via `scripts/export_for_probing.py` (already runs locally, see
+   `docs/probing_integration.md` for the full mapping); hidden-state extraction on
+   **Kaggle T4s** (fp16 batch; 4-bit if needed for 8B). Not started — first thing that
+   actually needs GPU.
 5. **M5 (wks 9–12):** zero-shot evals (closed + open models); human baselines; regression
    analysis; writing.
 
@@ -115,3 +123,15 @@ Run Python scripts with `-X utf8` on Windows (Bangla output to console).
   acronym spellings).
 - Tokenizer registry lives in `src/tokenizer_adapter.py` (llama3 needs HF_TOKEN;
   ungated NousResearch mirror is the fallback and is byte-identical for tokenization).
+- `data/tasks/*.jsonl` — frozen task datasets (Spec A.5 schema): `g2p.jsonl`,
+  `syllable_count_word.jsonl` (3,000 words each, 1,500 HighFreq/1,500 LowFreq by
+  wordfreq(bn) zipf quartile), `schwa_deletion.jsonl` (1,000 words, environment-
+  stratified), `rhyme_pairs.jsonl` (200 pos + 200 neg, 50 "hard" orthographic-decoy
+  negatives, anti-leakage filter on final-2-akshara spelling). Built by
+  `scripts/build_tasks.py`. **Not yet annotator-verified** — treat as silver until M3's
+  human pass.
+- `data/probing_export/` — CSV views of the above for the M4 probing harness, split by
+  A/M/CB category per tokenizer (`scripts/export_for_probing.py`); see
+  `docs/probing_integration.md`.
+- `normalize_bn()` in bangla_phonology.py: use this, not bare NFC, for any new ingestion
+  — NFC alone leaves ড়/ঢ়/য় decomposed (they're Unicode composition exclusions).

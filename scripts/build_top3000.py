@@ -15,8 +15,11 @@ from __future__ import annotations
 
 import argparse
 import sys
-import unicodedata
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
+from bangla_phonology import normalize_bn
 
 
 def main():
@@ -41,7 +44,7 @@ def main():
 
     out_rows, seen = [], set()
     for w in wordfreq.top_n_list("bn", args.pool):
-        w = unicodedata.normalize("NFC", w)
+        w = normalize_bn(w)
         if w in lex and w not in seen:
             seen.add(w)
             z = wordfreq.zipf_frequency(w, "bn")

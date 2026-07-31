@@ -29,7 +29,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from bangla_phonology import align, segment_aksharas, syllabify
+from bangla_phonology import align, normalize_bn, segment_aksharas, syllabify
 
 BENGALI_RE = re.compile(r"[ঀ-৿‌‍]")
 GLIDES = {"i̯", "u̯", "e̯", "o̯"}
@@ -124,7 +124,7 @@ def main():
             if len(parts) < 2:
                 stats["malformed_line"] += 1
                 continue
-            orth = unicodedata.normalize("NFC", parts[0].strip())
+            orth = normalize_bn(parts[0].strip())
             stats["total"] += 1
             if bangla_ratio(orth) < 0.9:
                 stats["dropped_nonbangla"] += 1
