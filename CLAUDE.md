@@ -104,11 +104,16 @@ Word categories for split analyses: **A** (aligned: GTAD=0 ∧ STAD=0), **CB**
    `scripts/build_annotation_sheet.py`, `scripts/apply_annotations.py`, sheets in
    `data/annotation/` — see `docs/annotation_guide.md`. No inter-annotator κ anywhere
    (single annotator, documented limitation vs Spec A.4's 2-annotator design).
-4. **M4 (wks 7–10):** probing harness — fork `liaodisen/Tokenization-Phonology`,
-   export our data via `scripts/export_for_probing.py` (already runs locally, see
-   `docs/probing_integration.md` for the full mapping); hidden-state extraction on
-   **Kaggle T4s** (fp16 batch; 4-bit if needed for 8B). Not started — first thing that
-   actually needs GPU.
+4. **M4 (wks 7–10):** pipeline BUILT, not yet run (needs GPU). Pivoted away from
+   forking `liaodisen/Tokenization-Phonology` for the core pipeline — see
+   `docs/probing_integration.md`'s "Pivot" section for why. Instead:
+   `scripts/kaggle_probing_lib.py` (file-level-resumable hidden-state extraction +
+   a generalized A/M/CB probe battery, unit-tested with a mock model —
+   `tests/test_kaggle_probing_lib.py`, no GPU needed) + `notebooks/m4_probing.ipynb`
+   (clone-and-run on Kaggle; BanglaT5 first as a smoke test, then TigerLLM/GPT-2/
+   ByT5/Llama-3.1 with 4-bit for the 8-9B models). Export already runs locally via
+   `scripts/export_for_probing.py`. Rhyme-probe A/M/CB category join not yet built
+   (flagged in the notebook's final cell, not silently skipped).
 5. **M5 (wks 9–12):** zero-shot evals (closed + open models); human baselines; regression
    analysis; writing.
 

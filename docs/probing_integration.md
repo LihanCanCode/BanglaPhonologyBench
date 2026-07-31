@@ -1,15 +1,43 @@
 # Probing harness integration (Milestone M4)
 
-Fork target: `github.com/liaodisen/Tokenization-Phonology` (Liao & Shi 2026).
-Clone it fresh when you reach M4 — it is **not** committed to this repo:
+**Status: implemented and ready to run.** `notebooks/m4_probing.ipynb` is
+the M4 pipeline — clone this repo on Kaggle, run the notebook, done. This
+doc is now background/reference (what upstream's harness expects, and why
+we built our own instead of forking it) rather than a to-do list.
 
-```
-git clone https://github.com/liaodisen/Tokenization-Phonology.git external/Tokenization-Phonology
-```
+## Pivot: self-contained pipeline instead of forking upstream
 
-(`external/` is gitignored here; it's third-party code with its own history.)
+The original plan (below, kept for reference) was to fork
+`github.com/liaodisen/Tokenization-Phonology` (Liao & Shi 2026) and reuse
+its `probing/generate_embedding.py` + `probing/train_probe_*.py`. In
+practice:
 
-## What upstream expects
+- `generate_embedding.py`'s model-loading/extraction functions are simple
+  enough (load tokenizer+model, one forward pass, take last-token hidden
+  states per layer) that reimplementing them directly is less code than
+  cloning-and-patching a third-party repo with known bugs (a hardcoded HF
+  token, Compute-Canada-specific absolute model paths).
+- `train_probe_{g2p,syl,rhyme}.py` are hardcoded to exactly TWO conditions
+  (their good/bad Hamming-distance split) and specific English-dataset
+  filenames — not reusable as-is for our three-way A/M/CB split (Spec
+  C.4). Adapting them would mean rewriting most of the file anyway.
+
+So `scripts/kaggle_probing_lib.py` reimplements both pieces natively in
+this repo: `extract_g2p` (file-level-resumable hidden-state extraction)
+and `run_probe_battery` (the same RidgeCV/LogisticRegression protocol,
+generalized to N categories with automatic pairwise one-sided t-tests).
+Both are unit-tested with a mock model (`tests/test_kaggle_probing_lib.py`,
+no GPU/network needed) — see `docs/DEVELOPMENT_LOG.md` for what was
+validated and how, since none of this could be run end-to-end without a
+real GPU before shipping it.
+
+The upstream fork is still worth cloning **separately, later**, if you
+want a direct English-vs-Bangla comparison using their own `datasets/`
+(arpabet/rhyming English data) under the identical protocol — that's a
+nice-to-have for the paper's cross-linguistic section, not part of the
+core M4 pipeline.
+
+## What upstream expects (reference — not what we actually run)
 
 Inspected `probing/generate_embedding.py`, `probing/train_probe_g2p.py`,
 `probing/train_probe_syl.py`, and the example CSVs in `datasets/`:
@@ -21,45 +49,47 @@ Inspected `probing/generate_embedding.py`, `probing/train_probe_g2p.py`,
   used only for `len()` (syllable count). Trained per hidden-state layer,
   10 seeds (10–19), 80/20 split, with `--control_task_label` /
   `--control_task_embed` flags for the random-embedding control — exactly
-  the protocol in Spec A.6.
+  the protocol in Spec A.6, and exactly what `run_probe_battery` reproduces.
 - **Rhyme probe** (`train_probe_rhyme.py` + `generate_embedding.py --feature
   rhyme`): reads `word1, word2, label`; prompt is `f"{word1} {word2}"` (or
   IPA/slash variants via `--use_IPA`/`--use_slash` — this is the delimiter
-  intervention hook for Spec C.6.4).
+  intervention hook for Spec C.6.4). Not yet wired into the notebook — see
+  its final markdown cell for what's needed.
 - **Their A/CB split analogue**: they don't have GTAD, so they split
   `arpabet_data_{LLM}_good.csv` / `_bad.csv` by a Hamming-distance-based
   tokenization-quality proxy (`hamming_distance` column) computed per LLM.
   Two separate probes are trained (`fp1`=bad, `fp2`=good) and compared —
   this is the slot our **A / M / CB categories** (Spec C.4) fill directly,
-  just three-way instead of two.
+  three-way instead of two, via `run_probe_battery`.
 - Embeddings come from `extract_embeddings_for_all_layers`: last-token
   hidden state at every layer, `output_hidden_states=True`, causal LM or
-  `T5EncoderModel` for ByT5/mT5. GPU if available, else CPU (too slow for
-  8B models — this is the M4 Kaggle-T4 step).
-- **Known upstream issue**: `generate_embedding.py` has a hardcoded
-  `access_token` (an HF token) and Compute-Canada-style absolute paths
-  (`/model-weights/...`) for `llama3.1`/`mistral`. Both need patching after
-  cloning — swap the token for `os environ["HF_TOKEN"]` and the paths for
-  the plain HF repo ids (already the commented-out fallback in that file).
+  `T5EncoderModel` for ByT5/mT5 — same approach `kaggle_probing_lib`'s
+  `extract_g2p` uses.
+- **Known upstream issue** (only relevant if you clone the fork
+  separately for the EN/BN comparison mentioned above):
+  `generate_embedding.py` has a hardcoded `access_token` (an HF token) and
+  Compute-Canada-style absolute paths (`/model-weights/...`) for
+  `llama3.1`/`mistral`. Patch the token to `os.environ["HF_TOKEN"]` and the
+  paths to the plain HF repo ids (already the commented-out fallback in
+  that file) before running anything from the fork directly.
 
 ## Our export (already runnable, no GPU)
 
 `python scripts/export_for_probing.py` reads `data/tasks/g2p.jsonl` and
-`data/tasks/rhyme_pairs.jsonl` and writes, per tokenizer, into
+`data/task3a_rhyme_pairs.jsonl` and writes, per tokenizer, into
 `data/probing_export/`:
 
 - `g2p_{tokenizer}_{A,M,CB}.csv` — word, phon_vec (padded phoneme indices),
   syllables, ipa. Category = Spec C.4's A/M/CB, computed from our GTAD/STAD.
 - `rhyme_pairs.csv` — word1, word2, label (shared across tokenizers; the
   category split for rhyme probing happens at analysis time by joining on
-  GTAD/STAD per tokenizer, not by pre-splitting the file).
+  GTAD/STAD per tokenizer, not by pre-splitting the file — not yet built,
+  see the notebook's final cell).
 - `data/tasks/phoneme_vocab.json` — the phoneme→index map + pad length,
   needed to decode `phon_vec` back to IPA later.
 
-At M4, copy `data/probing_export/*.csv` into the cloned fork's
-`probing/data/` (create that directory; it doesn't exist upstream — their
-default paths are `datasets/` and `embeddings/`, adjust `--file_dir` flags
-accordingly, or just point `--file_dir` at `data/probing_export` directly).
+`notebooks/m4_probing.ipynb` clones this repo on Kaggle and reads
+`data/probing_export/` directly — no manual copying needed.
 
 ## Numbers from the current freeze (3,000-word G2P set)
 
@@ -81,23 +111,27 @@ accordingly, or just point `--file_dir` at `data/probing_export` directly).
   This *is* the headline result, not a bug: every English-centric tokenizer
   puts 99%+ of Bangla words in the cluster-broken (CB) category — GTAD > 0
   for nearly every word — so their G2P/syllable probes will only ever see
-  the worst category. TigerLLM and BanglaT5 are the ones where the A vs M
-  vs CB comparison is actually informative. banglat5's larger "excluded"
-  count comes from this G2P sample (drawn across the full frequency range,
-  Spec A.4.1) including rarer/longer words than the wordfreq-filtered
-  top-3000 set used for Figure 2, where banglat5 had zero quarantines.
+  the worst category (the notebook handles this: fewer than 2 available
+  categories for a tokenizer just skips probe training for it, logged, not
+  silently zero-filled). TigerLLM and BanglaT5 are the ones where the A vs
+  M vs CB comparison is actually informative.
 
-## Still to do at M4 (needs GPU — Kaggle T4, not local)
+## Running M4
 
-1. Patch `generate_embedding.py` (token + model paths, see above).
-2. Run `generate_embedding.py --file_dir data/probing_export --file_name
-   g2p_{tokenizer}_{cat}.csv --LLM {llm} --layers -1 --feature g2p` per
-   tokenizer × category (only for tokenizers with an actual causal LM /
-   encoder behind them — TigerLLM-9B and Llama-3.1-8B need real GPU;
-   BanglaT5 fits on a T4 easily as it's an encoder-decoder ~580M).
-3. Run `train_probe_g2p.py --LLM {llm}` three times (once per category)
-   instead of upstream's twice (good/bad), plus `--control_task_label` for
-   the random-embedding control (10 seeds each, matches Spec A.6).
-4. Repeat for `train_probe_syl.py` and `train_probe_rhyme.py`.
-5. One-sided t-tests A > M > CB per layer per task (Spec C.6.2), same
-   reporting style as Liao & Shi Table 3.
+1. Upload/import `notebooks/m4_probing.ipynb` to Kaggle (or open it and
+   copy cells in) with a GPU accelerator (T4 x1 is fine to start).
+2. First run: nothing to restore, just run all cells top to bottom.
+   Recommended order (already the notebook's default `RUN_ORDER`):
+   BanglaT5 first (smallest, ~580M, fast — a pipeline smoke test), then
+   TigerLLM/GPT-2/ByT5/Llama-3.1.
+3. When you stop (end of session, quota, or just done for now): click
+   **Save Version** to persist `/kaggle/working/checkpoints/`.
+4. Next session: attach that saved output as an input dataset, point
+   `CHECKPOINT_INPUT` at it, re-run — already-finished (tokenizer,
+   category) combos are skipped automatically (see the notebook's own
+   resumability section for the reasoning: file-level only, since each
+   combo is minutes not hours).
+5. Once results exist for TigerLLM and BanglaT5 (the two with real 3-way
+   A/M/CB splits): one-sided t-tests A > M > CB per layer per task
+   (already computed by `run_probe_battery`, just needs aggregating into
+   the paper's Table-3-style reporting format — small follow-on step).

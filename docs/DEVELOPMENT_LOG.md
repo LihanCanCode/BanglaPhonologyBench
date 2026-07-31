@@ -311,17 +311,104 @@ fork clone) correctly stays gitignored.
 
 ---
 
+## M4 build: probing pipeline + Kaggle notebook
+
+Asked to start M4 with two explicit constraints: the Kaggle notebook must
+survive a session restart without redoing finished work, and a GitHub
+README was also wanted.
+
+### Pivot away from forking the upstream harness
+
+The plan up to this point (see `docs/probing_integration.md`'s original
+version) was to fork `liaodisen/Tokenization-Phonology` and reuse its
+`generate_embedding.py` / `train_probe_*.py`. Reconsidered once actually
+building it: `generate_embedding.py`'s extraction functions are simple
+enough to reimplement directly (load model, one forward pass, take
+last-token hidden states per layer), and `train_probe_*.py` are hardcoded
+to exactly TWO conditions with English-dataset-specific filenames — not
+reusable as-is for our three-way A/M/CB split, would need rewriting most
+of the file anyway. Built a self-contained `scripts/kaggle_probing_lib.py`
+instead: `extract_g2p` (extraction) + `run_probe_battery` (RidgeCV/
+LogisticRegression probe, generalized to N categories with automatic
+pairwise one-sided t-tests) — avoids depending on cloning-and-patching a
+third-party repo with known bugs (hardcoded HF token, wrong model paths)
+for two functions that were easier to just write. Documented as a pivot,
+not silently changed, since the earlier M4 plan had already been described
+to the user multiple times.
+
+### ❌ Resumability scope, caught by asking rather than assuming
+
+Started implementing ROW-LEVEL checkpointing (save progress every N rows
+within a single extraction, resume from a partial mid-file state) —
+genuinely more robust in the abstract, but before finishing it, stepped
+back and did the actual scale math: each (tokenizer, category) combo is at
+most ~3,000 words, a single forward pass per word, so even an 8B model on
+a T4 finishes a combo in minutes, not the hours where a session timeout
+becomes a real risk. Asked the user directly ("do we need the
+resumability??" prompted a genuine reconsideration) rather than shipping
+the more-complex version by default. Simplified to **file-level only**:
+skip a combo entirely if its output already exists and looks complete —
+no partial-state files, no resume-from-row-index machinery. User confirmed
+this was the right call.
+
+### Testing what could be tested without a GPU
+
+None of this could be run end-to-end on Kaggle before shipping it (no GPU
+in this environment), so correctness had to come from testing what
+*could* be tested locally, not from trusting hand-written code:
+
+- `tests/test_kaggle_probing_lib.py` (11 tests, mock model, no GPU/network):
+  confirms a completed combo is truly skipped (extract_fn not called
+  again), a corrupted checkpoint is detected and redone rather than
+  silently trusted, and — the part most likely to have a subtle bug —
+  `run_probe_battery` actually recovers a known linear signal (R² > 0.8 on
+  a constructed near-deterministic relationship) while correctly failing
+  to find one in pure noise (R² < 0.3), plus the control-label condition
+  measurably destroys a real signal, and 3-way A/M/CB produces exactly the
+  6 expected pairwise comparison keys.
+- Ran the full pipeline (real exported CSV → `extract_g2p` →
+  `run_probe_battery`) end to end locally with a mock model against
+  actual `data/probing_export/g2p_banglat5_{A,CB}.csv` rows — catches any
+  real-data shape mismatch (e.g. the pad_len=18 phon_vec) that synthetic
+  test data might not expose.
+- Every notebook code cell syntax-checked via `ast.parse` after generating
+  the `.ipynb` programmatically (a Python script building the JSON, not
+  hand-typed — far less error-prone for a format this fiddly).
+
+### Deliverables
+
+- `scripts/kaggle_probing_lib.py`, `tests/test_kaggle_probing_lib.py`
+- `notebooks/m4_probing.ipynb`: clone-and-run on Kaggle, BanglaT5 first
+  (smallest, ~580M, best smoke test) then TigerLLM/GPT-2/ByT5/Llama-3.1
+  (4-bit quantization for the 8-9B models via bitsandbytes), per-model
+  error isolation (one model failing doesn't kill the whole run), a
+  results-aggregation cell, and explicit Kaggle Save-Version/attach-as-
+  input instructions for the resumability workflow.
+- `docs/probing_integration.md` rewritten to document the pivot and point
+  at the notebook instead of listing M4 as a to-do.
+- `README.md`: project overview, metric-triple table, headline findings,
+  status table with the human-verification results, repro instructions.
+  Did not add a `LICENSE` file unprompted — `pyproject.toml` already
+  declares Apache-2.0 for the code; the README states that plus the
+  lexicon's CC BY 4.0 rather than making a new licensing decision.
+- Rhyme-probe A/M/CB category join (per-word GTAD/STAD join at analysis
+  time, per the spec) flagged as NOT built, in both the notebook's final
+  cell and `probing_integration.md` — not silently omitted.
+
+---
+
 ## Current state summary (see `CLAUDE.md` for the authoritative live version)
 
 - **M1–M3: done**, including the full human annotation pass (rhyme 3a
   400/400 100%, rhyme 3b 300/300 100%, schwa 160/160 100%, etymology
   353/353 at a genuine 38.2% heuristic-tagger accuracy).
-- **M4 (Kaggle probing)**: prepped (`docs/probing_integration.md`,
-  `scripts/export_for_probing.py`), not started — needs GPU.
+- **M4 (Kaggle probing)**: pipeline BUILT and unit-tested, not yet run
+  against real models — needs GPU. `notebooks/m4_probing.ipynb` +
+  `scripts/kaggle_probing_lib.py`. Rhyme-probe category join not built.
 - **M5 (zero-shot evals)**: not started.
 - **Not done, spec-mentioned stretch goals**: Task 5 (conjunct
   pronunciation, optional per spec), poetry-corpus rhyme enrichment.
-- **Test suite**: 116 tests, all green, run with `pytest` from repo root.
+- **Test suite**: 127 tests, all green, run with `pytest` from repo root.
 
 ## How to pick this back up
 
@@ -333,6 +420,11 @@ fork clone) correctly stays gitignored.
 3. Check `data/annotation/*.csv` for any sheets with `reviewed` rows that
    haven't been merged (`python scripts/apply_annotations.py` is
    idempotent and safe to re-run).
-4. If picking up M4: start with `docs/probing_integration.md`, run
-   BanglaT5 first on Kaggle (smallest model, ~580M, good pipeline smoke
-   test before spending quota on TigerLLM-9B/Llama-3.1-8B).
+4. If picking up M4: `notebooks/m4_probing.ipynb` is ready to run — upload
+   to Kaggle with a GPU accelerator and run top to bottom, BanglaT5 first
+   (already the default order). If a `/kaggle/working/checkpoints/`
+   dataset exists from a prior session, attach it as input and set
+   `CHECKPOINT_INPUT` in the notebook's checkpoint-restore cell before
+   re-running — already-finished (tokenizer, category) combos are skipped
+   automatically. See `docs/probing_integration.md` for the full design
+   rationale and what's still missing (the rhyme-probe category join).
