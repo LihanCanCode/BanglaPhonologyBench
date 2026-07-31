@@ -87,9 +87,13 @@ Word categories for split analyses: **A** (aligned: GTAD=0 ∧ STAD=0), **CB**
    `syllable_count_word.jsonl`, 3,000 words each); GTAD/STAD/ρ computed for 5 real
    tokenizers (`results/metrics_top3000.csv`); descriptive stats (`figures/figure2.*`).
 3. **M3 (wks 5–8):** ✅ Tasks 3a/4 built (`rhyme_pairs.jsonl` 400 pairs w/ anti-leakage
-   filter, `schwa_deletion.jsonl` 1,000 words from the aligner). ⏳ annotation pass
-   (etym/pos tags, human verification) not yet done — `annotation.verified=false`
-   throughout; native-speaker review still needed before these count as gold.
+   filter, `schwa_deletion.jsonl` 1,000 words from the aligner). ⏳ annotation pass:
+   tooling built (`scripts/tag_etymology_heuristic.py`, `scripts/build_annotation_sheet.py`,
+   `scripts/apply_annotations.py`), review sheets generated in `data/annotation/`
+   — see `docs/annotation_guide.md`. Actual human review is a solo-annotator pass,
+   not yet done; `annotation.verified=false` until you mark rows reviewed and run
+   `apply_annotations.py`. No inter-annotator κ (single annotator, documented
+   limitation vs Spec A.4's 2-annotator design).
 4. **M4 (wks 7–10):** probing harness — fork `liaodisen/Tokenization-Phonology`,
    export our data via `scripts/export_for_probing.py` (already runs locally, see
    `docs/probing_integration.md` for the full mapping); hidden-state extraction on
@@ -135,5 +139,7 @@ Run Python scripts with `-X utf8` on Windows (Bangla output to console).
 - `data/probing_export/` — CSV views of the above for the M4 probing harness, split by
   A/M/CB category per tokenizer (`scripts/export_for_probing.py`); see
   `docs/probing_integration.md`.
+- `data/annotation/` — M3 human review sheets (etym/rhyme/schwa), see `docs/annotation_guide.md`.
+  Edit the CSVs, then `python scripts/apply_annotations.py` to merge into `data/tasks/*.jsonl`.
 - `normalize_bn()` in bangla_phonology.py: use this, not bare NFC, for any new ingestion
   — NFC alone leaves ড়/ঢ়/য় decomposed (they're Unicode composition exclusions).
