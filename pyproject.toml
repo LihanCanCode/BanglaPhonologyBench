@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bangla-phonology-bench"
+version = "0.1.0"
+description = "BanglaPhonologyBench: Bangla phonology benchmark + GTAD/STAD_bn/rho tokenization-misalignment analysis"
+readme = "BanglaPhonologyBench_Research_Spec.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+dependencies = [
+    "transformers>=4.40",
+    "tokenizers>=0.19",
+    "pandas>=2.0",
+    "matplotlib>=3.8",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[tool.setuptools]
+py-modules = ["bangla_phonology"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = [".", "tests"]
