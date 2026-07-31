@@ -1,161 +1,161 @@
 ﻿id,orth,aksharas,schwa_vector,schwa_environments,vector_corrected,reviewed,notes
-schwa_00116,ভেলর,ভে ল র,1 0,medial final,,,
-schwa_00640,সেনজেন,সে ন জে ন,0 0,medial final,,,
-schwa_00236,বাক্সের,বা ক্সে র,0,final,,,
-schwa_00722,গন্ধযুক্ত,গ ন্ধ যু ক্ত,1 1 1,medial conjunct final,,,
-schwa_00990,প্রবহমান,প্র ব হ মা ন,1 1 1 0,conjunct post_conjunct medial final,,,
-schwa_00102,ক্যাপটিভ,ক্যা প টি ভ,0 0,post_conjunct final,,,
-schwa_00566,উত্তমকুমারের,উ ত্ত ম কু মা রে র,1 0 0,conjunct post_conjunct final,,,
-schwa_00434,স্বাস্থ্যসম্মত,স্বা স্থ্য স ম্ম ত,1 1 1 1,post_conjunct post_conjunct conjunct final,,,
-schwa_00492,ছেলেটির,ছে লে টি র,0,final,,,
-schwa_00146,ভাষ্যকারের,ভা ষ্য কা রে র,1 0,conjunct final,,,
-schwa_00506,প্রাচ্যনাটের,প্রা চ্য না টে র,1 0,post_conjunct final,,,
-schwa_00548,সাইডার,সা ই ডা র,0,final,,,
-schwa_00752,এডউইন,এ ড উ ই ন,1 0,medial final,,,
-schwa_00148,রিকশাভ্যান,রি ক শা ভ্যা ন,0 0,medial final,,,
-schwa_00062,পোশাকশ্রমিকের,পো শা ক শ্র মি কে র,0 1 0,medial conjunct final,,,
-schwa_00560,কারাবন্দীদের,কা রা ব ন্দী দে র,1 0,medial final,,,
-schwa_00096,গৃহের,গৃ হে র,0,final,,,
-schwa_00398,অর্থবছরের,অ র্থ ব ছ রে র,1 1 1 0,conjunct post_conjunct medial final,,,
-schwa_00578,গ্রন্থের,গ্র ন্থে র,1 0,conjunct final,,,
-schwa_00712,তল,ত ল,1 0,medial final,,,
-schwa_00428,নেইম,নে ই ম,0,final,,,
-schwa_00390,পিগমেন্টেশন,পি গ মে ন্টে শ ন,0 1 0,medial post_conjunct final,,,
-schwa_00078,উগ্রবাদ,উ গ্র বা দ,1 0,conjunct final,,,
-schwa_00920,তাসের,তা সে র,0,final,,,
-schwa_00250,প্রিন্সটন,প্রি ন্স ট ন,0 1 0,post_conjunct post_conjunct final,,,
-schwa_00330,তাত্ক্ষণিক,তা ত্ক্ষ ণি ক,1 0,conjunct final,,,
-schwa_00892,আটকের,আ ট কে র,1 0,medial final,,,
-schwa_00780,নির্মানের,নি র্মা নে র,0,final,,,
-schwa_00710,প্রস্তাবনার,প্র স্তা ব না র,1 1 0,conjunct post_conjunct final,,,
-schwa_00112,রিটেইল,রি টে ই ল,0,final,,,
-schwa_00448,মিন্স্ক,মি ন্স্ক,0,final,,,
-schwa_00220,লাইব্রেরির,লা ই ব্রে রি র,0,final,,,
-schwa_00546,প্রক্টর,প্র ক্ট র,1 1 0,conjunct post_conjunct final,,,
-schwa_00592,গুটিকতক,গু টি ক ত ক,1 1 0,medial medial final,,,
-schwa_00108,আবেদনকৃত,আ বে দ ন কৃ ত,1 0 1,medial medial final,,,
-schwa_00230,অসংক্রামক,অ সং ক্রা ম ক,1 1 0,medial post_conjunct final,,,
-schwa_00760,নির্মূল,নি র্মূ ল,0,final,,,
-schwa_00830,চতুষ্পদ,চ তু ষ্প দ,1 1 0,medial conjunct final,,,
-schwa_00008,প্রাপ্তির,প্রা প্তি র,0,final,,,
-schwa_00940,জবরদস্তির,জ ব র দ স্তি র,1 1 0 1 0,medial medial medial medial final,,,
-schwa_00006,ঐক্যমত,ঐ ক্য ম ত,1 1 0,conjunct post_conjunct final,,,
-schwa_00242,স্ট্যান্ডার্ডস,স্ট্যা ন্ডা র্ড স,0 0,post_conjunct final,,,
-schwa_00743,শিল্পমন্ত্রী,শি ল্প ম ন্ত্রী,1 1,conjunct post_conjunct,,,
-schwa_00159,কর্মপরিধি,ক র্ম প রি ধি,1 1 1,medial conjunct post_conjunct,,,
-schwa_00211,উত্তেজনাকে,উ ত্তে জ না কে,1,post_conjunct,,,
-schwa_00283,অনুষ্ঠানই,অ নু ষ্ঠা ন ই,1,post_conjunct,,,
-schwa_00002,প্রযুক্তিসম্পন্ন,প্র যু ক্তি স ম্প ন্ন,1 1 1 1,conjunct post_conjunct conjunct final,,,
-schwa_00343,ঊর্ধ্বগতি,ঊ র্ধ্ব গ তি,1 1,conjunct post_conjunct,,,
-schwa_00899,শিল্পনগরীতে,শি ল্প ন গ রী তে,1 1 1,conjunct post_conjunct medial,,,
-schwa_00875,অন্দরসজ্জা,অ ন্দ র স জ্জা,1 0 1,conjunct post_conjunct medial,,,
-schwa_00375,মৃত্যুদণ্ডে,মৃ ত্যু দ ণ্ডে,1,post_conjunct,,,
-schwa_00951,প্রেসক্রিপশনে,প্রে স ক্রি প শ নে,0 0 1,post_conjunct post_conjunct medial,,,
-schwa_00859,ব্যাটসম্যানও,ব্যা ট স ম্যা ন ও,0 0 1,post_conjunct medial post_conjunct,,,
-schwa_00019,নিশ্চিতকরণে,নি শ্চি ত ক র ণে,0 1 1,post_conjunct medial medial,,,
-schwa_00118,সন্ত্রাসমুক্ত,স ন্ত্রা স মু ক্ত,1 0 1,medial post_conjunct final,,,
-schwa_00270,শুক্লপক্ষের,শু ক্ল প ক্ষে র,1 1 0,conjunct post_conjunct final,,,
-schwa_00938,সমাজব্যবস্থার,স মা জ ব্য ব স্থা র,1 0 1 1 0,medial medial conjunct post_conjunct final,,,
-schwa_00515,হ্যান্ডলিং,হ্যা ন্ড লিং,0,post_conjunct,,,
-schwa_00091,ব্যবস্থারও,ব্য ব স্থা র ও,1 1 1,conjunct post_conjunct post_conjunct,,,
-schwa_00279,ক্যাম্পটি,ক্যা ম্প টি,0,post_conjunct,,,
-schwa_00794,খাদ্যদ্রব্য,খা দ্য দ্র ব্য,1 1 1,conjunct post_conjunct final,,,
-schwa_00910,ব্রডব্যান্ড,ব্র ড ব্যা ন্ড,1 0 0,conjunct post_conjunct final,,,
-schwa_00971,মর্মস্পর্শী,ম র্ম স্প র্শী,1 1 1,medial conjunct post_conjunct,,,
-schwa_00367,উত্তরপ্রদেশে,উ ত্ত র প্র দে শে,1 0 1,conjunct post_conjunct conjunct,,,
-schwa_00418,রাষ্ট্রধর্ম,রা ষ্ট্র ধ র্ম,1 1 1,conjunct post_conjunct final,,,
-schwa_00143,হত্যারও,হ ত্যা র ও,1 1,medial post_conjunct,,,
-schwa_00843,গ্রাহককে,গ্রা হ ক কে,1 0,post_conjunct medial,,,
-schwa_00111,বিক্ষুব্ধরা,বি ক্ষু ব্ধ রা,1,post_conjunct,,,
-schwa_00651,বিস্তারও,বি স্তা র ও,1,post_conjunct,,,
-schwa_00382,অপব্যবহার,অ প ব্য ব হা র,1 1 1 0,medial conjunct post_conjunct final,,,
-schwa_00879,খাদ্যমন্ত্রী,খা দ্য ম ন্ত্রী,1 1,conjunct post_conjunct,,,
-schwa_00759,বিচারব্যবস্থাকে,বি চা র ব্য ব স্থা কে,0 1 1,medial conjunct post_conjunct,,,
-schwa_00255,ম্যাচটাতে,ম্যা চ টা তে,0,post_conjunct,,,
-schwa_00411,অনুপ্রেরণা,অ নু প্রে র ণা,1,post_conjunct,,,
-schwa_00319,স্কুলটা,স্কু ল টা,0,post_conjunct,,,
-schwa_00782,সংক্রমণের,সং ক্র ম ণে র,1 1 1 0,medial conjunct post_conjunct final,,,
-schwa_00450,ফক্সকন,ফ ক্স ক ন,1 0 1 0,medial conjunct post_conjunct final,,,
-schwa_00047,নির্বাচকরা,নি র্বা চ ক রা,1 0,post_conjunct medial,,,
-schwa_00086,ক্যালরিযুক্ত,ক্যা ল রি যু ক্ত,1 1,post_conjunct final,,,
-schwa_00655,আস্তাবলে,আ স্তা ব লে,1,post_conjunct,,,
-schwa_00818,ধর্মসচিব,ধ র্ম স চি ব,1 1 1 0,medial conjunct post_conjunct final,,,
-schwa_00478,ছাত্রত্ব,ছা ত্র ত্ব,1 1,conjunct final,,,
-schwa_00606,নিত্যদিন,নি ত্য দি ন,1 0,conjunct final,,,
-schwa_00022,নিম্নবর্ণিত,নি ম্ন ব র্ণি ত,1 1 1,conjunct post_conjunct final,,,
-schwa_00335,যুক্তরাষ্ট্রেই,যু ক্ত রা ষ্ট্রে ই,1,conjunct,,,
-schwa_00130,প্রশ্নগুলোর,প্র শ্ন গু লো র,1 1 0,conjunct post_conjunct final,,,
-schwa_00974,প্রতিনিধিদল,প্র তি নি ধি দ ল,1 1 0,conjunct medial final,,,
-schwa_00347,সম্ভবা,স ম্ভ বা,1 1,medial conjunct,,,
-schwa_00034,বাক্যগুলোর,বা ক্য গু লো র,1 0,conjunct final,,,
-schwa_00822,সর্বশান্ত,স র্ব শা ন্ত,1 1 1,medial conjunct final,,,
-schwa_00747,কলেজছাত্রকে,ক লে জ ছা ত্র কে,1 0 1,medial medial conjunct,,,
-schwa_00574,জন্মগ্রহণ,জ ন্ম গ্র হ ণ,1 1 1 1 0,medial conjunct post_conjunct post_conjunct final,,,
-schwa_00103,জনসম্পদে,জ ন স ম্প দে,1 1 1 1,medial medial medial conjunct,,,
-schwa_00010,অল্পস্বল্প,অ ল্প স্ব ল্প,1 1 1,conjunct post_conjunct final,,,
-schwa_00727,সিক্সটি,সি ক্স টি,0,conjunct,,,
-schwa_00027,নাট্যকলা,না ট্য ক লা,1 1,conjunct post_conjunct,,,
-schwa_00243,মঞ্চটা,ম ঞ্চ টা,1 1,medial conjunct,,,
-schwa_00046,পর্যবেক্ষক,প র্য বে ক্ষ ক,1 1 1 0,medial conjunct conjunct final,,,
-schwa_00950,পবিত্রতম,প বি ত্র ত ম,1 1 1 1,medial conjunct post_conjunct final,,,
-schwa_00126,অনন্তপুর,অ ন ন্ত পু র,1 1 0,medial conjunct final,,,
-schwa_00098,লর্ডস,ল র্ড স,1 0 0,medial conjunct final,,,
-schwa_00738,কণ্ঠস্বরের,ক ণ্ঠ স্ব রে র,1 1 1 0,medial conjunct post_conjunct final,,,
-schwa_00127,অর্থদাতা,অ র্থ দা তা,1,conjunct,,,
-schwa_00819,সম্পদও,স ম্প দ ও,1 1 1,medial conjunct post_conjunct,,,
-schwa_00119,শিক্ষকও,শি ক্ষ ক ও,1 1,conjunct post_conjunct,,,
-schwa_00407,কীর্তনখোলা,কী র্ত ন খো লা,1 0,conjunct post_conjunct,,,
-schwa_00186,নিম্নরূপ,নি ম্ন রূ প,1 0,conjunct final,,,
-schwa_00982,প্রতিশ্রুতিবদ্ধ,প্র তি শ্রু তি ব দ্ধ,1 1 1,conjunct medial final,,,
-schwa_00994,করমর্দন,ক র ম র্দ ন,1 1 1 1 0,medial medial medial conjunct final,,,
-schwa_00702,স্বর্ণবার,স্ব র্ণ বা র,1 1 0,conjunct post_conjunct final,,,
-schwa_00558,সিম্পল,সি ম্প ল,1 0,conjunct final,,,
-schwa_00526,ক্ষণের,ক্ষ ণে র,1 0,conjunct final,,,
-schwa_00586,আলট্রন,আ ল ট্র ন,0 1 0,medial conjunct final,,,
-schwa_00495,কার্যদিবসে,কা র্য দি ব সে,1 1,conjunct medial,,,
-schwa_00014,ব্রডের,ব্র ডে র,1 0,conjunct final,,,
-schwa_00206,কোন্দল,কো ন্দ ল,1 0,conjunct final,,,
-schwa_00239,দক্ষতাকে,দ ক্ষ তা কে,1 1,medial conjunct,,,
-schwa_00907,প্রতিবিঘা,প্র তি বি ঘা,1,conjunct,,,
-schwa_00643,বান্ধবীকে,বা ন্ধ বী কে,1,conjunct,,,
-schwa_00594,প্রত্নতত্ত্ব,প্র ত্ন ত ত্ত্ব,1 1 1 1,conjunct post_conjunct post_conjunct final,,,
-schwa_00323,প্রচারণাকে,প্র চা র ণা কে,1 1,conjunct medial,,,
-schwa_00549,সংসারকে,সং সা র কে,1 0,medial medial,,,
-schwa_00149,ওইদিনই,ও ই দি ন ই,1,medial,,,
-schwa_00705,এসজি,এ স জি,0,medial,,,
-schwa_00654,অবস্থাসম্পন্ন,অ ব স্থা স ম্প ন্ন,1 1 1 1,medial post_conjunct conjunct final,,,
-schwa_00564,রাধানগর,রা ধা ন গ র,1 1 0,medial medial final,,,
-schwa_00117,চাপতে,চা প তে,0,medial,,,
-schwa_00929,হিজরিতে,হি জ রি তে,0,medial,,,
-schwa_00565,রন্টি,র ন্টি,1,medial,,,
-schwa_00090,আনপ্লাগড,আ ন প্লা গ ড,0 0 0,medial post_conjunct final,,,
-schwa_00921,খবরও,খ ব র ও,1 1 1,medial medial medial,,,
-schwa_00587,কার্যকরও,কা র্য ক র ও,1 1 1,conjunct post_conjunct medial,,,
-schwa_00129,ডিলাররা,ডি লা র রা,0,medial,,,
-schwa_00301,নাচটি,না চ টি,0,medial,,,
-schwa_00854,ভদ্রস্থ,ভ দ্র স্থ,1 1 1,medial conjunct final,,,
-schwa_00926,প্রতিবছরের,প্র তি ব ছ রে র,1 1 1 0,conjunct medial medial final,,,
-schwa_00285,আরএনএ,আ র এ ন এ,1 1,medial medial,,,
-schwa_00810,পর্যবেক্ষন,প র্য বে ক্ষ ন,1 1 1 0,medial conjunct conjunct final,,,
-schwa_00309,পক্ষেও,প ক্ষে ও,1,medial,,,
-schwa_00757,চাদরে,চা দ রে,1,medial,,,
-schwa_00041,পরিচালকরা,প রি চা ল ক রা,1 1 0,medial medial medial,,,
-schwa_00973,কন্ঠে,ক ন্ঠে,1,medial,,,
-schwa_00947,চন্দ্রাবতী,চ ন্দ্রা ব তী,1 1,medial post_conjunct,,,
-schwa_00650,শপথগ্রহণের,শ প থ গ্র হ ণে র,1 1 0 1 1 0,medial medial medial conjunct post_conjunct final,,,
-schwa_00273,থেঁতলে,থেঁ ত লে,0,medial,,,
-schwa_00632,আফসোসের,আ ফ সো সে র,0 0,medial final,,,
-schwa_00661,বিড়ালগুলো,বি ড়া ল গু লো,0,medial,,,
-schwa_00178,বক্কর,ব ক্ক র,1 1 0,medial conjunct final,,,
-schwa_00867,ঘণ্টাপ্রতি,ঘ ণ্টা প্র তি,1 1,medial post_conjunct,,,
-schwa_00433,জনগণেরও,জ ন গ ণে র ও,1 1 1 1,medial medial medial medial,,,
-schwa_00725,রুটগুলো,রু ট গু লো,0,medial,,,
-schwa_00113,রমা,র মা,1,medial,,,
-schwa_00625,অবনতি,অ ব ন তি,1 1,medial medial,,,
-schwa_00736,বৈঠক,বৈ ঠ ক,1 0,medial final,,,
-schwa_00321,সন্তানেরাও,স ন্তা নে রা ও,1,medial,,,
-schwa_00939,নম্বরেই,ন ম্ব রে ই,1 1,medial conjunct,,,
-schwa_00165,চৌমুহনীতে,চৌ মু হ নী তে,1,medial,,,
-schwa_00897,হাতও,হা ত ও,1,medial,,,
-schwa_00097,চারদিনে,চা র দি নে,0,medial,,,
-schwa_00251,ফর্মটা,ফ র্ম টা,1 0,medial conjunct,,,
+schwa_00116,ভেলর,ভে ল র,1 0,medial final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00640,সেনজেন,সে ন জে ন,0 0,medial final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00236,বাক্সের,বা ক্সে র,0,final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00722,গন্ধযুক্ত,গ ন্ধ যু ক্ত,1 1 1,medial conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00990,প্রবহমান,প্র ব হ মা ন,1 1 1 0,conjunct post_conjunct medial final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00102,ক্যাপটিভ,ক্যা প টি ভ,0 0,post_conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00566,উত্তমকুমারের,উ ত্ত ম কু মা রে র,1 0 0,conjunct post_conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00434,স্বাস্থ্যসম্মত,স্বা স্থ্য স ম্ম ত,1 1 1 1,post_conjunct post_conjunct conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00492,ছেলেটির,ছে লে টি র,0,final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00146,ভাষ্যকারের,ভা ষ্য কা রে র,1 0,conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00506,প্রাচ্যনাটের,প্রা চ্য না টে র,1 0,post_conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00548,সাইডার,সা ই ডা র,0,final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00752,এডউইন,এ ড উ ই ন,1 0,medial final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00148,রিকশাভ্যান,রি ক শা ভ্যা ন,0 0,medial final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00062,পোশাকশ্রমিকের,পো শা ক শ্র মি কে র,0 1 0,medial conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00560,কারাবন্দীদের,কা রা ব ন্দী দে র,1 0,medial final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00096,গৃহের,গৃ হে র,0,final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00398,অর্থবছরের,অ র্থ ব ছ রে র,1 1 1 0,conjunct post_conjunct medial final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00578,গ্রন্থের,গ্র ন্থে র,1 0,conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00712,তল,ত ল,1 0,medial final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00428,নেইম,নে ই ম,0,final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00390,পিগমেন্টেশন,পি গ মে ন্টে শ ন,0 1 0,medial post_conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00078,উগ্রবাদ,উ গ্র বা দ,1 0,conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00920,তাসের,তা সে র,0,final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00250,প্রিন্সটন,প্রি ন্স ট ন,0 1 0,post_conjunct post_conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00330,তাত্ক্ষণিক,তা ত্ক্ষ ণি ক,1 0,conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00892,আটকের,আ ট কে র,1 0,medial final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00780,নির্মানের,নি র্মা নে র,0,final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00710,প্রস্তাবনার,প্র স্তা ব না র,1 1 0,conjunct post_conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00112,রিটেইল,রি টে ই ল,0,final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00448,মিন্স্ক,মি ন্স্ক,0,final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00220,লাইব্রেরির,লা ই ব্রে রি র,0,final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00546,প্রক্টর,প্র ক্ট র,1 1 0,conjunct post_conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00592,গুটিকতক,গু টি ক ত ক,1 1 0,medial medial final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00108,আবেদনকৃত,আ বে দ ন কৃ ত,1 0 1,medial medial final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00230,অসংক্রামক,অ সং ক্রা ম ক,1 1 0,medial post_conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00760,নির্মূল,নি র্মূ ল,0,final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00830,চতুষ্পদ,চ তু ষ্প দ,1 1 0,medial conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00008,প্রাপ্তির,প্রা প্তি র,0,final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00940,জবরদস্তির,জ ব র দ স্তি র,1 1 0 1 0,medial medial medial medial final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00006,ঐক্যমত,ঐ ক্য ম ত,1 1 0,conjunct post_conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00242,স্ট্যান্ডার্ডস,স্ট্যা ন্ডা র্ড স,0 0,post_conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00743,শিল্পমন্ত্রী,শি ল্প ম ন্ত্রী,1 1,conjunct post_conjunct,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00159,কর্মপরিধি,ক র্ম প রি ধি,1 1 1,medial conjunct post_conjunct,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00211,উত্তেজনাকে,উ ত্তে জ না কে,1,post_conjunct,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00283,অনুষ্ঠানই,অ নু ষ্ঠা ন ই,1,post_conjunct,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00002,প্রযুক্তিসম্পন্ন,প্র যু ক্তি স ম্প ন্ন,1 1 1 1,conjunct post_conjunct conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00343,ঊর্ধ্বগতি,ঊ র্ধ্ব গ তি,1 1,conjunct post_conjunct,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00899,শিল্পনগরীতে,শি ল্প ন গ রী তে,1 1 1,conjunct post_conjunct medial,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00875,অন্দরসজ্জা,অ ন্দ র স জ্জা,1 0 1,conjunct post_conjunct medial,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00375,মৃত্যুদণ্ডে,মৃ ত্যু দ ণ্ডে,1,post_conjunct,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00951,প্রেসক্রিপশনে,প্রে স ক্রি প শ নে,0 0 1,post_conjunct post_conjunct medial,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00859,ব্যাটসম্যানও,ব্যা ট স ম্যা ন ও,0 0 1,post_conjunct medial post_conjunct,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00019,নিশ্চিতকরণে,নি শ্চি ত ক র ণে,0 1 1,post_conjunct medial medial,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00118,সন্ত্রাসমুক্ত,স ন্ত্রা স মু ক্ত,1 0 1,medial post_conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00270,শুক্লপক্ষের,শু ক্ল প ক্ষে র,1 1 0,conjunct post_conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00938,সমাজব্যবস্থার,স মা জ ব্য ব স্থা র,1 0 1 1 0,medial medial conjunct post_conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00515,হ্যান্ডলিং,হ্যা ন্ড লিং,0,post_conjunct,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00091,ব্যবস্থারও,ব্য ব স্থা র ও,1 1 1,conjunct post_conjunct post_conjunct,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00279,ক্যাম্পটি,ক্যা ম্প টি,0,post_conjunct,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00794,খাদ্যদ্রব্য,খা দ্য দ্র ব্য,1 1 1,conjunct post_conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00910,ব্রডব্যান্ড,ব্র ড ব্যা ন্ড,1 0 0,conjunct post_conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00971,মর্মস্পর্শী,ম র্ম স্প র্শী,1 1 1,medial conjunct post_conjunct,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00367,উত্তরপ্রদেশে,উ ত্ত র প্র দে শে,1 0 1,conjunct post_conjunct conjunct,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00418,রাষ্ট্রধর্ম,রা ষ্ট্র ধ র্ম,1 1 1,conjunct post_conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00143,হত্যারও,হ ত্যা র ও,1 1,medial post_conjunct,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00843,গ্রাহককে,গ্রা হ ক কে,1 0,post_conjunct medial,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00111,বিক্ষুব্ধরা,বি ক্ষু ব্ধ রা,1,post_conjunct,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00651,বিস্তারও,বি স্তা র ও,1,post_conjunct,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00382,অপব্যবহার,অ প ব্য ব হা র,1 1 1 0,medial conjunct post_conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00879,খাদ্যমন্ত্রী,খা দ্য ম ন্ত্রী,1 1,conjunct post_conjunct,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00759,বিচারব্যবস্থাকে,বি চা র ব্য ব স্থা কে,0 1 1,medial conjunct post_conjunct,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00255,ম্যাচটাতে,ম্যা চ টা তে,0,post_conjunct,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00411,অনুপ্রেরণা,অ নু প্রে র ণা,1,post_conjunct,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00319,স্কুলটা,স্কু ল টা,0,post_conjunct,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00782,সংক্রমণের,সং ক্র ম ণে র,1 1 1 0,medial conjunct post_conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00450,ফক্সকন,ফ ক্স ক ন,1 0 1 0,medial conjunct post_conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00047,নির্বাচকরা,নি র্বা চ ক রা,1 0,post_conjunct medial,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00086,ক্যালরিযুক্ত,ক্যা ল রি যু ক্ত,1 1,post_conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00655,আস্তাবলে,আ স্তা ব লে,1,post_conjunct,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00818,ধর্মসচিব,ধ র্ম স চি ব,1 1 1 0,medial conjunct post_conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00478,ছাত্রত্ব,ছা ত্র ত্ব,1 1,conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00606,নিত্যদিন,নি ত্য দি ন,1 0,conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00022,নিম্নবর্ণিত,নি ম্ন ব র্ণি ত,1 1 1,conjunct post_conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00335,যুক্তরাষ্ট্রেই,যু ক্ত রা ষ্ট্রে ই,1,conjunct,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00130,প্রশ্নগুলোর,প্র শ্ন গু লো র,1 1 0,conjunct post_conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00974,প্রতিনিধিদল,প্র তি নি ধি দ ল,1 1 0,conjunct medial final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00347,সম্ভবা,স ম্ভ বা,1 1,medial conjunct,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00034,বাক্যগুলোর,বা ক্য গু লো র,1 0,conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00822,সর্বশান্ত,স র্ব শা ন্ত,1 1 1,medial conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00747,কলেজছাত্রকে,ক লে জ ছা ত্র কে,1 0 1,medial medial conjunct,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00574,জন্মগ্রহণ,জ ন্ম গ্র হ ণ,1 1 1 1 0,medial conjunct post_conjunct post_conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00103,জনসম্পদে,জ ন স ম্প দে,1 1 1 1,medial medial medial conjunct,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00010,অল্পস্বল্প,অ ল্প স্ব ল্প,1 1 1,conjunct post_conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00727,সিক্সটি,সি ক্স টি,0,conjunct,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00027,নাট্যকলা,না ট্য ক লা,1 1,conjunct post_conjunct,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00243,মঞ্চটা,ম ঞ্চ টা,1 1,medial conjunct,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00046,পর্যবেক্ষক,প র্য বে ক্ষ ক,1 1 1 0,medial conjunct conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00950,পবিত্রতম,প বি ত্র ত ম,1 1 1 1,medial conjunct post_conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00126,অনন্তপুর,অ ন ন্ত পু র,1 1 0,medial conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00098,লর্ডস,ল র্ড স,1 0 0,medial conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00738,কণ্ঠস্বরের,ক ণ্ঠ স্ব রে র,1 1 1 0,medial conjunct post_conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00127,অর্থদাতা,অ র্থ দা তা,1,conjunct,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00819,সম্পদও,স ম্প দ ও,1 1 1,medial conjunct post_conjunct,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00119,শিক্ষকও,শি ক্ষ ক ও,1 1,conjunct post_conjunct,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00407,কীর্তনখোলা,কী র্ত ন খো লা,1 0,conjunct post_conjunct,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00186,নিম্নরূপ,নি ম্ন রূ প,1 0,conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00982,প্রতিশ্রুতিবদ্ধ,প্র তি শ্রু তি ব দ্ধ,1 1 1,conjunct medial final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00994,করমর্দন,ক র ম র্দ ন,1 1 1 1 0,medial medial medial conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00702,স্বর্ণবার,স্ব র্ণ বা র,1 1 0,conjunct post_conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00558,সিম্পল,সি ম্প ল,1 0,conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00526,ক্ষণের,ক্ষ ণে র,1 0,conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00586,আলট্রন,আ ল ট্র ন,0 1 0,medial conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00495,কার্যদিবসে,কা র্য দি ব সে,1 1,conjunct medial,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00014,ব্রডের,ব্র ডে র,1 0,conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00206,কোন্দল,কো ন্দ ল,1 0,conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00239,দক্ষতাকে,দ ক্ষ তা কে,1 1,medial conjunct,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00907,প্রতিবিঘা,প্র তি বি ঘা,1,conjunct,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00643,বান্ধবীকে,বা ন্ধ বী কে,1,conjunct,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00594,প্রত্নতত্ত্ব,প্র ত্ন ত ত্ত্ব,1 1 1 1,conjunct post_conjunct post_conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00323,প্রচারণাকে,প্র চা র ণা কে,1 1,conjunct medial,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00549,সংসারকে,সং সা র কে,1 0,medial medial,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00149,ওইদিনই,ও ই দি ন ই,1,medial,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00705,এসজি,এ স জি,0,medial,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00654,অবস্থাসম্পন্ন,অ ব স্থা স ম্প ন্ন,1 1 1 1,medial post_conjunct conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00564,রাধানগর,রা ধা ন গ র,1 1 0,medial medial final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00117,চাপতে,চা প তে,0,medial,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00929,হিজরিতে,হি জ রি তে,0,medial,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00565,রন্টি,র ন্টি,1,medial,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00090,আনপ্লাগড,আ ন প্লা গ ড,0 0 0,medial post_conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00921,খবরও,খ ব র ও,1 1 1,medial medial medial,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00587,কার্যকরও,কা র্য ক র ও,1 1 1,conjunct post_conjunct medial,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00129,ডিলাররা,ডি লা র রা,0,medial,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00301,নাচটি,না চ টি,0,medial,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00854,ভদ্রস্থ,ভ দ্র স্থ,1 1 1,medial conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00926,প্রতিবছরের,প্র তি ব ছ রে র,1 1 1 0,conjunct medial medial final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00285,আরএনএ,আ র এ ন এ,1 1,medial medial,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00810,পর্যবেক্ষন,প র্য বে ক্ষ ন,1 1 1 0,medial conjunct conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00309,পক্ষেও,প ক্ষে ও,1,medial,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00757,চাদরে,চা দ রে,1,medial,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00041,পরিচালকরা,প রি চা ল ক রা,1 1 0,medial medial medial,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00973,কন্ঠে,ক ন্ঠে,1,medial,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00947,চন্দ্রাবতী,চ ন্দ্রা ব তী,1 1,medial post_conjunct,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00650,শপথগ্রহণের,শ প থ গ্র হ ণে র,1 1 0 1 1 0,medial medial medial conjunct post_conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00273,থেঁতলে,থেঁ ত লে,0,medial,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00632,আফসোসের,আ ফ সো সে র,0 0,medial final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00661,বিড়ালগুলো,বি ড়া ল গু লো,0,medial,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00178,বক্কর,ব ক্ক র,1 1 0,medial conjunct final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00867,ঘণ্টাপ্রতি,ঘ ণ্টা প্র তি,1 1,medial post_conjunct,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00433,জনগণেরও,জ ন গ ণে র ও,1 1 1 1,medial medial medial medial,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00725,রুটগুলো,রু ট গু লো,0,medial,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00113,রমা,র মা,1,medial,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00625,অবনতি,অ ব ন তি,1 1,medial medial,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00736,বৈঠক,বৈ ঠ ক,1 0,medial final,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00321,সন্তানেরাও,স ন্তা নে রা ও,1,medial,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00939,নম্বরেই,ন ম্ব রে ই,1 1,medial conjunct,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00165,চৌমুহনীতে,চৌ মু হ নী তে,1,medial,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00897,হাতও,হা ত ও,1,medial,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00097,চারদিনে,চা র দি নে,0,medial,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+schwa_00251,ফর্মটা,ফ র্ম টা,1 0,medial conjunct,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
