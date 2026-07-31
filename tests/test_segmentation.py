@@ -6,7 +6,7 @@ import unicodedata
 import pytest
 
 from bangla_phonology import (ZWJ, ZWNJ, align, is_nucleus, legal_gap_positions,
-                              segment_aksharas, syllabify)
+                              normalize_bn, segment_aksharas, syllabify)
 from gold import GOLD, GOLD_IDS
 
 
@@ -148,3 +148,29 @@ def test_anusvara_coda_order():
     a = align("সংস্কার", ["ʃ", "ɔ", "ŋ", "s", "k", "a", "r"])
     assert a.ok
     assert a.spans[0] == (0, 3)                   # সং -> ʃ ɔ ŋ
+
+
+def test_precomposed_ra_consonants_recognized():
+    """CONSONANTS must recognize precomposed ড়/ঢ়/য় (normalize_bn's output),
+    not just their decomposed C+nukta form."""
+    from bangla_phonology import CONSONANTS
+    assert "ড়" in CONSONANTS and "ঢ়" in CONSONANTS and "য়" in CONSONANTS
+    w = normalize_bn("গ" + "ড" + "়" + "ে")   # গ + ড+nukta + e-matra
+    a = align(w, ["g", "ɔ", "r", "e"])
+    assert a.ok
+    clusters = segment_aksharas(w)
+    assert len(clusters) == 2 and clusters[0] == "গ"
+
+
+def test_visarga_triggers_coda_gemination():
+    """দুঃখ /d̪ukkʰo/ — বিসর্গ ঃ is a coda slot for the geminate onset."""
+    a = align("দুঃখ", ["d̪", "u", "k", "kʰ", "o"])
+    assert a.ok
+    assert a.spans[0] == (0, 3)                   # দুঃ -> d̪ u k
+
+
+def test_silent_ha_before_ri_kar():
+    """হৃদয় is colloquially /rid̪ɔe̯/ — word-initial হ before ঋ-kar drops."""
+    a = align("হৃদয়", ["r", "i", "d̪", "ɔe̯"])
+    assert a.ok
+    assert a.spans[0] == (0, 2)                   # হৃ -> r i (হ silent)

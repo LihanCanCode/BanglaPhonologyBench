@@ -20,6 +20,13 @@ from typing import List, Tuple, Optional, Set, Dict
 # ----------------------------------------------------------------------------
 
 CONSONANTS = set("কখগঘঙচছজঝঞটঠডঢণতথদধনপফবভমযরলশষসহড়ঢ়য়")
+CONSONANTS |= {"ড়", "ঢ়", "য়"}   # precomposed ড় ঢ় য় (composition
+                                                # exclusions: the literal above,
+                                                # like most source text, holds
+                                                # their decomposed C+nukta form;
+                                                # add the precomposed codepoints
+                                                # explicitly so normalize_bn()'s
+                                                # output is always recognized)
 KHANDA_TA = "\u09ce"          # ৎ  (coda-only)
 INDEP_VOWELS = set("অআইঈউঊঋএঐওঔ")
 MATRAS = set("\u09be\u09bf\u09c0\u09c1\u09c2\u09c3\u09c7\u09c8\u09cb\u09cc")  # া ি ী ু ূ ৃ ে ৈ ো ৌ
@@ -162,7 +169,8 @@ def syllabify(phonemes: List[str],
 
 RI_KAR = "\u09c3"   # ৃ  emits /ri/: one consonant + one vowel
 
-YA, BA, SSA, NYA, KA, JA, YYA = "য", "ব", "ষ", "ঞ", "ক", "জ", "য়"
+YA, BA, SSA, NYA, KA, JA = "য", "ব", "ষ", "ঞ", "ক", "জ"
+YYA = "য়"   # precomposed \u09df (য়) — forced via escape, see normalize_bn()
 
 
 def _expected_consonants(akshara: str) -> Tuple[int, int, int]:
@@ -176,18 +184,28 @@ def _expected_consonants(akshara: str) -> Tuple[int, int, int]:
           - ক্ষ realized /kʰ/ word-initially (ষ deletable after ক্)
           - জ্ঞ realized /g/ word-initially (ঞ deletable after জ্)
           - য় is a glide: silent or merged into a diphthong nucleus anywhere
-    coda: consonants realized AFTER the nucleus — anusvara ং (/ŋ/) and
-          khanda-ta ৎ (/t̪/) are phonemically syllable codas (Spec C.4), so
+          - word-initial হ before ঋ-kar (হৃ) is often silent: হৃদয় /rid̪ɔe̯/,
+            not /hrid̪ɔe̯/
+    coda: consonants realized AFTER the nucleus — anusvara ং (/ŋ/),
+          khanda-ta ৎ (/t̪/), AND visarga ঃ are phonemically syllable codas
+          (Spec C.4). Visarga specifically triggers GEMINATION of the
+          following syllable's onset (দুঃখ /d̪ukkʰo/) — we don't model the
+          identity constraint (the coda consonant equals the next onset),
+          only that one extra coda consonant slot is available; the
+          backtracking search finds the matching parse.
           the phoneme order inside the akshara is C* V coda*.
     """
     core = deletable = 0
     first_cons, prev_h = True, False
+    has_ri_kar = RI_KAR in akshara
     seen: List[str] = []
     for ch in akshara:
         if ch in CONSONANTS:
             core += 1
             if ch == YYA:
                 deletable += 1
+            elif ch == "হ" and first_cons and has_ri_kar:
+                deletable += 1                     # হৃ: হ often silent
             elif not first_cons and prev_h and (
                     ch in (YA, BA)
                     or (ch == SSA and KA in seen)
@@ -202,7 +220,7 @@ def _expected_consonants(akshara: str) -> Tuple[int, int, int]:
             prev_h = False
         else:
             prev_h = (ch == HASANTA)
-    coda = sum(1 for ch in akshara if ch in (ANUSVARA, KHANDA_TA))
+    coda = sum(1 for ch in akshara if ch in (ANUSVARA, KHANDA_TA, VISARGA))
     return core - deletable, core, coda
 
 def _vowel_initial(akshara: str) -> bool:

@@ -1,31 +1,31 @@
 orth	lexicon_transcription	mapped_ipa	category	note
-দুঃসাহসী	d u sh . sh a . h o . sh i	d̪ u ʃ ʃ a h o ʃ i	unconsumed_phonemes	unconsumed phonemes: ['ʃ', 'i']
-নিঃসংকোচে	n i sh . sh O N . k o . c e	n i ʃ ʃ ɔ ŋ k o tʃ e	vowel_where_consonant_expected	vowel where consonant expected @akshara 2 (কো)
-জোড়	j o r	dʒ o r	unconsumed_phonemes	unconsumed phonemes: ['r']
-পড়া	p O . r a	p ɔ r a	unconsumed_phonemes	unconsumed phonemes: ['r', 'a']
-গুঁড়া	g u . r a	g u r a	unconsumed_phonemes	unconsumed phonemes: ['r', 'a']
-পড়ে	p o . r e	p o r e	unconsumed_phonemes	unconsumed phonemes: ['r', 'e']
-কামাড়াগাঁওয়ে	k a . m a . r a . g a u^ . e	k a m a r a g au̯ e	nucleus_expected_for_indep_vowel	nucleus expected for independent vowel @akshara 4 (ও)
-লড়বে	l o r . b e	l o r b e	unconsumed_phonemes	unconsumed phonemes: ['b', 'e']
-গাড়ী	g a . r i	g a r i	unconsumed_phonemes	unconsumed phonemes: ['r', 'i']
-পড়বে	p o r . b e	p o r b e	unconsumed_phonemes	unconsumed phonemes: ['b', 'e']
-বাড়ানোর	b a . r a . n o r	b a r a n o r	unconsumed_phonemes	unconsumed phonemes: ['r']
-খাগড়াছড়ি	kh a g . r a . ch o . r i	kʰ a g r a tʃʰ o r i	unconsumed_phonemes	unconsumed phonemes: ['tʃʰ', 'o', 'r', 'i']
-কড়াই	k O . r a i^	k ɔ r ai̯	nucleus_expected_for_indep_vowel	nucleus expected for independent vowel @akshara 2 (ই)
-আধ্যাত্মিকতা	a d . dh a . t i . k O . t a	a d̪ d̪ʱ a t̪ i k ɔ t̪ a	vowel_where_consonant_expected	vowel where consonant expected @akshara 2 (ত্মি)
-ধানগড়া	dh a n . g o . r a	d̪ʱ a n g o r a	unconsumed_phonemes	unconsumed phonemes: ['r', 'a']
-মোড়টায়	m o r . T a e^	m o r ʈ ae̯	unconsumed_phonemes	unconsumed phonemes: ['ʈ', 'ae̯']
-গাড়ি	g a . r i	g a r i	unconsumed_phonemes	unconsumed phonemes: ['r', 'i']
-বাড়িয়েছে	b a . r i . e . ch e	b a r i e tʃʰ e	unconsumed_phonemes	unconsumed phonemes: ['e', 'tʃʰ', 'e']
-চুড়ি	c u . r i	tʃ u r i	unconsumed_phonemes	unconsumed phonemes: ['r', 'i']
+অ্যাভিয়েশন	E . bh i . e . sh o n	æ bʱ i e ʃ o n	vowel_where_consonant_expected	vowel where consonant expected @akshara 2 (ভি)
+অ্যামস্টারডাম	E m s . T a r . D a m	æ m s ʈ a r ɖ a m	vowel_where_consonant_expected	vowel where consonant expected @akshara 3 (স্টা)
+ঞ	e^ O	e̯ɔ	vowel_where_consonant_expected	vowel where consonant expected @akshara 0 (ঞ)
+সালাহউদ্দীন	s a . l a . u d . d i n	s a l a u d̪ d̪ i n	vowel_where_consonant_expected	vowel where consonant expected @akshara 2 (হ)
+মেজবাহউদ্দিন	m e j . b a . u d . d i n	m e dʒ b a u d̪ d̪ i n	vowel_where_consonant_expected	vowel where consonant expected @akshara 3 (হ)
+অ্যানিস্টন	E . n i s . T O n	æ n i s ʈ ɔ n	vowel_where_consonant_expected	vowel where consonant expected @akshara 3 (স্ট)
+কর্ম্ম	k O r . m o	k ɔ r m o	vowel_where_consonant_expected	vowel where consonant expected @akshara 1 (র্ম্ম)
 অ্যান্ডোরার	E n . D o . r a r	æ n ɖ o r a r	vowel_where_consonant_expected	vowel where consonant expected @akshara 2 (ন্ডো)
-দুঃখ	d u k . kh o	d̪ u k kʰ o	unconsumed_phonemes	unconsumed phonemes: ['kʰ', 'o']
-ওড়ানো	o . r a . n o	o r a n o	unconsumed_phonemes	unconsumed phonemes: ['n', 'o']
-মোটরগাড়ির	m o . T o r . g a . r i r	m o ʈ o r g a r i r	unconsumed_phonemes	unconsumed phonemes: ['r']
-পাড়া	p a . r a	p a r a	unconsumed_phonemes	unconsumed phonemes: ['r', 'a']
-নিঃসরণের	n i sh . sh O . r o . n e r	n i ʃ ʃ ɔ r o n e r	unconsumed_phonemes	unconsumed phonemes: ['r']
+সালাহউদ্দিনের	s a . l a . u d . d i . n e r	s a l a u d̪ d̪ i n e r	vowel_where_consonant_expected	vowel where consonant expected @akshara 2 (হ)
+অ্যাঞ্জেলিনা	E n . j e . l i . n a	æ n dʒ e l i n a	vowel_where_consonant_expected	vowel where consonant expected @akshara 2 (ঞ্জে)
+মাহমুদউল্লাহও	m a h . m u d . u l . l a o^	m a h m u d̪ u l l ao̯	nucleus_expected_for_indep_vowel	nucleus expected for independent vowel @akshara 4 (উ)
+সালাহউদ্দিনকে	s a . l a . u d . d i n . k e	s a l a u d̪ d̪ i n k e	vowel_where_consonant_expected	vowel where consonant expected @akshara 2 (হ)
+নির্ম্মাণ	n i r . m a n	n i r m a n	vowel_where_consonant_expected	vowel where consonant expected @akshara 1 (র্ম্মা)
+অ্যাকাউন্টের	E . k a . u n . T e r	æ k a u n ʈ e r	vowel_where_consonant_expected	vowel where consonant expected @akshara 2 (কা)
+অ্যানিস্টনের	E . n i s . T o n . e r	æ n i s ʈ o n e r	vowel_where_consonant_expected	vowel where consonant expected @akshara 3 (স্ট)
+হীনম্মন্যতা	h i . n o . m O n . n o . t a	h i n o m ɔ n n o t̪ a	vowel_where_consonant_expected	vowel where consonant expected @akshara 2 (ম্ম)
+অসহিষ্ণু	O . sh o . i sh . n u	ɔ ʃ o i ʃ n u	vowel_where_consonant_expected	vowel where consonant expected @akshara 2 (হি)
+আধ্যাত্মিকতা	a d . dh a . t i . k O . t a	a d̪ d̪ʱ a t̪ i k ɔ t̪ a	vowel_where_consonant_expected	vowel where consonant expected @akshara 2 (ত্মি)
+আধ্যাত্মিকতার	a d . dh a . t i . k O . t a r	a d̪ d̪ʱ a t̪ i k ɔ t̪ a r	vowel_where_consonant_expected	vowel where consonant expected @akshara 2 (ত্মি)
+অ্যালকাইল	E l . k a i^ l	æ l k ai̯ l	nucleus_expected_for_indep_vowel	nucleus expected for independent vowel @akshara 4 (ই)
+আধ্যাত্মিক	a d . dh a . t i k	a d̪ d̪ʱ a t̪ i k	vowel_where_consonant_expected	vowel where consonant expected @akshara 2 (ত্মি)
+অ্যাসিউরেন্সেস	E . s i u^ . r e n . s e s	æ s iu̯ r e n s e s	nucleus_expected_for_indep_vowel	nucleus expected for independent vowel @akshara 3 (উ)
+আল্লাহুম্মা	a l . l a . h u . m a	a l l a h u m a	vowel_where_consonant_expected	vowel where consonant expected @akshara 3 (ম্মা)
+অ্যালাইয়েন্স	E . l a i^ . e n s	æ l ai̯ e n s	vowel_where_consonant_expected	vowel where consonant expected @akshara 2 (লা)
+অ্যালস্টমে	E l . s T O . m e	æ l s ʈ ɔ m e	vowel_where_consonant_expected	vowel where consonant expected @akshara 3 (স্ট)
+মাহমুদউল্লাহর	m a h . m u . d u l . l a r	m a h m u d̪ u l l a r	nucleus_expected_for_indep_vowel	nucleus expected for independent vowel @akshara 4 (উ)
 অ্যাকুয়াটিক	E . k u . a . T i k	æ k u a ʈ i k	vowel_where_consonant_expected	vowel where consonant expected @akshara 2 (কু)
-চামড়াজাত	c a m . r a . j a t	tʃ a m r a dʒ a t̪	unconsumed_phonemes	unconsumed phonemes: ['t̪']
-মোটরগাড়ি	m o . T o r . g a . r i	m o ʈ o r g a r i	unconsumed_phonemes	unconsumed phonemes: ['r', 'i']
-হৃদরোগের	r i d . r o . g e r	r i d̪ r o g e r	vowel_where_consonant_expected	vowel where consonant expected @akshara 0 (হৃ)
-আষাঢ়	a . sh a . r	a ʃ a r	unconsumed_phonemes	unconsumed phonemes: ['r']
+হ্রাসের	r a . s e r	r a s e r	vowel_where_consonant_expected	vowel where consonant expected @akshara 0 (হ্রা)
+অ্যালুমিনিয়াম	E . l u . m i . n i . a m	æ l u m i n i a m	vowel_where_consonant_expected	vowel where consonant expected @akshara 4 (নি)
+অ্যাকাউন্টেন্ট	E . k a . u n . T e n T	æ k a u n ʈ e n ʈ	vowel_where_consonant_expected	vowel where consonant expected @akshara 2 (কা)

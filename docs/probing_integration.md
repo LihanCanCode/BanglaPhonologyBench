@@ -63,21 +63,20 @@ accordingly, or just point `--file_dir` at `data/probing_export` directly).
 
 ## Numbers from the current freeze (3,000-word G2P set)
 
-- Phoneme vocabulary: 59 symbols. Pad length: **20** (max phonemes in one
-  word — পূর্বপরিকল্পিতভাবে "in a pre-planned way", a long tatsama compound).
-  This exceeds the spec's estimate of 12–14; worth a sentence in the paper
-  — Bangla compounding produces longer tails than expected even against
-  English's ~8.
+- Phoneme vocabulary: 57 symbols. Pad length: **18** (max phonemes in one
+  word — a long tatsama compound). This exceeds the spec's estimate of
+  12–14; worth a sentence in the paper — Bangla compounding produces
+  longer tails than expected even against English's ~8.
 - Category counts per tokenizer (out of 3,000; remainder = quarantined or
   single-akshara words where STAD is undefined and no A/M/CB label applies):
 
   | tokenizer | A | M | CB | excluded |
   |---|---|---|---|---|
-  | llama3   | 0   | 0    | 2,980 | 20 |
-  | gpt2     | 0   | 0    | 2,980 | 20 |
-  | byt5     | 0   | 0    | 2,980 | 20 |
-  | tigerllm | 684 | 658  | 1,638 | 20 |
-  | banglat5 | 653 | 1,818| 456   | 73 |
+  | llama3   | 0   | 0    | 2,982 | 18 |
+  | gpt2     | 0   | 0    | 2,982 | 18 |
+  | byt5     | 0   | 0    | 2,982 | 18 |
+  | tigerllm | 697 | 671  | 1,614 | 18 |
+  | banglat5 | 647 | 1,822| 442   | 89 |
 
   This *is* the headline result, not a bug: every English-centric tokenizer
   puts 99%+ of Bangla words in the cluster-broken (CB) category — GTAD > 0

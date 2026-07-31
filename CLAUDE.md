@@ -79,8 +79,10 @@ Word categories for split analyses: **A** (aligned: GTAD=0 ∧ STAD=0), **CB**
 ## Milestone plan (Spec Part D)
 
 1. **M1 (wks 1–3):** ✅ lexicon acquired (Google bn-BD, CC BY 4.0, 65,037 entries) +
-   licensing recorded; akshara segmenter + phonemic syllabifier validated (93 tests,
-   99.86% syllable-count agreement against the lexicon).
+   licensing recorded; akshara segmenter + phonemic syllabifier validated (96 tests,
+   99.86% syllable-count agreement, aligner 99.95% coverage against the lexicon —
+   31 residual failures are heterogeneous long-tail items: English-loan অ্যা-digraph
+   transliteration, archaic double-consonant spellings, proper-name hiatus).
 2. **M2 (wks 3–6):** ✅ Tasks 1–2 datasets frozen (`data/tasks/g2p.jsonl`,
    `syllable_count_word.jsonl`, 3,000 words each); GTAD/STAD/ρ computed for 5 real
    tokenizers (`results/metrics_top3000.csv`); descriptive stats (`figures/figure2.*`).
