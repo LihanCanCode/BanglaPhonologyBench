@@ -1,0 +1,31 @@
+orth	lexicon_transcription	mapped_ipa	category	note
+জ্যাকেটের	j E . k e . T e r	dʒ æ k e ʈ e r	vowel_where_consonant_expected	vowel where consonant expected @akshara 0 (জ্যা)
+ড্যাশিং	D E . sh i N	ɖ æ ʃ i ŋ	vowel_where_consonant_expected	vowel where consonant expected @akshara 0 (ড্যা)
+স্ট্যান্ডের	s T E n . D e r	s ʈ æ n ɖ e r	vowel_where_consonant_expected	vowel where consonant expected @akshara 0 (স্ট্যা)
+স্ট্যান	s T E n	s ʈ æ n	vowel_where_consonant_expected	vowel where consonant expected @akshara 0 (স্ট্যা)
+ক্ষমতাকে	kh O . m o . t a . k e	kʰ ɔ m o t̪ a k e	vowel_where_consonant_expected	vowel where consonant expected @akshara 0 (ক্ষ)
+সাইডের	s a . i . D e r	s a i ɖ e r	vowel_where_consonant_expected	vowel where consonant expected @akshara 2 (ডে)
+চ্যালেঞ্জগুলো	c E . l e n j . g u . l o	tʃ æ l e n dʒ g u l o	vowel_where_consonant_expected	vowel where consonant expected @akshara 0 (চ্যা)
+সিএসআরের	s i . e s . a . r e r	s i e s a r e r	vowel_where_consonant_expected	vowel where consonant expected @akshara 2 (স)
+কুইন্সল্যান্ড	k u i^ n s . l E n D	k ui̯ n s l æ n ɖ	vowel_where_consonant_expected	vowel where consonant expected @akshara 3 (ল্যা)
+চ্যাটার্জির	c E . T a r . j i r	tʃ æ ʈ a r dʒ i r	vowel_where_consonant_expected	vowel where consonant expected @akshara 0 (চ্যা)
+সতর্কও	sh O . t o r . k o . o	ʃ ɔ t̪ o r k o o	unconsumed_phonemes	unconsumed phonemes: ['o']
+স্মরণের	sh O . r o . n e r	ʃ ɔ r o n e r	vowel_where_consonant_expected	vowel where consonant expected @akshara 0 (স্ম)
+ক্ষমতাসম্পন্ন	kh O . m o . t a . sh O m . p O n . n o	kʰ ɔ m o t̪ a ʃ ɔ m p ɔ n n o	vowel_where_consonant_expected	vowel where consonant expected @akshara 0 (ক্ষ)
+কচুয়া	k o . c u . a	k o tʃ u a	vowel_where_consonant_expected	vowel where consonant expected @akshara 2 (য)
+ইনিংসটাও	i . n i N s . T a . o	i n i ŋ s ʈ a o	unconsumed_phonemes	unconsumed phonemes: ['o']
+মজুরিও	m o . j u . r i . o	m o dʒ u r i o	unconsumed_phonemes	unconsumed phonemes: ['o']
+গ্যাস্ট্রিক	g E s . T r i k	g æ s ʈ r i k	vowel_where_consonant_expected	vowel where consonant expected @akshara 0 (গ্যা)
+স্যারের	s a . r e r	s a r e r	vowel_where_consonant_expected	vowel where consonant expected @akshara 0 (স্যা)
+তাআলার	t a . a . l a r	t̪ a a l a r	vowel_where_consonant_expected	vowel where consonant expected @akshara 2 (লা)
+আইপিএস	a i^ . p i . e s	ai̯ p i e s	nucleus_expected_for_indep_vowel	nucleus expected for independent vowel @akshara 1 (ই)
+বর্জ্যে	b O r . j e	b ɔ r dʒ e	vowel_where_consonant_expected	vowel where consonant expected @akshara 1 (র্জ্যে)
+ওপিএম	o . p i . e m	o p i e m	vowel_where_consonant_expected	vowel where consonant expected @akshara 3 (ম)
+স্ট্যানফোর্ড	s T E n . f o r D	s ʈ æ n f o r ɖ	vowel_where_consonant_expected	vowel where consonant expected @akshara 0 (স্ট্যা)
+লেভাইস	l e . bh a . i s	l e bʱ a i s	vowel_where_consonant_expected	vowel where consonant expected @akshara 3 (স)
+অস্তিত্বও	o s . t i t . t o . o	o s t̪ i t̪ t̪ o o	unconsumed_phonemes	unconsumed phonemes: ['o']
+ট্যালি	T E . l i	ʈ æ l i	vowel_where_consonant_expected	vowel where consonant expected @akshara 0 (ট্যা)
+কীর্তিও	k i r . t i . o	k i r t̪ i o	unconsumed_phonemes	unconsumed phonemes: ['o']
+উইমেন	u i^ . m e n	ui̯ m e n	nucleus_expected_for_indep_vowel	nucleus expected for independent vowel @akshara 1 (ই)
+জ্যোতির্বিজ্ঞানি	j o . t i r . b i g . g a . n i	dʒ o t̪ i r b i g g a n i	vowel_where_consonant_expected	vowel where consonant expected @akshara 0 (জ্যো)
+বিকেএসপির	b i . k e . e s . p i r	b i k e e s p i r	vowel_where_consonant_expected	vowel where consonant expected @akshara 3 (স)

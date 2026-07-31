@@ -96,3 +96,22 @@ source of truth; Kaggle notebooks pull it.
 
 - `pytest` — run the test suite (must stay green).
 - `python test_bangla_phonology.py` — human-readable validation tables + worked example.
+- `python scripts/validate_gold_tokenizers.py` — real vs simulated tokenizer table on gold words.
+- `python scripts/ingest_lexicon.py` — rebuild data/lexicon_clean.tsv + aligner report.
+- `python scripts/build_top3000.py` — top-3000 frequency wordlist (wordfreq bn).
+- `python scripts/compute_metrics.py data/wordlist_top3000.tsv -o results/metrics_top3000.csv`
+- `python scripts/make_figure2.py` — Figure 2 (metric distributions + violation types).
+
+Run Python scripts with `-X utf8` on Windows (Bangla output to console).
+
+## Pipeline data files
+
+- `data/google_bn_lexicon.tsv` — raw Google bn-BD lexicon (65,037 entries, CC BY 4.0,
+  pre-syllabified, NO vowel nasalization by policy — see data/phoneme_map.tsv header).
+- `data/phoneme_map.tsv` — lexicon notation -> our IPA (glides merge into diphthongs).
+- `data/lexicon_clean.tsv` — 60,087 ingested entries; aligner_ok column gates analyses.
+- `data/aligner_failures_sample.tsv` — 30-sample of aligner failures awaiting review
+  (main open categories: silent য-ফলা/ব-ফলা, ক্ষ/জ্ঞ simplification, vowel hiatus/য়,
+  acronym spellings).
+- Tokenizer registry lives in `src/tokenizer_adapter.py` (llama3 needs HF_TOKEN;
+  ungated NousResearch mirror is the fallback and is byte-identical for tokenization).

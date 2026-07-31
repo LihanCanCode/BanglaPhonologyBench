@@ -146,12 +146,19 @@ def syllabify(phonemes: List[str],
 
 RI_KAR = "\u09c3"   # ৃ  emits /ri/: one consonant + one vowel
 
-def _expected_consonants(akshara: str) -> int:
-    n = sum(1 for ch in akshara if ch in CONSONANTS)
-    n += sum(1 for ch in akshara if ch == ANUSVARA)   # ং emits /ŋ/
-    n += sum(1 for ch in akshara if ch == KHANDA_TA)  # ৎ emits /t̪/
-    n += sum(1 for ch in akshara if ch == RI_KAR)     # ৃ emits /r/ + vowel
-    return n
+def _expected_consonants(akshara: str) -> Tuple[int, int]:
+    """(core, coda) consonant counts for one akshara.
+
+    core: consonants realized BEFORE the nucleus (base/conjunct consonants,
+          plus the /r/ of ri-kar ৃ).
+    coda: consonants realized AFTER the nucleus — anusvara ং (/ŋ/) and
+          khanda-ta ৎ (/t̪/) are phonemically syllable codas (Spec C.4), so
+          the phoneme order inside the akshara is C* V coda*.
+    """
+    core = sum(1 for ch in akshara if ch in CONSONANTS)
+    core += sum(1 for ch in akshara if ch == RI_KAR)   # ৃ emits /r/ + vowel
+    coda = sum(1 for ch in akshara if ch in (ANUSVARA, KHANDA_TA))
+    return core, coda
 
 def _vowel_initial(akshara: str) -> bool:
     return len(akshara) > 0 and akshara[0] in INDEP_VOWELS
@@ -175,20 +182,20 @@ def align(word: str, phonemes: List[str]) -> Alignment:
     i = 0
     for ci, cl in enumerate(clusters):
         start = i
-        need_c = _expected_consonants(cl)
+        need_core, need_coda = _expected_consonants(cl)
         got_c = 0
         if _vowel_initial(cl):
-            # V (D)* akshara: vowel phoneme first, then diacritic consonants (ং, ঃ)
+            # V (D)* akshara: vowel phoneme first, then coda consonants (ং, ৎ)
             if i < len(phonemes) and is_nucleus(phonemes[i]):
                 i += 1
             else:
                 return Alignment(spans, False,
                                  f"nucleus expected for independent vowel @akshara {ci} ({cl})")
-            while i < len(phonemes) and got_c < need_c and not is_nucleus(phonemes[i]):
+            while i < len(phonemes) and got_c < need_coda and not is_nucleus(phonemes[i]):
                 i += 1; got_c += 1
             spans.append((start, i))
             continue
-        while i < len(phonemes) and got_c < need_c:
+        while i < len(phonemes) and got_c < need_core:
             if is_nucleus(phonemes[i]):
                 return Alignment(spans, False,
                                  f"vowel where consonant expected @akshara {ci} ({cl})")
@@ -201,6 +208,10 @@ def align(word: str, phonemes: List[str]) -> Alignment:
             # else: following independent vowel claims the nucleus
         if takes_vowel:
             i += 1
+        # coda consonants (ং /ŋ/, ৎ /t̪/) come AFTER the nucleus (Spec C.4)
+        got_c = 0
+        while i < len(phonemes) and got_c < need_coda and not is_nucleus(phonemes[i]):
+            i += 1; got_c += 1
         spans.append((start, i))
     ok = (i == len(phonemes))
     note = "" if ok else f"unconsumed phonemes: {phonemes[i:]}"

@@ -1,0 +1,57 @@
+# Mapping: Google language-resources bn-BD lexicon notation -> BanglaPhonologyBench IPA
+# Source notation: bn/phonemes.txt + bn/transcription.md (github.com/google/language-resources)
+# Columns: google_symbol <TAB> our_ipa <TAB> note
+#
+# Conventions on our side (match bangla_phonology.py gold set):
+#   - dental stops carry the bridge diacritic (t̪, d̪); retroflex are ʈ, ɖ
+#   - the palatal stop series c/ch/j/jh is rendered as affricates tʃ/dʒ (standard
+#     for Bangla; Google's IPA column uses c/ɟ)
+#   - voiced aspirates use ʱ, voiceless use ʰ
+#   - glide symbols (X^) are offglides/onglides; ingestion MERGES them with the
+#     adjacent vowel into one diphthong phoneme (e i^ -> ei̯), since diphthongs
+#     are single nuclei (Spec B.2 step 1)
+#   - '.' is the lexicon's syllable separator, not a phoneme
+#   - NOTE: the lexicon does NOT transcribe vowel nasalization (bn-BD colloquial
+#     policy, see transcription.md): চাঁদ -> c a d. Nasalization is recoverable
+#     from orthography (candrabindu) if needed; our aligner does not count ঁ as
+#     a consonant, so alignment is unaffected.
+#   - the lexicon has no ph symbol: ফ is transcribed f throughout.
+O	ɔ	open-mid back vowel
+a	a
+i	i
+u	u
+e	e
+E	æ
+o	o
+i^	i̯	glide: merged into adjacent vowel at ingestion
+u^	u̯	glide: merged into adjacent vowel at ingestion
+e^	e̯	glide: merged into adjacent vowel at ingestion
+o^	o̯	glide: merged into adjacent vowel at ingestion
+k	k
+kh	kʰ
+g	g
+gh	gʱ	voiced aspirate
+N	ŋ	anusvara / velar nasal
+c	tʃ	Google IPA: c
+ch	tʃʰ	Google IPA: cʰ
+j	dʒ	Google IPA: ɟ
+jh	dʒʱ	Google IPA: ɟʰ
+T	ʈ	retroflex
+Th	ʈʰ
+D	ɖ
+Dh	ɖʱ
+t	t̪	dental
+th	t̪ʰ
+d	d̪
+dh	d̪ʱ
+n	n
+p	p
+f	f	ফ (Google merges ph into f)
+b	b
+bh	bʱ
+m	m
+r	r
+l	l
+sh	ʃ
+s	s
+h	h
