@@ -1,401 +1,401 @@
 ﻿id,orth1,orth2,ipa1,ipa2,rime1,rime2,assonance_key1,assonance_key2,neg_type,predicted_label,freq_bucket1,freq_bucket2,label_corrected,reviewed,notes
-rhyme3a_00000,কনফ্লিক্ট,বেনেডিক্ট,kɔnflikʈ,beneɖikʈ,ikʈ,ikʈ,i,i,,1,mid,mid,,,
-rhyme3a_00001,ডিসট্রিক্ট,কনফ্লিক্ট,ɖisʈrikʈ,kɔnflikʈ,ikʈ,ikʈ,i,i,,1,mid,mid,,,
-rhyme3a_00002,ডিসট্রিক্ট,বেনেডিক্ট,ɖisʈrikʈ,beneɖikʈ,ikʈ,ikʈ,i,i,,1,mid,mid,,,
-rhyme3a_00003,অপারেশনস,কমিউনিকেশন্স,ɔpareʃons,komiu̯nikeʃons,ons,ons,o,o,,1,mid,mid,,,
-rhyme3a_00004,কমিউনিকেশনস,কমিউনিকেশন্স,kɔmiu̯nikeʃons,komiu̯nikeʃons,ons,ons,o,o,,1,mid,mid,,,
-rhyme3a_00005,অপারেশনস,কমন্স,ɔpareʃons,kɔmons,ons,ons,o,o,,1,mid,mid,,,
-rhyme3a_00006,কমিউনিকেশন্স,কমন্স,komiu̯nikeʃons,kɔmons,ons,ons,o,o,,1,mid,mid,,,
-rhyme3a_00007,কমিউনিকেশনস,কমন্স,kɔmiu̯nikeʃons,kɔmons,ons,ons,o,o,,1,mid,mid,,,
-rhyme3a_00008,মর্টগেজ,চেজ,mɔrʈgedʒ,tʃedʒ,edʒ,edʒ,e,e,,1,mid,mid,,,
-rhyme3a_00009,ড্রেনেজ,ম্যারেজ,ɖrenedʒ,mæredʒ,edʒ,edʒ,e,e,,1,mid,mid,,,
-rhyme3a_00010,হেরিটেজ,হাফেজ,heriʈedʒ,hafedʒ,edʒ,edʒ,e,e,,1,high,high,,,
-rhyme3a_00011,পেরেজ,ম্যানেজ,peredʒ,mænedʒ,edʒ,edʒ,e,e,,1,mid,mid,,,
-rhyme3a_00012,কভারেজ,মার্কেজ,kɔbʱaredʒ,markedʒ,edʒ,edʒ,e,e,,1,mid,mid,,,
-rhyme3a_00013,লোপেজ,ব্যান্ডেজ,lopedʒ,bænɖedʒ,edʒ,edʒ,e,e,,1,mid,mid,,,
-rhyme3a_00014,লাগেজ,ওয়েবপেজ,lagedʒ,o̯ebpedʒ,edʒ,edʒ,e,e,,1,mid,mid,,,
-rhyme3a_00015,পেরেজ,কটেজ,peredʒ,kɔʈedʒ,edʒ,edʒ,e,e,,1,mid,mid,,,
-rhyme3a_00016,বেভারেজ,আলভেজ,bebʱaredʒ,albʱedʒ,edʒ,edʒ,e,e,,1,mid,mid,,,
-rhyme3a_00017,টিনেজ,ব্যান্ডেজ,ʈinedʒ,bænɖedʒ,edʒ,edʒ,e,e,,1,mid,mid,,,
-rhyme3a_00018,খেত,অনিকেত,kʰet̪,ɔniket̪,et̪,et̪,e,e,,1,mid,mid,,,
-rhyme3a_00019,প্রেত,অনিকেত,pret̪,ɔniket̪,et̪,et̪,e,e,,1,mid,mid,,,
-rhyme3a_00020,নীলক্ষেত,অনিকেত,nilkʰet̪,ɔniket̪,et̪,et̪,e,e,,1,mid,mid,,,
-rhyme3a_00021,খিলক্ষেত,অনভিপ্রেত,kʰilkʰet̪,ɔnobʱipret̪,et̪,et̪,e,e,,1,mid,mid,,,
-rhyme3a_00022,বেলায়েত,বিলেত,belaet̪,bilet̪,et̪,et̪,e,e,,1,mid,mid,,,
-rhyme3a_00023,বেলায়েত,খিলক্ষেত,belaet̪,kʰilkʰet̪,et̪,et̪,e,e,,1,mid,mid,,,
-rhyme3a_00024,অশনিসংকেত,ধানখেত,ɔʃoniʃɔŋket̪,d̪ʱankʰet̪,et̪,et̪,e,e,,1,low,low,,,
-rhyme3a_00025,অশনিসংকেত,আহমেত,ɔʃoniʃɔŋket̪,ahmet̪,et̪,et̪,e,e,,1,low,low,,,
-rhyme3a_00026,নীলক্ষেত,বেত,nilkʰet̪,bet̪,et̪,et̪,e,e,,1,mid,mid,,,
-rhyme3a_00027,সোভিয়েত,ক্ষেত,sobʱiet̪,kʰet̪,et̪,et̪,e,e,,1,high,high,,,
-rhyme3a_00028,শিট,লিমিট,ʃiʈ,limiʈ,iʈ,iʈ,i,i,,1,mid,mid,,,
-rhyme3a_00029,ইউনিট,টিকিট,i̯uniʈ,ʈikiʈ,iʈ,iʈ,i,i,,1,high,high,,,
-rhyme3a_00030,ফ্লাইট,ডিলিট,flaiʈ,ɖiliʈ,iʈ,iʈ,i,i,,1,high,high,,,
-rhyme3a_00031,ক্রেডিট,কমপ্লিট,kreɖiʈ,kɔmpliʈ,iʈ,iʈ,i,i,,1,high,high,,,
-rhyme3a_00032,পিট,ভিজিট,piʈ,bʱidʒiʈ,iʈ,iʈ,i,i,,1,high,high,,,
-rhyme3a_00033,মেরিট,ট্রিট,meriʈ,ʈriʈ,iʈ,iʈ,i,i,,1,mid,mid,,,
-rhyme3a_00034,সিট,ডিলিট,siʈ,ɖiliʈ,iʈ,iʈ,i,i,,1,high,high,,,
-rhyme3a_00035,ফেবারিট,গিট,febariʈ,giʈ,iʈ,iʈ,i,i,,1,mid,mid,,,
-rhyme3a_00036,কিলোবাইট,সুপারহিট,kilobaiʈ,suparhiʈ,iʈ,iʈ,i,i,,1,mid,mid,,,
-rhyme3a_00037,ডাকটিকিট,শীট,ɖakʈikiʈ,ʃiʈ,iʈ,iʈ,i,i,,1,mid,mid,,,
-rhyme3a_00038,এয়ারপোর্ট,কোর্ট,earporʈ,korʈ,orʈ,orʈ,o,o,,1,high,high,,,
-rhyme3a_00039,হাইকোর্ট,পোর্ট,hai̯korʈ,porʈ,orʈ,orʈ,o,o,,1,high,high,,,
-rhyme3a_00040,এয়ারপোর্ট,হাইকোর্ট,earporʈ,hai̯korʈ,orʈ,orʈ,o,o,,1,high,high,,,
-rhyme3a_00041,রিসোর্ট,ফোর্ট,risorʈ,forʈ,orʈ,orʈ,o,o,,1,high,high,,,
-rhyme3a_00042,এয়ারপোর্ট,ফোর্ট,earporʈ,forʈ,orʈ,orʈ,o,o,,1,high,high,,,
-rhyme3a_00043,এক্সপোর্ট,কমফোর্ট,eksporʈ,kɔmforʈ,orʈ,orʈ,o,o,,1,mid,mid,,,
-rhyme3a_00044,কোর্ট,পোর্ট,korʈ,porʈ,orʈ,orʈ,o,o,,1,high,high,,,
-rhyme3a_00045,স্পোর্ট,কমফোর্ট,sporʈ,kɔmforʈ,orʈ,orʈ,o,o,,1,mid,mid,,,
-rhyme3a_00046,সাপোর্ট,হাইকোর্ট,saporʈ,hai̯korʈ,orʈ,orʈ,o,o,,1,high,high,,,
-rhyme3a_00047,কোর্ট,রিপোর্ট,korʈ,riporʈ,orʈ,orʈ,o,o,,1,high,high,,,
-rhyme3a_00048,মাঝমাঠ,সহপাঠ,madʒʱmaʈʰ,ʃɔhopaʈʰ,aʈʰ,aʈʰ,a,a,,1,low,low,,,
-rhyme3a_00049,মাঠ,পাঠ,maʈʰ,paʈʰ,aʈʰ,aʈʰ,a,a,,1,high,high,,,
-rhyme3a_00050,পত্রপাঠ,মধ্যমাঠ,pɔt̪ropaʈʰ,mod̪d̪ʱomaʈʰ,aʈʰ,aʈʰ,a,a,,1,low,low,,,
-rhyme3a_00051,কাঠ,পাঠ,kaʈʰ,paʈʰ,aʈʰ,aʈʰ,a,a,,1,high,high,,,
-rhyme3a_00052,পত্রপাঠ,মাঝমাঠ,pɔt̪ropaʈʰ,madʒʱmaʈʰ,aʈʰ,aʈʰ,a,a,,1,low,low,,,
-rhyme3a_00053,কবিতাপাঠ,মধ্যমাঠ,kobit̪apaʈʰ,mod̪d̪ʱomaʈʰ,aʈʰ,aʈʰ,a,a,,1,low,low,,,
-rhyme3a_00054,মধ্যমাঠ,সহপাঠ,mod̪d̪ʱomaʈʰ,ʃɔhopaʈʰ,aʈʰ,aʈʰ,a,a,,1,low,low,,,
-rhyme3a_00055,কবিতাপাঠ,মাঝমাঠ,kobit̪apaʈʰ,madʒʱmaʈʰ,aʈʰ,aʈʰ,a,a,,1,low,low,,,
-rhyme3a_00056,কাঠ,মাঠ,kaʈʰ,maʈʰ,aʈʰ,aʈʰ,a,a,,1,high,high,,,
-rhyme3a_00057,কিউপিড,লিকুইড,kiu̯piɖ,likuiɖ,iɖ,iɖ,i,i,,1,mid,mid,,,
-rhyme3a_00058,হাইব্রিড,মিড,hai̯briɖ,miɖ,iɖ,iɖ,i,i,,1,high,high,,,
-rhyme3a_00059,স্কুইড,সিড,skuiɖ,siɖ,iɖ,iɖ,i,i,,1,mid,mid,,,
-rhyme3a_00060,ডেভিড,গ্রিড,ɖebʱiɖ,griɖ,iɖ,iɖ,i,i,,1,high,high,,,
-rhyme3a_00061,অ্যাসিড,ডেভিড,æsiɖ,ɖebʱiɖ,iɖ,iɖ,i,i,,1,high,high,,,
-rhyme3a_00062,অ্যাসিড,গ্রিড,æsiɖ,griɖ,iɖ,iɖ,i,i,,1,high,high,,,
-rhyme3a_00063,এসিড,ডেভিড,esiɖ,ɖebʱiɖ,iɖ,iɖ,i,i,,1,high,high,,,
-rhyme3a_00064,হাইব্রিড,স্পিড,hai̯briɖ,spiɖ,iɖ,iɖ,i,i,,1,high,high,,,
-rhyme3a_00065,রিভারসাইড,বিড,ribʱarsaiɖ,biɖ,iɖ,iɖ,i,i,,1,mid,mid,,,
-rhyme3a_00066,কিড,সলিড,kiɖ,sɔliɖ,iɖ,iɖ,i,i,,1,mid,mid,,,
-rhyme3a_00067,বরবাদ,আওলাদ,bɔrbad̪,ao̯lad̪,ad̪,ad̪,a,a,,1,mid,mid,,,
-rhyme3a_00068,অপবাদ,আজাদ,ɔpobad̪,adʒad̪,ad̪,ad̪,a,a,,1,high,high,,,
-rhyme3a_00069,ফরিদাবাদ,আরশাদ,forid̪abad̪,arʃad̪,ad̪,ad̪,a,a,,1,mid,mid,,,
-rhyme3a_00070,আশির্বাদ,কায়কোবাদ,aʃirbad̪,kae̯kobad̪,ad̪,ad̪,a,a,,1,mid,mid,,,
-rhyme3a_00071,বিবাদ,ফরহাদ,bibad̪,fɔrhad̪,ad̪,ad̪,a,a,,1,high,high,,,
-rhyme3a_00072,আযাদ,দুঃসংবাদ,adʒad̪,d̪uʃʃɔŋbad̪,ad̪,ad̪,a,a,,1,mid,mid,,,
-rhyme3a_00073,বাদানুবাদ,জল্লাদ,bad̪anubad̪,dʒɔllad̪,ad̪,ad̪,a,a,,1,mid,mid,,,
-rhyme3a_00074,অনুবাদ,মিলাদ,onubad̪,milad̪,ad̪,ad̪,a,a,,1,high,high,,,
-rhyme3a_00075,ভ্লাদ,উগ্রবাদ,bʱlad̪,ugrobad̪,ad̪,ad̪,a,a,,1,mid,mid,,,
-rhyme3a_00076,সাম্যবাদ,বিষাদ,ʃammobad̪,biʃad̪,ad̪,ad̪,a,a,,1,mid,mid,,,
-rhyme3a_00077,কনট্যাক্ট,ইমপ্যাক্ট,kɔnʈækʈ,impækʈ,ækʈ,ækʈ,æ,æ,,1,mid,mid,,,
-rhyme3a_00078,কনট্যাক্ট,ফ্যাক্ট,kɔnʈækʈ,fækʈ,ækʈ,ækʈ,æ,æ,,1,mid,mid,,,
-rhyme3a_00079,ফ্যাক্ট,ইমপ্যাক্ট,fækʈ,impækʈ,ækʈ,ækʈ,æ,æ,,1,mid,mid,,,
-rhyme3a_00080,কম্প্যাক্ট,ফ্যাক্ট,kɔmpækʈ,fækʈ,ækʈ,ækʈ,æ,æ,,1,mid,mid,,,
-rhyme3a_00081,কমপ্যাক্ট,কনট্যাক্ট,kɔmpækʈ,kɔnʈækʈ,ækʈ,ækʈ,æ,æ,,1,mid,mid,,,
-rhyme3a_00082,কন্টাক্ট,কম্প্যাক্ট,kɔnʈækʈ,kɔmpækʈ,ækʈ,ækʈ,æ,æ,,1,mid,mid,,,
-rhyme3a_00083,কন্টাক্ট,ফ্যাক্ট,kɔnʈækʈ,fækʈ,ækʈ,ækʈ,æ,æ,,1,mid,mid,,,
-rhyme3a_00084,কম্প্যাক্ট,ইমপ্যাক্ট,kɔmpækʈ,impækʈ,ækʈ,ækʈ,æ,æ,,1,mid,mid,,,
-rhyme3a_00085,কমপ্যাক্ট,ফ্যাক্ট,kɔmpækʈ,fækʈ,ækʈ,ækʈ,æ,æ,,1,mid,mid,,,
-rhyme3a_00086,কমপ্যাক্ট,কন্টাক্ট,kɔmpækʈ,kɔnʈækʈ,ækʈ,ækʈ,æ,æ,,1,mid,mid,,,
-rhyme3a_00087,রোস্তম,প্রজননক্ষম,rost̪ɔm,prodʒonɔnɔkkʰɔm,ɔm,ɔm,ɔ,ɔ,,1,low,low,,,
-rhyme3a_00088,রম,মেকানিজম,rɔm,mekanidʒɔm,ɔm,ɔm,ɔ,ɔ,,1,mid,mid,,,
-rhyme3a_00089,মনোরম,সশ্রম,monorɔm,ʃɔsrɔm,ɔm,ɔm,ɔ,ɔ,,1,high,high,,,
-rhyme3a_00090,চমচম,রুস্তম,tʃɔmtʃɔm,rust̪ɔm,ɔm,ɔm,ɔ,ɔ,,1,mid,mid,,,
-rhyme3a_00091,আজম,গম,adʒɔm,gɔm,ɔm,ɔm,ɔ,ɔ,,1,high,high,,,
-rhyme3a_00092,লোকসমাগম,অর্গাজম,lokʃɔmagɔm,ɔrgadʒɔm,ɔm,ɔm,ɔ,ɔ,,1,low,low,,,
-rhyme3a_00093,মহররম,রেশম,mɔhorrɔm,reʃɔm,ɔm,ɔm,ɔ,ɔ,,1,mid,mid,,,
-rhyme3a_00094,অটিজম,মহরম,ɔʈidʒɔm,mɔhorɔm,ɔm,ɔm,ɔ,ɔ,,1,mid,mid,,,
-rhyme3a_00095,সুগম,কার্যক্ষম,ʃugɔm,kardʒokʰɔm,ɔm,ɔm,ɔ,ɔ,,1,mid,mid,,,
-rhyme3a_00096,চমচম,অরিন্দম,tʃɔmtʃɔm,ɔrind̪ɔm,ɔm,ɔm,ɔ,ɔ,,1,mid,mid,,,
-rhyme3a_00097,আলমন্ড,প্রাইজবন্ড,almɔnɖ,prai̯dʒbɔnɖ,ɔnɖ,ɔnɖ,ɔ,ɔ,,1,low,low,,,
-rhyme3a_00098,নভেলিস্ট,বেইজিস্ট,nobʱeliʃʈ,bei̯dʒiʃʈ,iʃʈ,iʃʈ,i,i,,1,low,low,,,
-rhyme3a_00099,টুরিস্ট,সোশ্যালিস্ট,ʈuriʃʈ,ʃoʃaliʃʈ,iʃʈ,iʃʈ,i,i,,1,mid,mid,,,
-rhyme3a_00100,তিনিও,পানীয়,t̪inio̯,panio̯,nio̯,nio̯,io̯,io̯,,1,high,high,,,
-rhyme3a_00101,নেতৃত্বস্থানীয়,কাহিনীও,net̪rit̪t̪ost̪ʰanio̯,kahinio̯,nio̯,nio̯,io̯,io̯,,1,mid,mid,,,
-rhyme3a_00102,নেতৃত্বস্থানীয়,বোর্নিও,net̪rit̪t̪ost̪ʰanio̯,bornio̯,nio̯,nio̯,io̯,io̯,,1,mid,mid,,,
-rhyme3a_00103,পালনীয়,কাহিনীও,palonio̯,kahinio̯,nio̯,nio̯,io̯,io̯,,1,mid,mid,,,
-rhyme3a_00104,মাননীয়,তিনিও,manonio̯,t̪inio̯,nio̯,nio̯,io̯,io̯,,1,high,high,,,
-rhyme3a_00105,শীর্ষস্থানীয়,তিনিও,ʃirʃost̪ʰanio̯,t̪inio̯,nio̯,nio̯,io̯,io̯,,1,high,high,,,
-rhyme3a_00106,বোর্নিও,পালনীয়,bornio̯,palonio̯,nio̯,nio̯,io̯,io̯,,1,mid,mid,,,
-rhyme3a_00107,বাহিনীও,নেতৃত্বস্থানীয়,bahinio̯,net̪rit̪t̪ost̪ʰanio̯,nio̯,nio̯,io̯,io̯,,1,mid,mid,,,
-rhyme3a_00108,বাহিনীও,পালনীয়,bahinio̯,palonio̯,nio̯,nio̯,io̯,io̯,,1,mid,mid,,,
-rhyme3a_00109,কিনল,আনলো,kinlo,anlo,nlo,nlo,o,o,,1,mid,mid,,,
-rhyme3a_00110,ইমারজেন্সি,আইছি,imardʒensi,ai̯si,si,si,i,i,,1,mid,mid,,,
-rhyme3a_00111,রেসিডেন্সি,সিএসসি,resiɖensi,siessi,si,si,i,i,,1,mid,mid,,,
-rhyme3a_00112,কেসি,এসএমসি,kesi,esemsi,si,si,i,i,,1,mid,mid,,,
-rhyme3a_00113,ফেরদৌসি,বিজেএমসি,ferd̪ou̯si,bidʒeemsi,si,si,i,i,,1,mid,mid,,,
-rhyme3a_00114,গ্যালাক্সি,সেক্সি,gælaksi,seksi,si,si,i,i,,1,high,high,,,
-rhyme3a_00115,আরসিসি,আব্বাসী,arsisi,abbasi,si,si,i,i,,1,mid,mid,,,
-rhyme3a_00116,গ্যালাক্সি,ফার্সি,gælaksi,farsi,si,si,i,i,,1,high,high,,,
-rhyme3a_00117,এলওসি,আরসি,elosi,arsi,si,si,i,i,,1,mid,mid,,,
-rhyme3a_00118,পেপসি,রেসিডেন্সি,pepsi,resiɖensi,si,si,i,i,,1,mid,mid,,,
-rhyme3a_00119,আইএফআইসি,কেসি,ai̯efai̯si,kesi,si,si,i,i,,1,mid,mid,,,
-rhyme3a_00120,স্ব,অংশ,ʃɔ,oŋʃɔ,ʃɔ,ʃɔ,ɔ,ɔ,,1,high,high,,,
-rhyme3a_00121,অন্যকিছু,পিছু,onnokitʃʰu,pitʃʰu,tʃʰu,tʃʰu,u,u,,1,high,high,,,
-rhyme3a_00122,বেশকিছু,মাথাপিছু,beʃkitʃʰu,mat̪ʰapitʃʰu,tʃʰu,tʃʰu,u,u,,1,high,high,,,
-rhyme3a_00123,বেশকিছু,পিছু,beʃkitʃʰu,pitʃʰu,tʃʰu,tʃʰu,u,u,,1,high,high,,,
-rhyme3a_00124,মাথাপিছু,অন্যকিছু,mat̪ʰapitʃʰu,onnokitʃʰu,tʃʰu,tʃʰu,u,u,,1,high,high,,,
-rhyme3a_00125,বিচ্ছু,বেশিকিছু,bitʃtʃʰu,beʃikitʃʰu,tʃʰu,tʃʰu,u,u,,1,mid,mid,,,
-rhyme3a_00126,সবকিছু,কিচ্ছু,ʃɔbkitʃʰu,kitʃtʃʰu,tʃʰu,tʃʰu,u,u,,1,high,high,,,
-rhyme3a_00127,কোনকিছু,পিছু,konokitʃʰu,pitʃʰu,tʃʰu,tʃʰu,u,u,,1,high,high,,,
-rhyme3a_00128,বিচ্ছু,অল্পকিছু,bitʃtʃʰu,ɔlpokitʃʰu,tʃʰu,tʃʰu,u,u,,1,mid,mid,,,
-rhyme3a_00129,বিচ্ছু,এতকিছু,bitʃtʃʰu,æt̪okitʃʰu,tʃʰu,tʃʰu,u,u,,1,mid,mid,,,
-rhyme3a_00130,মাথাপিছু,কিছু,mat̪ʰapitʃʰu,kitʃʰu,tʃʰu,tʃʰu,u,u,,1,high,high,,,
-rhyme3a_00131,আলেহান্দ্রো,তথ্যকেন্দ্র,alehand̪ro,t̪ot̪t̪ʰokend̪ro,d̪ro,d̪ro,o,o,,1,mid,mid,,,
-rhyme3a_00132,পেদ্রো,চান্দ্র,ped̪ro,tʃand̪ro,d̪ro,d̪ro,o,o,,1,mid,mid,,,
-rhyme3a_00133,অতিদরিদ্র,ব্যবসাকেন্দ্র,ot̪id̪orid̪ro,bæboʃakend̪ro,d̪ro,d̪ro,o,o,,1,low,low,,,
-rhyme3a_00134,রৌদ্র,প্রেমেন্দ্র,rou̯d̪ro,premend̪ro,d̪ro,d̪ro,o,o,,1,mid,mid,,,
-rhyme3a_00135,রামচন্দ্র,চান্দ্র,ramtʃɔnd̪ro,tʃand̪ro,d̪ro,d̪ro,o,o,,1,mid,mid,,,
-rhyme3a_00136,ভাদ্র,অতন্দ্র,bʱad̪ro,ɔt̪ond̪ro,d̪ro,d̪ro,o,o,,1,mid,mid,,,
-rhyme3a_00137,রাজেন্দ্র,সুরেন্দ্র,radʒend̪ro,ʃurend̪ro,d̪ro,d̪ro,o,o,,1,mid,mid,,,
-rhyme3a_00138,বরেন্দ্র,বঙ্কিমচন্দ্র,bɔrend̪ro,boŋkimtʃɔnd̪ro,d̪ro,d̪ro,o,o,,1,mid,mid,,,
-rhyme3a_00139,অতন্দ্র,ধর্মেন্দ্র,ɔt̪ond̪ro,d̪ʱɔrmend̪ro,d̪ro,d̪ro,o,o,,1,mid,mid,,,
-rhyme3a_00140,পর্যটনকেন্দ্র,বিনিদ্র,pɔrdʒoʈɔnkend̪ro,binid̪ro,d̪ro,d̪ro,o,o,,1,mid,mid,,,
-rhyme3a_00141,আবা,রিবা,aba,riba,ba,ba,a,a,,1,mid,mid,,,
-rhyme3a_00142,তোবা,সম্ভবা,t̪oba,ʃɔmbʱoba,ba,ba,a,a,,1,mid,mid,,,
-rhyme3a_00143,ডোবা,কখনোবা,ɖoba,kɔkʰonoba,ba,ba,a,a,,1,mid,mid,,,
-rhyme3a_00144,গ্রীবা,জনসেবা,griba,dʒɔnoʃeba,ba,ba,a,a,,1,mid,mid,,,
-rhyme3a_00145,কেউবা,কিম্বা,keu̯ba,kimba,ba,ba,a,a,,1,mid,mid,,,
-rhyme3a_00146,বাবা,নতুবা,baba,not̪uba,ba,ba,a,a,,1,high,high,,,
-rhyme3a_00147,ডোবা,সাহাবা,ɖoba,ʃahaba,ba,ba,a,a,,1,mid,mid,,,
-rhyme3a_00148,হেবা,আলবা,hæba,alba,ba,ba,a,a,,1,mid,mid,,,
-rhyme3a_00149,থাবা,বাঁ,t̪ʰaba,ba,ba,ba,a,a,,1,high,high,,,
-rhyme3a_00150,পরিসেবা,খুতবা,poriʃeba,kʰut̪ba,ba,ba,a,a,,1,mid,mid,,,
-rhyme3a_00151,চৌকাঠে,ফাঁসিকাষ্ঠে,tʃou̯kaʈʰe,faʃikaʃʈʰe,ʈʰe,ʈʰe,e,e,,1,low,low,,,
-rhyme3a_00152,মিঠে,ফাঁসিকাষ্ঠে,miʈʰe,faʃikaʃʈʰe,ʈʰe,ʈʰe,e,e,,1,low,low,,,
-rhyme3a_00153,জনকণ্ঠে,কাছেপিঠে,dʒɔnokɔnʈʰe,katʃʰepiʈʰe,ʈʰe,ʈʰe,e,e,,1,low,low,,,
-rhyme3a_00154,মিঠে,জনকণ্ঠে,miʈʰe,dʒɔnokɔnʈʰe,ʈʰe,ʈʰe,e,e,,1,low,low,,,
-rhyme3a_00155,পৃষ্ঠে,উচ্চকণ্ঠে,priʃʈʰe,utʃtʃokɔnʈʰe,ʈʰe,ʈʰe,e,e,,1,mid,mid,,,
-rhyme3a_00156,মঠে,ভূপৃষ্ঠে,mɔʈʰe,bʱupriʃʈʰe,ʈʰe,ʈʰe,e,e,,1,mid,mid,,,
-rhyme3a_00157,প্রকোষ্ঠে,ভূপৃষ্ঠে,prokoʃʈʰe,bʱupriʃʈʰe,ʈʰe,ʈʰe,e,e,,1,mid,mid,,,
-rhyme3a_00158,কাঠে,উচ্চকণ্ঠে,kaʈʰe,utʃtʃokɔnʈʰe,ʈʰe,ʈʰe,e,e,,1,mid,mid,,,
-rhyme3a_00159,পাঠে,আষ্টেপৃষ্ঠে,paʈʰe,aʃʈepriʃʈʰe,ʈʰe,ʈʰe,e,e,,1,mid,mid,,,
-rhyme3a_00160,চৌকাঠে,কাছেপিঠে,tʃou̯kaʈʰe,katʃʰepiʈʰe,ʈʰe,ʈʰe,e,e,,1,low,low,,,
-rhyme3a_00161,অযোধ্যা,গৎবাঁধা,ɔdʒod̪d̪ʱa,gɔt̪bad̪ʱa,d̪ʱa,d̪ʱa,a,a,,1,mid,mid,,,
-rhyme3a_00162,গৎবাঁধা,অভিধা,gɔt̪bad̪ʱa,obʱid̪ʱa,d̪ʱa,d̪ʱa,a,a,,1,mid,mid,,,
-rhyme3a_00163,স্নিগ্ধা,গোলকধাঁধা,ʃnigd̪ʱa,golokd̪ʱad̪ʱa,d̪ʱa,d̪ʱa,a,a,,1,mid,mid,,,
-rhyme3a_00164,সুধা,বন্ধ্যা,ʃud̪ʱa,bɔnd̪ʱa,d̪ʱa,d̪ʱa,a,a,,1,mid,mid,,,
-rhyme3a_00165,মুক্তিযোদ্ধা,বৃদ্ধা,mukt̪idʒod̪d̪ʱa,brid̪d̪ʱa,d̪ʱa,d̪ʱa,a,a,,1,high,high,,,
-rhyme3a_00166,ধরাবাঁধা,অযোধ্যা,d̪ʱɔrabad̪ʱa,ɔdʒod̪d̪ʱa,d̪ʱa,d̪ʱa,a,a,,1,mid,mid,,,
-rhyme3a_00167,সুধা,গোলকধাঁধা,ʃud̪ʱa,golokd̪ʱad̪ʱa,d̪ʱa,d̪ʱa,a,a,,1,mid,mid,,,
-rhyme3a_00168,বাঁধা,ধাঁধা,bad̪ʱa,d̪ʱad̪ʱa,d̪ʱa,d̪ʱa,a,a,,1,high,high,,,
-rhyme3a_00169,মুক্তিযোদ্ধা,শ্রদ্ধা,mukt̪idʒod̪d̪ʱa,srod̪d̪ʱa,d̪ʱa,d̪ʱa,a,a,,1,high,high,,,
-rhyme3a_00170,সুধা,সমাধা,ʃud̪ʱa,ʃɔmad̪ʱa,d̪ʱa,d̪ʱa,a,a,,1,mid,mid,,,
-rhyme3a_00171,এরমধ্যেই,যুদ্ধেই,ermod̪d̪ʱei̯,dʒud̪d̪ʱei̯,d̪ʱei̯,d̪ʱei̯,ei̯,ei̯,,1,mid,mid,,,
-rhyme3a_00172,কাঁধেই,প্রথমার্ধেই,kad̪ʱei̯,prot̪ʰomard̪ʱei̯,d̪ʱei̯,d̪ʱei̯,ei̯,ei̯,,1,low,low,,,
-rhyme3a_00173,অনুরোধেই,বিরুদ্ধেই,onurod̪ʱei̯,birud̪d̪ʱei̯,d̪ʱei̯,d̪ʱei̯,ei̯,ei̯,,1,mid,mid,,,
-rhyme3a_00174,মাঝেমধ্যেই,অনুরোধেই,madʒʱemod̪d̪ʱei̯,onurod̪ʱei̯,d̪ʱei̯,d̪ʱei̯,ei̯,ei̯,,1,mid,mid,,,
-rhyme3a_00175,অনুরোধেই,যুদ্ধেই,onurod̪ʱei̯,dʒud̪d̪ʱei̯,d̪ʱei̯,d̪ʱei̯,ei̯,ei̯,,1,mid,mid,,,
-rhyme3a_00176,মাঝেমধ্যেই,বিরুদ্ধেই,madʒʱemod̪d̪ʱei̯,birud̪d̪ʱei̯,d̪ʱei̯,d̪ʱei̯,ei̯,ei̯,,1,mid,mid,,,
-rhyme3a_00177,এরমধ্যেই,অনুরোধেই,ermod̪d̪ʱei̯,onurod̪ʱei̯,d̪ʱei̯,d̪ʱei̯,ei̯,ei̯,,1,mid,mid,,,
-rhyme3a_00178,মাঝেমধ্যেই,যুদ্ধেই,madʒʱemod̪d̪ʱei̯,dʒud̪d̪ʱei̯,d̪ʱei̯,d̪ʱei̯,ei̯,ei̯,,1,mid,mid,,,
-rhyme3a_00179,এরমধ্যেই,বিরুদ্ধেই,ermod̪d̪ʱei̯,birud̪d̪ʱei̯,d̪ʱei̯,d̪ʱei̯,ei̯,ei̯,,1,mid,mid,,,
-rhyme3a_00180,ডাকল,শুক্ল,ɖaklo,suklo,klo,klo,o,o,,1,mid,mid,,,
-rhyme3a_00181,ঢুকলো,শুক্ল,ɖʱuklo,suklo,klo,klo,o,o,,1,mid,mid,,,
-rhyme3a_00182,ঢুকলো,ডাকল,ɖʱuklo,ɖaklo,klo,klo,o,o,,1,mid,mid,,,
-rhyme3a_00183,হোমে,বিএমএ,home,bieme,me,me,e,e,,1,mid,mid,,,
-rhyme3a_00184,ট্রামে,হামে,ʈrame,hame,me,me,e,e,,1,low,low,,,
-rhyme3a_00185,সিকিমে,আমস্টারডামে,sikime,amosʈarɖame,me,me,e,e,,1,mid,mid,,,
-rhyme3a_00186,স্টকহোমে,সম্মতিক্রমে,sʈɔkhome,ʃɔmmot̪ikrɔme,me,me,e,e,,1,mid,mid,,,
-rhyme3a_00187,গ্রামে,মৌসুমে,grame,mou̯sume,me,me,e,e,,1,high,high,,,
-rhyme3a_00188,থেমে,যথাক্রমে,t̪ʰeme,dʒɔt̪ʰakrome,me,me,e,e,,1,high,high,,,
-rhyme3a_00189,চিত্রকর্মে,থিমে,tʃit̪rokɔrme,t̪ʰime,me,me,e,e,,1,mid,mid,,,
-rhyme3a_00190,মর্মে,গণমাধ্যমে,mɔrme,gɔnomad̪d̪ʱome,me,me,e,e,,1,high,high,,,
-rhyme3a_00191,থমথমে,টেলিফিল্মে,t̪ʰɔmt̪ʰɔme,ʈelifilme,me,me,e,e,,1,mid,mid,,,
-rhyme3a_00192,পাঠ্যক্রমে,প্রজন্মে,paʈʈʰokrɔme,prodʒɔnme,me,me,e,e,,1,mid,mid,,,
-rhyme3a_00193,শুক্র,জীবনচক্র,ʃukro,dʒibontʃɔkro,kro,kro,o,o,,1,mid,mid,,,
-rhyme3a_00194,মাইক্রো,টুকরো,mai̯kro,ʈukro,kro,kro,o,o,,1,high,high,,,
-rhyme3a_00195,জীবনচক্র,ম্যাক্রো,dʒibontʃɔkro,mækro,kro,kro,o,o,,1,mid,mid,,,
-rhyme3a_00196,টুকরো,চক্র,ʈukro,tʃɔkro,kro,kro,o,o,,1,high,high,,,
-rhyme3a_00197,জীবনচক্র,একটুকরো,dʒibontʃɔkro,ækʈukro,kro,kro,o,o,,1,mid,mid,,,
-rhyme3a_00198,শুক্র,পাঠচক্র,ʃukro,paʈʰtʃɔkro,kro,kro,o,o,,1,mid,mid,,,
-rhyme3a_00199,ম্যাক্রো,একটুকরো,mækro,ækʈukro,kro,kro,o,o,,1,mid,mid,,,
-rhyme3a_00200,দেখুন,ইনু,d̪ekʰun,inu,un,nu,u,u,assonance_decoy,0,high,high,,,
-rhyme3a_00201,দবিরুল,আজমপুর,d̪obirul,adʒompur,ul,ur,u,u,assonance_decoy,0,low,mid,,,
-rhyme3a_00202,হিন্দুর,মৃদুল,hind̪ur,mrid̪ul,ur,ul,u,u,assonance_decoy,0,mid,mid,,,
-rhyme3a_00203,শিকারপুর,পরুন,ʃikarpur,porun,ur,un,u,u,assonance_decoy,0,mid,mid,,,
-rhyme3a_00204,টাপুর,রুস,ʈapur,rus,ur,us,u,u,assonance_decoy,0,mid,mid,,,
-rhyme3a_00205,ক্লু,স্ক্রু,klu,skru,klu,skru,u,u,assonance_decoy,0,mid,mid,,,
-rhyme3a_00206,ঋজু,সোনু,ridʒu,sonu,dʒu,nu,u,u,assonance_decoy,0,mid,mid,,,
-rhyme3a_00207,রেণু,আনামুল,renu,anamul,nu,ul,u,u,assonance_decoy,0,mid,low,,,
-rhyme3a_00208,আরজু,আশেকুর,ardʒu,aʃekur,dʒu,ur,u,u,assonance_decoy,0,mid,,,,
-rhyme3a_00209,আশরাফুল,দারূণ,aʃraful,d̪arun,ul,un,u,u,assonance_decoy,0,high,low,,,
-rhyme3a_00210,হাসুর,স্ট্যাচু,haʃur,sʈætʃu,ur,tʃu,u,u,assonance_decoy,0,low,mid,,,
-rhyme3a_00211,আজিজুল,ধূমকেতুর,adʒidʒul,d̪ʱumket̪ur,ul,ur,u,u,assonance_decoy,0,high,mid,,,
-rhyme3a_00212,গমনেচ্ছু,হাটু,gɔmonetʃtʃʰu,haʈu,tʃʰu,ʈu,u,u,assonance_decoy,0,,mid,,,
-rhyme3a_00213,বর্ধিষ্ণু,পুরুষ,bord̪ʱiʃnu,puruʃ,nu,uʃ,u,u,assonance_decoy,0,mid,high,,,
-rhyme3a_00214,শুকুর,শামসুন,ʃukur,ʃamsun,ur,un,u,u,assonance_decoy,0,mid,mid,,,
-rhyme3a_00215,লতিফুল,যিশু,lot̪iful,dʒiʃu,ul,ʃu,u,u,assonance_decoy,0,low,high,,,
-rhyme3a_00216,এলবিডব্লুর,শুড,elbiɖɔblur,ʃuɖ,ur,uɖ,u,u,assonance_decoy,0,,low,,,
-rhyme3a_00217,স্বরূপ,সম্মুখ,ʃɔrup,ʃɔmmukʰ,up,ukʰ,u,u,assonance_decoy,0,high,high,,,
-rhyme3a_00218,মাছিমপুর,রবিউল,masimpur,robiul,ur,ul,u,u,assonance_decoy,0,low,high,,,
-rhyme3a_00219,ওজু,মোগাদিশু,odʒu,mogad̪iʃu,dʒu,ʃu,u,u,assonance_decoy,0,mid,mid,,,
-rhyme3a_00220,ইনু,মৃদু,inu,mrid̪u,nu,d̪u,u,u,assonance_decoy,0,high,high,,,
-rhyme3a_00221,পরুন,রাতারগুল,porun,rat̪argul,un,ul,u,u,assonance_decoy,0,mid,mid,,,
-rhyme3a_00222,বেকসুর,শকুন,bekosur,ʃokun,ur,un,u,u,assonance_decoy,0,mid,mid,,,
-rhyme3a_00223,আইটিউনস,অহিদুল,ai̯ʈiuns,ohid̪ul,uns,ul,u,u,assonance_decoy,0,low,low,,,
-rhyme3a_00224,কাউন্ট,ফাস্টফুড,kaunʈ,fasʈfuɖ,unʈ,uɖ,u,u,assonance_decoy,0,high,mid,,,
-rhyme3a_00225,একবিন্দু,ঊরুর,ækbind̪u,urur,d̪u,ur,u,u,assonance_decoy,0,low,low,,,
-rhyme3a_00226,বাদুর,মিঠুন,bad̪ur,miʈʰun,ur,un,u,u,assonance_decoy,0,mid,mid,,,
-rhyme3a_00227,সাবিকুন,প্যারামাউন্ট,sabikun,pæramaunʈ,un,unʈ,u,u,assonance_decoy,0,,mid,,,
-rhyme3a_00228,তুং,নিজামপুর,t̪uŋ,nidʒampur,uŋ,ur,u,u,assonance_decoy,0,mid,mid,,,
-rhyme3a_00229,অকূল,মু,ɔkul,mu,ul,mu,u,u,assonance_decoy,0,low,high,,,
-rhyme3a_00230,হাডুডু,স্তুপ,haɖuɖu,st̪up,ɖu,up,u,u,assonance_decoy,0,mid,mid,,,
-rhyme3a_00231,তাজুল,নীতুর,t̪adʒul,nit̪ur,ul,ur,u,u,assonance_decoy,0,mid,low,,,
-rhyme3a_00232,ভারুন,মিজু,bʱarun,midʒu,un,dʒu,u,u,assonance_decoy,0,low,mid,,,
-rhyme3a_00233,ইজারুল,স্বর্ণযুগ,idʒarul,ʃɔrnodʒug,ul,ug,u,u,assonance_decoy,0,,mid,,,
-rhyme3a_00234,দারুণ,শফিকুর,d̪arun,ʃofikur,un,ur,u,u,assonance_decoy,0,high,mid,,,
-rhyme3a_00235,সেটুকু,ছেরুর,ʃeʈuku,tʃʰerur,ku,ur,u,u,assonance_decoy,0,mid,,,,
-rhyme3a_00236,মুশফিকুর,ভিখু,muʃfikur,bʱikʰu,ur,kʰu,u,u,assonance_decoy,0,high,low,,,
-rhyme3a_00237,কামরূপ,মনতাজুর,kamrup,mont̪adʒur,up,ur,u,u,assonance_decoy,0,mid,mid,,,
-rhyme3a_00238,হিমুর,মাউস,himur,maus,ur,us,u,u,assonance_decoy,0,mid,high,,,
-rhyme3a_00239,পাপ্পুর,ফলমূল,pappur,fɔlmul,ur,ul,u,u,assonance_decoy,0,low,mid,,,
-rhyme3a_00240,কাঠমাণ্ডু,কুসুম,kaʈʰmanɖu,kuʃum,ɖu,um,u,u,assonance_decoy,0,mid,high,,,
-rhyme3a_00241,শফিকুল,শম্ভুর,ʃofikul,ʃombʱur,ul,ur,u,u,assonance_decoy,0,high,low,,,
-rhyme3a_00242,বহরমপুর,ফুড,bɔhrompur,fuɖ,ur,uɖ,u,u,assonance_decoy,0,mid,high,,,
-rhyme3a_00243,বেণু,চতুর,benu,tʃot̪ur,nu,ur,u,u,assonance_decoy,0,mid,high,,,
-rhyme3a_00244,চক্ষু,হুবহু,tʃokkʰu,hubohu,kʰu,hu,u,u,assonance_decoy,0,high,high,,,
-rhyme3a_00245,কাবু,বিদ্যুত,kabu,bid̪d̪ut̪,bu,ut̪,u,u,assonance_decoy,0,mid,high,,,
-rhyme3a_00246,শামসু,একটুর,ʃamsu,ekʈur,su,ur,u,u,assonance_decoy,0,mid,mid,,,
-rhyme3a_00247,যতদুর,রহিদুল,dʒɔt̪od̪ur,rohid̪ul,ur,ul,u,u,assonance_decoy,0,mid,,,,
-rhyme3a_00248,মিনুর,নিপুণ,minur,nipun,ur,un,u,u,assonance_decoy,0,mid,mid,,,
-rhyme3a_00249,শ্যাম্পু,মারুফ,ʃæmpu,maruf,pu,uf,u,u,assonance_decoy,0,mid,high,,,
-rhyme3a_00250,শিডিউল,থ্রু,ʃiɖiul,t̪ʰru,ul,t̪ʰru,u,u,assonance_decoy,0,high,mid,,,
-rhyme3a_00251,বরুণ,সফিপুর,borun,ʃofipur,un,ur,u,u,assonance_decoy,0,high,mid,,,
-rhyme3a_00252,লুক,সিরাজুম,luk,ʃiradʒum,uk,um,u,u,assonance_decoy,0,high,low,,,
-rhyme3a_00253,কুছ,বানু,kutʃʰ,banu,utʃʰ,nu,u,u,assonance_decoy,0,mid,high,,,
-rhyme3a_00254,সিমু,আধটু,ʃimu,ad̪ʱʈu,mu,ʈu,u,u,assonance_decoy,0,mid,mid,,,
-rhyme3a_00255,কর্মবিমুখ,এবাদুর,kɔrmobimukʰ,ebad̪ur,ukʰ,ur,u,u,assonance_decoy,0,low,low,,,
-rhyme3a_00256,স্বরূপ,আসফাকুস,ʃɔrup,aʃfakuʃ,up,uʃ,u,u,assonance_decoy,0,high,,,,
-rhyme3a_00257,কুচ,স্যু,kutʃ,ʃu,utʃ,ʃu,u,u,assonance_decoy,0,mid,mid,,,
-rhyme3a_00258,মধু,মিরাজুল,mod̪ʱu,miradʒul,d̪ʱu,ul,u,u,assonance_decoy,0,high,low,,,
-rhyme3a_00259,বসুন,ফকরুল,boʃun,fokrul,un,ul,u,u,assonance_decoy,0,high,low,,,
-rhyme3a_00260,কিসলু,দেবু,kislu,d̪ebu,slu,bu,u,u,assonance_decoy,0,mid,mid,,,
-rhyme3a_00261,তালুর,গবাদিপশু,t̪alur,gɔbad̪ipoʃu,ur,ʃu,u,u,assonance_decoy,0,mid,mid,,,
-rhyme3a_00262,খসরু,শিমূল,kʰoʃru,ʃimul,ʃru,ul,u,u,assonance_decoy,0,mid,mid,,,
-rhyme3a_00263,শাহরুখ,কাকুর,ʃahrukʰ,kakur,ukʰ,ur,u,u,assonance_decoy,0,high,mid,,,
-rhyme3a_00264,ওয়াসীমুল,কুন্ডুর,oasimul,kunɖur,ul,ur,u,u,assonance_decoy,0,low,low,,,
-rhyme3a_00265,রিংকুর,এজাজুল,riŋkur,edʒadʒul,ur,ul,u,u,assonance_decoy,0,,mid,,,
-rhyme3a_00266,ভাশুর,আমূল,bʱaʃur,amul,ur,ul,u,u,assonance_decoy,0,,high,,,
-rhyme3a_00267,আনুক,আমৃত্যু,anuk,amrit̪t̪u,uk,t̪u,u,u,assonance_decoy,0,mid,high,,,
-rhyme3a_00268,বলিউড,সিরাজুল,bɔliuɖ,ʃiradʒul,uɖ,ul,u,u,assonance_decoy,0,high,high,,,
-rhyme3a_00269,মকসুদ,গাজীউল,moksud̪,gadʒiul,ud̪,ul,u,u,assonance_decoy,0,mid,mid,,,
-rhyme3a_00270,লুপ,যুগ,lup,dʒug,up,ug,u,u,assonance_decoy,0,high,high,,,
-rhyme3a_00271,ফুট,পুতুল,fuʈ,put̪ul,uʈ,ul,u,u,assonance_decoy,0,high,high,,,
-rhyme3a_00272,বেশিকিছু,দেখুন,beʃikitʃʰu,d̪ekʰun,tʃʰu,un,u,u,assonance_decoy,0,mid,high,,,
-rhyme3a_00273,অমানুষ,লালুর,ɔmanuʃ,lalur,uʃ,ur,u,u,assonance_decoy,0,mid,low,,,
-rhyme3a_00274,গুরুর,বায়তুল,gurur,bae̯t̪ul,ur,ul,u,u,assonance_decoy,0,high,high,,,
-rhyme3a_00275,সাজ্জাদুল,নিবু,sadʒdʒad̪ul,nibu,ul,bu,u,u,assonance_decoy,0,mid,low,,,
-rhyme3a_00276,হিন্দুর,ফুড,hind̪ur,fuɖ,ur,uɖ,u,u,assonance_decoy,0,mid,high,,,
-rhyme3a_00277,মাসুম,আধটু,masum,ad̪ʱʈu,um,ʈu,u,u,assonance_decoy,0,high,mid,,,
-rhyme3a_00278,ভাসুর,ডিম্বাণু,bʱaʃur,ɖimbanu,ur,nu,u,u,assonance_decoy,0,low,mid,,,
-rhyme3a_00279,সমুদ্দুর,গুড,ʃomud̪d̪ur,guɖ,ur,uɖ,u,u,assonance_decoy,0,low,high,,,
-rhyme3a_00280,তবু,কিচ্ছু,t̪obu,kitʃtʃʰu,bu,tʃʰu,u,u,ortho_decoy,0,high,high,,,
-rhyme3a_00281,বাবু,বাকু,babu,baku,bu,ku,u,u,ortho_decoy,0,high,mid,,,
-rhyme3a_00282,শত্রু,কচু,ʃot̪ru,kotʃu,t̪ru,tʃu,u,u,ortho_decoy,0,high,mid,,,
-rhyme3a_00283,পুং,অরবিন্দবাবু,puŋ,ɔrobind̪ɔbabu,uŋ,bu,u,u,ortho_decoy,0,mid,,,,
-rhyme3a_00284,সিধু,কল্পতরু,ʃid̪ʱu,kɔlpot̪oru,d̪ʱu,ru,u,u,ortho_decoy,0,mid,mid,,,
-rhyme3a_00285,মিতাপু,গোরু,mit̪apu,goru,pu,ru,u,u,ortho_decoy,0,,mid,,,
-rhyme3a_00286,তুং,ডিম্বাণু,t̪uŋ,ɖimbanu,uŋ,nu,u,u,ortho_decoy,0,mid,mid,,,
-rhyme3a_00287,শত্রু,কমলালেবু,ʃot̪ru,kɔmolalebu,t̪ru,bu,u,u,ortho_decoy,0,high,mid,,,
-rhyme3a_00288,কমলালেবু,বনদস্যু,kɔmolalebu,bɔnod̪oʃʃu,bu,ʃu,u,u,ortho_decoy,0,mid,mid,,,
-rhyme3a_00289,ভিক্ষু,রু,bʱikkʰu,ru,kʰu,ru,u,u,ortho_decoy,0,high,mid,,,
-rhyme3a_00290,অপু,সংখ্যাগুরু,opu,ʃɔŋkʰaguru,pu,ru,u,u,ortho_decoy,0,high,mid,,,
-rhyme3a_00291,টিপু,আবু,ʈipu,abu,pu,bu,u,u,ortho_decoy,0,high,high,,,
-rhyme3a_00292,পপলু,টুলু,poplu,ʈulu,plu,lu,u,u,ortho_decoy,0,,mid,,,
-rhyme3a_00293,করমু,লাবলু,kormu,lablu,mu,blu,u,u,ortho_decoy,0,high,,,,
-rhyme3a_00294,শম্ভু,পাতলু,ʃombʱu,pat̪lu,bʱu,lu,u,u,ortho_decoy,0,mid,low,,,
-rhyme3a_00295,বসু,লিনু,bosu,linu,su,nu,u,u,ortho_decoy,0,high,low,,,
-rhyme3a_00296,রঘু,কাজু,rogʱu,kadʒu,gʱu,dʒu,u,u,ortho_decoy,0,mid,mid,,,
-rhyme3a_00297,বহু,নতজানু,bohu,nɔt̪odʒanu,hu,nu,u,u,ortho_decoy,0,high,mid,,,
-rhyme3a_00298,ভুলু,সম্মানটুকু,bʱulu,ʃɔmmanʈuku,lu,ku,u,u,ortho_decoy,0,mid,low,,,
-rhyme3a_00299,হিমাংশু,আকলু,himaŋʃu,aklu,ʃu,klu,u,u,ortho_decoy,0,mid,,,,
-rhyme3a_00300,বধু,দুষ্টু,bod̪ʱu,d̪uʃʈu,d̪ʱu,ʈu,u,u,ortho_decoy,0,mid,high,,,
-rhyme3a_00301,টেম্পু,অংশটুকু,ʈempu,ɔŋʃoʈuku,pu,ku,u,u,ortho_decoy,0,mid,mid,,,
-rhyme3a_00302,রংধনু,ততটুকু,rɔŋd̪ʱonu,t̪ɔt̪oʈuku,nu,ku,u,u,ortho_decoy,0,mid,mid,,,
-rhyme3a_00303,মঞ্জু,ধূমকেতু,mondʒu,d̪ʱumket̪u,dʒu,t̪u,u,u,ortho_decoy,0,mid,mid,,,
-rhyme3a_00304,ভুরু,হরিণাকুণ্ডু,bʱuru,horinakunɖu,ru,ɖu,u,u,ortho_decoy,0,low,mid,,,
-rhyme3a_00305,গাবলু,তেলেগু,gablu,t̪elegu,blu,gu,u,u,ortho_decoy,0,low,mid,,,
-rhyme3a_00306,টিংকু,ধূমকেতু,ʈiŋku,d̪ʱumket̪u,ku,t̪u,u,u,ortho_decoy,0,low,mid,,,
-rhyme3a_00307,সাধু,পিছু,ʃad̪ʱu,pitʃʰu,d̪ʱu,tʃʰu,u,u,ortho_decoy,0,high,high,,,
-rhyme3a_00308,শীতাংশু,ঝু,ʃit̪aŋʃu,dʒʱu,ʃu,dʒʱu,u,u,ortho_decoy,0,,mid,,,
-rhyme3a_00309,মামু,লিনু,mamu,linu,mu,nu,u,u,ortho_decoy,0,mid,low,,,
-rhyme3a_00310,বাবু,ভেঁপু,babu,bʱepu,bu,pu,u,u,ortho_decoy,0,high,mid,,,
-rhyme3a_00311,সুধাংশু,চামু,ʃud̪ʱaŋʃu,tʃamu,ʃu,mu,u,u,ortho_decoy,0,mid,low,,,
-rhyme3a_00312,বিটু,চন্দ্রবিন্দু,biʈu,tʃɔnd̪robind̪u,ʈu,d̪u,u,u,ortho_decoy,0,low,mid,,,
-rhyme3a_00313,জু,সাবু,dʒu,ʃabu,dʒu,bu,u,u,ortho_decoy,0,high,mid,,,
-rhyme3a_00314,মজনু,কমলালেবু,modʒnu,kɔmolalebu,nu,bu,u,u,ortho_decoy,0,mid,mid,,,
-rhyme3a_00315,একটু,ঝু,ekʈu,dʒʱu,ʈu,dʒʱu,u,u,ortho_decoy,0,high,mid,,,
-rhyme3a_00316,শু,শ্যাম্পু,ʃu,ʃæmpu,ʃu,pu,u,u,ortho_decoy,0,high,mid,,,
-rhyme3a_00317,পরাগরেণু,শিবলু,pɔragrenu,ʃiblu,nu,blu,u,u,ortho_decoy,0,low,,,,
-rhyme3a_00318,ভিখু,রঘু,bʱikʰu,rogʱu,kʰu,gʱu,u,u,ortho_decoy,0,low,mid,,,
-rhyme3a_00319,যদু,বহু,dʒod̪u,bohu,d̪u,hu,u,u,ortho_decoy,0,mid,high,,,
-rhyme3a_00320,উপন্যাসে,প্রশ্নগুলো,uponnaʃe,proʃnogulo,ʃe,lo,e,o,random,0,high,high,,,
-rhyme3a_00321,কোনোরকম,যুদ্ধক্ষেত্রে,konorɔkom,dʒud̪d̪ʱokʰet̪re,om,t̪re,o,e,random,0,high,high,,,
-rhyme3a_00322,সামঞ্জস্য,আসামীকে,ʃamondʒoʃʃo,aʃamike,ʃo,ke,o,e,random,0,high,high,,,
-rhyme3a_00323,মাঝামাঝি,সন্ত্রাসবাদের,madʒʱamadʒʱi,ʃɔnt̪raʃbad̪er,dʒʱi,er,i,e,random,0,high,high,,,
-rhyme3a_00324,অহংকারী,উপকারে,ɔhoŋkari,upokare,ri,re,i,e,random,0,high,high,,,
-rhyme3a_00325,পুরোপুরি,ডিসেম্বরের,puropuri,ɖisembɔrer,ri,er,i,e,random,0,high,high,,,
-rhyme3a_00326,সৃষ্টিকারী,শিরোনামের,ʃriʃʈikari,ʃironamer,ri,er,i,e,random,0,high,high,,,
-rhyme3a_00327,ইহুদীদের,ছবিগুলো,ihud̪id̪er,tʃʰobigulo,er,lo,e,o,random,0,high,high,,,
-rhyme3a_00328,অসুস্থতার,ইউরোপীয়,ɔʃust̪ʰot̪ar,i̯uropio,ar,,a,o,random,0,high,high,,,
-rhyme3a_00329,উপভোগ্য,অফিসারদের,upobʱoggo,ɔfisard̪er,go,er,o,e,random,0,high,high,,,
-rhyme3a_00330,গভীরতা,অন্যভাবে,gobʱirɔt̪a,onnobʱabe,t̪a,be,a,e,random,0,high,high,,,
-rhyme3a_00331,জেরুজালেম,উপজাতি,dʒerudʒalem,upodʒat̪i,em,t̪i,e,i,random,0,high,high,,,
-rhyme3a_00332,নীরবতার,সেপ্টেম্বরে,nirobɔt̪ar,sepʈembɔre,ar,re,a,e,random,0,high,high,,,
-rhyme3a_00333,মোকাবিলা,একবিংশ,mokabila,ækobiŋʃo,la,ʃo,a,o,random,0,high,high,,,
-rhyme3a_00334,তুলেছিল,পদোন্নতি,t̪uletʃʰilo,pɔd̪onnot̪i,lo,t̪i,o,i,random,0,high,high,,,
-rhyme3a_00335,প্রত্যাবর্তন,মুক্তভাবে,prot̪t̪abɔrt̪on,mukt̪obʱabe,on,be,o,e,random,0,high,high,,,
-rhyme3a_00336,বাহিনীতে,পরীক্ষার্থী,bahinit̪e,porikkʰart̪ʰi,t̪e,t̪ʰi,e,i,random,0,high,high,,,
-rhyme3a_00337,লুকোচুরি,আত্মবিশ্বাস,lukotʃuri,at̪t̪obiʃʃaʃ,ri,aʃ,i,a,random,0,high,high,,,
-rhyme3a_00338,একাত্তরের,অধিপতি,ekat̪t̪orer,ɔd̪ʱipot̪i,er,t̪i,e,i,random,0,high,high,,,
-rhyme3a_00339,হেপাটাইটিস,রাগান্বিত,hepaʈai̯ʈis,ragannit̪o,is,t̪o,i,o,random,0,high,high,,,
-rhyme3a_00340,পার্লামেন্টের,ধারাবাহিক,parlamenʈer,d̪ʱarabahik,er,ik,e,i,random,0,high,high,,,
-rhyme3a_00341,দীর্ঘতম,মধ্যরাতে,d̪irgʱot̪ɔmo,mod̪d̪ʱorat̪e,mo,t̪e,o,e,random,0,high,high,,,
-rhyme3a_00342,এগুলোতে,গোলাগুলির,egulot̪e,golagulir,t̪e,ir,e,i,random,0,high,high,,,
-rhyme3a_00343,এলাকাতে,আলজেরিয়ার,elakat̪e,aldʒeriar,t̪e,ar,e,a,random,0,high,high,,,
-rhyme3a_00344,নাশকতা,একেবারেই,naʃokɔt̪a,ækebarei̯,t̪a,rei̯,a,ei̯,random,0,high,high,,,
-rhyme3a_00345,মন্ত্রিসভার,সন্ত্রাসীদের,mont̪riʃɔbʱar,ʃɔnt̪raʃid̪er,ar,er,a,e,random,0,high,high,,,
-rhyme3a_00346,প্রজাতন্ত্র,জবানবন্দি,prodʒat̪ɔnt̪ro,dʒɔbanbond̪i,t̪ro,d̪i,o,i,random,0,high,high,,,
-rhyme3a_00347,তালিকাটি,সংবাদপত্রের,t̪alikaʈi,ʃɔŋbad̪pɔt̪rer,ʈi,er,i,e,random,0,high,high,,,
-rhyme3a_00348,কোনভাবে,অগ্রযাত্রা,konobʱabe,ɔgrodʒat̪ra,be,t̪ra,e,a,random,0,high,high,,,
-rhyme3a_00349,অনুশীলন,সাংবাদিকের,onuʃilɔn,ʃaŋbad̪iker,ɔn,er,ɔ,e,random,0,high,high,,,
-rhyme3a_00350,সমকামী,সময়মতো,ʃɔmokami,sɔmoe̯mɔt̪o,mi,t̪o,i,o,random,0,high,high,,,
-rhyme3a_00351,বহিষ্কৃত,নির্বাচনে,bɔhiʃkrit̪o,nirbatʃɔne,t̪o,ne,o,e,random,0,high,high,,,
-rhyme3a_00352,আন্দোলনকে,মহানগর,and̪olonke,mɔhanɔgor,ke,or,e,o,random,0,high,high,,,
-rhyme3a_00353,মোহাম্মদের,অরবিন্দ,mohammod̪er,ɔrobind̪o,er,d̪o,e,o,random,0,high,high,,,
-rhyme3a_00354,ওয়েলফেয়ার,বিরিয়ানি,oelfear,biriani,ar,ni,a,i,random,0,high,high,,,
-rhyme3a_00355,রেস্টুরেন্টে,সক্ষমতা,resʈurenʈe,ʃɔkkʰomɔt̪a,ʈe,t̪a,e,a,random,0,high,high,,,
-rhyme3a_00356,দিনাজপুরে,আলোচনায়,d̪inadʒpure,alotʃonae̯,re,nae̯,e,ae̯,random,0,high,high,,,
-rhyme3a_00357,বিজ্ঞানীরা,ধ্বংসাবশেষ,bigganira,d̪ʱɔŋʃaboʃeʃ,ra,eʃ,a,e,random,0,high,high,,,
-rhyme3a_00358,পর্যবেক্ষন,প্রতিদ্বন্দ্বী,pɔrdʒobekkʰon,prot̪id̪ond̪i,on,d̪i,o,i,random,0,high,high,,,
-rhyme3a_00359,শহরটিতে,বিবেচনা,ʃɔhorʈit̪e,bibetʃɔna,t̪e,na,e,a,random,0,high,high,,,
-rhyme3a_00360,লুকোচুরি,সমমানের,lukotʃuri,ʃɔmomaner,ri,er,i,e,random,0,high,high,,,
-rhyme3a_00361,আবেদনের,বন্ধুবান্ধব,abed̪ɔner,bond̪ʱuband̪ʱɔb,er,ɔb,e,ɔ,random,0,high,high,,,
-rhyme3a_00362,প্রজাপতি,শান্তিপূর্ণ,prodʒapot̪i,ʃant̪ipurno,t̪i,no,i,o,random,0,high,high,,,
-rhyme3a_00363,লিখেছিলাম,একেবারেই,likʰetʃʰilam,ækebarei̯,am,rei̯,a,ei̯,random,0,high,high,,,
-rhyme3a_00364,প্রতিরোধী,আয়ারল্যান্ডের,prot̪irod̪ʱi,ae̯arlænɖer,d̪ʱi,er,i,e,random,0,high,high,,,
-rhyme3a_00365,চাঁদাবাজি,নারায়ণগঞ্জ,tʃad̪abadʒi,naraɔngɔndʒ,dʒi,ɔndʒ,i,ɔ,random,0,high,high,,,
-rhyme3a_00366,পিতামাতার,সংস্থাগুলোর,pit̪amat̪ar,ʃɔŋst̪ʰagulor,ar,or,a,o,random,0,high,high,,,
-rhyme3a_00367,প্রধানত,উপন্যাসে,prod̪ʱanɔt̪o,uponnaʃe,t̪o,ʃe,o,e,random,0,high,high,,,
-rhyme3a_00368,সম্পাদকীয়,নিবন্ধনের,ʃɔmpad̪okio̯,nibɔnd̪ʱɔner,kio̯,er,io̯,e,random,0,high,high,,,
-rhyme3a_00369,পবিত্রতা,প্রতিষ্ঠানটি,pobit̪rot̪a,prot̪iʃʈʰanʈi,t̪a,ʈi,a,i,random,0,high,high,,,
-rhyme3a_00370,আজারবাইজান,কোনরকম,adʒarbai̯dʒan,konorɔkom,an,om,a,o,random,0,high,high,,,
-rhyme3a_00371,আজারবাইজান,এককভাবে,adʒarbai̯dʒan,ækokbʱabe,an,be,a,e,random,0,high,high,,,
-rhyme3a_00372,সম্মানিত,সংগঠনটি,ʃɔmmanit̪o,ʃɔŋgɔʈʰonʈi,t̪o,ʈi,o,i,random,0,high,high,,,
-rhyme3a_00373,গতকালের,গর্ভধারণ,gɔt̪okaler,gɔrbʱod̪ʱaron,er,on,e,o,random,0,high,high,,,
-rhyme3a_00374,তিউনিসিয়ার,লেবাননের,t̪iu̯niʃiar,lebanɔner,ar,er,a,e,random,0,high,high,,,
-rhyme3a_00375,রাসূলুল্লাহ,যাবজ্জীবন,rasulullah,dʒabodʒdʒibɔn,ah,ɔn,a,ɔ,random,0,high,high,,,
-rhyme3a_00376,সিদ্ধান্তকে,কেন্দ্রবিন্দু,ʃid̪d̪ʱant̪oke,kend̪robind̪u,ke,d̪u,e,u,random,0,high,high,,,
-rhyme3a_00377,গবেষকদের,উপদেষ্টা,gɔbeʃɔkd̪er,upod̪eʃʈa,er,ʈa,e,a,random,0,high,high,,,
-rhyme3a_00378,অবনমন,অসুবিধা,ɔbonɔmon,ɔʃubid̪ʱa,on,d̪ʱa,o,a,random,0,high,high,,,
-rhyme3a_00379,আক্রান্তদের,নথিপত্র,akrant̪od̪er,not̪ʰipɔt̪ro,er,t̪ro,e,o,random,0,high,high,,,
-rhyme3a_00380,নীতিমালার,পদপ্রার্থী,nit̪imalar,pɔd̪oprart̪ʰi,ar,t̪ʰi,a,i,random,0,high,high,,,
-rhyme3a_00381,অগ্নিকাণ্ডের,বলেছিল,ognikanɖer,boletʃʰilo,er,lo,e,o,random,0,high,high,,,
-rhyme3a_00382,প্রশাসনে,হয়েছিলো,proʃaʃone,hoe̯etʃʰilo,ne,lo,e,o,random,0,high,high,,,
-rhyme3a_00383,শহরটিতে,বিন্দুমাত্র,ʃɔhorʈit̪e,bind̪umat̪ro,t̪e,t̪ro,e,o,random,0,high,high,,,
-rhyme3a_00384,অবদানের,প্রতিষ্ঠাতা,ɔbod̪aner,prot̪isʈʰat̪a,er,t̪a,e,a,random,0,high,high,,,
-rhyme3a_00385,প্রতিবন্ধী,প্রথমত,prot̪ibond̪ʱi,prot̪ʰomɔt̪o,d̪ʱi,t̪o,i,o,random,0,high,high,,,
-rhyme3a_00386,সমীকরণ,শীর্ষস্থানীয়,ʃomikɔron,ʃirʃost̪ʰanio̯,on,nio̯,o,io̯,random,0,high,high,,,
-rhyme3a_00387,সর্বশ্রেষ্ঠ,অপারেশন,ʃɔrbosresʈʰo,ɔpareʃɔn,ʈʰo,ɔn,o,ɔ,random,0,high,high,,,
-rhyme3a_00388,সন্ত্রাসীরা,অন্তর্বর্তী,ʃɔnt̪raʃira,ɔnt̪orbort̪i,ra,t̪i,a,i,random,0,high,high,,,
-rhyme3a_00389,পরিত্যাক্ত,অপারেটিং,porit̪ækt̪o,ɔpareʈiŋ,t̪o,iŋ,o,i,random,0,high,high,,,
-rhyme3a_00390,উত্তোলনের,প্রদানকারী,ut̪t̪oloner,prod̪ankari,er,ri,e,i,random,0,high,high,,,
-rhyme3a_00391,সার্টিফিকেট,কতখানি,sarʈifikeʈ,kɔt̪okʰani,eʈ,ni,e,i,random,0,high,high,,,
-rhyme3a_00392,সাংগঠনিক,নিরাপত্তা,ʃaŋgɔʈʰonik,nirapɔt̪t̪a,ik,t̪a,i,a,random,0,high,high,,,
-rhyme3a_00393,অদ্বিতীয়,সারাজীবন,ɔd̪it̪io,ʃaradʒibɔn,,ɔn,o,ɔ,random,0,high,high,,,
-rhyme3a_00394,টুর্নামেন্টের,মধ্যবর্তী,ʈurnamenʈer,mod̪d̪ʱobort̪i,er,t̪i,e,i,random,0,high,high,,,
-rhyme3a_00395,বিরক্তিকর,অনুষ্ঠানে,birokt̪ikɔr,onuʃʈʰane,ɔr,ne,ɔ,e,random,0,high,high,,,
-rhyme3a_00396,জামায়াতে,অভিযুক্ত,dʒamae̯at̪e,obʱidʒukt̪o,t̪e,t̪o,e,o,random,0,high,high,,,
-rhyme3a_00397,অগ্নিকাণ্ডে,সমস্যাটা,ognikanɖe,ʃɔmoʃʃaʈa,ɖe,ʈa,e,a,random,0,high,high,,,
-rhyme3a_00398,প্রতিবন্ধী,সংবিধানে,prot̪ibond̪ʱi,ʃɔŋbid̪ʱane,d̪ʱi,ne,i,e,random,0,high,high,,,
-rhyme3a_00399,শিক্ষার্থীরা,প্রেসিডেন্টের,ʃikkʰart̪ʰira,presiɖenʈer,ra,er,a,e,random,0,high,high,,,
+rhyme3a_00000,কনফ্লিক্ট,বেনেডিক্ট,kɔnflikʈ,beneɖikʈ,ikʈ,ikʈ,i,i,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00001,ডিসট্রিক্ট,কনফ্লিক্ট,ɖisʈrikʈ,kɔnflikʈ,ikʈ,ikʈ,i,i,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00002,ডিসট্রিক্ট,বেনেডিক্ট,ɖisʈrikʈ,beneɖikʈ,ikʈ,ikʈ,i,i,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00003,অপারেশনস,কমিউনিকেশন্স,ɔpareʃons,komiu̯nikeʃons,ons,ons,o,o,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00004,কমিউনিকেশনস,কমিউনিকেশন্স,kɔmiu̯nikeʃons,komiu̯nikeʃons,ons,ons,o,o,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00005,অপারেশনস,কমন্স,ɔpareʃons,kɔmons,ons,ons,o,o,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00006,কমিউনিকেশন্স,কমন্স,komiu̯nikeʃons,kɔmons,ons,ons,o,o,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00007,কমিউনিকেশনস,কমন্স,kɔmiu̯nikeʃons,kɔmons,ons,ons,o,o,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00008,মর্টগেজ,চেজ,mɔrʈgedʒ,tʃedʒ,edʒ,edʒ,e,e,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00009,ড্রেনেজ,ম্যারেজ,ɖrenedʒ,mæredʒ,edʒ,edʒ,e,e,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00010,হেরিটেজ,হাফেজ,heriʈedʒ,hafedʒ,edʒ,edʒ,e,e,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00011,পেরেজ,ম্যানেজ,peredʒ,mænedʒ,edʒ,edʒ,e,e,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00012,কভারেজ,মার্কেজ,kɔbʱaredʒ,markedʒ,edʒ,edʒ,e,e,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00013,লোপেজ,ব্যান্ডেজ,lopedʒ,bænɖedʒ,edʒ,edʒ,e,e,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00014,লাগেজ,ওয়েবপেজ,lagedʒ,o̯ebpedʒ,edʒ,edʒ,e,e,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00015,পেরেজ,কটেজ,peredʒ,kɔʈedʒ,edʒ,edʒ,e,e,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00016,বেভারেজ,আলভেজ,bebʱaredʒ,albʱedʒ,edʒ,edʒ,e,e,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00017,টিনেজ,ব্যান্ডেজ,ʈinedʒ,bænɖedʒ,edʒ,edʒ,e,e,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00018,খেত,অনিকেত,kʰet̪,ɔniket̪,et̪,et̪,e,e,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00019,প্রেত,অনিকেত,pret̪,ɔniket̪,et̪,et̪,e,e,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00020,নীলক্ষেত,অনিকেত,nilkʰet̪,ɔniket̪,et̪,et̪,e,e,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00021,খিলক্ষেত,অনভিপ্রেত,kʰilkʰet̪,ɔnobʱipret̪,et̪,et̪,e,e,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00022,বেলায়েত,বিলেত,belaet̪,bilet̪,et̪,et̪,e,e,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00023,বেলায়েত,খিলক্ষেত,belaet̪,kʰilkʰet̪,et̪,et̪,e,e,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00024,অশনিসংকেত,ধানখেত,ɔʃoniʃɔŋket̪,d̪ʱankʰet̪,et̪,et̪,e,e,,1,low,low,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00025,অশনিসংকেত,আহমেত,ɔʃoniʃɔŋket̪,ahmet̪,et̪,et̪,e,e,,1,low,low,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00026,নীলক্ষেত,বেত,nilkʰet̪,bet̪,et̪,et̪,e,e,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00027,সোভিয়েত,ক্ষেত,sobʱiet̪,kʰet̪,et̪,et̪,e,e,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00028,শিট,লিমিট,ʃiʈ,limiʈ,iʈ,iʈ,i,i,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00029,ইউনিট,টিকিট,i̯uniʈ,ʈikiʈ,iʈ,iʈ,i,i,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00030,ফ্লাইট,ডিলিট,flaiʈ,ɖiliʈ,iʈ,iʈ,i,i,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00031,ক্রেডিট,কমপ্লিট,kreɖiʈ,kɔmpliʈ,iʈ,iʈ,i,i,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00032,পিট,ভিজিট,piʈ,bʱidʒiʈ,iʈ,iʈ,i,i,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00033,মেরিট,ট্রিট,meriʈ,ʈriʈ,iʈ,iʈ,i,i,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00034,সিট,ডিলিট,siʈ,ɖiliʈ,iʈ,iʈ,i,i,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00035,ফেবারিট,গিট,febariʈ,giʈ,iʈ,iʈ,i,i,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00036,কিলোবাইট,সুপারহিট,kilobaiʈ,suparhiʈ,iʈ,iʈ,i,i,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00037,ডাকটিকিট,শীট,ɖakʈikiʈ,ʃiʈ,iʈ,iʈ,i,i,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00038,এয়ারপোর্ট,কোর্ট,earporʈ,korʈ,orʈ,orʈ,o,o,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00039,হাইকোর্ট,পোর্ট,hai̯korʈ,porʈ,orʈ,orʈ,o,o,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00040,এয়ারপোর্ট,হাইকোর্ট,earporʈ,hai̯korʈ,orʈ,orʈ,o,o,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00041,রিসোর্ট,ফোর্ট,risorʈ,forʈ,orʈ,orʈ,o,o,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00042,এয়ারপোর্ট,ফোর্ট,earporʈ,forʈ,orʈ,orʈ,o,o,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00043,এক্সপোর্ট,কমফোর্ট,eksporʈ,kɔmforʈ,orʈ,orʈ,o,o,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00044,কোর্ট,পোর্ট,korʈ,porʈ,orʈ,orʈ,o,o,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00045,স্পোর্ট,কমফোর্ট,sporʈ,kɔmforʈ,orʈ,orʈ,o,o,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00046,সাপোর্ট,হাইকোর্ট,saporʈ,hai̯korʈ,orʈ,orʈ,o,o,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00047,কোর্ট,রিপোর্ট,korʈ,riporʈ,orʈ,orʈ,o,o,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00048,মাঝমাঠ,সহপাঠ,madʒʱmaʈʰ,ʃɔhopaʈʰ,aʈʰ,aʈʰ,a,a,,1,low,low,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00049,মাঠ,পাঠ,maʈʰ,paʈʰ,aʈʰ,aʈʰ,a,a,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00050,পত্রপাঠ,মধ্যমাঠ,pɔt̪ropaʈʰ,mod̪d̪ʱomaʈʰ,aʈʰ,aʈʰ,a,a,,1,low,low,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00051,কাঠ,পাঠ,kaʈʰ,paʈʰ,aʈʰ,aʈʰ,a,a,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00052,পত্রপাঠ,মাঝমাঠ,pɔt̪ropaʈʰ,madʒʱmaʈʰ,aʈʰ,aʈʰ,a,a,,1,low,low,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00053,কবিতাপাঠ,মধ্যমাঠ,kobit̪apaʈʰ,mod̪d̪ʱomaʈʰ,aʈʰ,aʈʰ,a,a,,1,low,low,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00054,মধ্যমাঠ,সহপাঠ,mod̪d̪ʱomaʈʰ,ʃɔhopaʈʰ,aʈʰ,aʈʰ,a,a,,1,low,low,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00055,কবিতাপাঠ,মাঝমাঠ,kobit̪apaʈʰ,madʒʱmaʈʰ,aʈʰ,aʈʰ,a,a,,1,low,low,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00056,কাঠ,মাঠ,kaʈʰ,maʈʰ,aʈʰ,aʈʰ,a,a,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00057,কিউপিড,লিকুইড,kiu̯piɖ,likuiɖ,iɖ,iɖ,i,i,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00058,হাইব্রিড,মিড,hai̯briɖ,miɖ,iɖ,iɖ,i,i,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00059,স্কুইড,সিড,skuiɖ,siɖ,iɖ,iɖ,i,i,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00060,ডেভিড,গ্রিড,ɖebʱiɖ,griɖ,iɖ,iɖ,i,i,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00061,অ্যাসিড,ডেভিড,æsiɖ,ɖebʱiɖ,iɖ,iɖ,i,i,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00062,অ্যাসিড,গ্রিড,æsiɖ,griɖ,iɖ,iɖ,i,i,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00063,এসিড,ডেভিড,esiɖ,ɖebʱiɖ,iɖ,iɖ,i,i,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00064,হাইব্রিড,স্পিড,hai̯briɖ,spiɖ,iɖ,iɖ,i,i,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00065,রিভারসাইড,বিড,ribʱarsaiɖ,biɖ,iɖ,iɖ,i,i,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00066,কিড,সলিড,kiɖ,sɔliɖ,iɖ,iɖ,i,i,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00067,বরবাদ,আওলাদ,bɔrbad̪,ao̯lad̪,ad̪,ad̪,a,a,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00068,অপবাদ,আজাদ,ɔpobad̪,adʒad̪,ad̪,ad̪,a,a,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00069,ফরিদাবাদ,আরশাদ,forid̪abad̪,arʃad̪,ad̪,ad̪,a,a,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00070,আশির্বাদ,কায়কোবাদ,aʃirbad̪,kae̯kobad̪,ad̪,ad̪,a,a,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00071,বিবাদ,ফরহাদ,bibad̪,fɔrhad̪,ad̪,ad̪,a,a,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00072,আযাদ,দুঃসংবাদ,adʒad̪,d̪uʃʃɔŋbad̪,ad̪,ad̪,a,a,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00073,বাদানুবাদ,জল্লাদ,bad̪anubad̪,dʒɔllad̪,ad̪,ad̪,a,a,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00074,অনুবাদ,মিলাদ,onubad̪,milad̪,ad̪,ad̪,a,a,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00075,ভ্লাদ,উগ্রবাদ,bʱlad̪,ugrobad̪,ad̪,ad̪,a,a,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00076,সাম্যবাদ,বিষাদ,ʃammobad̪,biʃad̪,ad̪,ad̪,a,a,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00077,কনট্যাক্ট,ইমপ্যাক্ট,kɔnʈækʈ,impækʈ,ækʈ,ækʈ,æ,æ,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00078,কনট্যাক্ট,ফ্যাক্ট,kɔnʈækʈ,fækʈ,ækʈ,ækʈ,æ,æ,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00079,ফ্যাক্ট,ইমপ্যাক্ট,fækʈ,impækʈ,ækʈ,ækʈ,æ,æ,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00080,কম্প্যাক্ট,ফ্যাক্ট,kɔmpækʈ,fækʈ,ækʈ,ækʈ,æ,æ,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00081,কমপ্যাক্ট,কনট্যাক্ট,kɔmpækʈ,kɔnʈækʈ,ækʈ,ækʈ,æ,æ,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00082,কন্টাক্ট,কম্প্যাক্ট,kɔnʈækʈ,kɔmpækʈ,ækʈ,ækʈ,æ,æ,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00083,কন্টাক্ট,ফ্যাক্ট,kɔnʈækʈ,fækʈ,ækʈ,ækʈ,æ,æ,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00084,কম্প্যাক্ট,ইমপ্যাক্ট,kɔmpækʈ,impækʈ,ækʈ,ækʈ,æ,æ,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00085,কমপ্যাক্ট,ফ্যাক্ট,kɔmpækʈ,fækʈ,ækʈ,ækʈ,æ,æ,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00086,কমপ্যাক্ট,কন্টাক্ট,kɔmpækʈ,kɔnʈækʈ,ækʈ,ækʈ,æ,æ,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00087,রোস্তম,প্রজননক্ষম,rost̪ɔm,prodʒonɔnɔkkʰɔm,ɔm,ɔm,ɔ,ɔ,,1,low,low,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00088,রম,মেকানিজম,rɔm,mekanidʒɔm,ɔm,ɔm,ɔ,ɔ,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00089,মনোরম,সশ্রম,monorɔm,ʃɔsrɔm,ɔm,ɔm,ɔ,ɔ,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00090,চমচম,রুস্তম,tʃɔmtʃɔm,rust̪ɔm,ɔm,ɔm,ɔ,ɔ,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00091,আজম,গম,adʒɔm,gɔm,ɔm,ɔm,ɔ,ɔ,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00092,লোকসমাগম,অর্গাজম,lokʃɔmagɔm,ɔrgadʒɔm,ɔm,ɔm,ɔ,ɔ,,1,low,low,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00093,মহররম,রেশম,mɔhorrɔm,reʃɔm,ɔm,ɔm,ɔ,ɔ,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00094,অটিজম,মহরম,ɔʈidʒɔm,mɔhorɔm,ɔm,ɔm,ɔ,ɔ,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00095,সুগম,কার্যক্ষম,ʃugɔm,kardʒokʰɔm,ɔm,ɔm,ɔ,ɔ,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00096,চমচম,অরিন্দম,tʃɔmtʃɔm,ɔrind̪ɔm,ɔm,ɔm,ɔ,ɔ,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00097,আলমন্ড,প্রাইজবন্ড,almɔnɖ,prai̯dʒbɔnɖ,ɔnɖ,ɔnɖ,ɔ,ɔ,,1,low,low,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00098,নভেলিস্ট,বেইজিস্ট,nobʱeliʃʈ,bei̯dʒiʃʈ,iʃʈ,iʃʈ,i,i,,1,low,low,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00099,টুরিস্ট,সোশ্যালিস্ট,ʈuriʃʈ,ʃoʃaliʃʈ,iʃʈ,iʃʈ,i,i,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00100,তিনিও,পানীয়,t̪inio̯,panio̯,nio̯,nio̯,io̯,io̯,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00101,নেতৃত্বস্থানীয়,কাহিনীও,net̪rit̪t̪ost̪ʰanio̯,kahinio̯,nio̯,nio̯,io̯,io̯,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00102,নেতৃত্বস্থানীয়,বোর্নিও,net̪rit̪t̪ost̪ʰanio̯,bornio̯,nio̯,nio̯,io̯,io̯,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00103,পালনীয়,কাহিনীও,palonio̯,kahinio̯,nio̯,nio̯,io̯,io̯,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00104,মাননীয়,তিনিও,manonio̯,t̪inio̯,nio̯,nio̯,io̯,io̯,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00105,শীর্ষস্থানীয়,তিনিও,ʃirʃost̪ʰanio̯,t̪inio̯,nio̯,nio̯,io̯,io̯,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00106,বোর্নিও,পালনীয়,bornio̯,palonio̯,nio̯,nio̯,io̯,io̯,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00107,বাহিনীও,নেতৃত্বস্থানীয়,bahinio̯,net̪rit̪t̪ost̪ʰanio̯,nio̯,nio̯,io̯,io̯,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00108,বাহিনীও,পালনীয়,bahinio̯,palonio̯,nio̯,nio̯,io̯,io̯,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00109,কিনল,আনলো,kinlo,anlo,nlo,nlo,o,o,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00110,ইমারজেন্সি,আইছি,imardʒensi,ai̯si,si,si,i,i,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00111,রেসিডেন্সি,সিএসসি,resiɖensi,siessi,si,si,i,i,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00112,কেসি,এসএমসি,kesi,esemsi,si,si,i,i,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00113,ফেরদৌসি,বিজেএমসি,ferd̪ou̯si,bidʒeemsi,si,si,i,i,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00114,গ্যালাক্সি,সেক্সি,gælaksi,seksi,si,si,i,i,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00115,আরসিসি,আব্বাসী,arsisi,abbasi,si,si,i,i,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00116,গ্যালাক্সি,ফার্সি,gælaksi,farsi,si,si,i,i,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00117,এলওসি,আরসি,elosi,arsi,si,si,i,i,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00118,পেপসি,রেসিডেন্সি,pepsi,resiɖensi,si,si,i,i,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00119,আইএফআইসি,কেসি,ai̯efai̯si,kesi,si,si,i,i,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00120,স্ব,অংশ,ʃɔ,oŋʃɔ,ʃɔ,ʃɔ,ɔ,ɔ,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00121,অন্যকিছু,পিছু,onnokitʃʰu,pitʃʰu,tʃʰu,tʃʰu,u,u,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00122,বেশকিছু,মাথাপিছু,beʃkitʃʰu,mat̪ʰapitʃʰu,tʃʰu,tʃʰu,u,u,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00123,বেশকিছু,পিছু,beʃkitʃʰu,pitʃʰu,tʃʰu,tʃʰu,u,u,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00124,মাথাপিছু,অন্যকিছু,mat̪ʰapitʃʰu,onnokitʃʰu,tʃʰu,tʃʰu,u,u,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00125,বিচ্ছু,বেশিকিছু,bitʃtʃʰu,beʃikitʃʰu,tʃʰu,tʃʰu,u,u,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00126,সবকিছু,কিচ্ছু,ʃɔbkitʃʰu,kitʃtʃʰu,tʃʰu,tʃʰu,u,u,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00127,কোনকিছু,পিছু,konokitʃʰu,pitʃʰu,tʃʰu,tʃʰu,u,u,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00128,বিচ্ছু,অল্পকিছু,bitʃtʃʰu,ɔlpokitʃʰu,tʃʰu,tʃʰu,u,u,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00129,বিচ্ছু,এতকিছু,bitʃtʃʰu,æt̪okitʃʰu,tʃʰu,tʃʰu,u,u,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00130,মাথাপিছু,কিছু,mat̪ʰapitʃʰu,kitʃʰu,tʃʰu,tʃʰu,u,u,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00131,আলেহান্দ্রো,তথ্যকেন্দ্র,alehand̪ro,t̪ot̪t̪ʰokend̪ro,d̪ro,d̪ro,o,o,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00132,পেদ্রো,চান্দ্র,ped̪ro,tʃand̪ro,d̪ro,d̪ro,o,o,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00133,অতিদরিদ্র,ব্যবসাকেন্দ্র,ot̪id̪orid̪ro,bæboʃakend̪ro,d̪ro,d̪ro,o,o,,1,low,low,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00134,রৌদ্র,প্রেমেন্দ্র,rou̯d̪ro,premend̪ro,d̪ro,d̪ro,o,o,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00135,রামচন্দ্র,চান্দ্র,ramtʃɔnd̪ro,tʃand̪ro,d̪ro,d̪ro,o,o,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00136,ভাদ্র,অতন্দ্র,bʱad̪ro,ɔt̪ond̪ro,d̪ro,d̪ro,o,o,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00137,রাজেন্দ্র,সুরেন্দ্র,radʒend̪ro,ʃurend̪ro,d̪ro,d̪ro,o,o,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00138,বরেন্দ্র,বঙ্কিমচন্দ্র,bɔrend̪ro,boŋkimtʃɔnd̪ro,d̪ro,d̪ro,o,o,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00139,অতন্দ্র,ধর্মেন্দ্র,ɔt̪ond̪ro,d̪ʱɔrmend̪ro,d̪ro,d̪ro,o,o,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00140,পর্যটনকেন্দ্র,বিনিদ্র,pɔrdʒoʈɔnkend̪ro,binid̪ro,d̪ro,d̪ro,o,o,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00141,আবা,রিবা,aba,riba,ba,ba,a,a,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00142,তোবা,সম্ভবা,t̪oba,ʃɔmbʱoba,ba,ba,a,a,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00143,ডোবা,কখনোবা,ɖoba,kɔkʰonoba,ba,ba,a,a,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00144,গ্রীবা,জনসেবা,griba,dʒɔnoʃeba,ba,ba,a,a,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00145,কেউবা,কিম্বা,keu̯ba,kimba,ba,ba,a,a,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00146,বাবা,নতুবা,baba,not̪uba,ba,ba,a,a,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00147,ডোবা,সাহাবা,ɖoba,ʃahaba,ba,ba,a,a,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00148,হেবা,আলবা,hæba,alba,ba,ba,a,a,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00149,থাবা,বাঁ,t̪ʰaba,ba,ba,ba,a,a,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00150,পরিসেবা,খুতবা,poriʃeba,kʰut̪ba,ba,ba,a,a,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00151,চৌকাঠে,ফাঁসিকাষ্ঠে,tʃou̯kaʈʰe,faʃikaʃʈʰe,ʈʰe,ʈʰe,e,e,,1,low,low,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00152,মিঠে,ফাঁসিকাষ্ঠে,miʈʰe,faʃikaʃʈʰe,ʈʰe,ʈʰe,e,e,,1,low,low,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00153,জনকণ্ঠে,কাছেপিঠে,dʒɔnokɔnʈʰe,katʃʰepiʈʰe,ʈʰe,ʈʰe,e,e,,1,low,low,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00154,মিঠে,জনকণ্ঠে,miʈʰe,dʒɔnokɔnʈʰe,ʈʰe,ʈʰe,e,e,,1,low,low,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00155,পৃষ্ঠে,উচ্চকণ্ঠে,priʃʈʰe,utʃtʃokɔnʈʰe,ʈʰe,ʈʰe,e,e,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00156,মঠে,ভূপৃষ্ঠে,mɔʈʰe,bʱupriʃʈʰe,ʈʰe,ʈʰe,e,e,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00157,প্রকোষ্ঠে,ভূপৃষ্ঠে,prokoʃʈʰe,bʱupriʃʈʰe,ʈʰe,ʈʰe,e,e,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00158,কাঠে,উচ্চকণ্ঠে,kaʈʰe,utʃtʃokɔnʈʰe,ʈʰe,ʈʰe,e,e,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00159,পাঠে,আষ্টেপৃষ্ঠে,paʈʰe,aʃʈepriʃʈʰe,ʈʰe,ʈʰe,e,e,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00160,চৌকাঠে,কাছেপিঠে,tʃou̯kaʈʰe,katʃʰepiʈʰe,ʈʰe,ʈʰe,e,e,,1,low,low,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00161,অযোধ্যা,গৎবাঁধা,ɔdʒod̪d̪ʱa,gɔt̪bad̪ʱa,d̪ʱa,d̪ʱa,a,a,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00162,গৎবাঁধা,অভিধা,gɔt̪bad̪ʱa,obʱid̪ʱa,d̪ʱa,d̪ʱa,a,a,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00163,স্নিগ্ধা,গোলকধাঁধা,ʃnigd̪ʱa,golokd̪ʱad̪ʱa,d̪ʱa,d̪ʱa,a,a,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00164,সুধা,বন্ধ্যা,ʃud̪ʱa,bɔnd̪ʱa,d̪ʱa,d̪ʱa,a,a,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00165,মুক্তিযোদ্ধা,বৃদ্ধা,mukt̪idʒod̪d̪ʱa,brid̪d̪ʱa,d̪ʱa,d̪ʱa,a,a,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00166,ধরাবাঁধা,অযোধ্যা,d̪ʱɔrabad̪ʱa,ɔdʒod̪d̪ʱa,d̪ʱa,d̪ʱa,a,a,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00167,সুধা,গোলকধাঁধা,ʃud̪ʱa,golokd̪ʱad̪ʱa,d̪ʱa,d̪ʱa,a,a,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00168,বাঁধা,ধাঁধা,bad̪ʱa,d̪ʱad̪ʱa,d̪ʱa,d̪ʱa,a,a,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00169,মুক্তিযোদ্ধা,শ্রদ্ধা,mukt̪idʒod̪d̪ʱa,srod̪d̪ʱa,d̪ʱa,d̪ʱa,a,a,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00170,সুধা,সমাধা,ʃud̪ʱa,ʃɔmad̪ʱa,d̪ʱa,d̪ʱa,a,a,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00171,এরমধ্যেই,যুদ্ধেই,ermod̪d̪ʱei̯,dʒud̪d̪ʱei̯,d̪ʱei̯,d̪ʱei̯,ei̯,ei̯,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00172,কাঁধেই,প্রথমার্ধেই,kad̪ʱei̯,prot̪ʰomard̪ʱei̯,d̪ʱei̯,d̪ʱei̯,ei̯,ei̯,,1,low,low,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00173,অনুরোধেই,বিরুদ্ধেই,onurod̪ʱei̯,birud̪d̪ʱei̯,d̪ʱei̯,d̪ʱei̯,ei̯,ei̯,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00174,মাঝেমধ্যেই,অনুরোধেই,madʒʱemod̪d̪ʱei̯,onurod̪ʱei̯,d̪ʱei̯,d̪ʱei̯,ei̯,ei̯,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00175,অনুরোধেই,যুদ্ধেই,onurod̪ʱei̯,dʒud̪d̪ʱei̯,d̪ʱei̯,d̪ʱei̯,ei̯,ei̯,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00176,মাঝেমধ্যেই,বিরুদ্ধেই,madʒʱemod̪d̪ʱei̯,birud̪d̪ʱei̯,d̪ʱei̯,d̪ʱei̯,ei̯,ei̯,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00177,এরমধ্যেই,অনুরোধেই,ermod̪d̪ʱei̯,onurod̪ʱei̯,d̪ʱei̯,d̪ʱei̯,ei̯,ei̯,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00178,মাঝেমধ্যেই,যুদ্ধেই,madʒʱemod̪d̪ʱei̯,dʒud̪d̪ʱei̯,d̪ʱei̯,d̪ʱei̯,ei̯,ei̯,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00179,এরমধ্যেই,বিরুদ্ধেই,ermod̪d̪ʱei̯,birud̪d̪ʱei̯,d̪ʱei̯,d̪ʱei̯,ei̯,ei̯,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00180,ডাকল,শুক্ল,ɖaklo,suklo,klo,klo,o,o,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00181,ঢুকলো,শুক্ল,ɖʱuklo,suklo,klo,klo,o,o,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00182,ঢুকলো,ডাকল,ɖʱuklo,ɖaklo,klo,klo,o,o,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00183,হোমে,বিএমএ,home,bieme,me,me,e,e,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00184,ট্রামে,হামে,ʈrame,hame,me,me,e,e,,1,low,low,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00185,সিকিমে,আমস্টারডামে,sikime,amosʈarɖame,me,me,e,e,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00186,স্টকহোমে,সম্মতিক্রমে,sʈɔkhome,ʃɔmmot̪ikrɔme,me,me,e,e,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00187,গ্রামে,মৌসুমে,grame,mou̯sume,me,me,e,e,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00188,থেমে,যথাক্রমে,t̪ʰeme,dʒɔt̪ʰakrome,me,me,e,e,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00189,চিত্রকর্মে,থিমে,tʃit̪rokɔrme,t̪ʰime,me,me,e,e,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00190,মর্মে,গণমাধ্যমে,mɔrme,gɔnomad̪d̪ʱome,me,me,e,e,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00191,থমথমে,টেলিফিল্মে,t̪ʰɔmt̪ʰɔme,ʈelifilme,me,me,e,e,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00192,পাঠ্যক্রমে,প্রজন্মে,paʈʈʰokrɔme,prodʒɔnme,me,me,e,e,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00193,শুক্র,জীবনচক্র,ʃukro,dʒibontʃɔkro,kro,kro,o,o,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00194,মাইক্রো,টুকরো,mai̯kro,ʈukro,kro,kro,o,o,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00195,জীবনচক্র,ম্যাক্রো,dʒibontʃɔkro,mækro,kro,kro,o,o,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00196,টুকরো,চক্র,ʈukro,tʃɔkro,kro,kro,o,o,,1,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00197,জীবনচক্র,একটুকরো,dʒibontʃɔkro,ækʈukro,kro,kro,o,o,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00198,শুক্র,পাঠচক্র,ʃukro,paʈʰtʃɔkro,kro,kro,o,o,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00199,ম্যাক্রো,একটুকরো,mækro,ækʈukro,kro,kro,o,o,,1,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00200,দেখুন,ইনু,d̪ekʰun,inu,un,nu,u,u,assonance_decoy,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00201,দবিরুল,আজমপুর,d̪obirul,adʒompur,ul,ur,u,u,assonance_decoy,0,low,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00202,হিন্দুর,মৃদুল,hind̪ur,mrid̪ul,ur,ul,u,u,assonance_decoy,0,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00203,শিকারপুর,পরুন,ʃikarpur,porun,ur,un,u,u,assonance_decoy,0,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00204,টাপুর,রুস,ʈapur,rus,ur,us,u,u,assonance_decoy,0,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00205,ক্লু,স্ক্রু,klu,skru,klu,skru,u,u,assonance_decoy,0,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00206,ঋজু,সোনু,ridʒu,sonu,dʒu,nu,u,u,assonance_decoy,0,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00207,রেণু,আনামুল,renu,anamul,nu,ul,u,u,assonance_decoy,0,mid,low,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00208,আরজু,আশেকুর,ardʒu,aʃekur,dʒu,ur,u,u,assonance_decoy,0,mid,,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00209,আশরাফুল,দারূণ,aʃraful,d̪arun,ul,un,u,u,assonance_decoy,0,high,low,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00210,হাসুর,স্ট্যাচু,haʃur,sʈætʃu,ur,tʃu,u,u,assonance_decoy,0,low,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00211,আজিজুল,ধূমকেতুর,adʒidʒul,d̪ʱumket̪ur,ul,ur,u,u,assonance_decoy,0,high,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00212,গমনেচ্ছু,হাটু,gɔmonetʃtʃʰu,haʈu,tʃʰu,ʈu,u,u,assonance_decoy,0,,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00213,বর্ধিষ্ণু,পুরুষ,bord̪ʱiʃnu,puruʃ,nu,uʃ,u,u,assonance_decoy,0,mid,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00214,শুকুর,শামসুন,ʃukur,ʃamsun,ur,un,u,u,assonance_decoy,0,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00215,লতিফুল,যিশু,lot̪iful,dʒiʃu,ul,ʃu,u,u,assonance_decoy,0,low,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00216,এলবিডব্লুর,শুড,elbiɖɔblur,ʃuɖ,ur,uɖ,u,u,assonance_decoy,0,,low,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00217,স্বরূপ,সম্মুখ,ʃɔrup,ʃɔmmukʰ,up,ukʰ,u,u,assonance_decoy,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00218,মাছিমপুর,রবিউল,masimpur,robiul,ur,ul,u,u,assonance_decoy,0,low,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00219,ওজু,মোগাদিশু,odʒu,mogad̪iʃu,dʒu,ʃu,u,u,assonance_decoy,0,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00220,ইনু,মৃদু,inu,mrid̪u,nu,d̪u,u,u,assonance_decoy,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00221,পরুন,রাতারগুল,porun,rat̪argul,un,ul,u,u,assonance_decoy,0,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00222,বেকসুর,শকুন,bekosur,ʃokun,ur,un,u,u,assonance_decoy,0,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00223,আইটিউনস,অহিদুল,ai̯ʈiuns,ohid̪ul,uns,ul,u,u,assonance_decoy,0,low,low,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00224,কাউন্ট,ফাস্টফুড,kaunʈ,fasʈfuɖ,unʈ,uɖ,u,u,assonance_decoy,0,high,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00225,একবিন্দু,ঊরুর,ækbind̪u,urur,d̪u,ur,u,u,assonance_decoy,0,low,low,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00226,বাদুর,মিঠুন,bad̪ur,miʈʰun,ur,un,u,u,assonance_decoy,0,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00227,সাবিকুন,প্যারামাউন্ট,sabikun,pæramaunʈ,un,unʈ,u,u,assonance_decoy,0,,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00228,তুং,নিজামপুর,t̪uŋ,nidʒampur,uŋ,ur,u,u,assonance_decoy,0,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00229,অকূল,মু,ɔkul,mu,ul,mu,u,u,assonance_decoy,0,low,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00230,হাডুডু,স্তুপ,haɖuɖu,st̪up,ɖu,up,u,u,assonance_decoy,0,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00231,তাজুল,নীতুর,t̪adʒul,nit̪ur,ul,ur,u,u,assonance_decoy,0,mid,low,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00232,ভারুন,মিজু,bʱarun,midʒu,un,dʒu,u,u,assonance_decoy,0,low,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00233,ইজারুল,স্বর্ণযুগ,idʒarul,ʃɔrnodʒug,ul,ug,u,u,assonance_decoy,0,,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00234,দারুণ,শফিকুর,d̪arun,ʃofikur,un,ur,u,u,assonance_decoy,0,high,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00235,সেটুকু,ছেরুর,ʃeʈuku,tʃʰerur,ku,ur,u,u,assonance_decoy,0,mid,,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00236,মুশফিকুর,ভিখু,muʃfikur,bʱikʰu,ur,kʰu,u,u,assonance_decoy,0,high,low,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00237,কামরূপ,মনতাজুর,kamrup,mont̪adʒur,up,ur,u,u,assonance_decoy,0,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00238,হিমুর,মাউস,himur,maus,ur,us,u,u,assonance_decoy,0,mid,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00239,পাপ্পুর,ফলমূল,pappur,fɔlmul,ur,ul,u,u,assonance_decoy,0,low,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00240,কাঠমাণ্ডু,কুসুম,kaʈʰmanɖu,kuʃum,ɖu,um,u,u,assonance_decoy,0,mid,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00241,শফিকুল,শম্ভুর,ʃofikul,ʃombʱur,ul,ur,u,u,assonance_decoy,0,high,low,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00242,বহরমপুর,ফুড,bɔhrompur,fuɖ,ur,uɖ,u,u,assonance_decoy,0,mid,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00243,বেণু,চতুর,benu,tʃot̪ur,nu,ur,u,u,assonance_decoy,0,mid,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00244,চক্ষু,হুবহু,tʃokkʰu,hubohu,kʰu,hu,u,u,assonance_decoy,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00245,কাবু,বিদ্যুত,kabu,bid̪d̪ut̪,bu,ut̪,u,u,assonance_decoy,0,mid,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00246,শামসু,একটুর,ʃamsu,ekʈur,su,ur,u,u,assonance_decoy,0,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00247,যতদুর,রহিদুল,dʒɔt̪od̪ur,rohid̪ul,ur,ul,u,u,assonance_decoy,0,mid,,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00248,মিনুর,নিপুণ,minur,nipun,ur,un,u,u,assonance_decoy,0,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00249,শ্যাম্পু,মারুফ,ʃæmpu,maruf,pu,uf,u,u,assonance_decoy,0,mid,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00250,শিডিউল,থ্রু,ʃiɖiul,t̪ʰru,ul,t̪ʰru,u,u,assonance_decoy,0,high,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00251,বরুণ,সফিপুর,borun,ʃofipur,un,ur,u,u,assonance_decoy,0,high,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00252,লুক,সিরাজুম,luk,ʃiradʒum,uk,um,u,u,assonance_decoy,0,high,low,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00253,কুছ,বানু,kutʃʰ,banu,utʃʰ,nu,u,u,assonance_decoy,0,mid,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00254,সিমু,আধটু,ʃimu,ad̪ʱʈu,mu,ʈu,u,u,assonance_decoy,0,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00255,কর্মবিমুখ,এবাদুর,kɔrmobimukʰ,ebad̪ur,ukʰ,ur,u,u,assonance_decoy,0,low,low,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00256,স্বরূপ,আসফাকুস,ʃɔrup,aʃfakuʃ,up,uʃ,u,u,assonance_decoy,0,high,,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00257,কুচ,স্যু,kutʃ,ʃu,utʃ,ʃu,u,u,assonance_decoy,0,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00258,মধু,মিরাজুল,mod̪ʱu,miradʒul,d̪ʱu,ul,u,u,assonance_decoy,0,high,low,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00259,বসুন,ফকরুল,boʃun,fokrul,un,ul,u,u,assonance_decoy,0,high,low,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00260,কিসলু,দেবু,kislu,d̪ebu,slu,bu,u,u,assonance_decoy,0,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00261,তালুর,গবাদিপশু,t̪alur,gɔbad̪ipoʃu,ur,ʃu,u,u,assonance_decoy,0,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00262,খসরু,শিমূল,kʰoʃru,ʃimul,ʃru,ul,u,u,assonance_decoy,0,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00263,শাহরুখ,কাকুর,ʃahrukʰ,kakur,ukʰ,ur,u,u,assonance_decoy,0,high,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00264,ওয়াসীমুল,কুন্ডুর,oasimul,kunɖur,ul,ur,u,u,assonance_decoy,0,low,low,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00265,রিংকুর,এজাজুল,riŋkur,edʒadʒul,ur,ul,u,u,assonance_decoy,0,,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00266,ভাশুর,আমূল,bʱaʃur,amul,ur,ul,u,u,assonance_decoy,0,,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00267,আনুক,আমৃত্যু,anuk,amrit̪t̪u,uk,t̪u,u,u,assonance_decoy,0,mid,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00268,বলিউড,সিরাজুল,bɔliuɖ,ʃiradʒul,uɖ,ul,u,u,assonance_decoy,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00269,মকসুদ,গাজীউল,moksud̪,gadʒiul,ud̪,ul,u,u,assonance_decoy,0,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00270,লুপ,যুগ,lup,dʒug,up,ug,u,u,assonance_decoy,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00271,ফুট,পুতুল,fuʈ,put̪ul,uʈ,ul,u,u,assonance_decoy,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00272,বেশিকিছু,দেখুন,beʃikitʃʰu,d̪ekʰun,tʃʰu,un,u,u,assonance_decoy,0,mid,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00273,অমানুষ,লালুর,ɔmanuʃ,lalur,uʃ,ur,u,u,assonance_decoy,0,mid,low,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00274,গুরুর,বায়তুল,gurur,bae̯t̪ul,ur,ul,u,u,assonance_decoy,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00275,সাজ্জাদুল,নিবু,sadʒdʒad̪ul,nibu,ul,bu,u,u,assonance_decoy,0,mid,low,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00276,হিন্দুর,ফুড,hind̪ur,fuɖ,ur,uɖ,u,u,assonance_decoy,0,mid,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00277,মাসুম,আধটু,masum,ad̪ʱʈu,um,ʈu,u,u,assonance_decoy,0,high,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00278,ভাসুর,ডিম্বাণু,bʱaʃur,ɖimbanu,ur,nu,u,u,assonance_decoy,0,low,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00279,সমুদ্দুর,গুড,ʃomud̪d̪ur,guɖ,ur,uɖ,u,u,assonance_decoy,0,low,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00280,তবু,কিচ্ছু,t̪obu,kitʃtʃʰu,bu,tʃʰu,u,u,ortho_decoy,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00281,বাবু,বাকু,babu,baku,bu,ku,u,u,ortho_decoy,0,high,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00282,শত্রু,কচু,ʃot̪ru,kotʃu,t̪ru,tʃu,u,u,ortho_decoy,0,high,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00283,পুং,অরবিন্দবাবু,puŋ,ɔrobind̪ɔbabu,uŋ,bu,u,u,ortho_decoy,0,mid,,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00284,সিধু,কল্পতরু,ʃid̪ʱu,kɔlpot̪oru,d̪ʱu,ru,u,u,ortho_decoy,0,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00285,মিতাপু,গোরু,mit̪apu,goru,pu,ru,u,u,ortho_decoy,0,,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00286,তুং,ডিম্বাণু,t̪uŋ,ɖimbanu,uŋ,nu,u,u,ortho_decoy,0,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00287,শত্রু,কমলালেবু,ʃot̪ru,kɔmolalebu,t̪ru,bu,u,u,ortho_decoy,0,high,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00288,কমলালেবু,বনদস্যু,kɔmolalebu,bɔnod̪oʃʃu,bu,ʃu,u,u,ortho_decoy,0,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00289,ভিক্ষু,রু,bʱikkʰu,ru,kʰu,ru,u,u,ortho_decoy,0,high,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00290,অপু,সংখ্যাগুরু,opu,ʃɔŋkʰaguru,pu,ru,u,u,ortho_decoy,0,high,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00291,টিপু,আবু,ʈipu,abu,pu,bu,u,u,ortho_decoy,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00292,পপলু,টুলু,poplu,ʈulu,plu,lu,u,u,ortho_decoy,0,,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00293,করমু,লাবলু,kormu,lablu,mu,blu,u,u,ortho_decoy,0,high,,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00294,শম্ভু,পাতলু,ʃombʱu,pat̪lu,bʱu,lu,u,u,ortho_decoy,0,mid,low,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00295,বসু,লিনু,bosu,linu,su,nu,u,u,ortho_decoy,0,high,low,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00296,রঘু,কাজু,rogʱu,kadʒu,gʱu,dʒu,u,u,ortho_decoy,0,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00297,বহু,নতজানু,bohu,nɔt̪odʒanu,hu,nu,u,u,ortho_decoy,0,high,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00298,ভুলু,সম্মানটুকু,bʱulu,ʃɔmmanʈuku,lu,ku,u,u,ortho_decoy,0,mid,low,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00299,হিমাংশু,আকলু,himaŋʃu,aklu,ʃu,klu,u,u,ortho_decoy,0,mid,,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00300,বধু,দুষ্টু,bod̪ʱu,d̪uʃʈu,d̪ʱu,ʈu,u,u,ortho_decoy,0,mid,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00301,টেম্পু,অংশটুকু,ʈempu,ɔŋʃoʈuku,pu,ku,u,u,ortho_decoy,0,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00302,রংধনু,ততটুকু,rɔŋd̪ʱonu,t̪ɔt̪oʈuku,nu,ku,u,u,ortho_decoy,0,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00303,মঞ্জু,ধূমকেতু,mondʒu,d̪ʱumket̪u,dʒu,t̪u,u,u,ortho_decoy,0,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00304,ভুরু,হরিণাকুণ্ডু,bʱuru,horinakunɖu,ru,ɖu,u,u,ortho_decoy,0,low,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00305,গাবলু,তেলেগু,gablu,t̪elegu,blu,gu,u,u,ortho_decoy,0,low,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00306,টিংকু,ধূমকেতু,ʈiŋku,d̪ʱumket̪u,ku,t̪u,u,u,ortho_decoy,0,low,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00307,সাধু,পিছু,ʃad̪ʱu,pitʃʰu,d̪ʱu,tʃʰu,u,u,ortho_decoy,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00308,শীতাংশু,ঝু,ʃit̪aŋʃu,dʒʱu,ʃu,dʒʱu,u,u,ortho_decoy,0,,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00309,মামু,লিনু,mamu,linu,mu,nu,u,u,ortho_decoy,0,mid,low,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00310,বাবু,ভেঁপু,babu,bʱepu,bu,pu,u,u,ortho_decoy,0,high,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00311,সুধাংশু,চামু,ʃud̪ʱaŋʃu,tʃamu,ʃu,mu,u,u,ortho_decoy,0,mid,low,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00312,বিটু,চন্দ্রবিন্দু,biʈu,tʃɔnd̪robind̪u,ʈu,d̪u,u,u,ortho_decoy,0,low,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00313,জু,সাবু,dʒu,ʃabu,dʒu,bu,u,u,ortho_decoy,0,high,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00314,মজনু,কমলালেবু,modʒnu,kɔmolalebu,nu,bu,u,u,ortho_decoy,0,mid,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00315,একটু,ঝু,ekʈu,dʒʱu,ʈu,dʒʱu,u,u,ortho_decoy,0,high,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00316,শু,শ্যাম্পু,ʃu,ʃæmpu,ʃu,pu,u,u,ortho_decoy,0,high,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00317,পরাগরেণু,শিবলু,pɔragrenu,ʃiblu,nu,blu,u,u,ortho_decoy,0,low,,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00318,ভিখু,রঘু,bʱikʰu,rogʱu,kʰu,gʱu,u,u,ortho_decoy,0,low,mid,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00319,যদু,বহু,dʒod̪u,bohu,d̪u,hu,u,u,ortho_decoy,0,mid,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00320,উপন্যাসে,প্রশ্নগুলো,uponnaʃe,proʃnogulo,ʃe,lo,e,o,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00321,কোনোরকম,যুদ্ধক্ষেত্রে,konorɔkom,dʒud̪d̪ʱokʰet̪re,om,t̪re,o,e,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00322,সামঞ্জস্য,আসামীকে,ʃamondʒoʃʃo,aʃamike,ʃo,ke,o,e,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00323,মাঝামাঝি,সন্ত্রাসবাদের,madʒʱamadʒʱi,ʃɔnt̪raʃbad̪er,dʒʱi,er,i,e,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00324,অহংকারী,উপকারে,ɔhoŋkari,upokare,ri,re,i,e,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00325,পুরোপুরি,ডিসেম্বরের,puropuri,ɖisembɔrer,ri,er,i,e,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00326,সৃষ্টিকারী,শিরোনামের,ʃriʃʈikari,ʃironamer,ri,er,i,e,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00327,ইহুদীদের,ছবিগুলো,ihud̪id̪er,tʃʰobigulo,er,lo,e,o,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00328,অসুস্থতার,ইউরোপীয়,ɔʃust̪ʰot̪ar,i̯uropio,ar,,a,o,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00329,উপভোগ্য,অফিসারদের,upobʱoggo,ɔfisard̪er,go,er,o,e,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00330,গভীরতা,অন্যভাবে,gobʱirɔt̪a,onnobʱabe,t̪a,be,a,e,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00331,জেরুজালেম,উপজাতি,dʒerudʒalem,upodʒat̪i,em,t̪i,e,i,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00332,নীরবতার,সেপ্টেম্বরে,nirobɔt̪ar,sepʈembɔre,ar,re,a,e,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00333,মোকাবিলা,একবিংশ,mokabila,ækobiŋʃo,la,ʃo,a,o,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00334,তুলেছিল,পদোন্নতি,t̪uletʃʰilo,pɔd̪onnot̪i,lo,t̪i,o,i,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00335,প্রত্যাবর্তন,মুক্তভাবে,prot̪t̪abɔrt̪on,mukt̪obʱabe,on,be,o,e,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00336,বাহিনীতে,পরীক্ষার্থী,bahinit̪e,porikkʰart̪ʰi,t̪e,t̪ʰi,e,i,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00337,লুকোচুরি,আত্মবিশ্বাস,lukotʃuri,at̪t̪obiʃʃaʃ,ri,aʃ,i,a,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00338,একাত্তরের,অধিপতি,ekat̪t̪orer,ɔd̪ʱipot̪i,er,t̪i,e,i,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00339,হেপাটাইটিস,রাগান্বিত,hepaʈai̯ʈis,ragannit̪o,is,t̪o,i,o,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00340,পার্লামেন্টের,ধারাবাহিক,parlamenʈer,d̪ʱarabahik,er,ik,e,i,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00341,দীর্ঘতম,মধ্যরাতে,d̪irgʱot̪ɔmo,mod̪d̪ʱorat̪e,mo,t̪e,o,e,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00342,এগুলোতে,গোলাগুলির,egulot̪e,golagulir,t̪e,ir,e,i,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00343,এলাকাতে,আলজেরিয়ার,elakat̪e,aldʒeriar,t̪e,ar,e,a,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00344,নাশকতা,একেবারেই,naʃokɔt̪a,ækebarei̯,t̪a,rei̯,a,ei̯,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00345,মন্ত্রিসভার,সন্ত্রাসীদের,mont̪riʃɔbʱar,ʃɔnt̪raʃid̪er,ar,er,a,e,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00346,প্রজাতন্ত্র,জবানবন্দি,prodʒat̪ɔnt̪ro,dʒɔbanbond̪i,t̪ro,d̪i,o,i,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00347,তালিকাটি,সংবাদপত্রের,t̪alikaʈi,ʃɔŋbad̪pɔt̪rer,ʈi,er,i,e,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00348,কোনভাবে,অগ্রযাত্রা,konobʱabe,ɔgrodʒat̪ra,be,t̪ra,e,a,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00349,অনুশীলন,সাংবাদিকের,onuʃilɔn,ʃaŋbad̪iker,ɔn,er,ɔ,e,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00350,সমকামী,সময়মতো,ʃɔmokami,sɔmoe̯mɔt̪o,mi,t̪o,i,o,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00351,বহিষ্কৃত,নির্বাচনে,bɔhiʃkrit̪o,nirbatʃɔne,t̪o,ne,o,e,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00352,আন্দোলনকে,মহানগর,and̪olonke,mɔhanɔgor,ke,or,e,o,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00353,মোহাম্মদের,অরবিন্দ,mohammod̪er,ɔrobind̪o,er,d̪o,e,o,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00354,ওয়েলফেয়ার,বিরিয়ানি,oelfear,biriani,ar,ni,a,i,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00355,রেস্টুরেন্টে,সক্ষমতা,resʈurenʈe,ʃɔkkʰomɔt̪a,ʈe,t̪a,e,a,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00356,দিনাজপুরে,আলোচনায়,d̪inadʒpure,alotʃonae̯,re,nae̯,e,ae̯,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00357,বিজ্ঞানীরা,ধ্বংসাবশেষ,bigganira,d̪ʱɔŋʃaboʃeʃ,ra,eʃ,a,e,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00358,পর্যবেক্ষন,প্রতিদ্বন্দ্বী,pɔrdʒobekkʰon,prot̪id̪ond̪i,on,d̪i,o,i,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00359,শহরটিতে,বিবেচনা,ʃɔhorʈit̪e,bibetʃɔna,t̪e,na,e,a,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00360,লুকোচুরি,সমমানের,lukotʃuri,ʃɔmomaner,ri,er,i,e,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00361,আবেদনের,বন্ধুবান্ধব,abed̪ɔner,bond̪ʱuband̪ʱɔb,er,ɔb,e,ɔ,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00362,প্রজাপতি,শান্তিপূর্ণ,prodʒapot̪i,ʃant̪ipurno,t̪i,no,i,o,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00363,লিখেছিলাম,একেবারেই,likʰetʃʰilam,ækebarei̯,am,rei̯,a,ei̯,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00364,প্রতিরোধী,আয়ারল্যান্ডের,prot̪irod̪ʱi,ae̯arlænɖer,d̪ʱi,er,i,e,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00365,চাঁদাবাজি,নারায়ণগঞ্জ,tʃad̪abadʒi,naraɔngɔndʒ,dʒi,ɔndʒ,i,ɔ,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00366,পিতামাতার,সংস্থাগুলোর,pit̪amat̪ar,ʃɔŋst̪ʰagulor,ar,or,a,o,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00367,প্রধানত,উপন্যাসে,prod̪ʱanɔt̪o,uponnaʃe,t̪o,ʃe,o,e,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00368,সম্পাদকীয়,নিবন্ধনের,ʃɔmpad̪okio̯,nibɔnd̪ʱɔner,kio̯,er,io̯,e,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00369,পবিত্রতা,প্রতিষ্ঠানটি,pobit̪rot̪a,prot̪iʃʈʰanʈi,t̪a,ʈi,a,i,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00370,আজারবাইজান,কোনরকম,adʒarbai̯dʒan,konorɔkom,an,om,a,o,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00371,আজারবাইজান,এককভাবে,adʒarbai̯dʒan,ækokbʱabe,an,be,a,e,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00372,সম্মানিত,সংগঠনটি,ʃɔmmanit̪o,ʃɔŋgɔʈʰonʈi,t̪o,ʈi,o,i,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00373,গতকালের,গর্ভধারণ,gɔt̪okaler,gɔrbʱod̪ʱaron,er,on,e,o,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00374,তিউনিসিয়ার,লেবাননের,t̪iu̯niʃiar,lebanɔner,ar,er,a,e,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00375,রাসূলুল্লাহ,যাবজ্জীবন,rasulullah,dʒabodʒdʒibɔn,ah,ɔn,a,ɔ,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00376,সিদ্ধান্তকে,কেন্দ্রবিন্দু,ʃid̪d̪ʱant̪oke,kend̪robind̪u,ke,d̪u,e,u,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00377,গবেষকদের,উপদেষ্টা,gɔbeʃɔkd̪er,upod̪eʃʈa,er,ʈa,e,a,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00378,অবনমন,অসুবিধা,ɔbonɔmon,ɔʃubid̪ʱa,on,d̪ʱa,o,a,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00379,আক্রান্তদের,নথিপত্র,akrant̪od̪er,not̪ʰipɔt̪ro,er,t̪ro,e,o,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00380,নীতিমালার,পদপ্রার্থী,nit̪imalar,pɔd̪oprart̪ʰi,ar,t̪ʰi,a,i,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00381,অগ্নিকাণ্ডের,বলেছিল,ognikanɖer,boletʃʰilo,er,lo,e,o,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00382,প্রশাসনে,হয়েছিলো,proʃaʃone,hoe̯etʃʰilo,ne,lo,e,o,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00383,শহরটিতে,বিন্দুমাত্র,ʃɔhorʈit̪e,bind̪umat̪ro,t̪e,t̪ro,e,o,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00384,অবদানের,প্রতিষ্ঠাতা,ɔbod̪aner,prot̪isʈʰat̪a,er,t̪a,e,a,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00385,প্রতিবন্ধী,প্রথমত,prot̪ibond̪ʱi,prot̪ʰomɔt̪o,d̪ʱi,t̪o,i,o,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00386,সমীকরণ,শীর্ষস্থানীয়,ʃomikɔron,ʃirʃost̪ʰanio̯,on,nio̯,o,io̯,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00387,সর্বশ্রেষ্ঠ,অপারেশন,ʃɔrbosresʈʰo,ɔpareʃɔn,ʈʰo,ɔn,o,ɔ,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00388,সন্ত্রাসীরা,অন্তর্বর্তী,ʃɔnt̪raʃira,ɔnt̪orbort̪i,ra,t̪i,a,i,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00389,পরিত্যাক্ত,অপারেটিং,porit̪ækt̪o,ɔpareʈiŋ,t̪o,iŋ,o,i,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00390,উত্তোলনের,প্রদানকারী,ut̪t̪oloner,prod̪ankari,er,ri,e,i,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00391,সার্টিফিকেট,কতখানি,sarʈifikeʈ,kɔt̪okʰani,eʈ,ni,e,i,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00392,সাংগঠনিক,নিরাপত্তা,ʃaŋgɔʈʰonik,nirapɔt̪t̪a,ik,t̪a,i,a,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00393,অদ্বিতীয়,সারাজীবন,ɔd̪it̪io,ʃaradʒibɔn,,ɔn,o,ɔ,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00394,টুর্নামেন্টের,মধ্যবর্তী,ʈurnamenʈer,mod̪d̪ʱobort̪i,er,t̪i,e,i,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00395,বিরক্তিকর,অনুষ্ঠানে,birokt̪ikɔr,onuʃʈʰane,ɔr,ne,ɔ,e,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00396,জামায়াতে,অভিযুক্ত,dʒamae̯at̪e,obʱidʒukt̪o,t̪e,t̪o,e,o,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00397,অগ্নিকাণ্ডে,সমস্যাটা,ognikanɖe,ʃɔmoʃʃaʈa,ɖe,ʈa,e,a,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00398,প্রতিবন্ধী,সংবিধানে,prot̪ibond̪ʱi,ʃɔŋbid̪ʱane,d̪ʱi,ne,i,e,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
+rhyme3a_00399,শিক্ষার্থীরা,প্রেসিডেন্টের,ʃikkʰart̪ʰira,presiɖenʈer,ra,er,a,e,random,0,high,high,,TRUE,"bulk-approved by solo annotator, full manual read, no corrections"
