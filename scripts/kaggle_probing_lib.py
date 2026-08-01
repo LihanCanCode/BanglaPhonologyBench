@@ -228,6 +228,7 @@ def run_probe_battery(X_by_cat: Dict[str, Sequence], y_by_cat: Dict[str, Sequenc
     from sklearn.linear_model import LogisticRegression, RidgeCV
     from sklearn.metrics import accuracy_score, r2_score
     from sklearn.model_selection import train_test_split
+    from sklearn.preprocessing import StandardScaler
 
     if set(X_by_cat) != set(y_by_cat):
         raise ValueError("X_by_cat and y_by_cat must have the same category keys")
@@ -279,9 +280,19 @@ def run_probe_battery(X_by_cat: Dict[str, Sequence], y_by_cat: Dict[str, Sequenc
                 multioutput = "variance_weighted" if y_train_n.ndim > 1 else "uniform_average"
                 score = r2_score(y_test_n, model.predict(X_test), multioutput=multioutput)
             elif probe == "logistic":
-                model = LogisticRegression(max_iter=1000, C=10)
-                model.fit(X_train, y_train)
-                score = accuracy_score(y_test, model.predict(X_test))
+                # Raw hidden-state embeddings have arbitrary, often large
+                # per-dimension scale; lbfgs (LogisticRegression's default
+                # solver) can fail to converge within max_iter on unscaled
+                # features with a fixed C, unlike the ridge branch above
+                # where RidgeCV cross-validates alpha and self-adapts.
+                # Standardize (fit on train only, applied to both splits)
+                # so convergence is reliable and comparable across layers.
+                scaler = StandardScaler()
+                X_train_s = scaler.fit_transform(X_train)
+                X_test_s = scaler.transform(X_test)
+                model = LogisticRegression(max_iter=5000, C=10)
+                model.fit(X_train_s, y_train)
+                score = accuracy_score(y_test, model.predict(X_test_s))
             else:
                 raise ValueError(f"unknown probe type: {probe!r}")
             scores_by_cat[cat].append(score)
