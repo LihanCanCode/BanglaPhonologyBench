@@ -174,12 +174,33 @@ def run_probe_battery(X_by_cat: Dict[str, Sequence], y_by_cat: Dict[str, Sequenc
     if set(X_by_cat) != set(y_by_cat):
         raise ValueError("X_by_cat and y_by_cat must have the same category keys")
 
+    # Drop y columns that are constant across an entire category (e.g. the
+    # tail positions of a padded multi-output target like phon_vec, where
+    # every word in a given A/M/CB slice is shorter than the dataset-wide
+    # max length). A constant column carries no signal, and per-column
+    # z-score normalization below would divide by that column's ~0 std,
+    # blowing a couple of legitimate but rare nonzero rows up to huge
+    # z-scores and destabilizing RidgeCV / r2_score (observed: R^2 on the
+    # order of 1e28-1e32 on the real BanglaT5 g2p probe). Computed once
+    # per category on the full data, not per split, so train/test stay
+    # column-aligned.
+    y_arrays: Dict[str, "np.ndarray"] = {cat: np.asarray(y_by_cat[cat], dtype=float)
+                                        for cat in y_by_cat}
+    keep_cols: Dict[str, "np.ndarray"] = {}
+    for cat, y_full in y_arrays.items():
+        if probe == "ridge" and y_full.ndim > 1:
+            keep_cols[cat] = y_full.std(axis=0) > 0
+            if not keep_cols[cat].any():
+                keep_cols[cat] = np.ones(y_full.shape[1], dtype=bool)
+
     scores_by_cat: Dict[str, List[float]] = {cat: [] for cat in X_by_cat}
     for seed in range(seed_start, seed_start + n_seeds):
         rng = np.random.RandomState(seed)
         for cat in X_by_cat:
             X = np.asarray(X_by_cat[cat], dtype=float)
-            y = np.asarray(y_by_cat[cat], dtype=float)
+            y = y_arrays[cat]
+            if cat in keep_cols:
+                y = y[:, keep_cols[cat]]
             if control_label:
                 y = rng.randn(*y.shape) if probe == "ridge" else rng.randint(
                     0, max(len(set(y.tolist())), 2), size=len(y))
@@ -197,7 +218,8 @@ def run_probe_battery(X_by_cat: Dict[str, Sequence], y_by_cat: Dict[str, Sequenc
                 y_test_n = (y_test - mean) / std
                 model = RidgeCV(alphas=[10, 100, 500, 1000, 2000])
                 model.fit(X_train, y_train_n)
-                score = r2_score(y_test_n, model.predict(X_test))
+                multioutput = "variance_weighted" if y_train_n.ndim > 1 else "uniform_average"
+                score = r2_score(y_test_n, model.predict(X_test), multioutput=multioutput)
             elif probe == "logistic":
                 model = LogisticRegression(max_iter=1000, C=10)
                 model.fit(X_train, y_train)

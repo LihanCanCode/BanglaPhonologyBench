@@ -238,3 +238,26 @@ def test_probe_battery_control_label_destroys_signal():
 def test_probe_battery_mismatched_keys_raises():
     with pytest.raises(ValueError):
         run_probe_battery({"A": [[1, 2]]}, {"B": [1]})
+
+
+def test_probe_battery_handles_padded_sparse_multioutput_target():
+    """Regression test for the real bug found on the first BanglaT5 g2p
+    probe run: phon_vec is padded to the dataset-wide max length, so a
+    category slice can have tail columns that are ~all zero except a rare
+    long word. Per-column z-score normalization by that column's near-zero
+    std blew a couple of legitimate values up to huge z-scores, producing
+    mean R^2 on the order of 1e28-1e32 instead of a sane (if bad) score."""
+    rng = np.random.RandomState(4)
+    n = 200
+    X = rng.randn(n, 10)
+    y_signal_col = X[:, 0] * 3 + rng.randn(n) * 0.01
+    y_const_col = np.zeros(n)          # never varies in this category at all
+    y_sparse_col = np.zeros(n)
+    y_sparse_col[:3] = rng.choice([15.0, 30.0, 45.0], size=3)   # rare, large outliers
+    y = np.column_stack([y_signal_col, y_const_col, y_sparse_col])
+
+    result = run_probe_battery({"A": X}, {"A": y}, probe="ridge", n_seeds=5, seed_start=10)
+
+    assert result["mean"]["A"] > -10, (
+        "a padded/sparse output column should not blow up the aggregate R^2 "
+        f"to astronomical values; got {result['mean']['A']!r}")
