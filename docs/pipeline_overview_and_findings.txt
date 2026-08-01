@@ -1,0 +1,379 @@
+BanglaPhonologyBench + GTAD/STAD Analysis — Pipeline, Prework, and Findings
+============================================================================
+Generated as a working reference for idea generation / thesis writing.
+Full technical detail always lives in CLAUDE.md, the Research Spec, and
+docs/DEVELOPMENT_LOG.md — this file is a narrative summary of all of it.
+
+
+1. WHAT THIS PROJECT IS
+------------------------------------------------------------------------
+BanglaPhonologyBench is a phonology benchmark for Bangla language models
+(G2P, syllable counting, rhyme judgment/generation, schwa-deletion
+prediction), combined with a tokenization-misalignment analysis specific
+to Bangla's abugida script. It replicates and extends two prior papers:
+
+  - PhonologyBench (Suvarna et al., 2024) — the task design (G2P,
+    syllable counting, rhyme).
+  - "How Tokenization Limits Phonological Knowledge Representation in
+    LMs" (Liao & Shi, 2026) — the probing protocol and the STAD metric,
+    which this project lifts from the character level (their alphabetic
+    scripts) up to the akshara level (Bangla's grapheme clusters).
+
+The core idea: Bangla is written in an abugida where a single visual
+"syllable-like" unit (an akshara — e.g. a conjunct consonant cluster
+plus vowel sign) can span multiple Unicode codepoints and, critically,
+can straddle a tokenizer's subword boundaries in ways that alphabetic
+scripts never do. This project asks: does that tokenizer-vs-script
+mismatch measurably hurt a language model's internal representation of
+Bangla phonology, and does it hurt zero-shot phonological task
+performance?
+
+
+2. THE CORE METRIC TRIPLE (do not change definitions casually)
+------------------------------------------------------------------------
+Hierarchy: bytes ⊂ codepoints ⊂ aksharas ⊂ syllables.
+
+  GTAD  (Grapheme-Tokenization Alignment Divergence), in [0,1]
+        Fraction of a tokenizer's internal boundaries that cut INSIDE an
+        akshara (violate its integrity) — decomposed into byte-internal,
+        matra-split, and conjunct-split violation types. GTAD is exactly
+        0 for genuinely alphabetic scripts by construction, so it
+        isolates the abugida-specific misalignment axis. This is the
+        project's own contribution (Liao & Shi don't need it, since
+        English has no akshara-like clustering).
+
+  STAD_bn (Syllable-Tokenization Alignment Divergence, Bangla variant)
+        Hamming distance between the true syllable-boundary vector and
+        the tokenizer-boundary vector, measured over the m-1 gaps
+        BETWEEN aksharas (not between codepoints), normalized by (m-1).
+        None when m<2 (single-akshara words). This is Liao & Shi's STAD
+        lifted from codepoint-gaps to akshara-gaps; it collapses back to
+        their original definition when every akshara happens to be one
+        codepoint (i.e. for alphabetic scripts).
+
+  rho (ρ), in [0,1]
+        Fraction of TRUE phonemic syllable boundaries that have no legal
+        akshara-gap they could possibly land on (e.g. the syllable break
+        in /shan.to/ falls inside the conjunct ন্ত of শান্ত — no tokenizer,
+        however script-aware, could place a boundary there without
+        breaking the akshara). This is a property of the Bangla script
+        itself, not of any tokenizer — it's the ceiling on what ANY
+        akshara-respecting tokenizer could ever achieve on STAD.
+
+These three are always reported together, never collapsed into one
+number, because they answer different questions: GTAD = "does the
+tokenizer even respect orthographic units?", STAD = "even when it does,
+does it get the phonology right?", rho = "how good could STAD possibly
+get, given the script?".
+
+WORD CATEGORIES (used everywhere downstream — probing, zero-shot splits):
+  A  (Aligned)          GTAD=0 AND STAD=0   — clean case
+  M  (syllable-Misaligned) GTAD=0 AND STAD>0.25 — akshara-respecting but
+                          wrong syllable boundaries
+  CB (Cluster-Broken)    GTAD>0              — tokenizer literally cuts
+                          inside a conjunct/matra, the worst case
+
+The central hypothesis of the whole project: a model's phonological
+competence (whether probed from hidden states or measured by zero-shot
+accuracy) should degrade going A > M > CB.
+
+
+3. REPO / CODE LAYOUT (what does what)
+------------------------------------------------------------------------
+  bangla_phonology.py         Reference implementation: akshara segmenter
+                               (segment_aksharas/legal_gap_positions),
+                               phonemic syllabifier (syllabify/is_nucleus/
+                               LEGAL_ONSETS), orthography<->phoneme aligner
+                               (align — flags failures, never silently
+                               accepts them), and the metrics themselves
+                               (gtad, stad_bn, token_byte_spans_from_strings).
+
+  src/tokenizer_adapter.py    Registry of 5 real tokenizers (llama3, gpt2,
+                               byt5, tigerllm, banglat5) adapted to UTF-8
+                               byte-span format so any HF tokenizer can
+                               plug into the metrics.
+
+  src/rhyme.py                Proper open/closed-syllable-aware rime rule
+                               (Task 3a/3b), plus Success@k scoring
+                               utilities for zero-shot rhyme generation.
+
+  scripts/                    All one-shot pipeline stages: lexicon
+                               ingestion, task-dataset builders, metric
+                               computation, figure generation, annotation
+                               tooling, the M4 export step, and the M4
+                               probing library (kaggle_probing_lib.py).
+
+  data/                       Lexicon (Google bn-BD, 65k entries, CC BY
+                               4.0), cleaned/aligned lexicon, frozen task
+                               datasets (data/tasks/*.jsonl), rhyme
+                               datasets, human-annotation review sheets,
+                               and the M4 probing export CSVs.
+
+  results/, figures/          Computed metrics (metrics_top3000.csv),
+                               descriptive-stat figures (figure2), and the
+                               M4 probe results CSVs (BanglaT5 & TigerLLM).
+
+  notebooks/m4_probing.ipynb  The Kaggle-run GPU pipeline: hidden-state
+                               extraction + linear probe battery.
+
+  tests/, test_bangla_phonology.py   133 pytest tests (as of the last
+                               run); the segmenter/syllabifier/aligner/
+                               metrics are validated against gold words,
+                               and kaggle_probing_lib is validated with a
+                               mock model (no GPU needed to catch bugs
+                               before they cost Kaggle GPU-hours).
+
+  docs/DEVELOPMENT_LOG.md     Full chronological history of every session
+                               — what broke, how it was diagnosed, exact
+                               numbers at each stage. Read this for the
+                               "why" behind any design decision.
+
+  BanglaPhonologyBench_Research_Spec.md   The original research design
+                               document (task definitions, eval matrix,
+                               syllabifier grammar, etc). Source of truth
+                               for anything CLAUDE.md summarizes.
+
+
+4. MILESTONE-BY-MILESTONE STATUS
+------------------------------------------------------------------------
+
+M1 — Foundations (DONE)
+  - Lexicon: Google bn-BD, 65,037 entries, CC BY 4.0.
+  - Akshara segmenter + phonemic syllabifier validated: 96 tests,
+    99.86% syllable-count agreement against the lexicon.
+  - Orthography->phoneme aligner: 99.95% coverage (31 residual failures,
+    heterogeneous long tail — English-loan অ্যা-digraph transliteration,
+    archaic double-consonant spellings, proper-name hiatus).
+  - Earlier in-session bug: anusvara/khanda-ta were being consumed BEFORE
+    the vowel instead of after in the aligner — a real Spec-compliance
+    bug, fixed same day, coverage jumped 86.85% -> 89.44% (then further
+    to 99.95% with later fixes).
+
+M2 — Tasks 1-2 + real-tokenizer metrics (DONE)
+  - g2p.jsonl and syllable_count_word.jsonl frozen: 3,000 words each,
+    1,500 HighFreq/1,500 LowFreq by wordfreq(bn) zipf quartile.
+  - GTAD/STAD/rho computed for 5 real tokenizers on the top-3000 list
+    (results/metrics_top3000.csv), descriptive stats in figures/figure2.
+  - Real tokenizers are dramatically worse than the Spec's illustrative
+    "SIMULATED" tables suggested — e.g. Llama-3.1 GTAD as high as 0.86 on
+    some words vs. the SIMULATED table's 0.5. This was an early signal
+    that the phenomenon is real and large, not a modeling artifact.
+
+M3 — Tasks 1, 3a, 3b, 4 + full human annotation pass (DONE)
+  - Task 3a (rhyme pairs): 200 positive + 200 negative (negatives split
+    80 assonance_decoy / 40 ortho_decoy / 80 random), anti-leakage via
+    is_trivial_pair + phoneme-stem checks. Human-verified 400/400, 100%
+    agreement.
+  - Task 3b (rhyme generation): 300 prompts (200 common/100 rare), gold
+    sets additionally filtered through is_trivial_pair — WITHOUT this
+    filter, short grammatical suffixes like -এর dominate gold sets almost
+    entirely (a real methodological finding, documented in the script's
+    docstring). Human-verified 300/300, no corrections.
+  - Task 4 (schwa deletion): 1,000 words, environment-stratified. Human-
+    verified 160/160 (stratified sample), 100% agreement.
+  - Task 1 (etymology): 4-way tag (added "deshi" beyond the Spec's
+    original 3). Human-verified 353/353. Heuristic tagger accuracy only
+    38.2% — a genuine, reportable weakness of orthography-only etymology
+    guessing (i.e. the heuristic is a bad G2P-adjacent baseline, not a
+    bug in the annotation).
+  - No inter-annotator kappa anywhere — single annotator throughout, a
+    documented limitation vs. the Spec's original 2-annotator design.
+
+M4 — Probing pipeline (BUILT + PARTIALLY RUN)
+  - Pivoted away from forking liaodisen/Tokenization-Phonology (the
+    Liao & Shi reference repo) after inspecting it: its extraction code
+    was simple enough to reimplement directly, and its probe-training
+    scripts are hardcoded to exactly TWO conditions (their good/bad
+    Hamming-distance split) plus English-only filenames — not reusable
+    for a three-way A/M/CB split without a rewrite anyway. Built instead:
+    scripts/kaggle_probing_lib.py (file-level-resumable extraction +
+    a generalized N-category probe battery: RidgeCV for regression
+    targets, LogisticRegression for classification, 10 seeds, 80/20
+    split, random-label/embedding controls, automatic pairwise one-sided
+    t-tests) — unit-tested with a mock model, no GPU needed to validate
+    logic.
+  - Two real bugs found and fixed on the first actual Kaggle GPU runs
+    (both are useful lessons, see section 6 below):
+      1. T5-family models (BanglaT5, ByT5) overflow to inf in float16 —
+         T5 was trained in bf16/fp32; fixed by forcing float32 for the
+         T5 family regardless of device.
+      2. Storage dtype float16 was too narrow for some real hidden-state
+         values (word বীর্য, layer 4, exceeded float16's ~65504 max even
+         though the values were finite in the model's native dtype) —
+         fixed by defaulting checkpoint storage to float32.
+      3. (Found and fixed THIS session, not yet in CLAUDE.md's numbered
+         list) A third, more subtle bug: the g2p (phon_vec) probe's
+         reported R^2 was astronomically wrong (~1e28 to 1e32) even
+         though the embeddings themselves were finite and correct. Root
+         cause: phon_vec is zero-padded to the dataset-wide max length
+         (18), so within a single A/M/CB category slice, tail columns
+         can be ~all-zero except for one or two rare long words.
+         Per-column z-score normalization by that column's near-zero std
+         blew those rare nonzero values up to huge normalized targets,
+         destabilizing RidgeCV, and sklearn's default unweighted
+         per-column R^2 average let a couple of wrecked columns drag the
+         whole score down to nonsense. Fixed by (a) dropping columns that
+         are constant across a whole category before fitting, and
+         (b) switching to variance-weighted R^2 aggregation as a second
+         safety net. Verified against a purpose-built regression test
+         reproducing the exact padded-sparse-column scenario.
+  - BanglaT5 + TigerLLM probing run to completion post-fix (results in
+    results/BanglaT5 & TigerLLM.csv). GPT-2/ByT5/Llama-3.1 extraction
+    also ran, but their probe comparison could not be trained (see
+    Finding 3 below) — this is expected, not a failure.
+  - Not yet built: the rhyme-probe (Task 3a) A/M/CB category join —
+    rhyme_pairs.csv exists but isn't pre-split by category the way g2p
+    is; needs a per-tokenizer GTAD/STAD join at analysis time. Flagged
+    explicitly in the notebook's final cell, not silently skipped.
+  - Not yet built: aggregating run_probe_battery's pairwise one-sided
+    p-values (A>M>CB, already computed per layer) into the paper's
+    Table-3-style reporting format — a small follow-on step once you're
+    ready to write results up.
+
+M5 — Zero-shot evals + human baselines + regression analysis + writing
+  (NOT STARTED)
+  Per the Research Spec's evaluation matrix (Part A.6):
+    - Performance models (zero-shot): GPT-4o-class, Claude, Gemini
+      (closed); Llama-3.1-8B-Instruct, TigerLLM-9B, a BanglaLLaMA/
+      titulm-class Bangla model, ByT5 (open).
+    - Baselines: rule-based Bangla G2P; vowel-nucleus syllable counter;
+      dictionary rime lookup; majority-rule schwa heuristic ("delete
+      word-final, keep post-conjunct"); human baseline (2 native
+      annotators, 100 items/task, report cost).
+    - Prompting: zero-shot, Bangla-language prompts, PLUS an
+      English-prompt ablation (the prompt-language effect is itself
+      flagged as a reportable finding, not just a control).
+    - Regression analysis: relate GTAD/STAD/rho (per word, per
+      tokenizer) to zero-shot accuracy, controlling for frequency —
+      the performance-side analogue of the M4 probing comparison.
+
+
+5. KEY FINDINGS SO FAR (useful for the "ideas" ask)
+------------------------------------------------------------------------
+
+Finding 1 — Real tokenizers are far worse than illustrative estimates.
+  The Spec's own illustrative SIMULATED tokenizer tables understated the
+  problem; real GPT-2/Llama-3 GTAD values run as high as 0.86 on real
+  words. This alone is a strong opening result: Bangla tokenization is
+  measurably, severely misaligned with script structure in tokenizers
+  that were never designed with Bangla in mind.
+
+Finding 2 — Category counts are a headline result on their own, before
+any probing/zero-shot numbers exist:
+
+  tokenizer  |   A   |   M    |   CB   | excluded (of 3,000)
+  -----------|-------|--------|--------|---------------------
+  llama3     |     0 |      0 |  2,982 | 18
+  gpt2       |     0 |      0 |  2,982 | 18
+  byt5       |     0 |      0 |  2,982 | 18
+  tigerllm   |   697 |    671 |  1,614 | 18
+  banglat5   |   647 |  1,822 |    442 | 89
+
+  Every English-centric tokenizer (llama3, gpt2, byt5) puts 99%+ of
+  Bangla words in the worst (cluster-broken) category. GTAD ≡ 0 is a
+  theoretical property of alphabetic scripts, but the flip side —
+  "GTAD > 0 for almost every word" — is what actually happens when you
+  point a script-unaware tokenizer at an abugida. TigerLLM and BanglaT5
+  (Bangla-aware tokenizers) show genuine spread across all three
+  categories, which is exactly why only those two could run the A/M/CB
+  probe comparison at all.
+
+Finding 3 — The probe comparison is only meaningful for
+  script-aware tokenizers, structurally, not just empirically. Because
+  gpt2/byt5/llama3 have (effectively) zero A and M words, there is
+  nothing to compare their CB-category embeddings against — not a
+  missing-data problem to patch, but itself the finding: for these
+  tokenizers, "does tokenization misalignment hurt phonological
+  encoding?" isn't even an answerable question in a within-tokenizer
+  sense, because misalignment isn't a variable for them — it's a
+  constant. The comparison across tokenizers (Bangla-aware vs. not)
+  becomes the real story instead of within-tokenizer A/M/CB comparison.
+
+Finding 4 — Where probing DID run (BanglaT5, TigerLLM), results broadly
+  support the A > M > CB hypothesis for syllable-count probing:
+    BanglaT5, final layer (12): A=0.698 > M=0.599 > CB=0.436
+    TigerLLM, final layer (48): A=0.689 > CB=0.595 > M=0.541  (M/CB
+      order swapped, plausibly noise from unequal category sizes —
+      worth a significance check via the already-computed pairwise
+      one-sided p-values once you aggregate them)
+  G2P (phon_vec) probing, by contrast, is negative across nearly every
+  layer/category for both models — plausibly a property of the probe
+  DESIGN (phon_vec is a vector of arbitrary categorical phoneme-vocab
+  indices; linear regression on categorical IDs has no strong reason to
+  work well, since index 5 isn't numerically "between" index 4 and 6 in
+  any phonetic sense) rather than evidence the models don't encode
+  phonology at all — the syllable-count task (a genuinely ordinal
+  target) on the SAME embeddings works fine, which argues for a probe
+  design issue over a representation issue. Possible idea: try a
+  classification-style probe (predict each phoneme slot independently
+  via LogisticRegression, or use a Hamming/edit-distance-based score
+  instead of R^2) as a fairer comparison to Liao & Shi's own STAD-style
+  scoring, since R^2 on unordered categorical targets is a known-shaky
+  metric.
+
+Finding 5 — Task 3b's naive design would have been dominated by
+  grammatical suffixes. Building the rhyme-generation gold sets without
+  filtering through is_trivial_pair (stem/phoneme-sequence overlap
+  check) let short, extremely productive suffixes like -এর swallow the
+  gold set almost entirely — not a useful task if left in. This is a
+  general lesson about rhyme/phonology tasks in agglutinative-adjacent
+  languages: naive "shares a rime" gold-set construction conflates
+  morphological productivity with genuine phonological rhyme.
+
+Finding 6 — Etymology tagging from orthography alone is weak (38.2%
+  heuristic accuracy against 353 human-verified gold labels). Could be
+  read two ways for the thesis: (a) a clean negative result supporting
+  "you need more than script-level information," or (b) grounds for an
+  interesting follow-up — does a language model's zero-shot etymology
+  guess also cluster around 38%, or does it do meaningfully better/worse
+  than the orthography-only heuristic? That'd be a nice small addendum
+  to the M5 zero-shot battery if there's room.
+
+
+6. LESSONS FROM DEBUGGING (useful for avoiding repeat mistakes)
+------------------------------------------------------------------------
+  - Always unit-test GPU-bound pipeline code with a MOCK model before
+    spending real GPU quota on it (this is exactly why
+    kaggle_probing_lib.py has a full mock-model test suite that runs in
+    seconds locally) — it doesn't catch numerical-precision bugs
+    (float16 overflow) that only show up on real model outputs, but it
+    does catch every structural/logic bug for free.
+  - float16 is unsafe for storing or computing T5-family hidden states;
+    T5 was trained in bf16/fp32. This generalizes: always check a
+    model's *training* dtype before choosing an *inference* dtype,
+    don't assume fp16 is a safe default just because it halves memory.
+  - Padded/sparse targets (zero-padding a variable-length vector to a
+    fixed max length) are dangerous to normalize per-column without
+    checking for near-zero variance first — a handful of legitimate
+    outliers in an otherwise-constant column can silently produce
+    catastrophically unstable regression fits. Worth checking for this
+    pattern anywhere else padding is used in this pipeline (e.g. if a
+    similar padded vector target ever gets used for the rhyme or schwa
+    probes later).
+  - Astronomically bad metric values (R^2 in the 1e28+ range) are a
+    strong signal of numerical instability upstream, not "the model is
+    just really bad at this" — a sane model badly failing a task
+    produces R^2 around -1 to -5, not -1e30. Worth remembering as a
+    smell test for any regression-based eval later in M5.
+
+
+7. SUGGESTED NEXT STEPS (in rough priority order)
+------------------------------------------------------------------------
+  1. (Optional, low effort) Aggregate the already-computed pairwise
+     one-sided A>M>CB p-values into a proper Table-3-style summary for
+     BanglaT5/TigerLLM — everything needed already exists in
+     run_probe_battery's output, just needs a small aggregation script.
+  2. (Optional, medium effort) Build the rhyme-probe (Task 3a) A/M/CB
+     join that's currently flagged-but-not-built in the notebook, if you
+     want rhyme-probing results alongside G2P/syllable-count.
+  3. (Main path) Start M5: zero-shot evaluation harness for the closed
+     + open models listed in the Spec's eval matrix, against all four
+     frozen task datasets, with the Bangla/English-prompt ablation and
+     the rule-based/human baselines. This is the biggest remaining
+     chunk of work and the one the milestone plan calls out as weeks
+     9-12.
+  4. Once M5 numbers exist, the regression analysis tying GTAD/STAD/rho
+     to zero-shot accuracy (controlling for word frequency) is the
+     direct performance-side analogue of the M4 probing comparison —
+     worth designing so the two analyses read as one coherent story in
+     the final writeup rather than two disconnected halves.

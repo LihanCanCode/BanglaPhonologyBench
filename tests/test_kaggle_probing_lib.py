@@ -15,7 +15,8 @@ import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 
-from kaggle_probing_lib import extract_g2p, extraction_done, run_probe_battery
+from kaggle_probing_lib import (extract_g2p, extract_rhyme, extraction_done,
+                                run_probe_battery)
 
 N_LAYERS = 4
 HIDDEN = 6
@@ -105,6 +106,43 @@ def test_extract_raises_clear_error_on_nonfinite_model_output(tmp_path):
         extract_g2p(make_nonfinite_extract_fn(), rows, str(tmp_path), N_LAYERS)
     # nothing partial left behind to confuse a later resumability check
     assert not extraction_done(str(tmp_path), N_LAYERS)
+
+
+def mock_rhyme_rows(n=10):
+    rng = np.random.RandomState(0)
+    return [{
+        "word1": f"w1_{i}", "word2": f"w2_{i}",
+        "label": int(rng.randint(0, 2)),
+    } for i in range(n)]
+
+
+def test_extract_rhyme_writes_all_layers(tmp_path):
+    rows = mock_rhyme_rows(8)
+    calls = []
+    out = extract_rhyme(make_extract_fn(calls), rows, str(tmp_path), N_LAYERS)
+    assert out == str(tmp_path)
+    assert len(calls) == 8
+    assert calls[0] == "w1_0 w2_0"          # joint prompt, matches upstream's format
+    for li in range(N_LAYERS):
+        with open(tmp_path / f"layer_{li}.pkl", "rb") as f:
+            data = pickle.load(f)
+        assert len(data["word"]) == 8       # generic key extraction_done() relies on
+        assert len(data["word1"]) == 8
+        assert len(data["word2"]) == 8
+        assert len(data["label"]) == 8
+        assert data["embeddings"][0].shape == (HIDDEN,)
+    assert extraction_done(str(tmp_path), N_LAYERS)
+
+
+def test_extract_rhyme_skips_when_already_done(tmp_path):
+    rows = mock_rhyme_rows(8)
+    calls1 = []
+    extract_rhyme(make_extract_fn(calls1), rows, str(tmp_path), N_LAYERS)
+    assert len(calls1) == 8
+
+    calls2 = []
+    extract_rhyme(make_extract_fn(calls2), rows, str(tmp_path), N_LAYERS)
+    assert len(calls2) == 0, "extract_fn must NOT be called again for a completed combo"
 
 
 def test_extract_default_storage_dtype_is_float32(tmp_path):

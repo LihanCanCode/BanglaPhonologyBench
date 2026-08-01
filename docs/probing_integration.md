@@ -81,10 +81,15 @@ Inspected `probing/generate_embedding.py`, `probing/train_probe_g2p.py`,
 
 - `g2p_{tokenizer}_{A,M,CB}.csv` — word, phon_vec (padded phoneme indices),
   syllables, ipa. Category = Spec C.4's A/M/CB, computed from our GTAD/STAD.
-- `rhyme_pairs.csv` — word1, word2, label (shared across tokenizers; the
-  category split for rhyme probing happens at analysis time by joining on
-  GTAD/STAD per tokenizer, not by pre-splitting the file — not yet built,
-  see the notebook's final cell).
+- `rhyme_pairs.csv` — word1, word2, label (shared across tokenizers, flat).
+- `rhyme_{tokenizer}_{A,M,CB}.csv` — same columns, split by per-pair
+  category. Unlike g2p.jsonl, task3a_rhyme_pairs.jsonl carries no
+  precomputed per-tokenizer tokenization field, so `build_rhyme_category_
+  export` in `export_for_probing.py` computes GTAD/STAD fresh per word per
+  tokenizer (loads tokenizers — CPU-only, no GPU) and combines each pair's
+  two per-word categories into one via `categorize_pair` (the worse of the
+  two, since either word's misalignment compromises the joint
+  `f"{word1} {word2}"` prompt embedding the rhyme probe extracts from).
 - `data/tasks/phoneme_vocab.json` — the phoneme→index map + pad length,
   needed to decode `phon_vec` back to IPA later.
 
@@ -132,6 +137,8 @@ Inspected `probing/generate_embedding.py`, `probing/train_probe_g2p.py`,
    resumability section for the reasoning: file-level only, since each
    combo is minutes not hours).
 5. Once results exist for TigerLLM and BanglaT5 (the two with real 3-way
-   A/M/CB splits): one-sided t-tests A > M > CB per layer per task
-   (already computed by `run_probe_battery`, just needs aggregating into
-   the paper's Table-3-style reporting format — small follow-on step).
+   A/M/CB splits): one-sided t-tests A > M > CB per layer per task are
+   computed by `run_probe_battery` and flattened into
+   `checkpoints/probe_pairwise_summary.csv` by the notebook's summary cell
+   (section 7) — ready to read directly into the paper's Table-3-style
+   reporting format, no manual aggregation needed.

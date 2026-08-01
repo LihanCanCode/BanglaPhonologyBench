@@ -112,8 +112,16 @@ Word categories for split analyses: **A** (aligned: GTAD=0 ∧ STAD=0), **CB**
    `tests/test_kaggle_probing_lib.py`, no GPU needed) + `notebooks/m4_probing.ipynb`
    (clone-and-run on Kaggle; BanglaT5 first as a smoke test, then TigerLLM/GPT-2/
    ByT5/Llama-3.1 with 4-bit for the 8-9B models). Export already runs locally via
-   `scripts/export_for_probing.py`. Rhyme-probe A/M/CB category join not yet built
-   (flagged in the notebook's final cell, not silently skipped).
+   `scripts/export_for_probing.py`, including the rhyme-probe (Task 3a) A/M/CB
+   category join (`categorize_pair`: per-pair category = the worse of its two
+   words' categories) — `data/probing_export/rhyme_{tokenizer}_{A,M,CB}.csv`.
+   BanglaT5 + TigerLLM g2p/syllable-count probing run to completion
+   (`results/BanglaT5 & TigerLLM.csv`); a numerically-unstable R^2 bug found on
+   that run (padded phon_vec columns with near-zero variance blowing up RidgeCV,
+   ~1e28-1e32 scores) is fixed in `kaggle_probing_lib.run_probe_battery`
+   (drop constant columns per category, variance-weighted R^2). Rhyme
+   extraction/probing cells and pairwise A>M>CB p-value aggregation
+   (`probe_pairwise_summary.csv`) added to the notebook; not yet run on Kaggle.
 5. **M5 (wks 9–12):** zero-shot evals (closed + open models); human baselines; regression
    analysis; writing.
 

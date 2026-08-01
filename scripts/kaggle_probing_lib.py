@@ -36,7 +36,7 @@ import os
 import pickle
 from typing import Dict, List, Sequence
 
-__all__ = ["extraction_done", "extract_g2p", "run_probe_battery"]
+__all__ = ["extraction_done", "extract_g2p", "extract_rhyme", "run_probe_battery"]
 
 
 # ----------------------------------------------------------------------------
@@ -141,6 +141,64 @@ def extract_g2p(extract_fn, rows: Sequence[dict], out_dir: str, n_layers: int,
         with open(os.path.join(out_dir, f"layer_{li}.pkl"), "wb") as f:
             pickle.dump({"word": words, "embeddings": embs,
                         "phon_vecs": phon_vecs, "syllable_count": syllable_counts}, f)
+    return out_dir
+
+
+def extract_rhyme(extract_fn, rows: Sequence[dict], out_dir: str, n_layers: int,
+                  storage_dtype: str = "float32") -> str:
+    """Extract last-token hidden states for every layer, for every row's
+    joint prompt f"{word1} {word2}" — matches upstream's rhyme-probe prompt
+    format (docs/probing_integration.md: generate_embedding.py builds the
+    same f"{word1} {word2}" string before extraction). Same file-level
+    resumability and non-finite/overflow guards as extract_g2p; see its
+    docstring for the storage_dtype rationale (T5-family float16 overflow).
+
+    extract_fn(prompt: str) -> List[np.ndarray], one array per layer.
+    rows: dicts with 'word1', 'word2' (str), 'label' (0/1, rhyme or not).
+    Writes layer_{i}.pkl with word/word1/word2/embeddings/label keys — the
+    'word' key (= the joint prompt) exists purely so extraction_done()'s
+    generic word-count/finiteness check works unchanged for this shape too.
+    """
+    import numpy as np
+
+    if extraction_done(out_dir, n_layers):
+        return out_dir
+    os.makedirs(out_dir, exist_ok=True)
+
+    prompts, word1s, word2s, labels = [], [], [], []
+    embeddings_by_layer: Dict[int, list] = {}
+    for row in rows:
+        prompt = f"{row['word1']} {row['word2']}"
+        layer_embeds = extract_fn(prompt)
+        if not embeddings_by_layer:
+            embeddings_by_layer = {li: [] for li in range(len(layer_embeds))}
+        for li, emb in enumerate(layer_embeds):
+            if not np.isfinite(emb).all():
+                raise RuntimeError(
+                    f"non-finite values in extract_fn output for pair={prompt!r}, "
+                    f"layer={li} — before any storage casting, so this is the model's own "
+                    f"output, not a downcast artifact. If this is a T5-family model, it's "
+                    f"almost certainly running in plain float16 (T5 was trained in "
+                    f"bfloat16/fp32 and plain fp16 inference commonly overflows internal "
+                    f"activations) — load it in float32 instead.")
+            cast = np.asarray(emb, dtype=storage_dtype)
+            if not np.isfinite(cast).all():
+                raise RuntimeError(
+                    f"pair={prompt!r}, layer={li}: finite in the model's native dtype "
+                    f"but overflowed casting to {storage_dtype} for storage. Use a wider "
+                    f"storage_dtype (float32 is already the default; if you're already on "
+                    f"float32 and still hitting this, the model's native values are "
+                    f"exceeding ~3.4e38, which would be its own separate bug).")
+            embeddings_by_layer[li].append(cast)
+        prompts.append(prompt)
+        word1s.append(row["word1"])
+        word2s.append(row["word2"])
+        labels.append(int(row["label"]))
+
+    for li, embs in embeddings_by_layer.items():
+        with open(os.path.join(out_dir, f"layer_{li}.pkl"), "wb") as f:
+            pickle.dump({"word": prompts, "word1": word1s, "word2": word2s,
+                        "embeddings": embs, "label": labels}, f)
     return out_dir
 
 
