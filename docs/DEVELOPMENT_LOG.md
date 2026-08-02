@@ -875,6 +875,40 @@ addresses. Stated as an interpretation to flag in the thesis, not a
 settled fact — the two claims may simply be about different things
 (reading difficulty for a human vs. rule-learnability for a model).
 
+### Nonce-word contamination test: dataset built, not yet run
+
+Built `scripts/build_nonce_words.py` (+ `tests/test_build_nonce_words.py`,
+2 tests) to finally act on the syllable_count contamination flag (Finding
+7b) rather than leaving it caveated indefinitely. Method: compound 2-3
+real, aligner-confident lexicon words together (e.g. প্রতি + স্বর + মাপক
+→ প্রতিস্বরমাপক, the same way real Bangla compounds form), verify the
+result is absent from the full 65k-entry lexicon, then get the gold
+syllable count from `syllabify()` on the CONCATENATED phoneme sequence
+(not a naive sum of the components' own counts — handles any
+onset-maximization interaction right at the new component boundary
+correctly). Every syllable/akshara used is real and attested; the
+specific multi-morpheme string is verified novel. Stated simplification:
+no cross-morpheme sandhi modeling, which could make gold counts a slight
+overestimate for the minority of combinations where real Bangla
+compounding would elide/assimilate at the boundary — a caveat to carry
+alongside any result from this test, not a fatal flaw for the actual
+question (does accuracy survive novel wordforms, or collapse).
+
+Generated `data/tasks/nonce_syllable_count.jsonl`, 150 items, syllable
+counts 4-11 (skews longer than the frozen task's 1-8 range, since each
+component itself has 2-4 syllables) — distribution: {4:20, 5:24, 6:34,
+7:26, 8:20, 9:9, 10:10, 11:7}.
+
+Wired into `notebooks/m5_zeroshot.ipynb` as new section 5f (generation,
+row-level resumable, same pattern as 5a-5e) plus its own scoring cell
+right after — kept separate from the main `TASK_SOURCES`/`SCORE_FNS`
+loop rather than shoehorned in, since it isn't one of the 5 frozen Spec
+tasks. **Status: built and unit-tested, not yet run on Kaggle.** Next
+action: `git pull` on Kaggle, run section 5f, compare its
+`exact_match_acc` directly against the frozen syllable_count task's 100%
+— a large drop signals contamination; a number that stays near 100%
+would be a rare, strong, citable positive result.
+
 ---
 
 ## Current state summary (see `CLAUDE.md` for the authoritative live version)
@@ -902,13 +936,18 @@ settled fact — the two claims may simply be about different things
   baseline; regression: GTAD positive, STAD/ρ negative). **Core honest
   finding**: no universal, uniformly-signed GTAD/STAD/ρ story across
   tasks — effects are small (R²<0.023 throughout) and flip sign by task,
-  contradicting `docs/ideas2.md`'s specific per-task predictions. Not done
-  yet: the syllable_count nonce-word contamination check, English-prompt
-  ablation, a second open model (Llama-3.1-8B-Instruct next), closed/paid
-  models, human baseline.
+  contradicting `docs/ideas2.md`'s specific per-task predictions.
+  Etymology-stratified G2P accuracy supports the frequency-paradox
+  hypothesis (tatsama 94.7% > tadbhava 92.6%, not explained by length
+  alone). Nonce-word contamination test for syllable_count: dataset BUILT
+  (`data/tasks/nonce_syllable_count.jsonl`, 150 items,
+  `scripts/build_nonce_words.py`) and wired into
+  `notebooks/m5_zeroshot.ipynb` (section 5f) — **not yet run on Kaggle**.
+  Not done yet: running 5f, English-prompt ablation, a second open model
+  (Llama-3.1-8B-Instruct next), closed/paid models, human baseline.
 - **Not done, spec-mentioned stretch goals**: Task 5 (conjunct
   pronunciation, optional per spec), poetry-corpus rhyme enrichment.
-- **Test suite**: 142 tests, all green, run with `pytest` from repo root.
+- **Test suite**: 144 tests, all green, run with `pytest` from repo root.
 
 ## How to pick this back up
 
@@ -930,16 +969,16 @@ settled fact — the two claims may simply be about different things
    automatically. See `docs/probing_integration.md` for the design
    rationale.
 5. If picking up M5: TigerLLM-9B-it's bn-prompt zero-shot run is DONE, all
-   5 tasks at full scale (see the "Kaggle run #1 complete" section above
-   for the full comparison table against `results/baselines_summary.csv`
-   — g2p and rhyme_generation are solid results; syllable_count's 100%
-   needs the contamination-vs-genuine-competence nonce-word check before
-   citing it unqualified; rhyme_awareness and schwa_deletion are real,
-   confirmed-at-full-scale negative/near-chance results). Next: (a) the
-   syllable_count nonce-word check, (b) `LANGS = ["bn", "en"]` in the
-   Config cell for the English-prompt ablation (Spec A.6) on the same
-   model, (c) a second open model — Llama-3.1-8B-Instruct is already
-   registered in `TOKENIZER_SPECS`, add it as a second `MODEL_KEY` pass
-   through the same 5a-5e cells. (d) after that, closed/paid models per
-   user direction, then human baseline (2 annotators, 100 items/task), then
-   the regression step (probe/zero-shot performance ~ GTAD+STAD+ρ+freq+etym).
+   5 tasks at full scale, plus the ρ-ceiling analysis, the GTAD/STAD/ρ
+   regression, and the etymology-stratified G2P check (see "Kaggle run #1
+   complete" and later sections above for full tables). **Immediate next
+   action**: the nonce-word contamination test is built and ready but NOT
+   YET RUN — `git pull` on Kaggle to get `data/tasks/
+   nonce_syllable_count.jsonl` and `notebooks/m5_zeroshot.ipynb`'s new
+   section 5f, run it (150 items, quick), compare its `exact_match_acc`
+   against the frozen syllable_count task's 100%. After that: (a)
+   `LANGS = ["bn", "en"]` in the Config cell for the English-prompt
+   ablation (Spec A.6), (b) a second open model — Llama-3.1-8B-Instruct is
+   already registered in `TOKENIZER_SPECS`, add it as a second `MODEL_KEY`
+   pass through the same 5a-5f cells, (c) after that, closed/paid models
+   per user direction, then human baseline (2 annotators, 100 items/task).

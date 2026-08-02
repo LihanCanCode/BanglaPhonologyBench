@@ -157,11 +157,17 @@ Word categories for split analyses: **A** (aligned: GTAD=0 ∧ STAD=0), **CB**
    positive for g2p; every McFadden pseudo-R² is small (<0.023). Effects are real but
    small and task-specific, not a clean "misalignment predicts difficulty" story.
    `scripts/score_zeroshot_results.py` scores local raw-completion files without
-   needing Kaggle, for regenerating `zeroshot_summary_{model}.csv`. Next: the
-   syllable_count nonce-word contamination check, English-prompt ablation
-   (`LANGS=["bn","en"]`), a second open model (Llama-3.1-8B-Instruct, already in
-   `TOKENIZER_SPECS`), then closed/paid models, human baseline (2 annotators,
-   100 items/task).
+   needing Kaggle, for regenerating `zeroshot_summary_{model}.csv`.
+   **Etymology-stratified G2P accuracy** supports the frequency-paradox hypothesis
+   (tatsama 94.7% > tadbhava 92.6% > n=1660, not explained by length alone — see
+   dev log for the literature-tension caveat). **Nonce-word contamination test**:
+   dataset built (`scripts/build_nonce_words.py` -> `data/tasks/
+   nonce_syllable_count.jsonl`, 150 compound words verified absent from the
+   lexicon, gold via `syllabify()`) and wired into `m5_zeroshot.ipynb` section 5f
+   — **NOT YET RUN on Kaggle**, the immediate next action. After that: English-prompt
+   ablation (`LANGS=["bn","en"]`), a second open model (Llama-3.1-8B-Instruct,
+   already in `TOKENIZER_SPECS`), then closed/paid models, human baseline
+   (2 annotators, 100 items/task).
 
 Workflow note: dataset construction, segmenter/metric work, and tokenizer analyses run
 fine locally (CPU-only). Only M4/M5 GPU forward passes go to Kaggle — this repo is the
@@ -186,6 +192,9 @@ source of truth; Kaggle notebooks pull it.
   accuracy binned by ρ vs. the naive baseline -> `results/rho_ceiling_syllable_count_{model}.csv`.
 - `python scripts/analyze_regression.py <task> <completions.jsonl>` — A/M/CB breakdown +
   logistic regression of correctness ~ GTAD+STAD+ρ+log_freq -> `results/regression_{task}_{model}.json`.
+- `python scripts/build_nonce_words.py --confirm -n 150` — M5 contamination-check
+  dataset: compound real morphemes into words verified absent from the lexicon,
+  gold syllable count via `syllabify()` -> `data/tasks/nonce_syllable_count.jsonl`.
 
 Run Python scripts with `-X utf8` on Windows (Bangla output to console).
 
