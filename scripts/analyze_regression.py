@@ -148,6 +148,7 @@ def _build_schwa(gold_by_id, raw_by_id, tokenizer):
         records.append({
             "id": i, "correct": correct, "gtad": gt.gtad, "stad": (st.stad or 0.0),
             "rho": st.rho, "log_freq": zipf_frequency(g["orth"], "bn"), "category": cat,
+            "etym": g.get("etym"),
         })
     return records
 

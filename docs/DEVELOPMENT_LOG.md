@@ -909,6 +909,54 @@ action: `git pull` on Kaggle, run section 5f, compare its
 — a large drop signals contamination; a number that stays near 100%
 would be a rare, strong, citable positive result.
 
+### Two follow-up local analyses while the nonce-word run is in flight on Kaggle
+
+Both cheap, no GPU, done with data already in hand.
+
+**Etymology in the schwa deletion regression** — the OPPOSITE direction
+from G2P's pattern, a genuinely different finding, not a repeat:
+
+| Etym | n | Accuracy (exact-vector-match) |
+|---|---|---|
+| Tadbhava | 373 | 35.7% |
+| Tatsama | 607 | **24.9%** |
+| Foreign | 19 | 57.9% |
+
+Adding one-hot etym predictors to the regression: `is_tatsama` coef =
+−0.202 (tatsama predicts LOWER schwa accuracy), R² = 0.024. Plausible
+reconciliation with the same Wikipedia note flagged earlier (tatsama
+often *retains* schwa as an exception to the general deletion pattern):
+if TigerLLM's behavior leans toward the majority-rule default (delete
+unless marked otherwise — the same pattern the 77.1% naive baseline
+encodes), it would systematically get tatsama's *exception* cases wrong,
+while G2P's whole-word exact match can absorb one wrong schwa slot
+without necessarily breaking if the rest of the word is right via other
+regularities. Two different tasks, two different mechanisms — don't
+collapse into one "etymology always helps/hurts" claim.
+
+**Rhyme awareness confusion matrix** — sharper and more damning than the
+earlier "biased toward না" framing:
+
+- Recall (catching real rhymes): **14.5%** (29/200 true positives, 171
+  false negatives). Specificity (rejecting non-rhymes): 91.5%.
+- The false negatives are NOT hard edge cases — random sample of 15
+  includes pairs with IDENTICAL rime tuples that any Bangla speaker would
+  recognize instantly (রিসোর্ট/ফোর্ট, ফ্লাইট/ডিলিট, হাইব্রিড/স্পিড — all
+  `neg_type=None`, i.e. genuine positives, not decoys).
+- The 17 false positives it did make skew almost entirely toward the
+  hardest negative categories (`assonance_decoy`, `ortho_decoy` —
+  pairs deliberately constructed to fool surface/orthographic matching),
+  essentially none on plain random negatives.
+
+**Conclusion, stated precisely**: this rules out "the model is
+conservatively cautious on genuinely ambiguous cases" as an explanation.
+It's missing the *easy*, unambiguous cases at scale (85.5% of true
+rhymes missed) while its rare "yes" answers get fooled by superficial
+similarity specifically on the hardest decoys. This reads as closer to a
+behavioral/calibration default (near-unconditional "না") than genuine
+phonological reasoning that occasionally fails on hard cases — a
+materially stronger and more citable claim than "biased toward না."
+
 ---
 
 ## Current state summary (see `CLAUDE.md` for the authoritative live version)

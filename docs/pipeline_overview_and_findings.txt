@@ -380,7 +380,7 @@ Finding 7 — M5's zero-shot pass (TigerLLM-9B-it, Bangla prompts, all 5
     ------------------|--------------------|-----------------------|------
     G2P               | 17.6% PER,36.2% ex | 3.0% PER, 93.6% exact  | Model dramatically beats baseline
     Syllable count    | 31.9% exact        | 100.0% exact           | Perfect -- needs Finding 7b's caveat
-    Rhyme awareness   | 100% (oracle)      | 53.0% acc, F1 0.236    | Near chance, biased toward "na" (no)
+    Rhyme awareness   | 100% (oracle)      | 53.0% acc, F1 0.236    | 14.5% recall on true rhymes (see Finding 9b)
     Rhyme generation  | 100% (oracle)      | success@5 = 0.21       | Far below the dictionary ceiling
     Schwa deletion    | 77.1% per-position | 52.4% per-position     | WORSE than a 1-line heuristic
 
@@ -459,6 +459,46 @@ Finding 9 — The G2P "frequency paradox" (log-frequency negatively
   because it's less rule-governed, not because tatsama is more
   accessible. Flagged as an interpretation for the thesis to state
   carefully, not a settled resolution of the literature tension.
+
+Finding 9a — Etymology's effect on schwa_deletion runs the OPPOSITE
+  direction from G2P's -- a genuinely different finding, not a repeat:
+
+    Etym       | n   | Accuracy (exact-vector-match)
+    -----------|-----|-------------------------------
+    Tadbhava   | 373 | 35.7%
+    Tatsama    | 607 | 24.9%  <- WORSE, not better
+    Foreign    |  19 | 57.9%  (n too small to trust much)
+
+  Adding etym as a regression predictor: is_tatsama coef = -0.202
+  (tatsama predicts LOWER schwa accuracy), R^2 = 0.024. Candidate
+  reconciliation with the same schwa-deletion literature note (tatsama
+  words often RETAIN schwa as an exception to the general deletion
+  pattern): if TigerLLM's behavior leans toward something like the
+  majority-rule default (delete unless marked otherwise -- exactly what
+  the 77.1% naive baseline encodes), it would systematically get
+  tatsama's EXCEPTION cases wrong, while G2P's whole-word exact match can
+  absorb one wrong schwa slot without breaking if the rest of the word is
+  right via other regularities. Two different tasks, two different
+  mechanisms -- do NOT collapse this into a single "etymology always
+  helps/hurts" claim in the thesis.
+
+Finding 9b — The rhyme_awareness confusion matrix is sharper and more
+  damning than "biased toward na": recall on true rhymes is 14.5%
+  (29/200 true positives, 171 false negatives); specificity on
+  non-rhymes is 91.5%. The false negatives are NOT hard edge cases -- a
+  random sample of 15 includes pairs with IDENTICAL rime tuples any
+  Bangla speaker would recognize instantly (রিসোর্ট/ফোর্ট, ফ্লাইট/ডিলিট,
+  হাইব্রিড/স্পিড, all neg_type=None i.e. genuine positives). The 17 false
+  positives it DID make skew almost entirely toward the hardest negative
+  categories (assonance_decoy, ortho_decoy -- pairs built specifically to
+  fool surface/orthographic matching), essentially none on plain random
+  negatives. This rules out "conservative on genuinely ambiguous cases"
+  as an explanation -- the model misses EASY, unambiguous cases at scale
+  while its rare "yes" answers get fooled by superficial similarity on
+  exactly the hardest decoys. Reads as closer to a near-unconditional
+  behavioral/calibration default than genuine phonological reasoning that
+  occasionally fails on hard cases -- a materially stronger, more
+  citable claim than "biased toward na."
 
 
 6. LESSONS FROM DEBUGGING (useful for avoiding repeat mistakes)
@@ -618,12 +658,20 @@ account:
 
   - Rhyme judgment requires comparing two words' PHONOLOGICAL structure
     abstractly (same rime, independent of spelling) rather than reading
-    off one word's own pronunciation. The "na" bias suggests the model
-    may default to a conservative "not obviously the same" heuristic
-    rather than actually computing and comparing rimes — consistent
-    with rhyme being a qualitatively different kind of task (comparison/
-    abstraction) rather than a harder version of the same kind of task
-    (transcription).
+    off one word's own pronunciation. UPDATE (confusion-matrix analysis,
+    done -- not speculation anymore): recall on true rhymes is 14.5%
+    (29/200), specificity on non-rhymes is 91.5%. Crucially, the false
+    negatives are NOT hard edge cases -- a random sample includes pairs
+    with IDENTICAL rime tuples any Bangla speaker would recognize
+    instantly (রিসোর্ট/ফোর্ট, ফ্লাইট/ডিলিট, হাইব্রিড/স্পিড), while the 17
+    false positives it did make skew almost entirely toward the hardest
+    NEGATIVE categories (assonance_decoy, ortho_decoy -- pairs built
+    specifically to fool surface-pattern matching), essentially none on
+    plain random negatives. This rules out "conservative on genuinely
+    ambiguous cases" -- it's missing the EASY cases at scale while its
+    rare "yes" answers get fooled by superficial similarity specifically.
+    Reads as closer to a near-unconditional behavioral default than
+    phonological reasoning that occasionally fails on hard cases.
 
 8.3 What the regression adds (and complicates)
 
@@ -679,27 +727,39 @@ tension named explicitly, not as a resolved contradiction.
 
 8.4 What would strengthen this chapter, in priority order
 
-  1. The nonce-word contamination test (Finding 7b above) — turns
-     syllable_count from "uncited caveat" into either a strong positive
-     result or an honest documented limitation. Currently the single
-     biggest open question blocking a clean write-up of M5's headline
-     numbers.
+  1. IN PROGRESS: the nonce-word contamination test (Finding 7b above) —
+     dataset built (scripts/build_nonce_words.py, data/tasks/
+     nonce_syllable_count.jsonl, 150 items) and wired into
+     notebooks/m5_zeroshot.ipynb section 5f; running on Kaggle now.
+     Turns syllable_count from "uncited caveat" into either a strong
+     positive result or an honest documented limitation once the number
+     comes back. Still the single biggest open question blocking a clean
+     write-up of M5's headline numbers.
   2. The g2p-vs-isolated-schwa consistency check proposed in 8.2 — cheap
      (both sets of raw completions already exist locally), and would
      directly test whether the "context-bound knowledge" story in 8.2
-     is real or speculation.
+     is real or speculation. Not started.
   3. DONE: etym-stratified G2P accuracy (8.3a above) — tatsama > tadbhava,
      supports the length/regularity story. Worth a citation check on the
      Wikipedia claim before the reconciliation goes in the thesis as
      written, though — neither source was read firsthand this session.
-  4. A second model's full M5 run — turns every claim in this section
+  4. DONE: etym added to the schwa_deletion regression (Finding 9a) —
+     opposite direction from G2P (tatsama WORSE, not better), a distinct
+     finding requiring its own explanation, not a repeat of 8.3a.
+  5. DONE: rhyme_awareness confusion matrix (Finding 9b) — 14.5% recall
+     on true rhymes including trivially obvious pairs, false positives
+     concentrated on the hardest decoy types. Sharper and more citable
+     than the earlier "na-biased" framing; supersedes it throughout this
+     document.
+  6. A second model's full M5 run — turns every claim in this section
      from "true of TigerLLM" to "true of Bangla-aware LLMs generally,"
-     a substantially stronger claim for a thesis.
-  5. Human baseline numbers — lets "53% is near chance" and "52.4% is
+     a substantially stronger claim for a thesis. Not started.
+  7. Human baseline numbers — lets "53% is near chance" and "52.4% is
      worse than a heuristic" be joined by "and humans score X%," the
-     comparison a reader will most want to see.
+     comparison a reader will most want to see. Not started.
 
-Items 1-2 and 4-5 are not started. This section is a draft skeleton for
-the argument, built honestly from what's actually been measured — the
-remaining claims in 8.2 are flagged as candidate explanations, not
-established findings, precisely because they haven't been checked yet.
+Items 2, 6, 7 are not started; item 1 is running. This section is a
+draft skeleton for the argument, built honestly from what's actually
+been measured — the remaining unchecked claims in 8.2 (the isolated-
+schwa context-boundedness story specifically) are flagged as candidate
+explanations, not established findings.
