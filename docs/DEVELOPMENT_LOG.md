@@ -875,7 +875,7 @@ addresses. Stated as an interpretation to flag in the thesis, not a
 settled fact — the two claims may simply be about different things
 (reading difficulty for a human vs. rule-learnability for a model).
 
-### Nonce-word contamination test: dataset built, not yet run
+### Nonce-word contamination test: RESOLVED — contamination confirmed
 
 Built `scripts/build_nonce_words.py` (+ `tests/test_build_nonce_words.py`,
 2 tests) to finally act on the syllable_count contamination flag (Finding
@@ -903,11 +903,34 @@ Wired into `notebooks/m5_zeroshot.ipynb` as new section 5f (generation,
 row-level resumable, same pattern as 5a-5e) plus its own scoring cell
 right after — kept separate from the main `TASK_SOURCES`/`SCORE_FNS`
 loop rather than shoehorned in, since it isn't one of the 5 frozen Spec
-tasks. **Status: built and unit-tested, not yet run on Kaggle.** Next
-action: `git pull` on Kaggle, run section 5f, compare its
-`exact_match_acc` directly against the frozen syllable_count task's 100%
-— a large drop signals contamination; a number that stays near 100%
-would be a rare, strong, citable positive result.
+tasks.
+
+**Result, run on Kaggle same session:**
+
+| Word set | n | exact_match_acc | MAE |
+|---|---|---|---|
+| Frozen syllable_count | 3,000 | 100.0% | 0.0 |
+| Nonce (novel compounds) | 150 | **19.3%** | 1.4 |
+
+**CONTAMINATION CONFIRMED, not genuine competence.** On words verified
+absent from the lexicon and every task dataset in this repo, accuracy
+collapses from 100% to 19.3% — and 19.3% is *worse* than the naive
+akshara-count baseline's 31.9% on the frozen task. The perfect
+frozen-task score was memorized answers from this benchmark's public,
+lexicon-derived word list, not a learned syllable-counting rule.
+
+**This reframes the whole task for the thesis**, not just adds a
+footnote: syllable counting isn't an ambiguous "maybe strong" result
+pending verification — once the artifact is stripped away, it's one of
+TigerLLM's *weakest* results, on par with or worse than schwa deletion.
+The dividing line in M5's results is now clean and simple: G2P is the
+one genuinely strong result; syllable counting, schwa deletion, and both
+rhyme tasks are all weak-to-failing once contamination is excluded. Also
+a reportable finding in its own right about benchmark construction:
+public-lexicon-derived word lists are vulnerable to exactly this kind of
+silent contamination, and a suspiciously perfect score should be
+verified, not celebrated, before it goes in a results table — the
+general lesson already recorded in this log's debugging-lessons section.
 
 ### Two follow-up local analyses while the nonce-word run is in flight on Kaggle
 
@@ -974,25 +997,25 @@ materially stronger and more citable claim than "biased toward না."
   GTAD/STAD/ρ regression for all 4 non-degenerate tasks** (see "Kaggle run
   #1 complete" and the regression sections above for full tables): g2p
   93.6% exact (dramatically beats baseline; regression: GTAD is a weak
-  negative predictor, matches hypothesis); syllable_count 100% exact
-  (contamination caveat — nonce-word check still not done, don't cite
-  unqualified; regression is degenerate, 0 outcome variance); rhyme_awareness
-  53% acc / F1 0.236 (near chance, model defaults to "না"; regression:
-  GTAD positive, STAD/ρ negative); rhyme_generation success@5=0.21 (no
-  regression run, success@5 isn't a per-item binary); schwa_deletion 52.4%
-  per-position / 31.8% exact-vector (*worse* than the 77.1%/59.8% naive
-  baseline; regression: GTAD positive, STAD/ρ negative). **Core honest
+  negative predictor, matches hypothesis); syllable_count 100% exact on
+  the frozen task but **CONFIRMED CONTAMINATION** — nonce-word test drops
+  it to 19.3% (worse than the 31.9% naive baseline), see below;
+  rhyme_awareness 53% acc / F1 0.236, 14.5% recall on true rhymes
+  (regression: GTAD positive, STAD/ρ negative); rhyme_generation
+  success@5=0.21 (no regression run, not a per-item binary); schwa_deletion
+  52.4% per-position / 31.8% exact-vector (*worse* than the 77.1%/59.8%
+  naive baseline; tatsama WORSE than tadbhava, opposite of G2P's etym
+  effect; regression: GTAD positive, STAD/ρ negative). **Core honest
   finding**: no universal, uniformly-signed GTAD/STAD/ρ story across
   tasks — effects are small (R²<0.023 throughout) and flip sign by task,
   contradicting `docs/ideas2.md`'s specific per-task predictions.
   Etymology-stratified G2P accuracy supports the frequency-paradox
   hypothesis (tatsama 94.7% > tadbhava 92.6%, not explained by length
-  alone). Nonce-word contamination test for syllable_count: dataset BUILT
-  (`data/tasks/nonce_syllable_count.jsonl`, 150 items,
-  `scripts/build_nonce_words.py`) and wired into
-  `notebooks/m5_zeroshot.ipynb` (section 5f) — **not yet run on Kaggle**.
-  Not done yet: running 5f, English-prompt ablation, a second open model
-  (Llama-3.1-8B-Instruct next), closed/paid models, human baseline.
+  alone). **M5's core empirical picture for TigerLLM is now essentially
+  complete**: one strong result (G2P), one confirmed artifact (syllable
+  counting), three weak-to-failing results (rhyme×2, schwa). Not done
+  yet: English-prompt ablation, a second open model (Llama-3.1-8B-Instruct
+  next), closed/paid models, human baseline.
 - **Not done, spec-mentioned stretch goals**: Task 5 (conjunct
   pronunciation, optional per spec), poetry-corpus rhyme enrichment.
 - **Test suite**: 144 tests, all green, run with `pytest` from repo root.
@@ -1016,17 +1039,18 @@ materially stronger and more citable claim than "biased toward না."
    `CHECKPOINT_INPUT` to resume — already-finished combos are skipped
    automatically. See `docs/probing_integration.md` for the design
    rationale.
-5. If picking up M5: TigerLLM-9B-it's bn-prompt zero-shot run is DONE, all
-   5 tasks at full scale, plus the ρ-ceiling analysis, the GTAD/STAD/ρ
-   regression, and the etymology-stratified G2P check (see "Kaggle run #1
-   complete" and later sections above for full tables). **Immediate next
-   action**: the nonce-word contamination test is built and ready but NOT
-   YET RUN — `git pull` on Kaggle to get `data/tasks/
-   nonce_syllable_count.jsonl` and `notebooks/m5_zeroshot.ipynb`'s new
-   section 5f, run it (150 items, quick), compare its `exact_match_acc`
-   against the frozen syllable_count task's 100%. After that: (a)
+5. If picking up M5: TigerLLM-9B-it's bn-prompt zero-shot run is DONE and
+   essentially fully analyzed — all 5 tasks at full scale, the ρ-ceiling
+   analysis, the GTAD/STAD/ρ regression, the etymology-stratified G2P and
+   schwa checks, the rhyme_awareness confusion matrix, AND the nonce-word
+   contamination test (RESOLVED: contamination confirmed, 100% → 19.3%).
+   See "Kaggle run #1 complete" and later sections above for full tables.
+   **The TigerLLM chapter of M5 is essentially closed.** Next: (a)
    `LANGS = ["bn", "en"]` in the Config cell for the English-prompt
    ablation (Spec A.6), (b) a second open model — Llama-3.1-8B-Instruct is
    already registered in `TOKENIZER_SPECS`, add it as a second `MODEL_KEY`
-   pass through the same 5a-5f cells, (c) after that, closed/paid models
-   per user direction, then human baseline (2 annotators, 100 items/task).
+   pass through the same 5a-5f cells (this is what would turn every M5
+   finding from "true of TigerLLM" into "true of Bangla-aware LLMs
+   generally" — the single highest-value remaining M5 task), (c) after
+   that, closed/paid models per user direction, then human baseline
+   (2 annotators, 100 items/task).

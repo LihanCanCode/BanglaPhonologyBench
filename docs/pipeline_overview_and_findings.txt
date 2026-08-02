@@ -274,8 +274,13 @@ M5 — Zero-shot evals + human baselines + regression analysis + writing
       what would turn this from "TigerLLM-specific" into a genuine
       cross-model comparison.
     - Also done, not in the original Spec plan: a rho-ceiling analysis
-      (Finding 7b) and a frequency-paradox investigation (Finding 9),
-      both flagged as valuable additions during M5 execution.
+      (Finding 7b), a frequency-paradox investigation (Finding 9),
+      etymology stratification for G2P and schwa (Findings 9/9a), a
+      rhyme_awareness confusion matrix (Finding 9b), and the nonce-word
+      contamination test for syllable_count (Finding 7c, RESOLVED:
+      contamination confirmed, 100% -> 19.3% on novel words) — all
+      flagged as valuable additions during M5 execution, not in the
+      original Spec plan.
 
 
 5. KEY FINDINGS SO FAR (useful for the "ideas" ask)
@@ -379,7 +384,7 @@ Finding 7 — M5's zero-shot pass (TigerLLM-9B-it, Bangla prompts, all 5
     Task              | Baseline           | TigerLLM zero-shot        | Read
     ------------------|--------------------|-----------------------|------
     G2P               | 17.6% PER,36.2% ex | 3.0% PER, 93.6% exact  | Model dramatically beats baseline
-    Syllable count    | 31.9% exact        | 100.0% exact           | Perfect -- needs Finding 7b's caveat
+    Syllable count    | 31.9% exact        | 100.0% exact (frozen)  | CONTAMINATED -- 19.3% on nonce words (Finding 7c)
     Rhyme awareness   | 100% (oracle)      | 53.0% acc, F1 0.236    | 14.5% recall on true rhymes (see Finding 9b)
     Rhyme generation  | 100% (oracle)      | success@5 = 0.21       | Far below the dictionary ceiling
     Schwa deletion    | 77.1% per-position | 52.4% per-position     | WORSE than a 1-line heuristic
@@ -391,15 +396,34 @@ Finding 7 — M5's zero-shot pass (TigerLLM-9B-it, Bangla prompts, all 5
   fair competitor."
 
 Finding 7b — The rho-ceiling analysis (scripts/analyze_rho_ceiling.py)
-  strengthens, rather than resolves, the syllable_count contamination
-  question: TigerLLM scores 1.000 in every rho bin, INCLUDING rho=1.0
-  (221 words where the true syllable boundary has literally no possible
-  orthographic representation). Genuine spelling-based reasoning should
-  degrade there; it doesn't, at all. This is a specific, falsifiable
-  point for the thesis -- stronger than "100% just looks suspicious" --
-  and raises the priority of the still-not-run nonce-word contamination
-  test (generate words that cannot appear in any training corpus and see
-  if the perfect score survives).
+  strengthened the syllable_count contamination question before the nonce
+  test resolved it: TigerLLM scored 1.000 in every rho bin, INCLUDING
+  rho=1.0 (221 words where the true syllable boundary has literally no
+  possible orthographic representation) -- genuine spelling-based
+  reasoning should degrade there; it didn't, at all.
+
+Finding 7c — RESOLVED: the nonce-word contamination test (scripts/
+  build_nonce_words.py, data/tasks/nonce_syllable_count.jsonl, run via
+  notebooks/m5_zeroshot.ipynb section 5f) confirms CONTAMINATION, not
+  genuine competence:
+
+    Word set              | n   | exact_match_acc | MAE
+    -----------------------|-----|------------------|-----
+    Frozen syllable_count  | 3000|      100.0%      | 0.0
+    Nonce (novel compounds)|  150|       19.3%       | 1.4
+
+  On words verified absent from the lexicon and every task dataset,
+  accuracy collapses from 100% to 19.3% -- and 19.3% is WORSE than the
+  naive akshara-count baseline's 31.9% on the frozen task. The perfect
+  frozen-task score was memorized answers from this benchmark's public,
+  lexicon-derived word list, not a learned syllable-counting rule. This
+  is now a clean, closed, headline-worthy finding for the thesis: not
+  just "the 100% is suspicious" but "the 100% is demonstrated
+  contamination, and the model's genuine zero-shot syllable-counting
+  ability (19.3%, worse than a one-line heuristic) is actually one of
+  its WEAKEST results, not its strongest." This substantially changes
+  Finding 7's table and the Synthesis section's "UNCLEAR" framing for
+  syllable counting -- both updated below.
 
 Finding 8 — The GTAD/STAD/rho regression (scripts/analyze_regression.py,
   run for all 4 non-degenerate tasks) finds NO universal, uniformly-signed
@@ -612,26 +636,39 @@ It is good at some things and genuinely bad at others, and the split
 is informative:
 
   STRONG:  G2P (93.6% exact, PER 0.029) — crushes the naive baseline
-           (36.2% exact, PER 0.176) by a wide margin.
-  UNCLEAR: Syllable counting (100.0% exact) — perfect, but flagged with
-           a contamination caveat (Finding 7b) pending the nonce-word
-           test. Cannot currently be cited as either a clean win or a
-           clean artifact.
-  WEAK:    Rhyme awareness (53.0% acc, F1 0.236) — barely above chance
-           on a balanced set, systematically biased toward "na" (no).
+           (36.2% exact, PER 0.176) by a wide margin. The one clean,
+           uncomplicated win in the whole battery.
+  ARTIFACT: Syllable counting looked perfect on the frozen task (100.0%
+           exact) but that number is CONTAMINATION, confirmed by the
+           nonce-word test (Finding 7c): genuine zero-shot accuracy on
+           novel words is 19.3% (MAE 1.4) -- worse than the naive
+           akshara-count baseline's 31.9%. Once the artifact is stripped
+           away, this is actually one of the model's WEAKEST results, not
+           its strongest -- a finding that reframes the whole task, not
+           just a footnote on an otherwise-good score.
+  WEAK:    Rhyme awareness (53.0% acc, F1 0.236) — 14.5% recall on true
+           rhymes (Finding 9b), including trivially obvious pairs;
+           91.5% specificity. Not conservative caution on hard cases --
+           missing easy cases at scale while its rare "yes" answers get
+           fooled by the hardest surface-similarity decoys specifically.
   WEAK:    Rhyme generation (success@5 = 0.21) — far below the
            dictionary-lookup ceiling (100%, by construction).
   FAILING: Schwa deletion (52.4% per-position) — WORSE than a one-line
            majority-rule heuristic (77.1%). Not just "not great" — the
            model actively underperforms a hardcoded rule a human wrote
-           in five minutes.
+           in five minutes. Etymology makes it worse in a specific way
+           (Finding 9a): tatsama words (24.9%) do WORSE than tadbhava
+           (35.7%), opposite of G2P's pattern.
 
 8.2 Why the asymmetry? A candidate explanation (needs scrutiny before
     it goes in a final draft)
 
-The clearest dividing line in the data is between G2P (strong) and
-everything phonology-adjacent-but-not-G2P (weak-to-failing). A plausible
-account:
+The dividing line in the data, now that syllable counting's artifact is
+stripped away, is stark and simple: G2P (strong) vs. EVERYTHING else
+(weak-to-failing) -- syllable counting, schwa deletion, and both rhyme
+tasks all land in the same weak/failing tier once contamination is
+excluded. This is a cleaner, more defensible claim than the earlier
+four-way split. A plausible account for why G2P is the outlier:
 
   - G2P is close to a direct, learnable function of orthography. Bangla
     spelling is largely phonemic; grapheme-to-phoneme mapping, while it
@@ -727,14 +764,11 @@ tension named explicitly, not as a resolved contradiction.
 
 8.4 What would strengthen this chapter, in priority order
 
-  1. IN PROGRESS: the nonce-word contamination test (Finding 7b above) —
-     dataset built (scripts/build_nonce_words.py, data/tasks/
-     nonce_syllable_count.jsonl, 150 items) and wired into
-     notebooks/m5_zeroshot.ipynb section 5f; running on Kaggle now.
-     Turns syllable_count from "uncited caveat" into either a strong
-     positive result or an honest documented limitation once the number
-     comes back. Still the single biggest open question blocking a clean
-     write-up of M5's headline numbers.
+  1. DONE: the nonce-word contamination test (Finding 7c above) — 100%
+     exact match on the frozen task collapses to 19.3% on novel words
+     (worse than the 31.9% naive baseline). CONTAMINATION CONFIRMED, not
+     genuine competence. This was the single biggest open question in
+     M5 and it's now resolved with a clean, citable, headline number.
   2. The g2p-vs-isolated-schwa consistency check proposed in 8.2 — cheap
      (both sets of raw completions already exist locally), and would
      directly test whether the "context-bound knowledge" story in 8.2
@@ -758,8 +792,8 @@ tension named explicitly, not as a resolved contradiction.
      worse than a heuristic" be joined by "and humans score X%," the
      comparison a reader will most want to see. Not started.
 
-Items 2, 6, 7 are not started; item 1 is running. This section is a
-draft skeleton for the argument, built honestly from what's actually
+Items 2, 6, 7 are not started; items 1, 3, 4, 5 are done. This section is
+a draft skeleton for the argument, built honestly from what's actually
 been measured — the remaining unchecked claims in 8.2 (the isolated-
 schwa context-boundedness story specifically) are flagged as candidate
 explanations, not established findings.

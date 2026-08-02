@@ -159,15 +159,25 @@ Word categories for split analyses: **A** (aligned: GTAD=0 ∧ STAD=0), **CB**
    `scripts/score_zeroshot_results.py` scores local raw-completion files without
    needing Kaggle, for regenerating `zeroshot_summary_{model}.csv`.
    **Etymology-stratified G2P accuracy** supports the frequency-paradox hypothesis
-   (tatsama 94.7% > tadbhava 92.6% > n=1660, not explained by length alone — see
-   dev log for the literature-tension caveat). **Nonce-word contamination test**:
-   dataset built (`scripts/build_nonce_words.py` -> `data/tasks/
-   nonce_syllable_count.jsonl`, 150 compound words verified absent from the
-   lexicon, gold via `syllabify()`) and wired into `m5_zeroshot.ipynb` section 5f
-   — **NOT YET RUN on Kaggle**, the immediate next action. After that: English-prompt
-   ablation (`LANGS=["bn","en"]`), a second open model (Llama-3.1-8B-Instruct,
-   already in `TOKENIZER_SPECS`), then closed/paid models, human baseline
-   (2 annotators, 100 items/task).
+   (tatsama 94.7% > tadbhava 92.6%, n=1660, not explained by length alone — see
+   dev log for the literature-tension caveat); the SAME check on schwa_deletion
+   runs the OPPOSITE direction (tatsama 24.9% < tadbhava 35.7%) — two distinct
+   findings, not one. **Rhyme awareness confusion matrix**: 14.5% recall on true
+   rhymes (91.5% specificity) — missing easy/obvious pairs at scale while rare
+   false positives concentrate on the hardest decoys; supersedes the earlier
+   "biased toward না" framing. **Nonce-word contamination test: RESOLVED** —
+   `scripts/build_nonce_words.py` -> `data/tasks/nonce_syllable_count.jsonl`
+   (150 compound words verified absent from the lexicon, gold via `syllabify()`),
+   run via `m5_zeroshot.ipynb` section 5f: exact_match_acc collapses 100% -> 19.3%
+   (worse than the 31.9% naive baseline) — **CONFIRMED CONTAMINATION**, syllable
+   counting is actually one of TigerLLM's weakest results once the artifact is
+   stripped away, not its strongest. **M5's TigerLLM chapter is essentially
+   closed**: one strong result (G2P), one confirmed artifact (syllable counting),
+   three weak-to-failing results (rhyme×2, schwa). Next, highest-value first:
+   a second open model (Llama-3.1-8B-Instruct, already in `TOKENIZER_SPECS`) —
+   turns every finding from "true of TigerLLM" into "true of Bangla-aware LLMs
+   generally" — then English-prompt ablation (`LANGS=["bn","en"]`), closed/paid
+   models, human baseline (2 annotators, 100 items/task).
 
 Workflow note: dataset construction, segmenter/metric work, and tokenizer analyses run
 fine locally (CPU-only). Only M4/M5 GPU forward passes go to Kaggle — this repo is the
