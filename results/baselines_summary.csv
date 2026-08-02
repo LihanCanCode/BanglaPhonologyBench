@@ -1,0 +1,5 @@
+task,n,metric,value,secondary_metric,secondary_value
+g2p,3000,mean_PER,0.17596820850717942,exact_match,0.3616666666666667
+syllable_count,3000,exact_match_acc,0.319,MAE,0.831
+schwa_deletion,1000,per_position_acc,0.7712820512820513,exact_vector_match,0.598
+rhyme_awareness,400,accuracy,1.0,F1,1.0

@@ -121,9 +121,30 @@ Word categories for split analyses: **A** (aligned: GTAD=0 ∧ STAD=0), **CB**
    ~1e28-1e32 scores) is fixed in `kaggle_probing_lib.run_probe_battery`
    (drop constant columns per category, variance-weighted R^2). Rhyme
    extraction/probing cells and pairwise A>M>CB p-value aggregation
-   (`probe_pairwise_summary.csv`) added to the notebook; not yet run on Kaggle.
-5. **M5 (wks 9–12):** zero-shot evals (closed + open models); human baselines; regression
-   analysis; writing.
+   (`probe_pairwise_summary.csv`) added to the notebook and **run to completion on
+   Kaggle** for BanglaT5 + TigerLLM (`results/probe_pairwise_BanglaT5+TigerLLM.csv`).
+   Result is genuinely mixed, not a clean confirmation of the spec's A>M>CB
+   hypothesis (CB beats M on rhyme for both models; M beats A on BanglaT5
+   g2p/syllables) — flagged for the M5 regression step, not yet explained. M4 is
+   DONE for these 2 tokenizers; GPT-2/ByT5/Llama-3.1 g2p/syllable probing (expected
+   ~all-CB, still worth running for completeness) not yet run.
+5. **M5 (wks 9–12):** IN PROGRESS. Baselines built (`scripts/build_baselines.py` ->
+   `results/baselines_summary.csv`): naive g2p (17.6% PER, 36.2% exact), akshara-count
+   syllable baseline (31.9% exact, MAE 0.83), majority-rule schwa (77.1% per-position,
+   59.8% exact-vector), dictionary-rime-lookup rhyme (100%, a ceiling baseline by
+   construction — the open question is whether an LLM can recover it from spelling
+   alone). Zero-shot harness built: `scripts/zeroshot_lib.py` (prompt/parse/score for
+   all 5 tasks, Bangla-language prompts + an English-ablation switch, unit-tested with
+   a mock generator — `tests/test_zeroshot_lib.py`, no GPU needed) +
+   `notebooks/m5_zeroshot.ipynb` (clone-and-run on Kaggle, **TigerLLM-9B-it only for
+   now** — cost-free; more open models next, closed/paid models later per user
+   direction). Unlike M4, generation is **row-level resumable** (one JSONL line per
+   item, `checkpoints/zeroshot/{task}_{lang}_tigerllm.jsonl`) since autoregressive
+   generation across ~5,000+ items across 5 tasks is a real multi-hour job, not M4's
+   minutes-scale single-forward-pass extraction. NOT YET RUN on Kaggle (needs GPU) —
+   next action is uploading the notebook and running the `SAMPLE_SIZE=300` smoke test.
+   Human baseline (2 annotators, 100 items/task) and the regression step (probe
+   residuals ~ GTAD+STAD+ρ+freq+etym) not started, blocked on real zero-shot numbers.
 
 Workflow note: dataset construction, segmenter/metric work, and tokenizer analyses run
 fine locally (CPU-only). Only M4/M5 GPU forward passes go to Kaggle — this repo is the
@@ -138,6 +159,10 @@ source of truth; Kaggle notebooks pull it.
 - `python scripts/build_top3000.py` — top-3000 frequency wordlist (wordfreq bn).
 - `python scripts/compute_metrics.py data/wordlist_top3000.tsv -o results/metrics_top3000.csv`
 - `python scripts/make_figure2.py` — Figure 2 (metric distributions + violation types).
+- `python scripts/build_baselines.py` — M5 non-LLM baselines (naive g2p, akshara-count
+  syllables, majority-rule schwa, dictionary-rime-lookup rhyme) -> `results/baselines_summary.csv`.
+- `notebooks/m5_zeroshot.ipynb` — M5 zero-shot eval on Kaggle (TigerLLM-9B-it first);
+  uses `scripts/zeroshot_lib.py` for prompts/parsing/scoring, row-level resumable.
 
 Run Python scripts with `-X utf8` on Windows (Bangla output to console).
 

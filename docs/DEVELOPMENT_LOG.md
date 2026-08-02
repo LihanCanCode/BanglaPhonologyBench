@@ -397,18 +397,117 @@ in this environment), so correctness had to come from testing what
 
 ---
 
+## M4 rhyme-probe run + M5 baselines and zero-shot harness
+
+Picked up after the M4 rhyme-probe cells (section 5b/6b) had been added to
+`m4_probing.ipynb` but never run on real Kaggle GPU.
+
+### Rhyme-probe (Task 3a) run to completion on Kaggle
+
+Ran the notebook's g2p/syllable + rhyme sections for BanglaT5 and TigerLLM
+end to end (the only 2 tokenizers with a real 3-way A/M/CB split — the
+other 3 registered tokenizers collapse to ~99% CB, so their probes are
+skipped by design, not a bug). Output:
+`results/probe_pairwise_BanglaT5+TigerLLM.csv` (per-layer, per-task,
+per-control-condition one-sided p-values for all 6 pairwise A/M/CB
+comparisons) and `results/probe_pairwise_summary.csv`.
+
+**Result is genuinely mixed, not the spec's clean A>M>CB hypothesis:**
+computed layer-wise significance rates (fraction of layers where
+`p_value < 0.05`, real condition only) directly from the CSV:
+
+| | BanglaT5 | TigerLLM |
+|---|---|---|
+| G2P | M beats A and CB in ~92% of layers (opposite of A>M) | A beats M and CB in ~50–55% of layers (matches, weakly) |
+| Syllable count | M beats A and CB in ~69% of layers | A beats M in 76%, but CB beats M in 57% (partially inverted) |
+| Rhyme | CB beats M in 92% of layers (opposite of M>CB) | CB beats M in 71% of layers (also opposite) |
+
+Not noise-shaped (too consistent within a model/task), but not the
+predicted ordering either. Left unexplained for now — flagged for the M5
+regression step (probe residuals ~ GTAD + STAD + ρ + log-freq + etym) to
+test whether category sample-size imbalance (BanglaT5's A/M/CB split is
+647/1822/442 words — M is the largest by far) or word-length/frequency
+confounds are driving it, rather than treating it as a clean finding.
+
+### M5 baselines (`scripts/build_baselines.py`)
+
+Four naive, non-learned reference points (Spec A.6's "Baselines" row),
+each deliberately weak so beating it is a low bar:
+- **G2P**: direct grapheme->phoneme table walk over `segment_aksharas`
+  clusters, no assimilation/gemination/silent-letter rules (those live
+  only in `bangla_phonology.align`, which produced the gold labels and is
+  never reused here — that would make the "baseline" the gold labeler).
+  17.6% mean PER, 36.2% exact match on the 3,000-word set.
+- **Syllable count**: `len(segment_aksharas(word))` — "one syllable per
+  akshara." 31.9% exact match, MAE 0.83; undercounts whenever a coda
+  cluster spans two aksharas (geminate splits).
+- **Schwa deletion**: majority-rule heuristic, the exact one named in the
+  spec ("delete word-final, keep the rest") — confirmed empirically
+  correct per-environment before hardcoding it (final: 82.2% majority-
+  delete; post_conjunct/medial/conjunct: 69–92% majority-keep, all same
+  direction). 77.1% per-position accuracy, 59.8% exact-vector match.
+- **Rhyme (3a)**: "dictionary rime lookup" — predicts rhyme iff the pair's
+  precomputed `rime1 == rime2` (derived from lexicon pronunciation, not
+  spelling). **100% accuracy**, expected and not a bug: it's a
+  ceiling-style baseline assuming perfect pronunciation knowledge: the
+  real M5 question is whether an LLM can recover the same answer from
+  spelling alone, without a dictionary.
+
+### M5 zero-shot harness (`scripts/zeroshot_lib.py` + `notebooks/m5_zeroshot.ipynb`)
+
+Built and unit-tested locally (`tests/test_zeroshot_lib.py`, 7 tests, mock
+generator, no GPU) — same "test what can be tested before touching a real
+model" discipline as M4. One prompt-builder + parser + scorer per task
+(g2p, syllable_count, rhyme_awareness, rhyme_generation, schwa_deletion),
+Bangla-language prompts by default with an English-ablation switch
+(`lang="en"`) per Spec A.6's prompt-language ablation.
+
+**Schwa elicitation design note**: the model is never shown IPA. It's
+given the word's schwa-eligible aksharas (the orthographic grapheme
+clusters at `schwa_positions` — e.g. পটলের's eligible clusters are
+প/ট/র, লে is excluded because it already has an explicit matra) numbered
+in order, asked Y/N per position ("is this consonant's default vowel
+pronounced"). This is the only elicitation format that doesn't require the
+model to already produce correct IPA as a side channel just to answer a
+binary-vector question.
+
+**Row-level resumability, unlike M4's file-level-only approach**: M4's
+extraction was one forward pass per word (minutes per combo even for an
+8B model). Zero-shot generation is autoregressive and far slower per item
+— a full run across 5 tasks is thousands of `generate()` calls, a real
+multi-hour job with real restart risk. So `m5_zeroshot.ipynb` saves one
+JSONL line per generated item (`checkpoints/zeroshot/{task}_{lang}.jsonl`)
+and skips ids already present on restart; scoring is a separate, cheap,
+re-runnable step over whatever's been generated so far, not fused into
+generation. Documented as a deliberate deviation from M4's precedent, with
+the reasoning, rather than silently copying a design that doesn't fit
+here.
+
+**Status: built, not yet run.** TigerLLM-9B-it only for this first pass
+(cost-free, per user direction — more open models next, closed/paid models
+later). Next action: upload the notebook to Kaggle, run the
+`SAMPLE_SIZE=300` smoke test across all 5 tasks, sanity-check parse rates
+and prompt wording against real model output before committing to a full
+run.
+
+---
+
 ## Current state summary (see `CLAUDE.md` for the authoritative live version)
 
 - **M1–M3: done**, including the full human annotation pass (rhyme 3a
   400/400 100%, rhyme 3b 300/300 100%, schwa 160/160 100%, etymology
   353/353 at a genuine 38.2% heuristic-tagger accuracy).
-- **M4 (Kaggle probing)**: pipeline BUILT and unit-tested, not yet run
-  against real models — needs GPU. `notebooks/m4_probing.ipynb` +
-  `scripts/kaggle_probing_lib.py`. Rhyme-probe category join not built.
-- **M5 (zero-shot evals)**: not started.
+- **M4 (Kaggle probing)**: g2p/syllable + rhyme probing run to completion
+  for BanglaT5 + TigerLLM (the 2 tokenizers with a real A/M/CB split);
+  result is a mixed, not-yet-explained deviation from the spec's A>M>CB
+  hypothesis (see above). GPT-2/ByT5/Llama-3.1 (expected ~all-CB) not run.
+- **M5 (zero-shot evals)**: baselines done (`results/baselines_summary.csv`);
+  zero-shot harness + Kaggle notebook built and unit-tested, not yet run
+  against a real model (needs GPU) — `notebooks/m5_zeroshot.ipynb`,
+  TigerLLM-9B-it first. Human baseline and the regression step not started.
 - **Not done, spec-mentioned stretch goals**: Task 5 (conjunct
   pronunciation, optional per spec), poetry-corpus rhyme enrichment.
-- **Test suite**: 127 tests, all green, run with `pytest` from repo root.
+- **Test suite**: 142 tests, all green, run with `pytest` from repo root.
 
 ## How to pick this back up
 
@@ -420,11 +519,24 @@ in this environment), so correctness had to come from testing what
 3. Check `data/annotation/*.csv` for any sheets with `reviewed` rows that
    haven't been merged (`python scripts/apply_annotations.py` is
    idempotent and safe to re-run).
-4. If picking up M4: `notebooks/m4_probing.ipynb` is ready to run — upload
-   to Kaggle with a GPU accelerator and run top to bottom, BanglaT5 first
-   (already the default order). If a `/kaggle/working/checkpoints/`
-   dataset exists from a prior session, attach it as input and set
-   `CHECKPOINT_INPUT` in the notebook's checkpoint-restore cell before
-   re-running — already-finished (tokenizer, category) combos are skipped
-   automatically. See `docs/probing_integration.md` for the full design
-   rationale and what's still missing (the rhyme-probe category join).
+4. If picking up remaining M4: g2p/syllable + rhyme probing for BanglaT5 +
+   TigerLLM is done (`results/probe_pairwise_BanglaT5+TigerLLM.csv`).
+   GPT-2/ByT5/Llama-3.1 haven't been run (expected ~all-CB, low priority
+   but not zero-value — completeness). `notebooks/m4_probing.ipynb` is
+   ready; upload to Kaggle with a GPU accelerator, attach a prior
+   `/kaggle/working/checkpoints/` dataset as input and set
+   `CHECKPOINT_INPUT` to resume — already-finished combos are skipped
+   automatically. See `docs/probing_integration.md` for the design
+   rationale.
+5. If picking up M5: `notebooks/m5_zeroshot.ipynb` is built and unit-tested
+   (`tests/test_zeroshot_lib.py`) but has never touched a real GPU. Upload
+   to Kaggle, leave `SAMPLE_SIZE = 300` for a first smoke test across all 5
+   tasks, run top to bottom, **Save Version**. Sanity-check
+   `zeroshot_summary_tigerllm.csv`'s parse rates before trusting the
+   accuracy numbers — prompt wording may need a tweak after seeing real
+   model output (the parsers in `scripts/zeroshot_lib.py` are forgiving but
+   untested against a real model's actual phrasing habits). Compare against
+   `results/baselines_summary.csv` once real numbers exist. TigerLLM only
+   for now; Llama-3.1-8B-Instruct is already registered in
+   `src/tokenizer_adapter.py`'s `TOKENIZER_SPECS` if/when more open models
+   are added, before moving to closed/paid models.
