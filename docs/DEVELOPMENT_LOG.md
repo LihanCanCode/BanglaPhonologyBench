@@ -490,6 +490,339 @@ later). Next action: upload the notebook to Kaggle, run the
 and prompt wording against real model output before committing to a full
 run.
 
+### Kaggle run #1 (TigerLLM-9B-it): smoke test, notebook UX fixes, g2p + syllable_count at full scale
+
+Ran `m5_zeroshot.ipynb` on Kaggle for real. Two bugs found and fixed before
+trusting any numbers, then two tasks finished at full scale — one of them a
+result surprising enough to need its own writeup.
+
+**Bug 1 — `generate()` crash on first run**: `AttributeError` inside
+`model.generate()` (`BatchEncoding` has no `.shape`) from passing
+`input_ids` positionally as a bare tensor — fragile across transformers
+versions when `apply_chat_template`'s return value isn't unwrapped
+consistently. Fixed by using `return_dict=True` and unpacking the encoding
+(`**encoded`) into `generate()` instead (the pattern HF's own docs
+recommend). Fixed, pushed, notebook re-pulled on Kaggle, no data lost
+(nothing had been generated yet at the point of the crash).
+
+**Notebook UX change — split section 5 into one cell per task (5a-5e)**:
+originally one loop fired all 5 tasks' ~6,200 remaining `generate()` calls
+back-to-back with nothing to inspect until it finished (hours, for a job
+with real restart risk). Split into 5a (g2p) / 5b (syllable_count) / 5c
+(rhyme_awareness) / 5d (rhyme_generation) / 5e (schwa_deletion), each
+independently runnable, plus a `peek(task)` helper cell to eyeball raw
+completions between tasks — catches a bad prompt/parser on a small batch
+instead of after committing hours to the full run. Requested by the user
+specifically to enable "one at a time" execution; matches this project's
+established "read the sample before trusting the pipeline" discipline.
+
+**Gotcha caught mid-run — scoring cell truncates by `SAMPLE_SIZE` same as
+generation does**: `score_task()` does `rows = rows[:SAMPLE_SIZE]` before
+matching against generated ids, so leaving `SAMPLE_SIZE` at a smaller
+value after generation had moved past it silently under-reported `n` in
+the scoring table (g2p briefly showed `n=1500` despite 2,341+ completions
+existing on disk). Not a data-loss bug — just a reporting trap. Fix:
+confirm `SAMPLE_SIZE = None` before trusting any scoring-cell row.
+
+**G2P at full scale (3,000/3,000): PER 0.029, exact match 93.6%.** Holds
+up from the 300-item smoke test's 92% — a real, strong, believable result,
+dramatically ahead of the naive baseline (PER 0.176, 36.2% exact).
+
+**Syllable count at full scale (3,000/3,000): exact match 1.0, MAE 0.0 —
+literally zero errors.** Independently re-verified outside the notebook's
+own scorer (not just trusting `run_syllable_count`'s output number):
+downloaded the raw checkpoint JSONL, diffed every one of the 3,000
+predictions against gold directly (0 mismatches), and confirmed the gold
+and predicted syllable-count distributions are bucket-for-bucket identical
+(1→166, 2→974, 3→973, 4→614, 5→211, 6→48, 7→11, 8→3 on both sides). A
+25-item random sample (fixed seed) spot-checked by eye, including a rare
+7-syllable compound (প্রতিদ্বন্দ্বিতাকারী), all correct. This rules out a
+scoring/parsing bug — the raw model completions genuinely are correct,
+word for word, on all 3,000.
+
+**This is flagged as a result requiring a contamination caveat, not
+reported as a clean win.** A literal 3,000/3,000 with zero errors is
+itself suspicious in the opposite direction from "the pipeline is broken":
+even the *gold labels'* own internal validation only reached 99.86%
+self-agreement (see M1's validation numbers), so a model landing on
+literally 0 disagreements against a gold set that isn't 100%
+self-consistent is unusual for genuine independent zero-shot inference.
+Two non-exclusive explanations recorded for the eventual writeup:
+(1) genuine competence — Bangla syllable division (অক্ষর বিভাজন) is a
+common school-curriculum drill, plausibly well-represented in a
+heavily-Bangla-tuned model's training data, and it's a more
+pattern-matchable task than full G2P (naive orthographic baseline: 31.9%
+exact, so it's not *trivially* solvable from spelling alone, but it may be
+learnable from enough examples); (2) contamination — the word list is
+derived from a public Google lexicon + `wordfreq`, and if TigerLLM's
+training corpus included the same or a similar syllable-annotated Bangla
+dictionary, this could be memorized recall rather than zero-shot
+reasoning. Not distinguished yet. A follow-up check worth doing before
+the numbers go in the paper: test on invented/nonce Bangla-looking words
+that cannot appear in any training corpus, and see if perfect accuracy
+survives — flagged as a TODO, not yet done.
+
+### Kaggle run #1 complete: all 5 tasks at full scale (TigerLLM-9B-it, bn prompts)
+
+rhyme_awareness (400/400) and schwa_deletion (1,000/1,000, 929 parsed)
+finished. Full M5 zero-shot-vs-baseline comparison, TigerLLM-9B-it,
+Bangla-language prompts:
+
+| Task | Baseline (`results/baselines_summary.csv`) | TigerLLM zero-shot | Read |
+|---|---|---|---|
+| G2P | PER 0.176, 36.2% exact | **PER 0.029, 93.6% exact** | Model dramatically beats the naive baseline — solid, credible win. |
+| Syllable count | 31.9% exact, MAE 0.83 | **100.0% exact, MAE 0.0** | Perfect — carries the contamination caveat above (nonce-word check still a TODO before this goes in the paper as-is). |
+| Rhyme awareness | 100% (ceiling/oracle, not a real floor) | 53.0% acc, F1 0.236 | Barely above chance on the full balanced 400-pair set — confirms the smoke test's "answers না almost unconditionally" finding wasn't a small-sample fluke. |
+| Rhyme generation | — (no baseline built yet) | success@5 = 0.21 | Stands alone; dataset is fixed-size at 300, this is the final number. |
+| Schwa deletion | 77.1% per-position, 59.8% exact-vector | 52.4% per-position, 31.8% exact-vector | Model is *worse* than the hardcoded majority-rule heuristic — a genuine negative result, confirmed at full scale (929/1,000 parsed, 7.1% unparseable). |
+
+**Headline framing for the writeup**: not "the model knows Bangla
+phonology" — it's *uneven* across sub-tasks, which is the more informative
+and honest story. TigerLLM is excellent at G2P, plausibly-but-unverified
+excellent at syllable counting (contamination caveat pending), and
+actively *worse than a one-line heuristic* at schwa deletion, with rhyme
+judgment sitting near chance. All 5 tasks are now done for this model —
+**M5's first full pass (TigerLLM, bn-only) is complete.**
+
+Not yet done, in priority order: (1) the syllable_count nonce-word
+contamination check; (2) English-prompt ablation (`lang="en"`, per Spec
+A.6) for the same 5 tasks/same model; (3) a second open model
+(Llama-3.1-8B-Instruct, already registered in `TOKENIZER_SPECS`); (4)
+closed/paid models, deferred per user direction; (5) human baseline (2
+annotators, 100 items/task); (6) the regression step tying probe/zero-shot
+performance to GTAD+STAD+ρ+freq+etym, which needs at least one more
+model's worth of data to be worth running.
+
+### ρ-ceiling analysis + rhyme-generation dictionary baseline (`scripts/analyze_rho_ceiling.py`, `build_baselines.py` update)
+
+An external AI (Perplexity) was consulted for a post-M5-results action
+plan (`docs/perplexity_idea.md`); several of its ideas overlapped with
+already-planned Spec C.6 work (the regression step, A/M/CB breakdown) and
+two were cheap enough to do immediately with data already in hand — done
+here. Others (P-CoT prompting, a cited rule-based schwa algorithm,
+feature-vector G2P probes, stem-only rhyme) were deliberately NOT acted
+on: they cite sources (a "Jang et al. 2025" P-CoT paper, "Nair 1999 /
+Niyogi 2006" schwa rules, specific PhonologyBench/human-baseline
+percentages) that were not verified against the actual papers before
+this session, and shouldn't be taken as citable facts in the thesis
+without that verification — flagged, not silently trusted or acted on.
+
+**ρ-ceiling analysis** (`scripts/analyze_rho_ceiling.py`, reads a task's
+raw `{id, raw_output}` completions + `syllable_count_word.jsonl`'s
+precomputed `rho` field, no new metric computation needed): bins words by
+ρ and compares TigerLLM's syllable-count accuracy against the naive
+akshara-count baseline's, per bin. Result, run against the full 3,000-word
+completions:
+
+| ρ bin | n | TigerLLM acc | baseline acc |
+|---|---|---|---|
+| 0.0 (no ceiling) | 2,050 | 1.000 | 0.288 |
+| 0.01–0.34 | 337 | 1.000 | 0.401 |
+| 0.35–0.99 | 392 | 1.000 | 0.342 |
+| 1.0 (fully misaligned) | 221 | 1.000 | 0.443 |
+
+**This sharpens the contamination concern rather than resolving it**:
+TigerLLM scores 1.000 even at ρ=1.0 — the 221 words where the true
+syllable boundary has NO possible orthographic representation at all.
+Genuine spelling-based reasoning should degrade there if it were reasoning
+from orthographic pattern alone; it doesn't degrade even slightly. This is
+a concrete, falsifiable point for the thesis (stronger than "100% looks
+suspicious") and makes the still-pending nonce-word contamination test
+more important, not less. Side finding, worth a caveat in the writeup: the
+naive baseline's accuracy does NOT track ρ monotonically (worst at ρ=0,
+its supposedly "easiest" bin) — because ρ only captures "boundary has no
+orthographic image at all," not the separate, more common Bangla pattern
+where one syllable's coda consonant cluster spans two aksharas (which
+makes the "1 syllable per akshara" baseline overcount, most often exactly
+when ρ=0). Don't conflate the two failure modes when writing this up.
+
+**Rhyme-generation dictionary baseline** added to `build_baselines.py`
+(`run_rhyme_generation_baseline`): picks any 5 words from the prompt's
+precomputed `gold_rhymes` set. Scores 100% success@5 — by construction,
+same tautology as the existing 3a rhyme baseline (the "prediction" is
+drawn from the gold set itself), not a meaningful floor, but the same
+"here's the ceiling a dictionary achieves" reference point 3a's baseline
+provides, so TigerLLM's 21% success@5 has something concrete to be
+compared against. `results/baselines_summary.csv` now has all 5 rows.
+
+### A/M/CB breakdown + regression, attempt 1: degenerate for syllable_count (`scripts/analyze_regression.py`)
+
+Second follow-up from the external-AI action plan (`docs/ideas2.md`) —
+same disclaimer as before: specific numeric claims in that doc (P-CoT's
+"52% gains," Nair 1999's "94.66% for Hindi") are unverified against the
+actual papers and were NOT acted on; only the two items buildable from
+data already in hand were.
+
+Built `scripts/analyze_regression.py`: per-word A/M/CB accuracy breakdown
+(reusing `export_for_probing.categorize`, the same fixed Spec C.4
+definition M4 uses — not re-derived) + a small hand-rolled IRLS logistic
+regression (`correct ~ gtad + stad + rho + log_freq`, standardized
+coefficients) since adding `statsmodels` as a new dependency for one
+script felt like overkill. **Explicit limitation, not silently
+upgraded**: this gives coefficients + McFadden's pseudo-R², NOT
+p-values/standard errors — treat as directional/exploratory, redo with
+`statsmodels.Logit` before anything in the thesis needs real significance
+testing.
+
+Ran against syllable_count (the only task with full clean local data):
+**A/M/CB accuracy is 1.000 in all three categories, and the regression is
+mathematically degenerate** (intercept diverges to 17.5, all coefficients
+≈0, McFadden pseudo-R² negative). Not a bug — the correct consequence of
+regressing against an outcome with zero variance (syllable_count is
+100% correct on all 2,982 usable words, so there's nothing for
+GTAD/STAD/ρ to explain).
+
+**Genuinely useful finding buried in the null result**: TigerLLM is
+invariant not just to ρ (previous section) but to its own tokenizer's
+GTAD/STAD category too — CB (cluster-broken, the worst category) scores
+identically to A (aligned). Worth a specific methodological point in the
+thesis: GTAD/STAD's original motivation (Liao & Shi) is about a linear
+**probe** reading one frozen last-token hidden state, where token boundary
+placement mechanically determines what that vector contains — a
+zero-shot **generation** model attends over its whole input regardless of
+internal boundary placement, so there's no a priori reason tokenization
+misalignment has to bottleneck generation the same way it bottlenecks
+probing. These may be genuinely different mechanisms, not the same claim
+measured twice — don't conflate M4's probing story with M5's zero-shot
+story as if they must agree.
+
+**The regression only becomes informative on a task with real variance in
+the outcome** — g2p (93.6%, not saturated), rhyme_awareness (53%), and
+schwa_deletion (52.4%) are where this analysis will actually produce a
+result. `build_dataset()` originally only implemented `correct` scoring for
+syllable_count; g2p scoring (exact match against gold IPA) added next
+(same pattern for rhyme_awareness/schwa_deletion once their data exists).
+
+### g2p regression: the real "money plot" (`results/regression_g2p_tigerllm.json`)
+
+User supplied fresh full-scale raw completions for g2p (`results/
+g2p_results.csv`, 3,000/3,000) — confirmed clean this time. Ran
+`analyze_regression.py g2p` against it:
+
+**A/M/CB breakdown**: A=0.927 (n=697), CB=0.930 (n=1,614), M=0.958
+(n=671) — same pattern as syllable_count: nearly flat, CB (the
+"worst" category) is NOT worse than A. The discrete A/M/CB split
+(M4's probing framework) does not cleanly separate G2P zero-shot
+performance.
+
+**But the continuous regression tells a different story**: `correct ~
+gtad + stad + rho + log_freq`, standardized coefficients — gtad
+coef=−0.338 (higher GTAD → lower accuracy, matching the spec's
+hypothesis direction), stad coef=+0.203, rho coef=+0.142, log_freq
+coef=−0.229 (counterintuitive — flagged, not explained away; possibly
+confounded with word length or etym, not investigated further this
+session). McFadden pseudo-R²=0.022 — real but small; these four
+predictors explain little of the variance in whether TigerLLM gets a
+word's phonemes right.
+
+**Honest framing for the thesis**: the discrete A/M/CB categorization
+doesn't predict G2P zero-shot performance, but the continuous GTAD score
+has a weak, directionally-correct negative association. Misalignment
+matters a little, in the predicted direction, but isn't close to the
+dominant driver of correctness — a more nuanced, more defensible claim
+than either "tokenization doesn't matter" or "tokenization is everything."
+Remember this regression's stated limitation: hand-rolled IRLS, no
+p-values/standard errors, directional/exploratory only until redone with
+`statsmodels.Logit`.
+
+**Still blocked (at time of writing above)**: rhyme_awareness and
+schwa_deletion regressions needed their real full-scale data — user's
+first two uploads were checked and were still capped at 300 items each
+(max ids `rhyme3a_00299` / `schwa_00299`), the smoke-test-scale copies,
+not the true 400/1,000. Resolved same session: user re-uploaded
+`results/rhyme_awareness_results.csv` (400/400, verified via max id
+`rhyme3a_00399`) and `results/schwa_deletion_results.csv` (1,000/1,000,
+verified via line count).
+
+### Regression complete for all 3 non-degenerate tasks — the honest "money plot"
+
+Neither `schwa_deletion.jsonl` nor `task3a_rhyme_pairs.jsonl` carry
+precomputed per-word `tokenization`/`rho`/`zipf` fields the way
+`g2p.jsonl`/`syllable_count_word.jsonl` do (schwa_deletion was never built
+with them; task3a needs a joint two-word prompt's tokenization, not a
+single word's — same reason `export_for_probing.py`'s rhyme export
+computes fresh rather than reading a precomputed field). Extended
+`analyze_regression.py` with `_build_schwa` and `_build_rhyme_awareness`:
+both load the real TigerLLM tokenizer locally (network access, tokenizer
+files only, no model weights — fast) and compute GTAD/STAD/rho fresh via
+the same primitives `compute_metrics.py`/`export_for_probing.py` already
+use, plus `wordfreq.zipf_frequency` for log_freq since neither file has it
+precomputed either. For rhyme_awareness (a PAIR, not a word), GTAD/STAD
+take the max of the two words' values (worst-of-two, same reasoning as
+`categorize_pair`), rho is averaged, log_freq is averaged. schwa's
+`correct` is whole-word exact-vector-match (stricter than the
+per-position accuracy reported earlier — sanity-checked: weighted
+A/M/CB average here comes out to ~29.5%, matching the previously-reported
+31.8% exact-vector-match from the Kaggle scoring cell).
+
+Full results, all four tasks with real variance (`results/regression_
+{task}_tigerllm.json`):
+
+| Task | n | GTAD coef | STAD coef | ρ coef | log_freq coef | McFadden R² |
+|---|---|---|---|---|---|---|
+| G2P | 2,982 | −0.338 | +0.203 | +0.142 | −0.229 | 0.022 |
+| Schwa deletion | 999 | +0.146 | −0.142 | −0.218 | +0.042 | 0.014 |
+| Rhyme awareness | 386 | +0.198 | −0.079 | −0.149 | +0.283 | 0.023 |
+| Syllable count | 2,982 | degenerate (0 variance — 100% correct throughout) | | | | |
+
+**The honest finding: there is no universal, uniformly-signed GTAD/STAD/ρ
+story.** GTAD is negative for G2P (matches the naive "misalignment hurts"
+hypothesis) but POSITIVE for both schwa_deletion and rhyme_awareness.
+STAD and ρ are negative for schwa/rhyme (matches hypothesis direction) but
+POSITIVE for G2P. Every R² is small (0.013–0.023) — these metrics explain
+a little of the variance in each task, never a lot, and the *direction*
+of the effect flips depending on the task. This directly contradicts the
+`docs/ideas2.md` action plan's specific per-task hypotheses ("GTAD should
+predict G2P," "STAD/rho should predict syllable count," stated as
+near-certain expected findings) — the actual result is messier and more
+interesting: **tokenization misalignment metrics have small, task-specific,
+not-uniformly-directioned effects on TigerLLM's zero-shot performance**,
+a materially different and more defensible claim than "misalignment
+predicts difficulty," and worth stating exactly this way rather than
+cherry-picking G2P's one clean-looking coefficient. A/M/CB category
+breakdowns tell the same story at a coarser grain — never a clean A>M>CB
+or even A>CB ordering in any of the four tasks.
+
+Also worth noting for the thesis, since a reviewer will ask: this doesn't
+contradict M4's probing story, because it's plausibly measuring a
+different mechanism (see the earlier "TigerLLM invariant to A/M/CB
+category" section) — a linear probe on one frozen hidden state is
+structurally coupled to token boundary placement in a way that
+autoregressive generation over the full input isn't.
+
+**Not done**: a rhyme_generation regression (success@5 is not a per-item
+binary the same way, would need a different formulation — not attempted
+this session, flagged as optional/future work, not blocking). This
+regression's stated limitation carries over from the g2p section above:
+hand-rolled IRLS, no p-values/standard errors, directional/exploratory
+only until redone with `statsmodels.Logit` before anything here goes in
+the thesis as a claimed-significant result.
+
+### Result-file cleanup + `scripts/score_zeroshot_results.py`
+
+Repo had accumulated several stale/duplicate zero-shot result files from
+the back-and-forth download process this session (300-item smoke-test
+copies sitting alongside full-scale re-downloads under different names,
+some misplaced in `notebooks/`/`data/tasks/`). Cleaned up:
+- Removed the stale 300-item `results/{task}_bn_tigerllm.jsonl` files and
+  the misplaced `notebooks/g2p_results.csv`, `notebooks/
+  syllable_count_results.csv`, `data/tasks/Schwa_deletion.csv`, `data/
+  tasks/zero_shot_summary_tigerllm.csv`.
+- Renamed the genuine full-scale downloads to the canonical
+  `results/{task}_bn_tigerllm.jsonl` naming (matches what the Kaggle
+  notebook itself would write): g2p (3,000), syllable_count (3,000),
+  rhyme_awareness (400), rhyme_generation (300), schwa_deletion (1,000).
+- Added `scripts/score_zeroshot_results.py`: scores a full set of local
+  raw-completion files against `zeroshot_lib`'s scorers without needing
+  Kaggle/a model loaded, producing the same `zeroshot_summary_{model}.csv`
+  shape the notebook's own section-6 cell writes. Ran it end to end —
+  output matches the Kaggle-reported numbers exactly, confirming the
+  cleaned-up local files are the real, correct full-scale data (not a
+  silently-different copy).
+
+`results/` now holds one clean copy per task, no duplicates, matching what
+this document's tables above already report.
+
 ---
 
 ## Current state summary (see `CLAUDE.md` for the authoritative live version)
@@ -501,10 +834,26 @@ run.
   for BanglaT5 + TigerLLM (the 2 tokenizers with a real A/M/CB split);
   result is a mixed, not-yet-explained deviation from the spec's A>M>CB
   hypothesis (see above). GPT-2/ByT5/Llama-3.1 (expected ~all-CB) not run.
-- **M5 (zero-shot evals)**: baselines done (`results/baselines_summary.csv`);
-  zero-shot harness + Kaggle notebook built and unit-tested, not yet run
-  against a real model (needs GPU) — `notebooks/m5_zeroshot.ipynb`,
-  TigerLLM-9B-it first. Human baseline and the regression step not started.
+- **M5 (zero-shot evals)**: baselines done, all 5 tasks (`results/
+  baselines_summary.csv`). **TigerLLM-9B-it bn-prompt zero-shot run
+  COMPLETE, all 5 tasks at full scale, plus the ρ-ceiling analysis and the
+  GTAD/STAD/ρ regression for all 4 non-degenerate tasks** (see "Kaggle run
+  #1 complete" and the regression sections above for full tables): g2p
+  93.6% exact (dramatically beats baseline; regression: GTAD is a weak
+  negative predictor, matches hypothesis); syllable_count 100% exact
+  (contamination caveat — nonce-word check still not done, don't cite
+  unqualified; regression is degenerate, 0 outcome variance); rhyme_awareness
+  53% acc / F1 0.236 (near chance, model defaults to "না"; regression:
+  GTAD positive, STAD/ρ negative); rhyme_generation success@5=0.21 (no
+  regression run, success@5 isn't a per-item binary); schwa_deletion 52.4%
+  per-position / 31.8% exact-vector (*worse* than the 77.1%/59.8% naive
+  baseline; regression: GTAD positive, STAD/ρ negative). **Core honest
+  finding**: no universal, uniformly-signed GTAD/STAD/ρ story across
+  tasks — effects are small (R²<0.023 throughout) and flip sign by task,
+  contradicting `docs/ideas2.md`'s specific per-task predictions. Not done
+  yet: the syllable_count nonce-word contamination check, English-prompt
+  ablation, a second open model (Llama-3.1-8B-Instruct next), closed/paid
+  models, human baseline.
 - **Not done, spec-mentioned stretch goals**: Task 5 (conjunct
   pronunciation, optional per spec), poetry-corpus rhyme enrichment.
 - **Test suite**: 142 tests, all green, run with `pytest` from repo root.
@@ -528,15 +877,17 @@ run.
    `CHECKPOINT_INPUT` to resume — already-finished combos are skipped
    automatically. See `docs/probing_integration.md` for the design
    rationale.
-5. If picking up M5: `notebooks/m5_zeroshot.ipynb` is built and unit-tested
-   (`tests/test_zeroshot_lib.py`) but has never touched a real GPU. Upload
-   to Kaggle, leave `SAMPLE_SIZE = 300` for a first smoke test across all 5
-   tasks, run top to bottom, **Save Version**. Sanity-check
-   `zeroshot_summary_tigerllm.csv`'s parse rates before trusting the
-   accuracy numbers — prompt wording may need a tweak after seeing real
-   model output (the parsers in `scripts/zeroshot_lib.py` are forgiving but
-   untested against a real model's actual phrasing habits). Compare against
-   `results/baselines_summary.csv` once real numbers exist. TigerLLM only
-   for now; Llama-3.1-8B-Instruct is already registered in
-   `src/tokenizer_adapter.py`'s `TOKENIZER_SPECS` if/when more open models
-   are added, before moving to closed/paid models.
+5. If picking up M5: TigerLLM-9B-it's bn-prompt zero-shot run is DONE, all
+   5 tasks at full scale (see the "Kaggle run #1 complete" section above
+   for the full comparison table against `results/baselines_summary.csv`
+   — g2p and rhyme_generation are solid results; syllable_count's 100%
+   needs the contamination-vs-genuine-competence nonce-word check before
+   citing it unqualified; rhyme_awareness and schwa_deletion are real,
+   confirmed-at-full-scale negative/near-chance results). Next: (a) the
+   syllable_count nonce-word check, (b) `LANGS = ["bn", "en"]` in the
+   Config cell for the English-prompt ablation (Spec A.6) on the same
+   model, (c) a second open model — Llama-3.1-8B-Instruct is already
+   registered in `TOKENIZER_SPECS`, add it as a second `MODEL_KEY` pass
+   through the same 5a-5e cells. (d) after that, closed/paid models per
+   user direction, then human baseline (2 annotators, 100 items/task), then
+   the regression step (probe/zero-shot performance ~ GTAD+STAD+ρ+freq+etym).

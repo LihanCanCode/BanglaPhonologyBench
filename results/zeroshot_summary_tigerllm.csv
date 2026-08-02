@@ -1,0 +1,13 @@
+task,lang,n,n_parsed,metric,value
+g2p,bn,3000,3000,mean_char_PER,0.028930341349110704
+g2p,bn,3000,3000,exact_match,0.9356666666666666
+syllable_count,bn,3000,3000,exact_match_acc,1.0
+syllable_count,bn,3000,3000,MAE,0.0
+syllable_count,bn,3000,3000,parse_rate,1.0
+rhyme_awareness,bn,400,400,accuracy,0.53
+rhyme_awareness,bn,400,400,F1,0.23577235772357721
+rhyme_awareness,bn,400,400,parse_rate,1.0
+rhyme_generation,bn,300,300,success_at_5,0.21
+schwa_deletion,bn,1000,929,per_position_acc,0.5237080447522643
+schwa_deletion,bn,1000,929,exact_vector_match,0.317545748116254
+schwa_deletion,bn,1000,929,parse_rate,0.929

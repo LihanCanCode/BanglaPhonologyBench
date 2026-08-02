@@ -37,6 +37,17 @@ Four baselines, one per task:
                         dataset too — see docs/DEVELOPMENT_LOG.md M5 section
                         for the empirical per-environment majority check that
                         confirmed this before hardcoding it).
+  - Rhyme (3b)       : same "dictionary lookup" ceiling idea as 3a's rhyme
+                        baseline, for the generation task — pick any 5 words
+                        from the prompt's precomputed `gold_rhymes` (already
+                        the full anti-leakage-filtered rime group, see
+                        scripts/build_rhyme_generation_dataset.py). This is
+                        trivially 100% BY CONSTRUCTION (the "prediction" is
+                        drawn from the gold set itself) — not a meaningful
+                        floor, just the same "if you have a dictionary, this
+                        task is easy" ceiling reference 3a's baseline gives,
+                        so an LLM's zero-shot success@5 has something to be
+                        compared against besides nothing.
 
 Run: `python -X utf8 scripts/build_baselines.py`
 Writes `results/baselines_summary.csv` (one row per task, headline metrics)
@@ -213,10 +224,23 @@ def run_rhyme_baseline():
             "secondary_metric": "F1", "secondary_value": f1}
 
 
+def run_rhyme_generation_baseline(k: int = 5):
+    sys.path.insert(0, os.path.join(REPO_ROOT, "src"))
+    from rhyme import mean_success_at_k  # noqa: E402
+
+    rows = load_jsonl(os.path.join(REPO_ROOT, "data", "task3b_rhyme_generation.jsonl"))
+    all_candidates = [r["gold_rhymes"][:k] for r in rows]
+    all_gold = [set(r["gold_rhymes"]) for r in rows]
+    score = mean_success_at_k(all_candidates, all_gold, k=k)
+    return {"task": "rhyme_generation", "n": len(rows), "metric": f"success_at_{k}", "value": score,
+            "secondary_metric": "n/a", "secondary_value": float("nan")}
+
+
 def main():
     os.makedirs(RESULTS_DIR, exist_ok=True)
     results = [run_g2p_baseline(), run_syllable_baseline(),
-               run_schwa_baseline(), run_rhyme_baseline()]
+               run_schwa_baseline(), run_rhyme_baseline(),
+               run_rhyme_generation_baseline()]
 
     out_path = os.path.join(RESULTS_DIR, "baselines_summary.csv")
     with open(out_path, "w", newline="", encoding="utf-8") as f:

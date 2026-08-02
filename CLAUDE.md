@@ -136,15 +136,32 @@ Word categories for split analyses: **A** (aligned: GTAD=0 ∧ STAD=0), **CB**
    alone). Zero-shot harness built: `scripts/zeroshot_lib.py` (prompt/parse/score for
    all 5 tasks, Bangla-language prompts + an English-ablation switch, unit-tested with
    a mock generator — `tests/test_zeroshot_lib.py`, no GPU needed) +
-   `notebooks/m5_zeroshot.ipynb` (clone-and-run on Kaggle, **TigerLLM-9B-it only for
-   now** — cost-free; more open models next, closed/paid models later per user
-   direction). Unlike M4, generation is **row-level resumable** (one JSONL line per
-   item, `checkpoints/zeroshot/{task}_{lang}_tigerllm.jsonl`) since autoregressive
-   generation across ~5,000+ items across 5 tasks is a real multi-hour job, not M4's
-   minutes-scale single-forward-pass extraction. NOT YET RUN on Kaggle (needs GPU) —
-   next action is uploading the notebook and running the `SAMPLE_SIZE=300` smoke test.
-   Human baseline (2 annotators, 100 items/task) and the regression step (probe
-   residuals ~ GTAD+STAD+ρ+freq+etym) not started, blocked on real zero-shot numbers.
+   `notebooks/m5_zeroshot.ipynb` (clone-and-run on Kaggle, one cell per task for
+   inspectable step-by-step runs, row-level resumable). **TigerLLM-9B-it, Bangla
+   prompts, all 5 tasks run to completion at full scale** — see
+   `docs/DEVELOPMENT_LOG.md`'s "Kaggle run #1 complete" section for the full
+   baseline-comparison table. Headline: g2p 93.6% exact (PER 0.029, crushes the
+   baseline); syllable_count 100.0% exact (independently re-verified, not a scoring
+   bug — but flagged with a contamination-vs-genuine-competence caveat, nonce-word
+   check still a TODO before citing unqualified); rhyme_awareness 53.0% acc / F1 0.236
+   (near chance on the full balanced 400-pair set, model defaults to "না" almost
+   always); rhyme_generation success@5 = 0.21; schwa_deletion 52.4% per-position —
+   **worse than the 77.1% naive baseline**, a real negative result.
+   **ρ-ceiling analysis** (`scripts/analyze_rho_ceiling.py`): TigerLLM's syllable-count
+   accuracy is 1.000 even at ρ=1.0 (no possible orthographic boundary signal at all)
+   — strengthens, doesn't resolve, the contamination question. **Regression + A/M/CB
+   breakdown** (`scripts/analyze_regression.py`, `results/regression_{task}_tigerllm.json`)
+   run for all 4 non-degenerate tasks (syllable_count's is degenerate, 0 outcome
+   variance): NO universal, uniformly-signed GTAD/STAD/ρ story — GTAD negative for
+   g2p but positive for schwa/rhyme_awareness; STAD/ρ negative for schwa/rhyme but
+   positive for g2p; every McFadden pseudo-R² is small (<0.023). Effects are real but
+   small and task-specific, not a clean "misalignment predicts difficulty" story.
+   `scripts/score_zeroshot_results.py` scores local raw-completion files without
+   needing Kaggle, for regenerating `zeroshot_summary_{model}.csv`. Next: the
+   syllable_count nonce-word contamination check, English-prompt ablation
+   (`LANGS=["bn","en"]`), a second open model (Llama-3.1-8B-Instruct, already in
+   `TOKENIZER_SPECS`), then closed/paid models, human baseline (2 annotators,
+   100 items/task).
 
 Workflow note: dataset construction, segmenter/metric work, and tokenizer analyses run
 fine locally (CPU-only). Only M4/M5 GPU forward passes go to Kaggle — this repo is the
@@ -163,6 +180,12 @@ source of truth; Kaggle notebooks pull it.
   syllables, majority-rule schwa, dictionary-rime-lookup rhyme) -> `results/baselines_summary.csv`.
 - `notebooks/m5_zeroshot.ipynb` — M5 zero-shot eval on Kaggle (TigerLLM-9B-it first);
   uses `scripts/zeroshot_lib.py` for prompts/parsing/scoring, row-level resumable.
+- `python scripts/score_zeroshot_results.py --model tigerllm --g2p results/g2p_bn_tigerllm.jsonl ...`
+  — score locally-downloaded raw zero-shot completions without Kaggle -> `results/zeroshot_summary_{model}.csv`.
+- `python scripts/analyze_rho_ceiling.py <completions.jsonl> --model-name tigerllm` — syllable-count
+  accuracy binned by ρ vs. the naive baseline -> `results/rho_ceiling_syllable_count_{model}.csv`.
+- `python scripts/analyze_regression.py <task> <completions.jsonl>` — A/M/CB breakdown +
+  logistic regression of correctness ~ GTAD+STAD+ρ+log_freq -> `results/regression_{task}_{model}.json`.
 
 Run Python scripts with `-X utf8` on Windows (Bangla output to console).
 

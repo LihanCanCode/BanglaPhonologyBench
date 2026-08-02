@@ -1,0 +1,5 @@
+rho_bin,n,model_acc,baseline_acc,model_name
+0.0 (no ceiling),2050,1.0,0.28780487804878047,tigerllm
+0.01-0.34,337,1.0,0.40059347181008903,tigerllm
+0.35-0.99,392,1.0,0.34183673469387754,tigerllm
+1.0 (fully misaligned),221,1.0,0.4434389140271493,tigerllm
