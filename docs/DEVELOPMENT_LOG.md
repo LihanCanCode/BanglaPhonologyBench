@@ -1045,12 +1045,27 @@ materially stronger and more citable claim than "biased toward না."
    schwa checks, the rhyme_awareness confusion matrix, AND the nonce-word
    contamination test (RESOLVED: contamination confirmed, 100% → 19.3%).
    See "Kaggle run #1 complete" and later sections above for full tables.
-   **The TigerLLM chapter of M5 is essentially closed.** Next: (a)
-   `LANGS = ["bn", "en"]` in the Config cell for the English-prompt
-   ablation (Spec A.6), (b) a second open model — Llama-3.1-8B-Instruct is
-   already registered in `TOKENIZER_SPECS`, add it as a second `MODEL_KEY`
-   pass through the same 5a-5f cells (this is what would turn every M5
-   finding from "true of TigerLLM" into "true of Bangla-aware LLMs
-   generally" — the single highest-value remaining M5 task), (c) after
-   that, closed/paid models per user direction, then human baseline
-   (2 annotators, 100 items/task).
+   **The TigerLLM chapter of M5 is essentially closed.**
+
+   **Second-model choice, decided this session**: NOT Llama-3.1-8B-Instruct
+   — M4 already showed llama3 collapses to ~all-CB (0 A, 0 M out of 2,982),
+   so a second run on it would give a degenerate A/M/CB comparison, the
+   same problem syllable_count's regression had, avoidably. Instead
+   registered `titulm` (`hishab/titulm-llama-3.2-3b-v2.0` — Llama-3.2-3B
+   continually pretrained with ~42K added Bangla tokens, ungated, supports
+   `apply_chat_template`) in `src/tokenizer_adapter.py`'s `TOKENIZER_SPECS`.
+   This is literally the model class the Research Spec's own eval matrix
+   (Part A.6) named as a target ("a BanglaLLaMA/titulm-class Bangla
+   model") — not a deviation, fulfilling the original plan. Verified
+   locally before committing GPU time (same discipline as validating any
+   new tokenizer): real A/M/CB spread on a 500-word g2p sample — A=56,
+   M=74, CB=365 — more CB-heavy than TigerLLM's roughly-balanced split but
+   nothing like llama3's collapse. Also smaller (3B vs TigerLLM's 9B), so
+   likely faster/cheaper on the same T4.
+
+   Next: (a) run `m5_zeroshot.ipynb` with `MODEL_KEY = "titulm"` through
+   the same 5a-5f cells (this is what would turn every M5 finding from
+   "true of TigerLLM" into "true of Bangla-aware LLMs generally" — the
+   single highest-value remaining M5 task), (b) `LANGS = ["bn", "en"]` for
+   the English-prompt ablation (Spec A.6), (c) closed/paid models per user
+   direction, then human baseline (2 annotators, 100 items/task).

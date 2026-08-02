@@ -149,6 +149,11 @@ TOKENIZER_SPECS: Dict[str, List[str]] = {
     "byt5":     ["google/byt5-small"],                      # byte-level control
     "tigerllm": ["md-nishat-008/TigerLLM-9B-it"],           # Bangla-centric (Gemma-2 SP)
     "banglat5": ["csebuetnlp/banglat5"],                    # Bangla-centric (SP)
+    "titulm":   ["hishab/titulm-llama-3.2-3b-v2.0"],        # Bangla-centric (Llama-3.2 continually
+                                                              # pretrained, +42K Bangla tokens; ungated,
+                                                              # supports apply_chat_template). Real A/M/CB
+                                                              # spread confirmed locally (500-word sample:
+                                                              # A=56 M=74 CB=365), unlike llama3's ~all-CB.
 }
 
 

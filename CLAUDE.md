@@ -173,9 +173,14 @@ Word categories for split analyses: **A** (aligned: GTAD=0 ∧ STAD=0), **CB**
    counting is actually one of TigerLLM's weakest results once the artifact is
    stripped away, not its strongest. **M5's TigerLLM chapter is essentially
    closed**: one strong result (G2P), one confirmed artifact (syllable counting),
-   three weak-to-failing results (rhyme×2, schwa). Next, highest-value first:
-   a second open model (Llama-3.1-8B-Instruct, already in `TOKENIZER_SPECS`) —
-   turns every finding from "true of TigerLLM" into "true of Bangla-aware LLMs
+   three weak-to-failing results (rhyme×2, schwa). **Second model, decided**:
+   NOT Llama-3.1 (M4 showed it collapses to ~all-CB, a degenerate A/M/CB
+   comparison) — `titulm` (`hishab/titulm-llama-3.2-3b-v2.0`, registered in
+   `TOKENIZER_SPECS`) instead: the Spec's own named "titulm-class" target,
+   real A/M/CB spread confirmed locally (500-word sample: A=56 M=74 CB=365),
+   smaller/cheaper than TigerLLM. Next: run `m5_zeroshot.ipynb` with
+   `MODEL_KEY = "titulm"` through 5a-5f — highest remaining M5 value, turns
+   every finding from "true of TigerLLM" into "true of Bangla-aware LLMs
    generally" — then English-prompt ablation (`LANGS=["bn","en"]`), closed/paid
    models, human baseline (2 annotators, 100 items/task).
 
