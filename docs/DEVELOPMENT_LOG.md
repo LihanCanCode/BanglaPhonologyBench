@@ -932,6 +932,32 @@ silent contamination, and a suspiciously perfect score should be
 verified, not celebrated, before it goes in a results table — the
 general lesson already recorded in this log's debugging-lessons section.
 
+**Deeper error analysis (raw completions independently re-verified,
+`results/nonce_syllable_count_bn_tigerllm.jsonl`)**: the failure mode is
+directional, not random noise —
+
+- Exact: 29/150 (19.3%, confirms the aggregate number, no scoring
+  discrepancy on re-check).
+- **Undercounting: 90/150 (60%)** vs. overcounting: 31/150 (20.7%). Mean
+  signed error (pred − gold): **−0.65**.
+- Most errors are off by exactly 1 or 2, in the undercounting direction
+  (79/150, ~53% of all items).
+
+This is more informative than a bare accuracy number: TigerLLM isn't
+guessing randomly on novel words, it has a systematic tendency to
+*undercount* — consistent with recognizing familiar component words but
+not correctly handling the new syllable/akshara-boundary interaction
+where two components splice together, rather than a wholesale inability
+to count at all.
+
+Also extended the ρ-ceiling analysis (Finding 7b) to the nonce set: too
+noisy to draw a conclusion from — no nonce word happened to land at
+ρ=1.0, the highest available bin (ρ 0.35–0.99) has only 7 items, and the
+observed trend (13.7% → 24.3% → 28.6% as ρ increases) runs the *opposite*
+direction from the frozen task's clean result. Reported as inconclusive/
+small-n, not as a real finding — don't lean on this in the thesis the way
+Finding 7b's frozen-task result can be leaned on.
+
 ### Two follow-up local analyses while the nonce-word run is in flight on Kaggle
 
 Both cheap, no GPU, done with data already in hand.

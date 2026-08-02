@@ -425,6 +425,21 @@ Finding 7c — RESOLVED: the nonce-word contamination test (scripts/
   Finding 7's table and the Synthesis section's "UNCLEAR" framing for
   syllable counting -- both updated below.
 
+  Deeper error analysis (raw completions independently re-verified,
+  results/nonce_syllable_count_bn_tigerllm.jsonl) -- the failure is
+  directional, not random noise: exact 29/150 (19.3%, confirms the
+  aggregate, no scoring discrepancy on re-check); UNDERCOUNTING 90/150
+  (60%) vs overcounting 31/150 (20.7%), mean signed error -0.65; most
+  errors off by exactly 1-2 in the undercounting direction (79/150,
+  ~53%). Consistent with recognizing familiar component words but not
+  correctly handling the NEW syllable/akshara-boundary interaction where
+  two components splice together, rather than a wholesale inability to
+  count. Extending the rho-ceiling analysis (Finding 7b) to the nonce set
+  was inconclusive -- too few items per bin (no rho=1.0 items at all, the
+  0.35-0.99 bin has only n=7) and the observed trend runs opposite the
+  frozen task's clean result; report as noisy/inconclusive, do not lean
+  on it the way Finding 7b's frozen-task result can be leaned on.
+
 Finding 8 — The GTAD/STAD/rho regression (scripts/analyze_regression.py,
   run for all 4 non-degenerate tasks) finds NO universal, uniformly-signed
   story -- a materially different, more defensible result than the
