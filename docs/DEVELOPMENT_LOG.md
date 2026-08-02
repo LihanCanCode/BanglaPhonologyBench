@@ -844,14 +844,36 @@ psycholinguistic literature) was checked rather than left unexplained:
 
 **Honest conclusion**: partially a length confound, not fully explained
 by it — a residual negative frequency effect survives controlling for
-length. Plausible (untested) linguistic story for the thesis: common,
-short, native (tadbhava) words often carry irregular colloquial
-pronunciation (schwa-deletion idiosyncrasies, assimilation) that's easy to
-get *almost* right but hard to get *exactly* right on a strict-match
-metric; longer, rarer, often-tatsama words tend to follow more regular,
-transparent orthography-to-phoneme correspondence. Testable via
-etym-stratified accuracy — not run this session, flagged as the natural
-follow-up rather than asserted as settled.
+length.
+
+**Etymology stratification test (follow-up, same session)** — directly
+tests the tadbhava/tatsama story instead of leaving it as a plausible
+guess:
+
+| Etymology | n | Accuracy | Mean length | Mean log_freq |
+|---|---|---|---|---|
+| Tadbhava | 1,660 | 0.926 | 6.11 | 3.11 |
+| Tatsama | 1,166 | **0.947** | 8.28 | 3.02 |
+| Foreign | 142 | 0.951 | 7.01 | 2.92 |
+| Deshi | 14 | 1.000 (n too small to trust) | 6.86 | 2.58 |
+
+Tatsama beats tadbhava (94.7% vs 92.6%) despite being longer and no more
+frequent — supports the hypothesis, and it isn't just length riding
+along (tatsama is both longer AND more accurate, so length alone doesn't
+explain the gap). User flagged a Wikipedia claim during this session that
+Bangla orthography is "opaque" for tatsama vs "transparent" for tadbhava
+(neither the Wikipedia page nor the underlying claim independently
+verified this session) — worth a cautious reconciliation, not a rebuttal:
+"opaque" there plausibly means unpredictable *without* Sanskrit/conjunct
+knowledge (hard for an unfamiliar human reader), which is a different
+axis from "regular/rule-governed once learned" (relevant to what a model
+trained on enough tatsama vocabulary can pick up). Tadbhava's exception-
+laden colloquial sound-drift may be the harder target for exact-match
+transcription precisely because it's less rule-governed, not because it's
+more "transparent" in the everyday-reading sense the Wikipedia claim
+addresses. Stated as an interpretation to flag in the thesis, not a
+settled fact — the two claims may simply be about different things
+(reading difficulty for a human vs. rule-learnability for a model).
 
 ---
 

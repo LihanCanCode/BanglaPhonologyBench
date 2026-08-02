@@ -433,13 +433,32 @@ Finding 9 — The G2P "frequency paradox" (log-frequency negatively
   Controlling for length shrinks the log_freq coefficient from -0.229 to
   -0.121 (roughly halves) and length becomes the single strongest
   predictor in the model (+0.401). A residual negative frequency effect
-  survives, though -- not fully explained away. Plausible (untested)
-  story: common short native (tadbhava) words carry irregular colloquial
-  pronunciation (schwa-deletion idiosyncrasies) that's easy to get ALMOST
-  right but hard to get EXACTLY right; longer, rarer, often-tatsama words
-  follow more regular, transparent spelling-to-sound correspondence.
-  Testable via etym-stratified accuracy -- not run yet, a good candidate
-  addendum.
+  survives, though -- not fully explained away.
+
+  DIRECTLY TESTED via etym-stratified accuracy (same session, follow-up):
+
+    Etymology  | n     | Accuracy | Mean length | Mean log_freq
+    -----------|-------|----------|--------------|---------------
+    Tadbhava   | 1,660 |   0.926  |     6.11     |     3.11
+    Tatsama    | 1,166 |   0.947  |     8.28     |     3.02
+    Foreign    |   142 |   0.951  |     7.01     |     2.92
+    Deshi      |    14 |   1.000  |     6.86     |     2.58   (n too small)
+
+  Tatsama beats tadbhava (94.7% vs 92.6%) despite being longer and no
+  more frequent -- length riding along doesn't explain the gap away,
+  since tatsama is both longer AND more accurate. A user-supplied
+  Wikipedia claim ("Bangla orthography is opaque for tatsama, transparent
+  for tadbhava," neither independently verified this session) appears to
+  cut the other way on first read -- reconciled cautiously, not
+  dismissed: "opaque" there plausibly describes reading difficulty for a
+  human unfamiliar with Sanskrit/conjunct spelling conventions, a
+  different axis from "rule-governed once a model has seen enough
+  examples," which is what matters for exact-match generation accuracy.
+  Tadbhava's exception-laden colloquial sound-drift (irregular schwa
+  deletion, assimilation) may be the harder EXACT-MATCH target precisely
+  because it's less rule-governed, not because tatsama is more
+  accessible. Flagged as an interpretation for the thesis to state
+  carefully, not a settled resolution of the literature tension.
 
 
 6. LESSONS FROM DEBUGGING (useful for avoiding repeat mistakes)
@@ -637,6 +656,27 @@ eventually produce given enough attention over the full context — a
 genuinely interesting methodological point connecting M4 and M5, not
 just two separate results sitting next to each other.
 
+8.3a Etym-stratified G2P accuracy: DONE, and it supports the length/
+     regularity story rather than contradicting it
+
+Tatsama accuracy (94.7%, n=1,166) beats tadbhava (92.6%, n=1,660) despite
+tatsama words being both longer (8.28 vs 6.11 mean phonemes) AND no more
+frequent (log_freq 3.02 vs 3.11) — so this isn't length riding along
+uncontrolled, it's etymology itself predicting accuracy in the direction
+8.2/Finding 9 proposed. A user-supplied Wikipedia claim during this
+session ("Bangla orthography is opaque for tatsama, transparent for
+tadbhava" — not independently verified here) reads as tension on first
+pass; reconciled cautiously rather than dismissed: that claim plausibly
+describes READING difficulty for a human unfamiliar with Sanskrit/
+conjunct spelling conventions, a different axis from RULE-LEARNABILITY
+for a model that has seen enough tatsama examples. Tadbhava's
+exception-laden colloquial sound-drift (irregular schwa deletion,
+assimilation patterns) is plausibly the harder EXACT-MATCH target
+precisely because it's less rule-governed, not because tatsama is more
+accessible in the everyday-reading sense the Wikipedia claim addresses.
+State this as an interpretation the thesis offers, with the literature
+tension named explicitly, not as a resolved contradiction.
+
 8.4 What would strengthen this chapter, in priority order
 
   1. The nonce-word contamination test (Finding 7b above) — turns
@@ -648,8 +688,10 @@ just two separate results sitting next to each other.
      (both sets of raw completions already exist locally), and would
      directly test whether the "context-bound knowledge" story in 8.2
      is real or speculation.
-  3. Etym-stratified G2P accuracy (Finding 9) — tests the
-     tadbhava/tatsama explanation for the frequency paradox directly.
+  3. DONE: etym-stratified G2P accuracy (8.3a above) — tatsama > tadbhava,
+     supports the length/regularity story. Worth a citation check on the
+     Wikipedia claim before the reconciliation goes in the thesis as
+     written, though — neither source was read firsthand this session.
   4. A second model's full M5 run — turns every claim in this section
      from "true of TigerLLM" to "true of Bangla-aware LLMs generally,"
      a substantially stronger claim for a thesis.
@@ -657,7 +699,7 @@ just two separate results sitting next to each other.
      worse than a heuristic" be joined by "and humans score X%," the
      comparison a reader will most want to see.
 
-None of these are started. This section is a draft skeleton for the
-argument, built honestly from what's actually been measured — the
-claims in 8.2 specifically are flagged as candidate explanations, not
+Items 1-2 and 4-5 are not started. This section is a draft skeleton for
+the argument, built honestly from what's actually been measured — the
+remaining claims in 8.2 are flagged as candidate explanations, not
 established findings, precisely because they haven't been checked yet.
