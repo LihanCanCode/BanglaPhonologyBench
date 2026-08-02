@@ -823,6 +823,36 @@ some misplaced in `notebooks/`/`data/tasks/`). Cleaned up:
 `results/` now holds one clean copy per task, no duplicates, matching what
 this document's tables above already report.
 
+### The G2P frequency paradox: partially a length confound
+
+The g2p regression's counterintuitive `log_freq` coefficient (−0.229,
+higher frequency → lower accuracy, opposite of PhonologyBench/most
+psycholinguistic literature) was checked rather than left unexplained:
+
+- `log_freq` vs `gtad`/`stad`/`rho` correlations are all ~0 (−0.013,
+  +0.011, +0.032) — not a collinearity artifact with the tokenization
+  metrics.
+- `log_freq` vs word length (phoneme count): **−0.29** — real, moderate.
+  Rarer words in this dataset skew longer (tatsama compounds, technical
+  vocabulary); common words skew short (তুমি, ঘর, মা).
+- length vs correctness: **+0.099** — longer words are, if anything,
+  slightly easier for exact-match G2P.
+- Adding `length` as a 5th regression predictor: `log_freq`'s coefficient
+  shrinks from −0.229 to **−0.121** (roughly halves), `length` itself is
+  the single strongest predictor in the model (+0.401), and McFadden
+  pseudo-R² nearly doubles (0.022 → 0.036).
+
+**Honest conclusion**: partially a length confound, not fully explained
+by it — a residual negative frequency effect survives controlling for
+length. Plausible (untested) linguistic story for the thesis: common,
+short, native (tadbhava) words often carry irregular colloquial
+pronunciation (schwa-deletion idiosyncrasies, assimilation) that's easy to
+get *almost* right but hard to get *exactly* right on a strict-match
+metric; longer, rarer, often-tatsama words tend to follow more regular,
+transparent orthography-to-phoneme correspondence. Testable via
+etym-stratified accuracy — not run this session, flagged as the natural
+follow-up rather than asserted as settled.
+
 ---
 
 ## Current state summary (see `CLAUDE.md` for the authoritative live version)

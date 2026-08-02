@@ -100,8 +100,14 @@ accuracy) should degrade going A > M > CB.
   scripts/                    All one-shot pipeline stages: lexicon
                                ingestion, task-dataset builders, metric
                                computation, figure generation, annotation
-                               tooling, the M4 export step, and the M4
-                               probing library (kaggle_probing_lib.py).
+                               tooling, the M4 export step, the M4
+                               probing library (kaggle_probing_lib.py),
+                               M5's non-LLM baselines (build_baselines.py),
+                               zero-shot prompt/parse/score library
+                               (zeroshot_lib.py), local scoring without
+                               Kaggle (score_zeroshot_results.py), and the
+                               post-hoc M5 analyses (analyze_rho_ceiling.py,
+                               analyze_regression.py).
 
   data/                       Lexicon (Google bn-BD, 65k entries, CC BY
                                4.0), cleaned/aligned lexicon, frozen task
@@ -110,13 +116,22 @@ accuracy) should degrade going A > M > CB.
                                and the M4 probing export CSVs.
 
   results/, figures/          Computed metrics (metrics_top3000.csv),
-                               descriptive-stat figures (figure2), and the
-                               M4 probe results CSVs (BanglaT5 & TigerLLM).
+                               descriptive-stat figures (figure2), the M4
+                               probe results CSVs (BanglaT5 & TigerLLM,
+                               probe_pairwise_*), M5's baselines_summary.csv,
+                               full-scale raw zero-shot completions
+                               (*_bn_tigerllm.jsonl), zeroshot_summary_
+                               tigerllm.csv, rho_ceiling_*.csv, and
+                               regression_{task}_tigerllm.json.
 
   notebooks/m4_probing.ipynb  The Kaggle-run GPU pipeline: hidden-state
                                extraction + linear probe battery.
+  notebooks/m5_zeroshot.ipynb The Kaggle-run zero-shot generation pipeline:
+                               one cell per task (5a-5e), row-level
+                               resumable, a peek() helper for inspecting
+                               raw completions between tasks.
 
-  tests/, test_bangla_phonology.py   133 pytest tests (as of the last
+  tests/, test_bangla_phonology.py   142 pytest tests (as of the last
                                run); the segmenter/syllabifier/aligner/
                                metrics are validated against gold words,
                                and kaggle_probing_lib is validated with a
@@ -179,7 +194,7 @@ M3 — Tasks 1, 3a, 3b, 4 + full human annotation pass (DONE)
   - No inter-annotator kappa anywhere — single annotator throughout, a
     documented limitation vs. the Spec's original 2-annotator design.
 
-M4 — Probing pipeline (BUILT + PARTIALLY RUN)
+M4 — Probing pipeline (BUILT + RUN for the 2 script-aware tokenizers)
   - Pivoted away from forking liaodisen/Tokenization-Phonology (the
     Liao & Shi reference repo) after inspecting it: its extraction code
     was simple enough to reimplement directly, and its probe-training
@@ -221,31 +236,46 @@ M4 — Probing pipeline (BUILT + PARTIALLY RUN)
     results/BanglaT5 & TigerLLM.csv). GPT-2/ByT5/Llama-3.1 extraction
     also ran, but their probe comparison could not be trained (see
     Finding 3 below) — this is expected, not a failure.
-  - Not yet built: the rhyme-probe (Task 3a) A/M/CB category join —
-    rhyme_pairs.csv exists but isn't pre-split by category the way g2p
-    is; needs a per-tokenizer GTAD/STAD join at analysis time. Flagged
-    explicitly in the notebook's final cell, not silently skipped.
-  - Not yet built: aggregating run_probe_battery's pairwise one-sided
-    p-values (A>M>CB, already computed per layer) into the paper's
-    Table-3-style reporting format — a small follow-on step once you're
-    ready to write results up.
+  - Rhyme-probe (Task 3a) A/M/CB category join: BUILT and RUN to
+    completion for BanglaT5 + TigerLLM (results/probe_pairwise_
+    BanglaT5+TigerLLM.csv). Result is genuinely mixed, not a clean A>M>CB
+    confirmation — see Finding 4a below.
+  - Pairwise one-sided p-values (A>M>CB) aggregated into
+    results/probe_pairwise_summary.csv, ready for Table-3-style
+    reporting.
+  - Not yet run: GPT-2/ByT5/Llama-3.1 g2p/syllable-count probing
+    (expected ~all-CB per Finding 2/3, low priority but not zero-value
+    for completeness).
 
 M5 — Zero-shot evals + human baselines + regression analysis + writing
-  (NOT STARTED)
+  (BASELINES DONE, TigerLLM ZERO-SHOT RUN + REGRESSION DONE, rest pending)
   Per the Research Spec's evaluation matrix (Part A.6):
-    - Performance models (zero-shot): GPT-4o-class, Claude, Gemini
-      (closed); Llama-3.1-8B-Instruct, TigerLLM-9B, a BanglaLLaMA/
-      titulm-class Bangla model, ByT5 (open).
-    - Baselines: rule-based Bangla G2P; vowel-nucleus syllable counter;
-      dictionary rime lookup; majority-rule schwa heuristic ("delete
-      word-final, keep post-conjunct"); human baseline (2 native
-      annotators, 100 items/task, report cost).
-    - Prompting: zero-shot, Bangla-language prompts, PLUS an
-      English-prompt ablation (the prompt-language effect is itself
-      flagged as a reportable finding, not just a control).
-    - Regression analysis: relate GTAD/STAD/rho (per word, per
-      tokenizer) to zero-shot accuracy, controlling for frequency —
-      the performance-side analogue of the M4 probing comparison.
+    - Baselines: ALL 5 built (scripts/build_baselines.py ->
+      results/baselines_summary.csv) — naive g2p (17.6% PER, 36.2%
+      exact), akshara-count syllable baseline (31.9% exact, MAE 0.83),
+      majority-rule schwa (77.1% per-position, 59.8% exact-vector),
+      dictionary-rime-lookup rhyme classification (100%, a ceiling by
+      construction), dictionary-lookup rhyme generation (100%, same
+      ceiling role).
+    - Zero-shot harness: BUILT (scripts/zeroshot_lib.py, unit-tested,
+      no GPU needed) + notebooks/m5_zeroshot.ipynb (row-level resumable,
+      one cell per task). TigerLLM-9B-it, Bangla prompts, ALL 5 TASKS RUN
+      TO COMPLETION AT FULL SCALE — see Finding 7 below for the full
+      table. Not yet run: English-prompt ablation, any other model
+      (Llama-3.1-8B-Instruct is registered and ready; closed/paid models
+      deferred per user direction until the open-model pass is further
+      along).
+    - Human baseline: NOT STARTED (2 native annotators, 100 items/task).
+    - Regression analysis: DONE for the 4 non-degenerate tasks
+      (scripts/analyze_regression.py, results/regression_{task}_
+      tigerllm.json) — see Finding 8 below. syllable_count's own
+      regression is degenerate (0 outcome variance, nothing to explain).
+      Not yet done: the same regression for a second model, which is
+      what would turn this from "TigerLLM-specific" into a genuine
+      cross-model comparison.
+    - Also done, not in the original Spec plan: a rho-ceiling analysis
+      (Finding 7b) and a frequency-paradox investigation (Finding 9),
+      both flagged as valuable additions during M5 execution.
 
 
 5. KEY FINDINGS SO FAR (useful for the "ideas" ask)
@@ -294,8 +324,8 @@ Finding 4 — Where probing DID run (BanglaT5, TigerLLM), results broadly
     BanglaT5, final layer (12): A=0.698 > M=0.599 > CB=0.436
     TigerLLM, final layer (48): A=0.689 > CB=0.595 > M=0.541  (M/CB
       order swapped, plausibly noise from unequal category sizes —
-      worth a significance check via the already-computed pairwise
-      one-sided p-values once you aggregate them)
+      p-values now aggregated in results/probe_pairwise_summary.csv,
+      worth a direct significance read before citing this ordering)
   G2P (phon_vec) probing, by contrast, is negative across nearly every
   layer/category for both models — plausibly a property of the probe
   DESIGN (phon_vec is a vector of arbitrary categorical phoneme-vocab
@@ -327,7 +357,89 @@ Finding 6 — Etymology tagging from orthography alone is weak (38.2%
   interesting follow-up — does a language model's zero-shot etymology
   guess also cluster around 38%, or does it do meaningfully better/worse
   than the orthography-only heuristic? That'd be a nice small addendum
-  to the M5 zero-shot battery if there's room.
+  to the M5 zero-shot battery if there's room. (Still not run.)
+
+Finding 4a — The rhyme-probe (Task 3a) result, once run, does NOT confirm
+  A>M>CB either, in a specific and consistent way across both models:
+    BanglaT5 rhyme: CB beats M in ~92% of layers (opposite of M>CB)
+    TigerLLM rhyme: CB beats M in ~71% of layers (also opposite)
+  Combined with the g2p/syllable-count probing swap noted in Finding 4,
+  the overall M4 probing picture is: real signal exists (probes clearly
+  beat the random-embedding control), but the specific A>M>CB ORDERING
+  the Spec hypothesized doesn't hold cleanly for any task/model combo
+  checked so far. This deserves its own paragraph in the thesis rather
+  than being smoothed over — "misalignment matters, but not in the simple
+  monotonic way we predicted" is a more honest and more interesting claim
+  than either confirming or rejecting the hypothesis outright.
+
+Finding 7 — M5's zero-shot pass (TigerLLM-9B-it, Bangla prompts, all 5
+  tasks at full scale) produces a genuinely uneven, task-by-task picture,
+  not a single "the model is good/bad at phonology" verdict:
+
+    Task              | Baseline           | TigerLLM zero-shot        | Read
+    ------------------|--------------------|-----------------------|------
+    G2P               | 17.6% PER,36.2% ex | 3.0% PER, 93.6% exact  | Model dramatically beats baseline
+    Syllable count    | 31.9% exact        | 100.0% exact           | Perfect -- needs Finding 7b's caveat
+    Rhyme awareness   | 100% (oracle)      | 53.0% acc, F1 0.236    | Near chance, biased toward "na" (no)
+    Rhyme generation  | 100% (oracle)      | success@5 = 0.21       | Far below the dictionary ceiling
+    Schwa deletion    | 77.1% per-position | 52.4% per-position     | WORSE than a 1-line heuristic
+
+  The "oracle" baselines for rhyme (both tasks) assume perfect
+  pronunciation knowledge (a dictionary lookup) -- they're a ceiling
+  reference, not a floor a model should be expected to clear; TigerLLM's
+  numbers there should be read as "far from ceiling," not "far below a
+  fair competitor."
+
+Finding 7b — The rho-ceiling analysis (scripts/analyze_rho_ceiling.py)
+  strengthens, rather than resolves, the syllable_count contamination
+  question: TigerLLM scores 1.000 in every rho bin, INCLUDING rho=1.0
+  (221 words where the true syllable boundary has literally no possible
+  orthographic representation). Genuine spelling-based reasoning should
+  degrade there; it doesn't, at all. This is a specific, falsifiable
+  point for the thesis -- stronger than "100% just looks suspicious" --
+  and raises the priority of the still-not-run nonce-word contamination
+  test (generate words that cannot appear in any training corpus and see
+  if the perfect score survives).
+
+Finding 8 — The GTAD/STAD/rho regression (scripts/analyze_regression.py,
+  run for all 4 non-degenerate tasks) finds NO universal, uniformly-signed
+  story -- a materially different, more defensible result than the
+  task-by-task predictions a naive reading of the Spec's hypothesis (or
+  an external planning document, see docs/ideas2.md) would make:
+
+    Task             | n     | GTAD    | STAD    | rho     | log_freq | R^2
+    -----------------|-------|---------|---------|---------|----------|------
+    G2P              | 2,982 | -0.338  | +0.203  | +0.142  | -0.229   | 0.022
+    Schwa deletion   |   999 | +0.146  | -0.142  | -0.218  | +0.042   | 0.014
+    Rhyme awareness  |   386 | +0.198  | -0.079  | -0.149  | +0.283   | 0.023
+    Syllable count   | 2,982 | degenerate (0 outcome variance)          | --
+
+  GTAD is negative for G2P (matches the naive hypothesis) but POSITIVE
+  for schwa and rhyme. STAD/rho are negative for schwa/rhyme (matches
+  hypothesis) but POSITIVE for G2P. Every R^2 is small (never above
+  0.023). A/M/CB category breakdowns tell the same story at a coarser
+  grain -- never a clean A>M>CB or even A>CB ordering in ANY of the four
+  tasks (e.g. g2p: A=0.927, CB=0.930, M=0.958 -- CB is not worse than A).
+  Tokenization misalignment has small, real, task-specific -- not
+  uniformly directional -- effects on zero-shot generation. This is a
+  genuinely different mechanism-level claim than M4's probing story (see
+  the Synthesis section below for why that's not a contradiction).
+
+Finding 9 — The G2P "frequency paradox" (log-frequency negatively
+  predicting accuracy, opposite of PhonologyBench/most psycholinguistic
+  literature) is partially, not fully, a word-length confound: rarer
+  words in this dataset skew longer (tatsama compounds), and longer words
+  are slightly EASIER for exact-match G2P (+0.099 correlation).
+  Controlling for length shrinks the log_freq coefficient from -0.229 to
+  -0.121 (roughly halves) and length becomes the single strongest
+  predictor in the model (+0.401). A residual negative frequency effect
+  survives, though -- not fully explained away. Plausible (untested)
+  story: common short native (tadbhava) words carry irregular colloquial
+  pronunciation (schwa-deletion idiosyncrasies) that's easy to get ALMOST
+  right but hard to get EXACTLY right; longer, rarer, often-tatsama words
+  follow more regular, transparent spelling-to-sound correspondence.
+  Testable via etym-stratified accuracy -- not run yet, a good candidate
+  addendum.
 
 
 6. LESSONS FROM DEBUGGING (useful for avoiding repeat mistakes)
@@ -354,26 +466,198 @@ Finding 6 — Etymology tagging from orthography alone is weak (38.2%
     strong signal of numerical instability upstream, not "the model is
     just really bad at this" — a sane model badly failing a task
     produces R^2 around -1 to -5, not -1e30. Worth remembering as a
-    smell test for any regression-based eval later in M5.
+    smell test for any regression-based eval.
+  - A LITERALLY PERFECT score (100.0%, zero errors, on hundreds+ of
+    diverse items) is itself a red flag, in the opposite direction from
+    the usual "why is this broken" instinct — real zero-shot systems
+    essentially never hit perfect scores on a large, diverse item set,
+    especially against gold labels that aren't even internally
+    100%-self-consistent (M1's own syllable-count validation only
+    reached 99.86% agreement). Don't just accept a suspiciously clean
+    number because the pipeline ran without errors — independently
+    re-verify (random sample eyeball, full mismatch scan, distribution
+    comparison) before trusting it, exactly the "read samples as a
+    native speaker" discipline this project used for the rhyme/schwa
+    annotation passes too. In this project's case (M5 syllable_count),
+    independent re-verification RULED OUT a scoring bug but couldn't
+    rule out training-data contamination — see Finding 7b.
+  - A local scoring/analysis cell that reuses the same variable (e.g.
+    SAMPLE_SIZE) for both "how much to generate" and "how much to score"
+    will silently under-report results once generation has moved past
+    that cap — a real bug hit mid-session (g2p briefly showed n=1500 in
+    the scoring table despite 2,341+ completions existing on disk).
+    Whenever a script slices a dataset for a quick test run, double-check
+    that slicing isn't ALSO capping the final scoring pass once the real
+    run finishes.
+  - Iterative manual file downloads (Kaggle -> local disk, repeated
+    across several back-and-forth rounds) reliably produce stale
+    duplicates and misplaced files (wrong folder, wrong extension, old
+    partial-scale copies sitting next to new full-scale ones under
+    similar names) — worth a deliberate cleanup pass (verify by line
+    count / max id, delete stale copies, rename to one canonical scheme)
+    before trusting "the data is all there," not just before committing.
 
 
 7. SUGGESTED NEXT STEPS (in rough priority order)
 ------------------------------------------------------------------------
-  1. (Optional, low effort) Aggregate the already-computed pairwise
-     one-sided A>M>CB p-values into a proper Table-3-style summary for
-     BanglaT5/TigerLLM — everything needed already exists in
-     run_probe_battery's output, just needs a small aggregation script.
-  2. (Optional, medium effort) Build the rhyme-probe (Task 3a) A/M/CB
-     join that's currently flagged-but-not-built in the notebook, if you
-     want rhyme-probing results alongside G2P/syllable-count.
-  3. (Main path) Start M5: zero-shot evaluation harness for the closed
-     + open models listed in the Spec's eval matrix, against all four
-     frozen task datasets, with the Bangla/English-prompt ablation and
-     the rule-based/human baselines. This is the biggest remaining
-     chunk of work and the one the milestone plan calls out as weeks
-     9-12.
-  4. Once M5 numbers exist, the regression analysis tying GTAD/STAD/rho
-     to zero-shot accuracy (controlling for word frequency) is the
-     direct performance-side analogue of the M4 probing comparison —
-     worth designing so the two analyses read as one coherent story in
-     the final writeup rather than two disconnected halves.
+  1. DONE (was items 1-2 in the previous version of this list): the
+     rhyme-probe A/M/CB join was built and run (Finding 4a); the pairwise
+     p-values are aggregated (results/probe_pairwise_summary.csv).
+  2. DONE: M5's core deliverables for TigerLLM-9B-it — all 5 baselines,
+     all 5 zero-shot tasks at full scale, the rho-ceiling analysis, and
+     the GTAD/STAD/rho regression for all 4 non-degenerate tasks
+     (Findings 7-9, Synthesis section below).
+  3. (Highest remaining value) The syllable_count nonce-word
+     contamination test (Finding 7b) — generate 100-200 phonotactically
+     valid but non-existent Bangla words (bangla_phonology.py's
+     segment_aksharas + syllabify already give you gold labels for free,
+     no human annotation needed since the syllabifier DEFINES the
+     correct answer for invented words) and re-run the same zero-shot
+     syllable-count prompt against them. This is the single check that
+     would let the thesis assert "genuine competence" or "contamination"
+     for M5's headline positive result, instead of leaving it caveated
+     indefinitely.
+  4. Extend the regression/A-M-CB analysis to a SECOND model
+     (Llama-3.1-8B-Instruct is already registered in TOKENIZER_SPECS) —
+     right now every M5 finding is TigerLLM-specific; a second model
+     would show whether Finding 8's "no universal story" is a fact about
+     tokenization generally or a fact about this one model.
+  5. English-prompt ablation (LANGS=["bn","en"] in m5_zeroshot.ipynb) —
+     the Spec calls this out as a reportable finding in its own right,
+     not just a control condition.
+  6. Etym-stratified accuracy for G2P, to test Finding 9's proposed
+     tadbhava-vs-tatsama explanation for the frequency paradox directly
+     rather than leaving it as a plausible-but-untested story.
+  7. Human baseline (2 native annotators, 100 items/task) — needed before
+     any "the model underperforms humans" claim can be made quantitively
+     rather than by appeal to general Bangla-speaker intuition.
+  8. Closed/paid models (GPT-4o-class, Claude, Gemini) once the open-model
+     comparison is further along, per user direction on cost sequencing.
+
+
+8. SYNTHESIS — What TigerLLM Has (and Hasn't) Learned About Bangla Phonology
+------------------------------------------------------------------------
+Draft narrative for the M5 results chapter, written directly from the
+numbers in Findings 7-9 above. Treat this as a first draft to edit, not a
+finished chapter — it hasn't been checked by a second pair of eyes, and
+two of its claims (the syllable_count "genuine competence" reading, the
+tadbhava/tatsama story for the frequency paradox) are explicitly flagged
+below as pending verification, not settled.
+
+8.1 The headline result: uneven competence, not a single verdict
+
+Across five tasks probing different facets of Bangla phonological
+knowledge, TigerLLM-9B-it's zero-shot performance is not well described
+by either "the model knows Bangla phonology" or "the model doesn't."
+It is good at some things and genuinely bad at others, and the split
+is informative:
+
+  STRONG:  G2P (93.6% exact, PER 0.029) — crushes the naive baseline
+           (36.2% exact, PER 0.176) by a wide margin.
+  UNCLEAR: Syllable counting (100.0% exact) — perfect, but flagged with
+           a contamination caveat (Finding 7b) pending the nonce-word
+           test. Cannot currently be cited as either a clean win or a
+           clean artifact.
+  WEAK:    Rhyme awareness (53.0% acc, F1 0.236) — barely above chance
+           on a balanced set, systematically biased toward "na" (no).
+  WEAK:    Rhyme generation (success@5 = 0.21) — far below the
+           dictionary-lookup ceiling (100%, by construction).
+  FAILING: Schwa deletion (52.4% per-position) — WORSE than a one-line
+           majority-rule heuristic (77.1%). Not just "not great" — the
+           model actively underperforms a hardcoded rule a human wrote
+           in five minutes.
+
+8.2 Why the asymmetry? A candidate explanation (needs scrutiny before
+    it goes in a final draft)
+
+The clearest dividing line in the data is between G2P (strong) and
+everything phonology-adjacent-but-not-G2P (weak-to-failing). A plausible
+account:
+
+  - G2P is close to a direct, learnable function of orthography. Bangla
+    spelling is largely phonemic; grapheme-to-phoneme mapping, while it
+    has real irregularities (schwa deletion, silent letters, conjunct
+    simplification — exactly the phenomena bangla_phonology.py's aligner
+    has to model explicitly), is still fundamentally "read the word,
+    say the sounds." A model that has seen enough Bangla text plausibly
+    absorbs this mapping the way it absorbs spelling-to-pronunciation
+    patterns in any language it's trained on.
+
+  - Schwa deletion requires the SAME underlying knowledge (it's a
+    sub-problem of G2P — deciding whether one specific vowel is
+    pronounced) but the zero-shot elicitation here asks for it in
+    ISOLATION, per-consonant, without the full-word context a G2P
+    prompt provides. That the model does much worse at "is this one
+    schwa pronounced" than at "transcribe the whole word" (where it
+    implicitly gets schwa deletion right as part of getting the whole
+    IPA string right, 93.6% of the time) suggests the knowledge may be
+    context-bound rather than an explicit, extractable rule — worth
+    checking directly: how often does the model's OWN g2p output for a
+    word imply a different schwa-deletion pattern than its answer to
+    the isolated schwa_deletion prompt for the same word? That
+    comparison hasn't been run and would be strong evidence either way.
+
+  - Rhyme judgment requires comparing two words' PHONOLOGICAL structure
+    abstractly (same rime, independent of spelling) rather than reading
+    off one word's own pronunciation. The "na" bias suggests the model
+    may default to a conservative "not obviously the same" heuristic
+    rather than actually computing and comparing rimes — consistent
+    with rhyme being a qualitatively different kind of task (comparison/
+    abstraction) rather than a harder version of the same kind of task
+    (transcription).
+
+8.3 What the regression adds (and complicates)
+
+Finding 8's regression result cuts against a tidy "GTAD explains
+everything" story. If tokenization misalignment were the primary driver
+of these failures, GTAD/STAD/rho should predict difficulty consistently
+across tasks. They don't — the direction of the effect flips between G2P
+and schwa/rhyme, and every effect size is small (R^2 < 0.023 throughout).
+This suggests **tokenization misalignment is a real but minor factor**
+here — not the reason schwa deletion and rhyme judgment fail. Whatever
+IS the primary driver of those failures (task framing, the isolated-vs-
+contextual elicitation difference in 8.2, insufficient training signal
+for abstract phonological comparison, something else) is not yet
+identified — flagged honestly as an open question rather than
+retrofitted to whichever metric happened to be on hand.
+
+This is also NOT a contradiction of the M4 probing results (which broadly
+found real signal, and closer to the predicted A>M>CB pattern) once you
+separate the two mechanisms: M4's probes read ONE frozen last-token
+hidden state, whose content is mechanically shaped by where the tokenizer
+placed its boundaries. M5's zero-shot generation attends over the WHOLE
+input regardless of internal boundary placement. There is no a priori
+reason misalignment has to bottleneck both the same way, and the data
+here suggests it doesn't: TigerLLM's zero-shot accuracy is ALSO flat
+across its own A/M/CB categories (Finding 8), even though M4 found real
+(if imperfectly-ordered) probing differences between those same
+categories. Tokenization misalignment may matter more for what a frozen
+representation contains than for what an autoregressive model can
+eventually produce given enough attention over the full context — a
+genuinely interesting methodological point connecting M4 and M5, not
+just two separate results sitting next to each other.
+
+8.4 What would strengthen this chapter, in priority order
+
+  1. The nonce-word contamination test (Finding 7b above) — turns
+     syllable_count from "uncited caveat" into either a strong positive
+     result or an honest documented limitation. Currently the single
+     biggest open question blocking a clean write-up of M5's headline
+     numbers.
+  2. The g2p-vs-isolated-schwa consistency check proposed in 8.2 — cheap
+     (both sets of raw completions already exist locally), and would
+     directly test whether the "context-bound knowledge" story in 8.2
+     is real or speculation.
+  3. Etym-stratified G2P accuracy (Finding 9) — tests the
+     tadbhava/tatsama explanation for the frequency paradox directly.
+  4. A second model's full M5 run — turns every claim in this section
+     from "true of TigerLLM" to "true of Bangla-aware LLMs generally,"
+     a substantially stronger claim for a thesis.
+  5. Human baseline numbers — lets "53% is near chance" and "52.4% is
+     worse than a heuristic" be joined by "and humans score X%," the
+     comparison a reader will most want to see.
+
+None of these are started. This section is a draft skeleton for the
+argument, built honestly from what's actually been measured — the
+claims in 8.2 specifically are flagged as candidate explanations, not
+established findings, precisely because they haven't been checked yet.
