@@ -1089,9 +1089,76 @@ materially stronger and more citable claim than "biased toward না."
    nothing like llama3's collapse. Also smaller (3B vs TigerLLM's 9B), so
    likely faster/cheaper on the same T4.
 
-   Next: (a) run `m5_zeroshot.ipynb` with `MODEL_KEY = "titulm"` through
-   the same 5a-5f cells (this is what would turn every M5 finding from
-   "true of TigerLLM" into "true of Bangla-aware LLMs generally" — the
-   single highest-value remaining M5 task), (b) `LANGS = ["bn", "en"]` for
-   the English-prompt ablation (Spec A.6), (c) closed/paid models per user
-   direction, then human baseline (2 annotators, 100 items/task).
+### titulm ruled out for M5 zero-shot generation (tokenizer is fine, the model isn't)
+
+Ran `m5_zeroshot.ipynb` with `MODEL_KEY = "titulm"` on Kaggle. Two
+symptoms surfaced together: generation was ~10-30x slower than TigerLLM's
+run despite being a smaller model (36 sec/item vs TigerLLM's ~1-3), and
+scores were near-zero (g2p PER 11.4 — over 10x a word's own length,
+exact_match 0.0%; syllable_count parse_rate 0%).
+
+**First fix attempted**: `generate()` was only passed `pad_token_id`, not
+`eos_token_id`, so early-stopping fell back to the checkpoint's own
+`generation_config.json` — a plausible cause if that file were stale
+(common for community continual-pretrain checkpoints). Verified the
+tokenizer's own `eos_token_id` (170250, `<|eot_id|>`) was correct and
+passed it explicitly to `generate()` too (`notebooks/m5_zeroshot.ipynb`,
+safe change for every registered model, not titulm-specific). Pushed,
+user re-ran — problem persisted.
+
+**Root cause, confirmed three ways**: titulm-llama-3.2-3b-v2.0 is a BASE
+model, not instruction-tuned.
+1. Raw completions make this undeniable: asked for a word's IPA
+   transcription, the model instead generates a generic scripted
+   "আমি/তুমি" dialogue template or repeats "আমি একটা ছোট্ট স্টোরি তৈরি
+   করতে চাই" (I want to write a short story) near-verbatim across
+   unrelated prompts — classic base-model free-association from a
+   chat-formatted prompt it was never fine-tuned to respond to, not a
+   formatting or parsing bug.
+2. This also explains the slowness: a model that never learned to
+   produce an end-of-turn token in response to an instruction just
+   keeps generating until `max_new_tokens` regardless of what
+   `eos_token_id` value is passed — the earlier fix couldn't have
+   worked here, since there's no correct token for the model to emit in
+   the first place.
+3. Confirmed via primary source: fetched the TituLLMs paper
+   (arxiv.org/html/2502.11187v2) directly — it states the 1B/3B models
+   are continually-pretrained BASE models only, and explicitly says they
+   "do not explore the full potential of instruction tuning" due to
+   insufficient Bangla instruction data. Chat-template *support* in the
+   tokenizer config does not imply the underlying weights were
+   instruction-tuned; this is exactly that gap.
+
+**A second open-model candidate was also checked and rejected before
+being recommended**: `BanglaLLM/BanglaLLama-3.1-8b-bangla-alpaca-orca-
+instruct-v0.0.1` (explicitly labeled "instruct") — its tokenizer
+collapses to **A=0, M=0, CB=495/500**, essentially the same all-CB
+result as plain Llama-3.1. Its 16K added Bangla tokens aren't enough to
+meaningfully shift real-word tokenization boundaries. A guessed BongLLaMA
+repo id (`BanglaLLM/BongLLaMA-1B-Instruct`) also failed to resolve on the
+Hub; not chased further given it's from the same tokenizer lineage as
+the just-rejected BanglaLLaMA.
+
+**Pattern worth naming explicitly**: among currently-available open
+Bangla models checked this session, models with a genuinely
+akshara-aware tokenizer extension turned out to be base-only (titulm),
+and models labeled "instruct" turned out to have a tokenizer barely
+different from stock Llama (BanglaLLaMA). TigerLLM combining both a real
+tokenizer extension AND genuine instruction-tuning appears to be
+comparatively rare among readily-available options, not the default —
+worth a sentence in the thesis's limitations section, since it bears on
+how easy M5-style Bangla-aware zero-shot evaluation actually is to
+extend to new models today.
+
+`titulm` is KEPT registered in `TOKENIZER_SPECS` (its tokenizer is
+legitimately good — useful for M4 probing or any future GTAD/STAD-only
+analysis) — just don't point `m5_zeroshot.ipynb`'s `MODEL_KEY` at it for
+generation.
+
+**Decision on how to proceed, pending user direction**: two live options,
+not yet chosen: (a) treat TigerLLM as the sole fully-analyzed open model
+for M5 and move to the English-prompt ablation / closed models next, or
+(b) do a more careful one-at-a-time search for a second genuinely
+usable open Bangla instruct model (verify tokenizer AND confirm real
+instruction-tuning from primary sources before spending any GPU time,
+same discipline used for titulm/BanglaLLaMA above).

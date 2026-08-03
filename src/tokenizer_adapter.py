@@ -150,10 +150,18 @@ TOKENIZER_SPECS: Dict[str, List[str]] = {
     "tigerllm": ["md-nishat-008/TigerLLM-9B-it"],           # Bangla-centric (Gemma-2 SP)
     "banglat5": ["csebuetnlp/banglat5"],                    # Bangla-centric (SP)
     "titulm":   ["hishab/titulm-llama-3.2-3b-v2.0"],        # Bangla-centric (Llama-3.2 continually
-                                                              # pretrained, +42K Bangla tokens; ungated,
-                                                              # supports apply_chat_template). Real A/M/CB
-                                                              # spread confirmed locally (500-word sample:
-                                                              # A=56 M=74 CB=365), unlike llama3's ~all-CB.
+                                                              # pretrained, +42K Bangla tokens; ungated).
+                                                              # Real A/M/CB spread confirmed locally
+                                                              # (500-word sample: A=56 M=74 CB=365),
+                                                              # unlike llama3's ~all-CB -- GOOD tokenizer.
+                                                              # But NOT usable for M5 zero-shot GENERATION:
+                                                              # confirmed base/non-instruction-tuned (the
+                                                              # TituLLMs paper says so explicitly; empirically
+                                                              # it ignores prompts and free-associates
+                                                              # unrelated text instead of answering). Keep
+                                                              # registered for tokenizer-only uses (M4
+                                                              # probing, GTAD/STAD analysis) -- just don't
+                                                              # point m5_zeroshot.ipynb's MODEL_KEY at it.
 }
 
 
